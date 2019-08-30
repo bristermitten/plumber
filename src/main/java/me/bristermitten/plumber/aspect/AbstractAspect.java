@@ -1,11 +1,15 @@
 package me.bristermitten.plumber.aspect;
 
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractAspect implements Aspect {
     protected Logger logger;
     private boolean enabled;
+    @Inject
+    private Injector injector;
 
     protected AbstractAspect() {
         logger = LoggerFactory.getLogger(getClass());
@@ -36,5 +40,9 @@ public abstract class AbstractAspect implements Aspect {
     }
 
     protected void doDisable() {
+    }
+
+    protected <T> T instance(Class<T> clazz) {
+        return injector.getInstance(clazz);
     }
 }

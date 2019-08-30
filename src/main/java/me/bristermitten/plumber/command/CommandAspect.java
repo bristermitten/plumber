@@ -17,8 +17,6 @@ public class CommandAspect extends AbstractAspect {
     private PlumberPlugin plumberPlugin;
 
     private CommandManager commandManager;
-    @Inject
-    private Injector injector;
 
     @Override
     protected void doEnable() {
@@ -31,8 +29,8 @@ public class CommandAspect extends AbstractAspect {
 
     @Override
     public void loadParts(Set<Class> annotatedClasses) {
-        for (Class annotatedClass : annotatedClasses) {
-            commandManager.registerCommand((BaseCommand) injector.getInstance(annotatedClass));
+        for (Class<?> annotatedClass : annotatedClasses) {
+            commandManager.registerCommand((BaseCommand) instance(annotatedClass));
             System.out.println("Loaded "+ annotatedClass);
         }
     }

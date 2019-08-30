@@ -13,5 +13,6 @@ public interface TimeBuilder {
 
     TimeUnitPicker in(long time);
 
-    FutureTime get();
+    FutureTime getTarget();
+
 }
