@@ -1,17 +1,17 @@
 package me.bristermitten.plumber.scheduling.timings;
 
 public interface TimeUnitPicker {
-    TimeBuilder milliseconds();
+    Class<? extends TimeUnitPicker> impl = TimeUnitPickerImpl.class;
 
-    TimeBuilder ticks();
+    TaskBuilder milliseconds();
 
-    TimeBuilder seconds();
+    TaskBuilder ticks();
 
-    TimeBuilder minutes();
+    TaskBuilder seconds();
 
-    TimeBuilder hours();
+    TaskBuilder minutes();
 
-    TimeBuilder days();
+    TaskBuilder hours();
 
-    TimeBuilder years();
+    TaskBuilder days();
 }

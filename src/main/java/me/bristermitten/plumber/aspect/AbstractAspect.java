@@ -2,11 +2,14 @@ package me.bristermitten.plumber.aspect;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractAspect implements Aspect {
     protected Logger logger;
+
     private boolean enabled;
     @Inject
     private Injector injector;
@@ -22,24 +25,29 @@ public abstract class AbstractAspect implements Aspect {
 
     @Override
     public void enable() {
-        logger.debug("Enabling aspect " + getClass().getSimpleName());
+        logger.info("Enabling aspect " + getClass().getSimpleName());
         doEnable();
         enabled = true;
-        logger.debug("Done");
+        logger.info("Done");
     }
 
     @Override
     public void disable() {
-        logger.debug("Enabling aspect " + getClass().getSimpleName());
+        logger.info("Enabling aspect " + getClass().getSimpleName());
         doDisable();
         enabled = false;
-        logger.debug("Done");
+        logger.info("Done");
     }
 
     protected void doEnable() {
     }
 
     protected void doDisable() {
+    }
+
+    @Override
+    public Module getModule() {
+        return null;
     }
 
     protected <T> T instance(Class<T> clazz) {

@@ -15,6 +15,7 @@ import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
 
 import java.io.File;
+import java.net.URISyntaxException;
 
 /**
  * Main class of the project
@@ -25,14 +26,13 @@ public class PlumberPlugin extends JavaPlugin {
     }
 
     public PlumberPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description,
-                         @NotNull File dataFolder, @NotNull File file) {
+                         @NotNull File dataFolder, @NotNull File file) throws URISyntaxException {
         super(loader, description, dataFolder, file);
     }
 
     protected void loadPlugin() {
         String ourPackage = getClass().getPackage().getName();
-        Configuration config = new ConfigurationBuilder().forPackages(ourPackage)
-                .setExpandSuperTypes(true);
+        Configuration config = new ConfigurationBuilder().forPackages(ourPackage);
         Reflections reflections = new Reflections(config);
 
         new AspectLoader(this, reflections)

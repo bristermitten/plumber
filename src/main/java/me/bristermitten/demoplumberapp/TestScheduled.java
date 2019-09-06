@@ -1,19 +1,30 @@
 package me.bristermitten.demoplumberapp;
 
+import com.google.inject.Inject;
 import me.bristermitten.plumber.scheduling.ScheduledTask;
 import me.bristermitten.plumber.scheduling.Task;
-import me.bristermitten.plumber.scheduling.timings.TimeBuilder;
+import me.bristermitten.plumber.scheduling.TaskFactory;
 
 @ScheduledTask
-public class TestScheduled extends Task {
+public class TestScheduled {
 
-    @Override
-    public void run() {
 
+    private Task printTask;
+
+    @Inject
+    public TestScheduled(TaskFactory factory) {
+        printTask = factory.create()
+                .in(5).ticks()
+                .every(9).seconds()
+                .doing(() -> System.out.println("Done!"))
+                .build();
+
+        start();
+
+        System.out.println(printTask);
     }
 
-    @Override
-    protected void configure(TimeBuilder timeBuilder) {
-        timeBuilder.fromNow().in(10).seconds();
+    public void start() {
+        printTask.start();
     }
 }

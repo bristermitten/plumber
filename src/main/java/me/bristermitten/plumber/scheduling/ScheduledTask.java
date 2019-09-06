@@ -8,4 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 @AspectAnnotation(target = SchedulerAspect.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ScheduledTask {
+
+
 }

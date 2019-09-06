@@ -15,8 +15,8 @@ import static org.bukkit.ChatColor.RED;
  */
 public class FuturePreview  extends BaseCommand {
 
-    @CommandAlias("freeze")
-    public class FreezeCommand extends BaseCommand {
+//    @CommandAlias("freeze")
+//    public class FreezeCommand extends BaseCommand {
 //        private DataKey<Boolean> frozen = new DataKey<>("frozen", false);
 //
 //        @Default
@@ -40,5 +40,5 @@ public class FuturePreview  extends BaseCommand {
 //
 //            target.removeKey(frozen);
 //        }
-    }
+//    }
 }

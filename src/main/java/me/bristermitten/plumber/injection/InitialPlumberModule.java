@@ -1,35 +1,33 @@
 package me.bristermitten.plumber.injection;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import me.bristermitten.plumber.PlumberPlugin;
 import me.bristermitten.plumber.aspect.Aspect;
+import me.bristermitten.plumber.aspect.AspectLoader;
 import org.reflections.Reflections;
 
 import java.util.Set;
 
-public class PlumberPluginModule extends AbstractModule {
+public class InitialPlumberModule extends PlumberModule {
 
     private final PlumberPlugin plugin;
     private final Reflections reflections;
-
     private final Set<Class<? extends Aspect>> aspects;
+    private AspectLoader loader;
 
-    public PlumberPluginModule(PlumberPlugin plugin, Reflections reflections, Set<Class<? extends Aspect>> aspects) {
+    public InitialPlumberModule(PlumberPlugin plugin, Reflections reflections,
+                                AspectLoader loader, Set<Class<? extends Aspect>> aspects) {
         this.plugin = plugin;
         this.reflections = reflections;
+        this.loader = loader;
         this.aspects = aspects;
     }
 
-    public Injector createInjector() {
-        return Guice.createInjector(this);
-    }
 
     @Override
     protected void configure() {
         bind(PlumberPlugin.class).toInstance(plugin);
         bind(Reflections.class).toInstance(reflections);
+        bind(AspectLoader.class).toInstance(loader);
         for (Class<? extends Aspect> aspect : aspects) {
             bind(aspect);
         }
