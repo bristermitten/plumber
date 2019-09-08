@@ -16,7 +16,7 @@ public interface TaskBuilder extends FluentBuilder<Task, FluentBuilder> {
      * @param period
      * @return
      */
-    TimeUnitPicker every(long period);
+    TimeUnitPicker<TaskBuilder> every(long period);
 
     /**
      * Define an *initial* delay for the task.
@@ -24,7 +24,7 @@ public interface TaskBuilder extends FluentBuilder<Task, FluentBuilder> {
      * @param wait
      * @return
      */
-    TimeUnitPicker in(long wait);
+    TimeUnitPicker<TaskBuilder> in(long wait);
 
     TaskBuilder doing(Runnable r);
 

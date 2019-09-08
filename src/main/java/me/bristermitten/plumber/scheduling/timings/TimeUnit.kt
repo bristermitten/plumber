@@ -7,9 +7,7 @@ internal enum class TimeUnit {
         }
     },
     MILLISECONDS {
-        override fun oneUnitMillisTime(): Long {
-            return 1
-        }
+        override fun oneUnitMillisTime(): Long = 1
     },
     SECONDS {
         override fun oneUnitMillisTime(): Long {
@@ -35,5 +33,9 @@ internal enum class TimeUnit {
 
     open fun oneUnitMillisTime(): Long {
         return -1
+    }
+
+    fun toTicks(time: Long): Long {
+        return oneUnitMillisTime() * time / 50
     }
 }

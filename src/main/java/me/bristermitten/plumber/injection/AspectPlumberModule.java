@@ -1,11 +1,7 @@
 package me.bristermitten.plumber.injection;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import com.google.inject.Module;
 import me.bristermitten.plumber.aspect.Aspect;
-import me.bristermitten.plumber.scheduling.TaskFactory;
 
 import java.util.Set;
 

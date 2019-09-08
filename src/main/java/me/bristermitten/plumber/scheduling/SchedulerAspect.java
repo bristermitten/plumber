@@ -7,6 +7,7 @@ import me.bristermitten.plumber.aspect.AbstractAspect;
 import me.bristermitten.plumber.scheduling.timings.TaskBuilder;
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPicker;
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory;
+import me.bristermitten.plumber.struct.builder.TaskFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitScheduler;
 
@@ -34,8 +35,11 @@ public class SchedulerAspect extends AbstractAspect {
 
                 install(new FactoryModuleBuilder()
                         .implement(TaskBuilder.class, TaskBuilder.impl)
-                        .build(TaskFactory.class));
+                        .build(TaskBuilderFactory.class));
 
+                install(new FactoryModuleBuilder()
+                        .build(TaskFactory.class)
+                );
             }
         };
     }

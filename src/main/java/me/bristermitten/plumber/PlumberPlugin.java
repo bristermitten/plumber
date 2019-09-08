@@ -26,7 +26,7 @@ public class PlumberPlugin extends JavaPlugin {
     }
 
     public PlumberPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description,
-                         @NotNull File dataFolder, @NotNull File file) throws URISyntaxException {
+                         @NotNull File dataFolder, File file) {
         super(loader, description, dataFolder, file);
     }
 
@@ -37,7 +37,5 @@ public class PlumberPlugin extends JavaPlugin {
 
         new AspectLoader(this, reflections)
                 .addThirdPartyAspectAnnotation(CommandAlias.class, CommandAspect.class).loadAll();
-
-
     }
 }

@@ -5,8 +5,13 @@ import me.bristermitten.plumber.aspect.AspectLoader
 import me.bristermitten.plumber.scheduling.SchedulerAspect
 import me.bristermitten.plumber.scheduling.Task
 import me.bristermitten.plumber.struct.builder.FluentBuilder
+import me.bristermitten.plumber.struct.builder.TaskFactory
 
-internal class TaskBuilderImpl @Inject constructor(private val factory: TimeUnitPickerFactory, loader: AspectLoader) : TaskBuilder {
+internal class TaskBuilderImpl @Inject constructor(
+        private val factory: TimeUnitPickerFactory,
+        loader: AspectLoader,
+        private val taskFactory: TaskFactory
+) : TaskBuilder {
 
     private var delayLength: Long = 0
     private var delayUnit = TimeUnit.MILLISECONDS
@@ -36,7 +41,9 @@ internal class TaskBuilderImpl @Inject constructor(private val factory: TimeUnit
 
     override fun build(): Task {
         checkNotNull(run)
-        return Task()
+        val delay = delayUnit.toTicks(delayLength);
+        val period = repeatUnit.toTicks(repeatLength);
+        return taskFactory.create(delay, period, run)
     }
 
     override fun done(): FluentBuilder<*, *> {

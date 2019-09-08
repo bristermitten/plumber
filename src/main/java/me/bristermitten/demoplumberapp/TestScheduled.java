@@ -3,7 +3,8 @@ package me.bristermitten.demoplumberapp;
 import com.google.inject.Inject;
 import me.bristermitten.plumber.scheduling.ScheduledTask;
 import me.bristermitten.plumber.scheduling.Task;
-import me.bristermitten.plumber.scheduling.TaskFactory;
+import me.bristermitten.plumber.scheduling.TaskBuilderFactory;
+import net.minecraft.server.v1_12_R1.MinecraftServer;
 
 @ScheduledTask
 public class TestScheduled {
@@ -12,7 +13,7 @@ public class TestScheduled {
     private Task printTask;
 
     @Inject
-    public TestScheduled(TaskFactory factory) {
+    public TestScheduled(TaskBuilderFactory factory) {
         printTask = factory.create()
                 .in(5).ticks()
                 .every(9).seconds()
@@ -21,7 +22,6 @@ public class TestScheduled {
 
         start();
 
-        System.out.println(printTask);
     }
 
     public void start() {
