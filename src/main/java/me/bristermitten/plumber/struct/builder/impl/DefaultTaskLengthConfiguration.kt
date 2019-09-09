@@ -24,11 +24,11 @@ internal open class DefaultTaskLengthConfiguration<B : ActionBuilder<*>>
     }
 
     override fun until(): B {
-        return value as B
+        return value
     }
 
     override fun after(time: Long): TimeUnitPicker<B> {
         length.length = time
-        return factory.pick(value as B, { length.unit = it })
+        return factory.pick(value, { length.unit = it })
     }
 }

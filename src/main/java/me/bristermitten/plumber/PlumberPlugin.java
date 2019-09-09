@@ -22,14 +22,6 @@ import java.io.File;
  * Plumber equivalent of SpringApplication
  */
 public class PlumberPlugin extends JavaPlugin {
-    public PlumberPlugin() {
-    }
-
-    public PlumberPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description,
-                         @NotNull File dataFolder, File file) {
-        super(loader, description, dataFolder, file);
-    }
-
     protected void loadPlugin() {
         String ourPackage = getClass().getPackage().getName();
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();

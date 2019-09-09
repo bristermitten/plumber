@@ -10,14 +10,6 @@ import org.slf4j.impl.SimpleLogger;
 import java.io.File;
 
 public class DemoPlugin extends PlumberPlugin {
-    public DemoPlugin() {
-    }
-
-    public DemoPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description,
-                      @NotNull File dataFolder, File file) {
-        super(loader, description, dataFolder, file);
-    }
-
     @Override
     public void onEnable() {
         System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "TRACE");

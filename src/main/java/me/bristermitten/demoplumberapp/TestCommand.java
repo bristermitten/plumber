@@ -1,6 +1,7 @@
 package me.bristermitten.demoplumberapp;
 
 import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.Default;
 import me.bristermitten.plumber.command.PlumberCommand;
 import me.bristermitten.plumber.struct.DataKey;
 import me.bristermitten.plumber.struct.player.PPlayer;
@@ -12,10 +13,11 @@ import org.bukkit.event.player.PlayerMoveEvent;
 /**
  * This is how projects using plumber will look in the future
  */
+@CommandAlias("freeze")
 public class TestCommand extends PlumberCommand {
     private DataKey<Boolean> frozen = new DataKey<>("frozen", false);
 
-    @CommandAlias("freeze")
+    @Default
     public void freeze(Player sender, PPlayer target) {
         target.blockEvent(PlayerMoveEvent.class)
                 .until()
