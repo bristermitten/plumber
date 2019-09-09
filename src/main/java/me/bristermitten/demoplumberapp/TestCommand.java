@@ -1,25 +1,45 @@
 package me.bristermitten.demoplumberapp;
 
-import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.Default;
-import co.aikar.commands.annotation.Subcommand;
-import org.bukkit.command.CommandSender;
+import me.bristermitten.plumber.command.PlumberCommand;
+import me.bristermitten.plumber.struct.DataKey;
+import me.bristermitten.plumber.struct.player.PPlayer;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerMoveEvent;
 
-@CommandAlias("test")
-public class TestCommand extends BaseCommand {
 
-    @Default
-    public void process(CommandSender sender) {
-        System.out.println("Ran");
+/**
+ * This is how projects using plumber will look in the future
+ */
+public class TestCommand extends PlumberCommand {
+    private DataKey<Boolean> frozen = new DataKey<>("frozen", false);
+
+    @CommandAlias("freeze")
+    public void freeze(Player sender, PPlayer target) {
+        target.blockEvent(PlayerMoveEvent.class)
+                .until()
+                .playerLogout()
+                .keyChange(frozen).toValue(false)
+                .or()
+                .after(30).seconds();
+        target.setData(frozen, true);
+
+
+        //todo some form of chat templating
+        //target.message(RED + "You have been frozen for " + length);
     }
 
-    @Subcommand("subcommand")
-    public static class Test2 {
-
-        @Default
-        public void run() {
-            System.out.println("subcommand ran!");
+    //
+    @CommandAlias("unfreeze")
+    public void unFreeze(Player sender, PPlayer target) {
+        boolean value = target.getData(frozen);
+        if (!value) {
+            reply(ChatColor.RED + "Player is not frozen");
+            return;
         }
+
+        target.setData(frozen, false);
     }
 }
+

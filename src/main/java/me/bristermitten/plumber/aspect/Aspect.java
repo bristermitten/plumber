@@ -12,12 +12,13 @@ import java.util.Set;
  * Due to how loading is performed, it is advised to not perform any logic in the constructor, and wait for
  * {@link Aspect#enable()} to be called, as data is injected twice due to constraints.
  * It's also advised to have a no-args constructor and instead use field injection (but only in an Aspect)
- *
+ * <p>
  * Aspects will not be initialized until they are required, and you can assume that {@link Aspect#enable()}
  * will be called almost immediately afterwards
  * Aspects will be initialized with Guice, so can safely use {@link Inject}
  */
 public interface Aspect {
+
 
     boolean isEnabled();
 
@@ -27,5 +28,11 @@ public interface Aspect {
 
     void loadParts(Set<Class> annotatedClasses);
 
-    Module getModule();
+    /**
+     * If an independent module is returned, it **MUST** install the provided parent!
+     *
+     * @param parent
+     * @return
+     */
+    Module getModule(Module parent);
 }

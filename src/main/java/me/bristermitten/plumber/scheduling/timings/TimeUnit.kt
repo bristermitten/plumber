@@ -1,6 +1,6 @@
 package me.bristermitten.plumber.scheduling.timings
 
-internal enum class TimeUnit {
+enum class TimeUnit {
     TICKS {
         override fun oneUnitMillisTime(): Long {
             return SECONDS.oneUnitMillisTime() / 20

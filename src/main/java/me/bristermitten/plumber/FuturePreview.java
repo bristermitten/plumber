@@ -1,40 +1,44 @@
 package me.bristermitten.plumber;
 
 
-import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.CommandAlias;
+import me.bristermitten.plumber.command.PlumberCommand;
 import me.bristermitten.plumber.struct.DataKey;
 import me.bristermitten.plumber.struct.player.PPlayer;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 /**
  * This is how projects using plumber will look in the future
  */
-public class FuturePreview extends BaseCommand {
-
-    //    @CommandAlias("freeze")
-//    public class FreezeCommand extends BaseCommand {
+public class FuturePreview extends PlumberCommand {
     private DataKey<Boolean> frozen = new DataKey<>("frozen", false);
 
-    //
+    @CommandAlias("freeze")
     public void freeze(Player sender, PPlayer target) {
         target.blockEvent(PlayerMoveEvent.class)
                 .until()
-                .playerLogout().or()
-                .after(30).seconds().or()
-                .onKeyChange(frozen).toValue(false);
-            target.setData(frozen, true);
+                .playerLogout()
+                .keyChange(frozen).toValue(false)
+                .or()
+                .after(30).seconds();
+        target.setData(frozen, true);
+
 
         //todo some form of chat templating
-//            target.message(RED + "You have been frozen for " + length);
+        //target.message(RED + "You have been frozen for " + length);
     }
-//
-//        @SubCommand("unfreeze")
-//        public void unFreeze(@Sender Player sender, Player target){
-//            if(!target.hasKey(frozen))
-//                return returnMessage(RED + "Player is not frozen");
-//
-//            target.removeKey(frozen);
-//        }
-//    }
+
+    //
+    @CommandAlias("unfreeze")
+    public void unFreeze(Player sender, PPlayer target) {
+        boolean value = target.getData(frozen);
+        if (!value) {
+            reply(ChatColor.RED + "Player is not frozen");
+            return;
+        }
+
+        target.setData(frozen, false);
+    }
 }

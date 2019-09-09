@@ -28,8 +28,6 @@ public class InitialPlumberModule extends PlumberModule {
         bind(PlumberPlugin.class).toInstance(plugin);
         bind(Reflections.class).toInstance(reflections);
         bind(AspectLoader.class).toInstance(loader);
-        for (Class<? extends Aspect> aspect : aspects) {
-            bind(aspect);
-        }
+        aspects.forEach(this::bind);
     }
 }

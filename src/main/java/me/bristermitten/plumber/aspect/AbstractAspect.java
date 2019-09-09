@@ -1,11 +1,13 @@
 package me.bristermitten.plumber.aspect;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Set;
 
 public abstract class AbstractAspect implements Aspect {
     protected Logger logger;
@@ -46,8 +48,13 @@ public abstract class AbstractAspect implements Aspect {
     }
 
     @Override
-    public Module getModule() {
-        return null;
+    public void loadParts(Set<Class> annotatedClasses) {
+
+    }
+
+    @Override
+    public Module getModule(Module parent) {
+        return parent;
     }
 
     protected <T> T instance(Class<T> clazz) {

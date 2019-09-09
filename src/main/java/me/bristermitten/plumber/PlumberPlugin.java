@@ -6,6 +6,7 @@ package me.bristermitten.plumber;
 import co.aikar.commands.annotation.CommandAlias;
 import me.bristermitten.plumber.aspect.AspectLoader;
 import me.bristermitten.plumber.command.CommandAspect;
+import me.bristermitten.plumber.struct.DataAspect;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
@@ -15,7 +16,6 @@ import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
 
 import java.io.File;
-import java.net.URISyntaxException;
 
 /**
  * Main class of the project
@@ -32,10 +32,17 @@ public class PlumberPlugin extends JavaPlugin {
 
     protected void loadPlugin() {
         String ourPackage = getClass().getPackage().getName();
-        Configuration config = new ConfigurationBuilder().forPackages(ourPackage);
+        ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+        configurationBuilder.setClassLoaders(new ClassLoader[]{getClassLoader()});
+        configurationBuilder.filterInputsBy(p -> !p.contains("META-INF"));
+        Configuration config = configurationBuilder.forPackages(ourPackage);
+
+
         Reflections reflections = new Reflections(config);
 
         new AspectLoader(this, reflections)
-                .addThirdPartyAspectAnnotation(CommandAlias.class, CommandAspect.class).loadAll();
+                .ensureLoaded(DataAspect.class)
+                .addThirdPartyAspectAnnotation(CommandAlias.class, CommandAspect.class)
+                .loadAll();
     }
 }

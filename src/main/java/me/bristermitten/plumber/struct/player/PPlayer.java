@@ -1,16 +1,16 @@
 package me.bristermitten.plumber.struct.player;
 
 import me.bristermitten.plumber.struct.DataKey;
-import me.bristermitten.plumber.struct.builder.PlayerTaskBuilder;
-import me.bristermitten.plumber.struct.builder.TaskLengthConfig;
+import me.bristermitten.plumber.struct.builder.PlayerActionBuilder;
+import me.bristermitten.plumber.struct.builder.TaskLengthConfiguration;
+import me.bristermitten.plumber.struct.entity.KeyStorer;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
 import org.bukkit.event.player.PlayerEvent;
 
-public interface PPlayer {
+public interface PPlayer extends KeyStorer {
     Player player();
 
-    TaskLengthConfig<PlayerTaskBuilder> blockEvent(Class<? extends PlayerEvent> e);
+    TaskLengthConfiguration<PlayerActionBuilder> blockEvent(Class<? extends PlayerEvent> e);
 
-    <K> void setData(DataKey<K> key, K data);
+
 }

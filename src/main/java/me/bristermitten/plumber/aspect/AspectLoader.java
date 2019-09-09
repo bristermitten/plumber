@@ -11,7 +11,9 @@ import org.reflections.Reflections;
 
 import javax.inject.Singleton;
 import java.lang.annotation.Annotation;
-import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,7 +22,7 @@ public class AspectLoader {
 
     private final Reflections reflections;
     private final PlumberPlugin plumberPlugin;
-    private Set<Class<? extends Aspect>> requiredAspects = new HashSet<>();
+    private Set<Class<? extends Aspect>> requiredAspects = new LinkedHashSet<>();
     private BiMap<Class<? extends Annotation>, Class<? extends Aspect>> mappings;
     private Injector injector;
 
@@ -47,9 +49,14 @@ public class AspectLoader {
                 });
     }
 
-    public void ensureLoaded(Class<? extends Aspect> aspectType) {
-        if (requiredAspects.contains(aspectType)) return;
-        load(injector.getInstance(aspectType));
+    public AspectLoader ensureLoaded(Class<? extends Aspect> aspectType) {
+        if (!requiredAspects.contains(aspectType)) {
+            if (injector != null)
+                load(injector.getInstance(aspectType));
+            requiredAspects.add(aspectType);
+        }
+
+        return this;
     }
 
     public Set<Aspect> loadAll() {
@@ -63,7 +70,6 @@ public class AspectLoader {
                 .map(injector::getInstance)
                 .collect(Collectors.toSet());
 
-
         module = new AspectPlumberModule(module, aspects);
         injector = module.createInjector();
 
@@ -72,17 +78,21 @@ public class AspectLoader {
     }
 
     private Set<Class> findAspectChildren(Class<? extends Aspect> a) {
-
         Class<? extends Annotation> mapping = mappings.inverse().get(a);
-        return reflections.getTypesAnnotatedWith(mapping)
-                .stream().filter(c -> !c.isInterface() && !c.isEnum())
-                .collect(Collectors.toSet());
+        if (mapping == null)return Collections.emptySet();
+            return reflections.getTypesAnnotatedWith(mapping)
+                    .stream().filter(c -> !c.isInterface() && !c.isEnum())
+                    .collect(Collectors.toSet());
     }
 
     private void findAll() {
         try {
             mappings.forEach((a, as) -> {
                 if (!reflections.getTypesAnnotatedWith(a).isEmpty()) {
+                    if (as.isAnnotationPresent(Dependency.class)) {
+                        Dependency dependency = as.getAnnotation(Dependency.class);
+                        requiredAspects.addAll(Arrays.asList(dependency.value()));
+                    }
                     requiredAspects.add(as);
                 }
             });

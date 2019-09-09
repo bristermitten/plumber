@@ -1,8 +1,13 @@
 package me.bristermitten.plumber.scheduling.timings;
 
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+
 import java.util.function.Consumer;
 
-public interface TimeUnitPickerFactory {
+public final class TimeUnitPickerFactory {
 
-    TimeUnitPicker pick(TaskBuilder parent, Consumer<TimeUnit> callback);
+    public <T> TimeUnitPicker<T> pick(T parent, Consumer<TimeUnit> callback) {
+        return new TimeUnitPickerImpl<>(parent, callback);
+    }
 }

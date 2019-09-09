@@ -1,12 +1,11 @@
 package me.bristermitten.plumber.scheduling.timings;
 
 import me.bristermitten.plumber.scheduling.Task;
-import me.bristermitten.plumber.struct.builder.FluentBuilder;
 
 /**
  * Builder for configuring times in the future for scheduling
  */
-public interface TaskBuilder extends FluentBuilder<Task, FluentBuilder> {
+public interface TaskBuilder {
 
     Class<? extends TaskBuilder> impl = TaskBuilderImpl.class;
 
