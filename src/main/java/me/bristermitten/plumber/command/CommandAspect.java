@@ -10,7 +10,9 @@ import me.bristermitten.plumber.struct.player.PPlayer;
 import me.bristermitten.plumber.struct.player.PPlayerManager;
 import org.bukkit.Bukkit;
 
+import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 public class CommandAspect extends AbstractAspect {
 
@@ -38,9 +40,18 @@ public class CommandAspect extends AbstractAspect {
 
     @Override
     public void loadParts(Set<Class> annotatedClasses) {
-        for (Class<?> annotatedClass : annotatedClasses) {
-            commandManager.registerCommand((BaseCommand) instance(annotatedClass));
-            System.out.println("Loaded " + annotatedClass);
+        for (Iterator<Class> iterator = annotatedClasses.iterator(); iterator.hasNext(); ) {
+            Class<?> annotatedClass = iterator.next();
+            if (annotatedClass.isMemberClass() || annotatedClass.isLocalClass()) {
+                iterator.remove();
+                annotatedClass=annotatedClass.getSuperclass();
+            }
+            load(annotatedClass);
         }
+    }
+
+    private void load(Class<?> clazz){
+        commandManager.registerCommand((BaseCommand) instance(clazz));
+        System.out.println("Loaded and registered command " + clazz);
     }
 }

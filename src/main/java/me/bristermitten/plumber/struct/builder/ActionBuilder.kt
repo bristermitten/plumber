@@ -2,6 +2,7 @@ package me.bristermitten.plumber.struct.builder
 
 import me.bristermitten.plumber.struct.builder.impl.ActionBuilderImpl
 
+
 interface ActionBuilder<T : ActionBuilder<T>> {
 
     /**
@@ -12,7 +13,7 @@ interface ActionBuilder<T : ActionBuilder<T>> {
     fun or(): TaskLengthConfiguration<T>
 
 
-    companion object {
-        var impl: Class<out ActionBuilder<*>> = ActionBuilderImpl::class.java
-    }
+//    companion object {
+//        var impl: Class<out ActionBuilder<*>> = ActionBuilderImpl::class.java
+//    }
 }

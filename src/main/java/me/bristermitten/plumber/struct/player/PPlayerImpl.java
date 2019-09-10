@@ -16,8 +16,8 @@ class PPlayerImpl implements PPlayer {
     private final Map<DataKey, Object> keyValues = new HashMap<>();
     private final Player player;
 
-    private @Inject
-    BuilderFactory factory;
+    @Inject
+    private BuilderFactory factory;
 
     PPlayerImpl(Player player) {
         this.player = player;

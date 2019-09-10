@@ -20,17 +20,22 @@ import java.util.stream.Collectors;
 @Singleton
 public class AspectLoader {
 
+    private static AspectLoader instance;
     private final Reflections reflections;
     private final PlumberPlugin plumberPlugin;
     private Set<Class<? extends Aspect>> requiredAspects = new LinkedHashSet<>();
     private BiMap<Class<? extends Annotation>, Class<? extends Aspect>> mappings;
     private Injector injector;
 
-
     public AspectLoader(PlumberPlugin plumberPlugin, Reflections reflections) {
         this.plumberPlugin = plumberPlugin;
         this.reflections = reflections;
         this.mappings = HashBiMap.create();
+        instance = this;
+    }
+
+    public static AspectLoader getInstance() {
+        return instance;
     }
 
     public AspectLoader addThirdPartyAspectAnnotation(Class<? extends Annotation> annotation,
@@ -72,6 +77,7 @@ public class AspectLoader {
 
         module = new AspectPlumberModule(module, aspects);
         injector = module.createInjector();
+        injector.injectMembers(plumberPlugin);
 
         aspects.forEach(this::load);
         return aspects;
@@ -79,10 +85,10 @@ public class AspectLoader {
 
     private Set<Class> findAspectChildren(Class<? extends Aspect> a) {
         Class<? extends Annotation> mapping = mappings.inverse().get(a);
-        if (mapping == null)return Collections.emptySet();
-            return reflections.getTypesAnnotatedWith(mapping)
-                    .stream().filter(c -> !c.isInterface() && !c.isEnum())
-                    .collect(Collectors.toSet());
+        if (mapping == null) return Collections.emptySet();
+        return reflections.getTypesAnnotatedWith(mapping)
+                .stream().filter(c -> !c.isInterface() && !c.isEnum())
+                .collect(Collectors.toSet());
     }
 
     private void findAll() {

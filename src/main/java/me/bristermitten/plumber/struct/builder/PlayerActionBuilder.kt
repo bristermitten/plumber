@@ -5,8 +5,6 @@ import me.bristermitten.plumber.struct.builder.impl.PlayerActionBuilderImpl
 
 interface PlayerActionBuilder : ActionBuilder<PlayerActionBuilder> {
 
-    //    TimeUnitPicker<PlayerActionBuilder<P>> after(long length);
-
     fun <K> keyChange(key: DataKey<K>): KeyChangeChooser<PlayerActionBuilder, K>
 
     fun playerLogout(): PlayerActionBuilder

@@ -1,5 +1,5 @@
-package me.bristermitten.plumber.struct.builder;
+package me.bristermitten.plumber.struct.builder
 
-public interface KeyChangeChooser<R, K> {
-    R toValue(K value);
+interface KeyChangeChooser<R, K> {
+    fun toValue(value: K): R
 }

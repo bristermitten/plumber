@@ -7,8 +7,10 @@ import me.bristermitten.plumber.aspect.AbstractAspect;
 import me.bristermitten.plumber.aspect.Dependency;
 import me.bristermitten.plumber.scheduling.SchedulerAspect;
 import me.bristermitten.plumber.struct.builder.BuilderFactory;
+import me.bristermitten.plumber.struct.builder.KeyChangeChooser;
 import me.bristermitten.plumber.struct.builder.PlayerActionBuilder;
 import me.bristermitten.plumber.struct.builder.TaskLengthConfiguration;
+import me.bristermitten.plumber.struct.builder.impl.KeyChangeChooserImpl;
 
 
 @Dependency(SchedulerAspect.class)

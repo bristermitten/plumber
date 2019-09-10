@@ -12,5 +12,4 @@ public interface PPlayer extends KeyStorer {
 
     TaskLengthConfiguration<PlayerActionBuilder> blockEvent(Class<? extends PlayerEvent> e);
 
-
 }

@@ -4,13 +4,14 @@
 package me.bristermitten.plumber;
 
 import co.aikar.commands.annotation.CommandAlias;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import me.bristermitten.plumber.aspect.AspectLoader;
 import me.bristermitten.plumber.command.CommandAspect;
 import me.bristermitten.plumber.struct.DataAspect;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
-import org.jetbrains.annotations.NotNull;
 import org.reflections.Configuration;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
@@ -22,11 +23,24 @@ import java.io.File;
  * Plumber equivalent of SpringApplication
  */
 public class PlumberPlugin extends JavaPlugin {
+
+
+    public PlumberPlugin() {
+    }
+
+    public PlumberPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
+        super(loader, description, dataFolder, file);
+    }
+
+    @Inject
+    private Injector injector;
+
     protected void loadPlugin() {
         String ourPackage = getClass().getPackage().getName();
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
         configurationBuilder.setClassLoaders(new ClassLoader[]{getClassLoader()});
         configurationBuilder.filterInputsBy(p -> !p.contains("META-INF"));
+        configurationBuilder.filterInputsBy(p -> !p.contains("org.bukkit"));
         Configuration config = configurationBuilder.forPackages(ourPackage);
 
 
@@ -36,5 +50,9 @@ public class PlumberPlugin extends JavaPlugin {
                 .ensureLoaded(DataAspect.class)
                 .addThirdPartyAspectAnnotation(CommandAlias.class, CommandAspect.class)
                 .loadAll();
+    }
+
+    protected final <T> T getInstance(Class<T> clazz) {
+        return injector.getInstance(clazz);
     }
 }

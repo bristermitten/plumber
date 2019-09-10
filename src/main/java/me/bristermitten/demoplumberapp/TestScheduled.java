@@ -16,12 +16,9 @@ public class TestScheduled {
     public TestScheduled(TaskBuilderFactory factory) {
         printTask = factory.create()
                 .in(5).ticks()
-                .every(9).seconds()
-                .doing(() -> System.out.println("Done!"))
+                .every(200).ticks()
+                .doing(() -> System.out.println("Scheduler ran!"))
                 .build();
-
-        start();
-
     }
 
     public void start() {
