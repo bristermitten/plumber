@@ -1,9 +1,9 @@
-package me.bristermitten.plumber.struct.builder.impl;
+package me.bristermitten.plumber.object.builder.impl;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
-import me.bristermitten.plumber.struct.DataKey;
-import me.bristermitten.plumber.struct.builder.KeyChangeChooser;
+import me.bristermitten.plumber.object.DataKey;
+import me.bristermitten.plumber.object.builder.KeyChangeChooser;
 
 public class KeyChangeChooserImpl<R, K> implements KeyChangeChooser<R, K> {
 

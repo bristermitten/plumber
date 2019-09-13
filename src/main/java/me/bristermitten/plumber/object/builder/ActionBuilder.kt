@@ -1,6 +1,4 @@
-package me.bristermitten.plumber.struct.builder
-
-import me.bristermitten.plumber.struct.builder.impl.ActionBuilderImpl
+package me.bristermitten.plumber.`object`.builder
 
 
 interface ActionBuilder<T : ActionBuilder<T>> {

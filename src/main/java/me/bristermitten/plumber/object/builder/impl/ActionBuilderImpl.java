@@ -1,7 +1,7 @@
-package me.bristermitten.plumber.struct.builder.impl;
+package me.bristermitten.plumber.object.builder.impl;
 
-import me.bristermitten.plumber.struct.builder.ActionBuilder;
-import me.bristermitten.plumber.struct.builder.TaskLengthConfiguration;
+import me.bristermitten.plumber.object.builder.ActionBuilder;
+import me.bristermitten.plumber.object.builder.TaskLengthConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 public class ActionBuilderImpl<T extends ActionBuilder<T>> implements ActionBuilder<T> {

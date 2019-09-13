@@ -1,4 +1,4 @@
-package me.bristermitten.plumber.struct.player
+package me.bristermitten.plumber.`object`.player
 
 import com.google.inject.Inject
 import com.google.inject.Injector

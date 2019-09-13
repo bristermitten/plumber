@@ -26,7 +26,7 @@ public interface Aspect {
 
     void disable();
 
-    void loadParts(Set<Class> annotatedClasses);
+    void loadParts(Set<Class<?>> annotatedClasses);
 
     /**
      * If an independent module is returned, it **MUST** install the provided parent!

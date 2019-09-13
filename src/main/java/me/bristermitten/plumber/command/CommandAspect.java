@@ -1,18 +1,17 @@
 package me.bristermitten.plumber.command;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.CommandManager;
+import co.aikar.commands.BukkitCommandManager;
 import co.aikar.commands.PaperCommandManager;
 import com.google.inject.Inject;
 import me.bristermitten.plumber.PlumberPlugin;
 import me.bristermitten.plumber.aspect.AbstractAspect;
-import me.bristermitten.plumber.struct.player.PPlayer;
-import me.bristermitten.plumber.struct.player.PPlayerManager;
+import me.bristermitten.plumber.object.player.PPlayer;
+import me.bristermitten.plumber.object.player.PPlayerManager;
 import org.bukkit.Bukkit;
 
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 public class CommandAspect extends AbstractAspect {
 
@@ -21,7 +20,7 @@ public class CommandAspect extends AbstractAspect {
 
     @Inject
     private PPlayerManager manager;
-    private CommandManager commandManager;
+    private BukkitCommandManager commandManager;
 
     @Override
     protected void doEnable() {
@@ -36,21 +35,25 @@ public class CommandAspect extends AbstractAspect {
 
     @Override
     protected void doDisable() {
+        commandManager.unregisterCommands();
+        commandManager = null;
     }
 
     @Override
-    public void loadParts(Set<Class> annotatedClasses) {
-        for (Iterator<Class> iterator = annotatedClasses.iterator(); iterator.hasNext(); ) {
-            Class<?> annotatedClass = iterator.next();
+    public void loadParts(Set<Class<?>> annotatedClasses) {
+        Set<Class<?>> loaded = new HashSet<>();
+        for (Class<?> annotatedClass : annotatedClasses) {
             if (annotatedClass.isMemberClass() || annotatedClass.isLocalClass()) {
-                iterator.remove();
-                annotatedClass=annotatedClass.getSuperclass();
+                annotatedClass = annotatedClass.getSuperclass();
+                if (loaded.contains(annotatedClass))
+                    continue;
             }
             load(annotatedClass);
+            loaded.add(annotatedClass);
         }
     }
 
-    private void load(Class<?> clazz){
+    private void load(Class<?> clazz) {
         commandManager.registerCommand((BaseCommand) instance(clazz));
         System.out.println("Loaded and registered command " + clazz);
     }

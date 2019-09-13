@@ -83,7 +83,7 @@ public class AspectLoader {
         return aspects;
     }
 
-    private Set<Class> findAspectChildren(Class<? extends Aspect> a) {
+    private Set<Class<?>> findAspectChildren(Class<? extends Aspect> a) {
         Class<? extends Annotation> mapping = mappings.inverse().get(a);
         if (mapping == null) return Collections.emptySet();
         return reflections.getTypesAnnotatedWith(mapping)

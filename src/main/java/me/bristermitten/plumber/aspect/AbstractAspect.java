@@ -48,7 +48,7 @@ public abstract class AbstractAspect implements Aspect {
     }
 
     @Override
-    public void loadParts(Set<Class> annotatedClasses) {
+    public void loadParts(Set<Class<?>> annotatedClasses) {
 
     }
 

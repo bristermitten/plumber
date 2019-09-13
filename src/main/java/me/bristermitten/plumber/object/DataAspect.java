@@ -1,4 +1,4 @@
-package me.bristermitten.plumber.struct;
+package me.bristermitten.plumber.object;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
@@ -6,11 +6,9 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
 import me.bristermitten.plumber.aspect.AbstractAspect;
 import me.bristermitten.plumber.aspect.Dependency;
 import me.bristermitten.plumber.scheduling.SchedulerAspect;
-import me.bristermitten.plumber.struct.builder.BuilderFactory;
-import me.bristermitten.plumber.struct.builder.KeyChangeChooser;
-import me.bristermitten.plumber.struct.builder.PlayerActionBuilder;
-import me.bristermitten.plumber.struct.builder.TaskLengthConfiguration;
-import me.bristermitten.plumber.struct.builder.impl.KeyChangeChooserImpl;
+import me.bristermitten.plumber.object.builder.BuilderFactory;
+import me.bristermitten.plumber.object.builder.PlayerActionBuilder;
+import me.bristermitten.plumber.object.builder.TaskLengthConfiguration;
 
 
 @Dependency(SchedulerAspect.class)

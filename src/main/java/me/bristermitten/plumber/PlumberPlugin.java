@@ -8,7 +8,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import me.bristermitten.plumber.aspect.AspectLoader;
 import me.bristermitten.plumber.command.CommandAspect;
-import me.bristermitten.plumber.struct.DataAspect;
+import me.bristermitten.plumber.object.DataAspect;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;

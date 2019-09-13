@@ -2,13 +2,14 @@ package me.bristermitten.demoplumberapp;
 
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
-import co.aikar.commands.annotation.Subcommand;
+import co.aikar.commands.annotation.Values;
 import me.bristermitten.plumber.command.PlumberCommand;
-import me.bristermitten.plumber.struct.DataKey;
-import me.bristermitten.plumber.struct.player.PPlayer;
-import org.bukkit.ChatColor;
+import me.bristermitten.plumber.object.DataKey;
+import me.bristermitten.plumber.object.player.PPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
+
+import static org.bukkit.ChatColor.RED;
 
 
 /**
@@ -25,7 +26,7 @@ public class TestCommand extends PlumberCommand {
         public void unFreeze(Player sender, PPlayer target) {
             boolean value = target.getData(frozen);
             if (!value) {
-                reply(ChatColor.RED + "Player is not frozen");
+                reply(RED + "Player is not frozen");
                 return;
             }
 
@@ -37,7 +38,7 @@ public class TestCommand extends PlumberCommand {
     @CommandAlias("freeze")
     public class Freeze extends TestCommand {
         @Default
-        public void freeze(Player sender, PPlayer target) {
+        public void freeze(Player sender, @Values("@players") PPlayer target) {
             target.blockEvent(PlayerMoveEvent.class)
                     .until()
                     .playerLogout()
@@ -48,7 +49,7 @@ public class TestCommand extends PlumberCommand {
 
 
             //todo some form of chat templating
-            //target.message(RED + "You have been frozen for " + length);
+            target.message(RED + "You have been frozen");
         }
     }
 }

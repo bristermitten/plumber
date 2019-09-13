@@ -45,8 +45,8 @@ public class SchedulerAspect extends AbstractAspect {
     }
 
     @Override
-    public void loadParts(Set<Class> annotatedClasses) {
-        for (Class annotatedClass : annotatedClasses) {
+    public void loadParts(Set<Class<?>> annotatedClasses) {
+        for (Class<?> annotatedClass : annotatedClasses) {
             Object instance = instance(annotatedClass);
 
         }

@@ -1,9 +1,9 @@
-package me.bristermitten.plumber.struct.builder.impl;
+package me.bristermitten.plumber.object.builder.impl;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory;
-import me.bristermitten.plumber.struct.builder.PlayerActionBuilder;
+import me.bristermitten.plumber.object.builder.PlayerActionBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public class PlayerTaskLengthConfiguration extends DefaultTaskLengthConfiguration<PlayerActionBuilder> {

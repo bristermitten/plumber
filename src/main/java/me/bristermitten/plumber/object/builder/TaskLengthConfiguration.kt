@@ -1,7 +1,7 @@
-package me.bristermitten.plumber.struct.builder
+package me.bristermitten.plumber.`object`.builder
 
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPicker
-import me.bristermitten.plumber.struct.builder.impl.DefaultTaskLengthConfiguration
+import me.bristermitten.plumber.`object`.builder.impl.DefaultTaskLengthConfiguration
 
 interface TaskLengthConfiguration<B : ActionBuilder<*>> {
 

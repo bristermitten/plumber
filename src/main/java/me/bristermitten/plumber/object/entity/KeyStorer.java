@@ -1,6 +1,6 @@
-package me.bristermitten.plumber.struct.entity;
+package me.bristermitten.plumber.object.entity;
 
-import me.bristermitten.plumber.struct.DataKey;
+import me.bristermitten.plumber.object.DataKey;
 
 public interface KeyStorer {
     <K> void setData(DataKey<K> key, K data);

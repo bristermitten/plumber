@@ -1,7 +1,7 @@
-package me.bristermitten.plumber.struct.builder
+package me.bristermitten.plumber.`object`.builder
 
-import me.bristermitten.plumber.struct.DataKey
-import me.bristermitten.plumber.struct.builder.impl.PlayerActionBuilderImpl
+import me.bristermitten.plumber.`object`.DataKey
+import me.bristermitten.plumber.`object`.builder.impl.PlayerActionBuilderImpl
 
 interface PlayerActionBuilder : ActionBuilder<PlayerActionBuilder> {
 

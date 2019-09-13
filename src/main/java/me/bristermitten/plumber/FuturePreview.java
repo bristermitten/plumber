@@ -3,8 +3,8 @@ package me.bristermitten.plumber;
 
 import co.aikar.commands.annotation.CommandAlias;
 import me.bristermitten.plumber.command.PlumberCommand;
-import me.bristermitten.plumber.struct.DataKey;
-import me.bristermitten.plumber.struct.player.PPlayer;
+import me.bristermitten.plumber.object.DataKey;
+import me.bristermitten.plumber.object.player.PPlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
