@@ -4,18 +4,19 @@ package me.bristermitten.plumber.`object`.builder.impl
 
 import com.google.inject.Inject
 import com.google.inject.assistedinject.Assisted
+import me.bristermitten.plumber.`object`.builder.ActionBuilder
+import me.bristermitten.plumber.`object`.builder.TaskLengthConfiguration
+import me.bristermitten.plumber.scheduling.TaskFactory
 import me.bristermitten.plumber.scheduling.timings.Time
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPicker
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory
-import me.bristermitten.plumber.`object`.builder.ActionBuilder
-import me.bristermitten.plumber.`object`.builder.TaskLengthConfiguration
 
-internal open class DefaultTaskLengthConfiguration<B : ActionBuilder<*>>
+internal open class DefaultTaskLengthConfiguration<B : ActionBuilder<B>>
 @Inject constructor(
         @Assisted private val value: B,
-        private val factory: TimeUnitPickerFactory
+        private val factory: TimeUnitPickerFactory,
+        private val taskFactory: TaskFactory
 ) : TaskLengthConfiguration<B> {
-
 
     private val length: Time = Time()
 
@@ -29,6 +30,9 @@ internal open class DefaultTaskLengthConfiguration<B : ActionBuilder<*>>
 
     override fun after(time: Long): TimeUnitPicker<B> {
         length.length = time
-        return factory.pick(value, { length.unit = it })
+        return factory.pick(value, {
+            length.unit = it
+            taskFactory.create(length, Time.NONE, value).start()
+        })
     }
 }

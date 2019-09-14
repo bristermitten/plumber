@@ -3,7 +3,6 @@ package me.bristermitten.plumber.object.event;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import me.bristermitten.plumber.PlumberPlugin;
-import me.bristermitten.plumber.object.event.EventController;
 import me.bristermitten.plumber.util.ReflectionUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Cancellable;
@@ -33,8 +32,11 @@ public class EventControllerImpl<T extends PlayerEvent & Cancellable> implements
 
     private void tryRegister() {
         if (registered) return;
-        Bukkit.getPluginManager().registerEvent(clazz, this, EventPriority.NORMAL, (listener, event) -> handle(event)
-                , plugin);
+        Bukkit.getPluginManager().registerEvent(clazz,
+                this,
+                EventPriority.NORMAL,
+                (listener, event) -> handle(event),
+                plugin);
         registered = true;
     }
 
@@ -47,12 +49,14 @@ public class EventControllerImpl<T extends PlayerEvent & Cancellable> implements
     }
 
 
-    private void unRegister() {
+    public void unRegister() {
         if (!registered) return;
+        System.out.println("unregistering " + clazz);
         HandlerList handlers = (HandlerList) ReflectionUtil.invokeNoArgsStaticMethod(clazz, "getHandlerList");
         if (handlers != null) {
             handlers.unregister(this);
         }
+        registered = false;
     }
 
     @Override
@@ -75,7 +79,7 @@ public class EventControllerImpl<T extends PlayerEvent & Cancellable> implements
 
     @Override
     public void ignoreAll() {
-        unRegister();
         consumer = null;
+        unRegister();
     }
 }

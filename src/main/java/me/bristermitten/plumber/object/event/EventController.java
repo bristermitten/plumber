@@ -9,8 +9,9 @@ public interface EventController<T extends PlayerEvent> extends Listener {
 
     void cancelAll();
 
-
     void cancelIf(Predicate<T> predicate);
 
     void ignoreAll();
+
+    void unRegister();
 }

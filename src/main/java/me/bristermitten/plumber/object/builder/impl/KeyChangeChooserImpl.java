@@ -1,24 +1,39 @@
 package me.bristermitten.plumber.object.builder.impl;
 
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
-import me.bristermitten.plumber.object.DataKey;
 import me.bristermitten.plumber.object.builder.KeyChangeChooser;
+import me.bristermitten.plumber.object.key.DataKey;
+
+import java.util.function.Consumer;
 
 public class KeyChangeChooserImpl<R, K> implements KeyChangeChooser<R, K> {
 
     private final R r;
     private final DataKey<K> watching;
+    private final Runnable callback;
+    private Consumer<K> consumer;
 
-    @Inject
-    public KeyChangeChooserImpl(@Assisted R r, @Assisted DataKey<K> key) {
-        this.r = (R) r;
+    public KeyChangeChooserImpl(R r, DataKey<K> key, Runnable callback) {
+        this.r = r;
         this.watching = key;
+        this.callback = callback;
     }
 
     @Override
     public R toValue(K value) {
-        //todo implement
+        if (consumer != null)
+            watching.getHandlers().remove(consumer);
+
+        consumer = v -> {
+            if (value.equals(v)) {
+                callback.run();
+            }
+        };
+        watching.getHandlers().add(consumer);
         return r;
+    }
+
+    @Override
+    public void reset() {
+        watching.getHandlers().remove(consumer);
     }
 }

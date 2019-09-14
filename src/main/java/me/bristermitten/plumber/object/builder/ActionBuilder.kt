@@ -1,7 +1,9 @@
 package me.bristermitten.plumber.`object`.builder
 
+import me.bristermitten.plumber.`object`.Resettable
 
-interface ActionBuilder<T : ActionBuilder<T>> {
+
+interface ActionBuilder<T : ActionBuilder<T>> : Runnable, Resettable {
 
     /**
      * Returns the parent object for further configuration

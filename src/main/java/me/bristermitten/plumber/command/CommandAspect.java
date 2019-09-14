@@ -30,7 +30,8 @@ public class CommandAspect extends AbstractAspect {
                     String arg = context.popFirstArg();
                     return manager.of(Bukkit.getPlayer(arg));
                 });
-        commandManager.getCommandCompletions().setDefaultCompletion("players", PPlayer.class);
+        commandManager.getCommandCompletions()
+                .setDefaultCompletion("players", PPlayer.class);
     }
 
     @Override

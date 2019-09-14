@@ -1,12 +1,14 @@
 package me.bristermitten.plumber.scheduling;
 
 import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
 import me.bristermitten.plumber.PlumberPlugin;
-import org.bukkit.Bukkit;
+import me.bristermitten.plumber.object.Resettable;
+import me.bristermitten.plumber.scheduling.timings.Time;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
-import javax.inject.Inject;
-
-public class Task implements Runnable {
+public class Task implements Runnable, Resettable {
 
     private final long delay;
     private final long period;
@@ -14,8 +16,9 @@ public class Task implements Runnable {
     private final Runnable delegate;
 
     private final PlumberPlugin plugin;
+    private BukkitTask task;
 
-    @Inject
+    @AssistedInject
     public Task(PlumberPlugin plugin, @Assisted("delay") long delay, @Assisted("period") long period,
                 @Assisted Runnable delegate) {
         this.plugin = plugin;
@@ -24,8 +27,35 @@ public class Task implements Runnable {
         this.delegate = delegate;
     }
 
+    @AssistedInject
+    public Task(PlumberPlugin plugin, @Assisted("delay") Time delay, @Assisted("period") Time period,
+                @Assisted Runnable delegate) {
+        this.plugin = plugin;
+        this.delay = delay.toTicks();
+        this.period = period.toTicks();
+        this.delegate = delegate;
+    }
+
     public final void start() {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this, 0, period);
+        BukkitRunnable runnable = new BukkitRunnable() {
+            @Override
+            public void run() {
+                Task.this.run();
+            }
+        };
+        if (delay == Time.Companion.getNONE_TICKS() && period == Time.Companion.getNONE_TICKS()) {
+            task = runnable.runTaskAsynchronously(plugin);
+            return;
+        }
+        if (delay == Time.Companion.getNONE_TICKS()) {
+            task = runnable.runTaskTimerAsynchronously(plugin, 0, period);
+            return;
+        }
+        if (period == Time.Companion.getNONE_TICKS()) {
+            task = runnable.runTaskLaterAsynchronously(plugin, delay);
+            return;
+        }
+        task = runnable.runTaskTimerAsynchronously(plugin, delay, period);
     }
 
     public final void stop() {
@@ -34,5 +64,12 @@ public class Task implements Runnable {
     @Override
     public void run() {
         delegate.run();
+    }
+
+    @Override
+    public void reset() {
+        if (task != null && !task.isCancelled()) {
+            task.cancel();
+        }
     }
 }

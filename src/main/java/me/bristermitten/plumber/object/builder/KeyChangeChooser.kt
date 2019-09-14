@@ -1,5 +1,7 @@
 package me.bristermitten.plumber.`object`.builder
 
-interface KeyChangeChooser<R, K> {
+import me.bristermitten.plumber.`object`.Resettable
+
+interface KeyChangeChooser<R, K> : Resettable {
     fun toValue(value: K): R
 }

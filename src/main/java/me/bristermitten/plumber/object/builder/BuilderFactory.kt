@@ -8,7 +8,7 @@ interface BuilderFactory {
     fun createPlayerConfiguration(@Assisted value: PlayerActionBuilder): PlayerTaskLengthConfiguration
 
 
-    fun createPlayerActionBuilder(@Assisted player: PPlayer): PlayerActionBuilder
+    fun createPlayerActionBuilder(@Assisted player: PPlayer, @Assisted onTrigger: Runnable): PlayerActionBuilder
 
 
 }
