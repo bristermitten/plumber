@@ -2,6 +2,7 @@ package me.bristermitten.plumber.aspect;
 
 import com.google.inject.Inject;
 import com.google.inject.Module;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
@@ -18,8 +19,6 @@ import java.util.Set;
  * Aspects will be initialized with Guice, so can safely use {@link Inject}
  */
 public interface Aspect {
-
-
     boolean isEnabled();
 
     void enable();
@@ -29,10 +28,9 @@ public interface Aspect {
     void loadParts(Set<Class<?>> annotatedClasses);
 
     /**
-     * If an independent module is returned, it **MUST** install the provided parent!
      *
-     * @param parent
      * @return
      */
-    Module getModule(Module parent);
+    @Nullable
+    Module getModule();
 }

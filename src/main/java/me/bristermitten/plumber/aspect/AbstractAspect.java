@@ -4,6 +4,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,13 +49,13 @@ public abstract class AbstractAspect implements Aspect {
     }
 
     @Override
-    public void loadParts(Set<Class<?>> annotatedClasses) {
+    public void loadParts(@NotNull Set<Class<?>> annotatedClasses) {
 
     }
 
     @Override
-    public Module getModule(Module parent) {
-        return parent;
+    public Module getModule() {
+        return null;
     }
 
     protected <T> T instance(Class<T> clazz) {

@@ -51,11 +51,11 @@ public class EventControllerImpl<T extends PlayerEvent & Cancellable> implements
 
     public void unRegister() {
         if (!registered) return;
-        System.out.println("unregistering " + clazz);
         HandlerList handlers = (HandlerList) ReflectionUtil.invokeNoArgsStaticMethod(clazz, "getHandlerList");
         if (handlers != null) {
             handlers.unregister(this);
         }
+        consumer = null;
         registered = false;
     }
 
@@ -79,7 +79,6 @@ public class EventControllerImpl<T extends PlayerEvent & Cancellable> implements
 
     @Override
     public void ignoreAll() {
-        consumer = null;
         unRegister();
     }
 }

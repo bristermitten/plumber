@@ -9,6 +9,7 @@ import me.bristermitten.plumber.aspect.AbstractAspect;
 import me.bristermitten.plumber.object.player.PPlayer;
 import me.bristermitten.plumber.object.player.PPlayerManager;
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,7 +42,7 @@ public class CommandAspect extends AbstractAspect {
     }
 
     @Override
-    public void loadParts(Set<Class<?>> annotatedClasses) {
+    public void loadParts(@NotNull Set<Class<?>> annotatedClasses) {
         Set<Class<?>> loaded = new HashSet<>();
         for (Class<?> annotatedClass : annotatedClasses) {
             if (annotatedClass.isMemberClass() || annotatedClass.isLocalClass()) {

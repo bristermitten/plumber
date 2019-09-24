@@ -9,6 +9,7 @@ import me.bristermitten.plumber.scheduling.timings.TimeUnitPicker;
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -45,7 +46,7 @@ public class SchedulerAspect extends AbstractAspect {
     }
 
     @Override
-    public void loadParts(Set<Class<?>> annotatedClasses) {
+    public void loadParts(@NotNull Set<Class<?>> annotatedClasses) {
         for (Class<?> annotatedClass : annotatedClasses) {
             Object instance = instance(annotatedClass);
 

@@ -19,10 +19,11 @@ public class AspectPlumberModule extends PlumberModule {
 
     @Override
     protected void configure() {
-        Module module = parent;
+        install(parent);
         for (Aspect aspect : aspects) {
-            module = aspect.getModule(module);
+            Module module = aspect.getModule();
+            if (module != null)
+                install(module);
         }
-        install(module);
     }
 }

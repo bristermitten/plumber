@@ -24,6 +24,9 @@ import java.io.File;
  */
 public class PlumberPlugin extends JavaPlugin {
 
+    private static PlumberPlugin plumberPlugin;
+    @Inject
+    private Injector injector;
 
     public PlumberPlugin() {
     }
@@ -32,10 +35,19 @@ public class PlumberPlugin extends JavaPlugin {
         super(loader, description, dataFolder, file);
     }
 
-    @Inject
-    private Injector injector;
+    /**
+     * Use discouraged
+     * Return the active plugin instance
+     * Only to be used if Dependency injection is not convenient
+     *
+     * @return
+     */
+    public static PlumberPlugin activePlugin() {
+        return plumberPlugin;
+    }
 
     protected void loadPlugin() {
+
         String ourPackage = getClass().getPackage().getName();
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
         configurationBuilder.setClassLoaders(new ClassLoader[]{getClassLoader()});
@@ -49,10 +61,10 @@ public class PlumberPlugin extends JavaPlugin {
         new AspectLoader(this, reflections)
                 .ensureLoaded(DataAspect.class)
                 .addThirdPartyAspectAnnotation(CommandAlias.class, CommandAspect.class)
+
                 .loadAll();
+
+        plumberPlugin = this;
     }
 
-    protected final <T> T getInstance(Class<T> clazz) {
-        return injector.getInstance(clazz);
-    }
 }
