@@ -16,7 +16,6 @@ import static org.bukkit.ChatColor.RED;
  */
 public class TestCommand extends PlumberCommand {
     private DataKey<Boolean> frozen = new DataKey<>("frozen", false);
-
     @CommandAlias("freeze")
     public class Freeze extends TestCommand {
         @Default
@@ -38,10 +37,8 @@ public class TestCommand extends PlumberCommand {
             target.message(RED + "You have been frozen");
         }
     }
-
     @CommandAlias("unfreeze")
     public class UnFreeze extends TestCommand {
-
         @Default
         public void unFreeze(Player sender, PPlayer target) {
             boolean value = target.getData(frozen);

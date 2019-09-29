@@ -1,14 +1,11 @@
 package me.bristermitten.plumber.scheduling.timings
 
 import com.google.inject.Inject
-import me.bristermitten.plumber.aspect.AspectLoader
-import me.bristermitten.plumber.scheduling.SchedulerAspect
 import me.bristermitten.plumber.scheduling.Task
 import me.bristermitten.plumber.scheduling.TaskFactory
 
 internal class TaskBuilderImpl @Inject constructor(
         private val factory: TimeUnitPickerFactory,
-        loader: AspectLoader,
         private val taskFactory: TaskFactory
 ) : TaskBuilder {
 
@@ -43,9 +40,5 @@ internal class TaskBuilderImpl @Inject constructor(
         val delay = delayUnit.toTicks(delayLength)
         val period = repeatUnit.toTicks(repeatLength)
         return taskFactory.create(delay, period, run)
-    }
-
-    init {
-        loader.ensureLoaded(SchedulerAspect::class.java)
     }
 }

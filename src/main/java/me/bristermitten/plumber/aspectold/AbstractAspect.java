@@ -1,9 +1,9 @@
-package me.bristermitten.plumber.aspect;
+package me.bristermitten.plumber.aspectold;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import me.bristermitten.plumber.newaspect.Aspect;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +21,6 @@ public abstract class AbstractAspect implements Aspect {
         logger = LoggerFactory.getLogger(getClass());
     }
 
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
 
     @Override
     public void enable() {
@@ -36,7 +32,7 @@ public abstract class AbstractAspect implements Aspect {
 
     @Override
     public void disable() {
-        logger.info("Enabling aspect " + getClass().getSimpleName());
+        logger.info("Disabling aspect " + getClass().getSimpleName());
         doDisable();
         enabled = false;
         logger.info("Done");
@@ -48,12 +44,10 @@ public abstract class AbstractAspect implements Aspect {
     protected void doDisable() {
     }
 
-    @Override
     public void loadParts(@NotNull Set<Class<?>> annotatedClasses) {
 
     }
 
-    @Override
     public Module getModule() {
         return null;
     }

@@ -3,16 +3,14 @@ package me.bristermitten.plumber.scheduling;
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
-import me.bristermitten.plumber.aspect.AbstractAspect;
+import me.bristermitten.plumber.newaspect.AbstractAspect;
+import me.bristermitten.plumber.newaspect.RequiredAspect;
 import me.bristermitten.plumber.scheduling.timings.TaskBuilder;
-import me.bristermitten.plumber.scheduling.timings.TimeUnitPicker;
-import me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
-
+@RequiredAspect
 public class SchedulerAspect extends AbstractAspect {
 
     private BukkitScheduler scheduler;
@@ -24,16 +22,20 @@ public class SchedulerAspect extends AbstractAspect {
     }
 
 
+//    @Override
+//    public void loadParts(@NotNull Set<Class<?>> annotatedClasses) {
+//        for (Class<?> annotatedClass : annotatedClasses) {
+//            Object instance = instance(annotatedClass);
+//
+//        }
+//    }
+
+    @Nullable
     @Override
-    public Module getModule(Module parent) {
+    public Module module() {
         return new AbstractModule() {
             @Override
             protected void configure() {
-//                install(new FactoryModuleBuilder()
-//                        .implement(TimeUnitPicker.class, TimeUnitPicker.impl)
-//                        .build(TimeUnitPickerFactory.class));
-
-                install(parent);
                 install(new FactoryModuleBuilder()
                         .implement(TaskBuilder.class, TaskBuilder.impl)
                         .build(TaskBuilderFactory.class));
@@ -43,13 +45,5 @@ public class SchedulerAspect extends AbstractAspect {
                 );
             }
         };
-    }
-
-    @Override
-    public void loadParts(@NotNull Set<Class<?>> annotatedClasses) {
-        for (Class<?> annotatedClass : annotatedClasses) {
-            Object instance = instance(annotatedClass);
-
-        }
     }
 }

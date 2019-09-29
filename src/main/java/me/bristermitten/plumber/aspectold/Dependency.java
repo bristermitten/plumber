@@ -1,4 +1,6 @@
-package me.bristermitten.plumber.aspect;
+package me.bristermitten.plumber.aspectold;
+
+import me.bristermitten.plumber.newaspect.Aspect;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

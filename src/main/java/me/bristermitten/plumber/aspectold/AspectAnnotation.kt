@@ -1,5 +1,6 @@
 package me.bristermitten.plumber.aspect
 
+import me.bristermitten.plumber.newaspect.Aspect
 import kotlin.reflect.KClass
 
 /**

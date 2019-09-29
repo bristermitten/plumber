@@ -5,15 +5,17 @@ import co.aikar.commands.BukkitCommandManager;
 import co.aikar.commands.PaperCommandManager;
 import com.google.inject.Inject;
 import me.bristermitten.plumber.PlumberPlugin;
-import me.bristermitten.plumber.aspect.AbstractAspect;
+import me.bristermitten.plumber.newaspect.AbstractAspect;
+import me.bristermitten.plumber.newaspect.AspectReflectionManager;
+import me.bristermitten.plumber.newaspect.RequiredAspect;
 import me.bristermitten.plumber.object.player.PPlayer;
 import me.bristermitten.plumber.object.player.PPlayerManager;
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@RequiredAspect
 public class CommandAspect extends AbstractAspect {
 
     @Inject
@@ -21,6 +23,10 @@ public class CommandAspect extends AbstractAspect {
 
     @Inject
     private PPlayerManager manager;
+
+    @Inject
+    private AspectReflectionManager reflectionManager;
+
     private BukkitCommandManager commandManager;
 
     @Override
@@ -33,26 +39,23 @@ public class CommandAspect extends AbstractAspect {
                 });
         commandManager.getCommandCompletions()
                 .setDefaultCompletion("players", PPlayer.class);
+
+        Set<Class<?>> loaded = new HashSet<>();
+        for (Class<?> commandClass : reflectionManager.classesForAspect(this)) {
+            if (commandClass.isMemberClass() || commandClass.isLocalClass()) {
+                commandClass = commandClass.getSuperclass();
+                if (loaded.contains(commandClass))
+                    continue;
+            }
+            load(commandClass);
+            loaded.add(commandClass);
+        }
     }
 
     @Override
     protected void doDisable() {
         commandManager.unregisterCommands();
         commandManager = null;
-    }
-
-    @Override
-    public void loadParts(@NotNull Set<Class<?>> annotatedClasses) {
-        Set<Class<?>> loaded = new HashSet<>();
-        for (Class<?> annotatedClass : annotatedClasses) {
-            if (annotatedClass.isMemberClass() || annotatedClass.isLocalClass()) {
-                annotatedClass = annotatedClass.getSuperclass();
-                if (loaded.contains(annotatedClass))
-                    continue;
-            }
-            load(annotatedClass);
-            loaded.add(annotatedClass);
-        }
     }
 
     private void load(Class<?> clazz) {

@@ -4,11 +4,11 @@
 package me.bristermitten.plumber;
 
 import co.aikar.commands.annotation.CommandAlias;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import me.bristermitten.plumber.aspect.AspectLoader;
+import com.google.inject.Guice;
+import com.google.inject.Singleton;
 import me.bristermitten.plumber.command.CommandAspect;
-import me.bristermitten.plumber.object.DataAspect;
+import me.bristermitten.plumber.newaspect.AspectReflectionManager;
+import me.bristermitten.plumber.newaspect.modules.InitialModule;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
@@ -22,11 +22,10 @@ import java.io.File;
  * Main class of the project
  * Plumber equivalent of SpringApplication
  */
+@Singleton
 public class PlumberPlugin extends JavaPlugin {
 
     private static PlumberPlugin plumberPlugin;
-    @Inject
-    private Injector injector;
 
     public PlumberPlugin() {
     }
@@ -46,23 +45,21 @@ public class PlumberPlugin extends JavaPlugin {
         return plumberPlugin;
     }
 
-    protected void loadPlugin() {
+    protected void loadPlumber() {
 
         String ourPackage = getClass().getPackage().getName();
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
         configurationBuilder.setClassLoaders(new ClassLoader[]{getClassLoader()});
-        configurationBuilder.filterInputsBy(p -> !p.contains("META-INF"));
-        configurationBuilder.filterInputsBy(p -> !p.contains("org.bukkit"));
+        configurationBuilder.filterInputsBy(p -> p != null && !p.contains("META-INF") && !p.contains("org.bukkit"));
         Configuration config = configurationBuilder.forPackages(ourPackage);
-
 
         Reflections reflections = new Reflections(config);
 
-        new AspectLoader(this, reflections)
-                .ensureLoaded(DataAspect.class)
-                .addThirdPartyAspectAnnotation(CommandAlias.class, CommandAspect.class)
-
-                .loadAll();
+        InitialModule initial = new InitialModule(this, reflections);
+        AspectReflectionManager manager = Guice.createInjector(initial).getInstance(AspectReflectionManager.class);
+        manager.loadBaseBindings();
+        manager.addThirdPartyBinding(CommandAlias.class, CommandAspect.class);
+        manager.loadAll();
 
         plumberPlugin = this;
     }

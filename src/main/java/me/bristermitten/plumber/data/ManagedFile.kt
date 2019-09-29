@@ -25,11 +25,11 @@ data class ManagedFile(private val fileName: String) : YamlConfiguration() {
                 return
             }
             val annotation = it.getAnnotation(ConfigVar::class.java)
-            it.set(instance, this[prefix configChild annotation.path])
+            it.set(instance, this[prefix child annotation.path])
         }
     }
 
-    private infix fun String.configChild(key: String): String = when {
+    private infix fun String.child(key: String): String = when {
         this.isEmpty() -> key
         this.endsWith(separator) -> this + key
         else -> this + separator + key
