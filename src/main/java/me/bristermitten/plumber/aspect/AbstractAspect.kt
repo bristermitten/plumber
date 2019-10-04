@@ -1,4 +1,4 @@
-package me.bristermitten.plumber.newaspect
+package me.bristermitten.plumber.aspect
 
 import com.google.inject.Inject
 import com.google.inject.Injector
@@ -16,7 +16,7 @@ abstract class AbstractAspect : Aspect {
 
     override fun enable() {
         logger.info("Enabling aspect " + javaClass.simpleName)
-        doDisable()
+        doEnable()
         enabled = true
         logger.info("Done")
     }

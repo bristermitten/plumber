@@ -1,4 +1,4 @@
-package me.bristermitten.plumber.newaspect
+package me.bristermitten.plumber.aspect
 
 import com.google.inject.Module
 

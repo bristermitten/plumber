@@ -3,7 +3,7 @@ package me.bristermitten.plumber.aspectold;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import me.bristermitten.plumber.newaspect.Aspect;
+import me.bristermitten.plumber.aspect.Aspect;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

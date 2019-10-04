@@ -1,9 +1,16 @@
 package me.bristermitten.plumber.data
 
-@Target(AnnotationTarget.TYPE)
+import me.bristermitten.plumber.aspect.AspectAnnotation
+
+@Target(AnnotationTarget.TYPE, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
+@AspectAnnotation(DataAspect::class)
 annotation class Configuration(val fileName: String = "config.yml", val prefix: String = "")
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class ConfigVar(val path: String)
+@AspectAnnotation(DataAspect::class)
+annotation class ConfigVar(val value: String)
+
+
+

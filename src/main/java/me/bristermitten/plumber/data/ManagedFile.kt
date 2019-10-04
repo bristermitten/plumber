@@ -1,22 +1,32 @@
 package me.bristermitten.plumber.data
 
+import com.google.inject.Inject
+import com.google.inject.assistedinject.Assisted
 import me.bristermitten.plumber.PlumberPlugin
 import org.bukkit.configuration.file.YamlConfiguration
+import java.nio.file.Files
 
 private const val separator = '.'
 
-data class ManagedFile(private val fileName: String) : YamlConfiguration() {
+data class ManagedFile @Inject constructor(private val plugin: PlumberPlugin,
+                                           @Assisted private val fileName: String) : YamlConfiguration() {
+
+    val path = plugin.dataFolder.resolve(fileName)
 
     init {
         reload()
     }
 
     fun reload() {
-        load(PlumberPlugin.activePlugin().dataFolder.resolve(fileName))
+        val toPath = path.toPath()
+        if (Files.notExists(toPath)) {
+            Files.createFile(toPath)
+        }
+        load(path)
     }
 
     fun save() {
-        save(PlumberPlugin.activePlugin().dataFolder.resolve(fileName))
+        save(path)
     }
 
     fun loadDataInto(instance: Any, prefix: String) {
@@ -25,7 +35,12 @@ data class ManagedFile(private val fileName: String) : YamlConfiguration() {
                 return
             }
             val annotation = it.getAnnotation(ConfigVar::class.java)
-            it.set(instance, this[prefix child annotation.path])
+            val value: Any? = this.get(prefix child annotation.value)
+            if (value != null)
+                it.set(instance, value)
+            else if (it.get(instance) != null) {
+                this.set(value, it.get(instance))
+            }
         }
     }
 

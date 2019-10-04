@@ -5,15 +5,21 @@ package me.bristermitten.plumber;
 
 import co.aikar.commands.annotation.CommandAlias;
 import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Singleton;
+import me.bristermitten.plumber.aspect.AspectReflectionManager;
+import me.bristermitten.plumber.aspect.modules.InitialModule;
 import me.bristermitten.plumber.command.CommandAspect;
-import me.bristermitten.plumber.newaspect.AspectReflectionManager;
-import me.bristermitten.plumber.newaspect.modules.InitialModule;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.reflections.Configuration;
 import org.reflections.Reflections;
+import org.reflections.scanners.FieldAnnotationsScanner;
+import org.reflections.scanners.MethodAnnotationsScanner;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ConfigurationBuilder;
 
 import java.io.File;
@@ -27,22 +33,14 @@ public class PlumberPlugin extends JavaPlugin {
 
     private static PlumberPlugin plumberPlugin;
 
+    @Inject
+    private Injector injector;
+
     public PlumberPlugin() {
     }
 
     public PlumberPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
         super(loader, description, dataFolder, file);
-    }
-
-    /**
-     * Use discouraged
-     * Return the active plugin instance
-     * Only to be used if Dependency injection is not convenient
-     *
-     * @return
-     */
-    public static PlumberPlugin activePlugin() {
-        return plumberPlugin;
     }
 
     protected void loadPlumber() {
@@ -51,17 +49,22 @@ public class PlumberPlugin extends JavaPlugin {
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
         configurationBuilder.setClassLoaders(new ClassLoader[]{getClassLoader()});
         configurationBuilder.filterInputsBy(p -> p != null && !p.contains("META-INF") && !p.contains("org.bukkit"));
-        Configuration config = configurationBuilder.forPackages(ourPackage);
+        Configuration config = configurationBuilder.forPackages(ourPackage)
+                .setScanners(new MethodAnnotationsScanner(), new FieldAnnotationsScanner(),
+                        new TypeAnnotationsScanner(), new SubTypesScanner());
 
         Reflections reflections = new Reflections(config);
 
         InitialModule initial = new InitialModule(this, reflections);
-        AspectReflectionManager manager = Guice.createInjector(initial).getInstance(AspectReflectionManager.class);
+        Injector initialInjector = Guice.createInjector(initial);
+        AspectReflectionManager manager = initialInjector.getInstance(AspectReflectionManager.class);
         manager.loadBaseBindings();
         manager.addThirdPartyBinding(CommandAlias.class, CommandAspect.class);
-        manager.loadAll();
-
+        manager.loadAll(this);
         plumberPlugin = this;
     }
 
+    protected <T> T getInstance(Class<T> clazz) {
+        return injector.getInstance(clazz);
+    }
 }

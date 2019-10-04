@@ -1,7 +1,9 @@
 package me.bristermitten.demoplumberapp;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import com.google.inject.Inject;
 import me.bristermitten.plumber.PlumberPlugin;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.slf4j.impl.SimpleLogger;
@@ -22,11 +24,13 @@ public class DemoPlugin extends PlumberPlugin {
         MockBukkit.load(DemoPlugin.class);
     }
 
+    private @Inject TestConfig config;
     @Override
     public void onEnable() {
         System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "TRACE");
         loadPlumber();
 
+        System.out.println(ReflectionToStringBuilder.toString(config));
 //        getInstance(TestScheduled.class).start();
     }
 }

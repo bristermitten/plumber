@@ -14,8 +14,10 @@ import static org.bukkit.ChatColor.RED;
 /**
  * This is how projects using plumber will look in the future
  */
+
 public class TestCommand extends PlumberCommand {
     private DataKey<Boolean> frozen = new DataKey<>("frozen", false);
+
     @CommandAlias("freeze")
     public class Freeze extends TestCommand {
         @Default
@@ -37,6 +39,7 @@ public class TestCommand extends PlumberCommand {
             target.message(RED + "You have been frozen");
         }
     }
+
     @CommandAlias("unfreeze")
     public class UnFreeze extends TestCommand {
         @Default
