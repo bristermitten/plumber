@@ -10,21 +10,21 @@ repositories {
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'https://jitpack.io' }
-    maven { url = "https://repo.aikar.co/content/groups/aikar/" }
+    maven { url "https://repo.aikar.co/content/groups/aikar/" }
 }
 
 dependencies {
-    implementation 'com.google.guava:guava:27.1-jre'
-    implementation 'com.google.inject:guice:4.2.2'
+    api 'com.google.guava:guava:27.1-jre'
+    api 'com.google.inject:guice:4.2.2'
     implementation 'com.google.inject.extensions:guice-assistedinject:4.2.2'
     implementation 'org.reflections:reflections:0.9.11'
-    implementation "co.aikar:acf-paper:0.5.0-SNAPSHOT"
-    implementation 'org.slf4j:slf4j-api:1.7.28'
+    api "co.aikar:acf-paper:0.5.0-SNAPSHOT"
+    api 'org.slf4j:slf4j-api:1.7.28'
     implementation 'org.slf4j:slf4j-simple:1.7.28'
     implementation 'com.github.knightzmc:mockbukkit:63f3b97ea3432c969a1a77dcf9d2ee96c40bb509'
 
 
-    implementation 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
+    api 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
     implementation 'org.spigotmc:spigot:1.12.2-R0.1-SNAPSHOT'
 
 
@@ -46,7 +46,6 @@ compileJava {
     options.compilerArgs += ["-parameters"]
     options.fork = true
 }
-
 
 shadowJar {
     minimize()

@@ -59,6 +59,7 @@ public class PlumberPlugin extends JavaPlugin {
      * This should be called immediately in {@link JavaPlugin#onEnable()}
      */
     protected void loadPlumber() {
+        getLogger().info("Plumber Loading for Plugin " + getName() + "...");
         String ourPackage = getClass().getPackage().getName();
         String[] packages = {ourPackage, PlumberPlugin.class.getPackage().getName()};
         Configuration config = new ConfigurationBuilder()
@@ -77,6 +78,8 @@ public class PlumberPlugin extends JavaPlugin {
         manager.loadBaseBindings();
         manager.addThirdPartyBinding(CommandAlias.class, CommandAspect.class);
         manager.loadAll(this);
+
+        getLogger().info("Plumber loaded!");
     }
 
     protected <T> T getInstance(Class<T> clazz) {

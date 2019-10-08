@@ -22,7 +22,7 @@ public class AFKListener {
     public void handle() {
 //        for (PPlayer player : server.players()) {
 //            if (player.lastMoved().moreThan(30).seconds().ago()) {
-//                player.kick();
+//                player.kick("Kicked for AFK.");
 //            }
 //        }
     }
