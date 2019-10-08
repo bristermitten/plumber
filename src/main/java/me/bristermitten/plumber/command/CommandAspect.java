@@ -8,8 +8,8 @@ import me.bristermitten.plumber.PlumberPlugin;
 import me.bristermitten.plumber.aspect.AbstractAspect;
 import me.bristermitten.plumber.aspect.AspectReflectionManager;
 import me.bristermitten.plumber.aspect.RequiredAspect;
-import me.bristermitten.plumber.object.player.PPlayer;
-import me.bristermitten.plumber.object.player.PPlayerManager;
+import me.bristermitten.plumber.struct.player.PPlayer;
+import me.bristermitten.plumber.struct.player.PPlayerManager;
 import org.bukkit.Bukkit;
 
 import java.util.HashSet;

@@ -1,7 +1,7 @@
 package me.bristermitten.demoplumberapp;
 
-import me.bristermitten.plumber.data.ConfigVar;
-import me.bristermitten.plumber.data.Configuration;
+import me.bristermitten.plumber.files.ConfigVar;
+import me.bristermitten.plumber.files.Configuration;
 
 @Configuration(fileName = "test.yml")
 public class TestConfig {

@@ -3,35 +3,34 @@ package me.bristermitten.demoplumberapp;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import me.bristermitten.plumber.command.PlumberCommand;
-import me.bristermitten.plumber.object.key.DataKey;
-import me.bristermitten.plumber.object.player.PPlayer;
+import me.bristermitten.plumber.struct.key.DataKey;
+import me.bristermitten.plumber.struct.player.PPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import static org.bukkit.ChatColor.RED;
 
 
-/**
- * This is how projects using plumber will look in the future
- */
-
 public class TestCommand extends PlumberCommand {
     private DataKey<Boolean> frozen = new DataKey<>("frozen", false);
 
     @CommandAlias("freeze")
     public class Freeze extends TestCommand {
+
         @Default
         public void freeze(Player sender, PPlayer target) {
+
             if (target.getData(frozen)) {
                 reply(RED + "Player already frozen");
                 return;
             }
+
             target.blockEvent(PlayerMoveEvent.class)
                     .until()
                     .playerLogout()
                     .keyChange(frozen).toValue(false)
                     .or()
-                    .after(30).seconds()
+                    .undoAfter(30).seconds()
                     .withMessageOnComplete(RED + "You have been freed!")
                     .setKeyOnComplete(frozen, false);
 

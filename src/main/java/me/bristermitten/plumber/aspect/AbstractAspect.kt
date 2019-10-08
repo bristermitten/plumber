@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory
 
 abstract class AbstractAspect : Aspect {
 
-    protected val logger = LoggerFactory.getLogger(javaClass)
+    protected val logger = LoggerFactory.getLogger(javaClass)!!
 
     private var enabled = false
 

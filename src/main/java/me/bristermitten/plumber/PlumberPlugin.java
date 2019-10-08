@@ -25,13 +25,17 @@ import org.reflections.util.ConfigurationBuilder;
 import java.io.File;
 
 /**
- * Main class of the project
- * Plumber equivalent of SpringApplication
+ * Main class of Plumber. A Plugin that uses Plumber should extend this instead of
+ * {@link JavaPlugin}, as it is responsible for the loading of the framework,
+ * and may handle more in the future.
+ * <p>
+ * This class will be a Singleton throughout the framework, and at the moment doesn't do much
+ * else than the initial setup.
+ * On that note, in any Plumber plugin, {@link PlumberPlugin#loadPlumber()}
+ * should be called in your {@link JavaPlugin#onEnable()}
  */
 @Singleton
 public class PlumberPlugin extends JavaPlugin {
-
-    private static PlumberPlugin plumberPlugin;
 
     @Inject
     private Injector injector;
@@ -43,13 +47,25 @@ public class PlumberPlugin extends JavaPlugin {
         super(loader, description, dataFolder, file);
     }
 
-    protected void loadPlumber() {
+    @Override
+    public void onEnable() {
+        loadPlumber();
+    }
 
+    /**
+     * Load the framework.
+     * This entails scanning classes in the classpath, creating instances and injectors
+     * through Guice, and loading all necessary aspects.
+     * This should be called immediately in {@link JavaPlugin#onEnable()}
+     */
+    protected void loadPlumber() {
         String ourPackage = getClass().getPackage().getName();
-        ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-        configurationBuilder.setClassLoaders(new ClassLoader[]{getClassLoader()});
-        configurationBuilder.filterInputsBy(p -> p != null && !p.contains("META-INF") && !p.contains("org.bukkit"));
-        Configuration config = configurationBuilder.forPackages(ourPackage)
+        String[] packages = {ourPackage, PlumberPlugin.class.getPackage().getName()};
+        Configuration config = new ConfigurationBuilder()
+                .addClassLoader(getClassLoader())
+                .filterInputsBy(p -> p != null && !p.contains("META-INF") && !p.contains("org.bukkit"))
+                .setExpandSuperTypes(false)
+                .forPackages(packages)
                 .setScanners(new MethodAnnotationsScanner(), new FieldAnnotationsScanner(),
                         new TypeAnnotationsScanner(), new SubTypesScanner());
 
@@ -61,7 +77,6 @@ public class PlumberPlugin extends JavaPlugin {
         manager.loadBaseBindings();
         manager.addThirdPartyBinding(CommandAlias.class, CommandAspect.class);
         manager.loadAll(this);
-        plumberPlugin = this;
     }
 
     protected <T> T getInstance(Class<T> clazz) {

@@ -1,13 +1,18 @@
-package me.bristermitten.plumber.scheduling.timings;
+package me.bristermitten.plumber.scheduling.timings
 
-import com.google.inject.Inject;
-import com.google.inject.Injector;
 
-import java.util.function.Consumer;
+/**
+ * Simple factory class for creating instances of [TimeUnitPicker]
+ * Due to the use of generics, we can't use Assisted Inject for this, so have to do it manually
+ *
+ * May be changed in the future
+ */
+class TimeUnitPickerFactory {
 
-public final class TimeUnitPickerFactory {
-
-    public <T> TimeUnitPicker<T> pick(T parent, Consumer<TimeUnit> callback) {
-        return new TimeUnitPickerImpl<>(parent, callback);
+    /**
+     * Create a new [TimeUnitPicker]
+     */
+    fun <T> pick(parent: T, callback: (TimeUnit) -> Unit): TimeUnitPicker<T> {
+        return TimeUnitPickerImpl(parent, callback)
     }
 }

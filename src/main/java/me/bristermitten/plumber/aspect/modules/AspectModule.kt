@@ -26,6 +26,8 @@ class AspectModule(private val parent: InitialModule,
                 if (injector != null) {
                     val instance = injector.getInstance(aspect)
                     bind(instance.javaClass).toInstance(instance)
+                    val module = instance.module()
+                    module?.let { install(it) }
                 }
             }
         }

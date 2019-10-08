@@ -4,6 +4,12 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ReflectionUtil {
 
+    /**
+     * Invoke a static method upon a class that has no arguments
+     * @param clazz the class holding the method
+     * @param methodName the method name
+     * @return the object returned by the method
+     */
     public static Object invokeNoArgsStaticMethod(Class<?> clazz, String methodName) {
         try {
             return clazz.getDeclaredMethod(methodName).invoke(null);

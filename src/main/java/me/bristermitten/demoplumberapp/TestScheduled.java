@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import me.bristermitten.plumber.scheduling.ScheduledTask;
 import me.bristermitten.plumber.scheduling.Task;
 import me.bristermitten.plumber.scheduling.TaskBuilderFactory;
-import net.minecraft.server.v1_12_R1.MinecraftServer;
 
 @ScheduledTask
 public class TestScheduled {

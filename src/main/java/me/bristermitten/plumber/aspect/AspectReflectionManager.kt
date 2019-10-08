@@ -30,8 +30,9 @@ class AspectReflectionManager @Inject constructor(
                 .flatMap { bindings[it] }
                 .toSet() +
                 reflections.getTypesAnnotatedWith(RequiredAspect::class.java)
-                        .filter { it.isAssignableFrom(Aspect::class.java) }
+                        .filter { Aspect::class.java.isAssignableFrom(it) }
                         .mapNotNull { it as Class<out Aspect> }
+                        .toSet()
     }
 
     fun loadBaseBindings() {
@@ -58,9 +59,7 @@ class AspectReflectionManager @Inject constructor(
     }
 
     fun classesForAspect(aspect: Class<out Aspect>): Set<Class<*>> {
-        val inverse = Multimaps.invertFrom(bindings,
-                HashMultimap.create())
-        println(inverse)
+        val inverse = Multimaps.invertFrom(bindings, HashMultimap.create())
         val annotations = inverse[aspect] ?: return emptySet()
         return annotations.flatMap {
             reflections.getTypesAnnotatedWith(it)
@@ -71,6 +70,7 @@ class AspectReflectionManager @Inject constructor(
         val module = AspectModule(initialModule, this, injector = injector)
         var injector = Guice.createInjector(module)
 
+        println(requiredAspects)
         val finalModule = FinalAspectModule(module, injector, module.requiredAspects)
         injector = Guice.createInjector(finalModule)
 

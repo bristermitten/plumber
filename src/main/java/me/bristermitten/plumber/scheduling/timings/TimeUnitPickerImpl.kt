@@ -2,42 +2,42 @@ package me.bristermitten.plumber.scheduling.timings
 
 import com.google.inject.Inject
 import com.google.inject.assistedinject.Assisted
-import java.util.function.Consumer
 
 
-internal class TimeUnitPickerImpl<T> @Inject constructor(
+internal class TimeUnitPickerImpl<T>
+@Inject constructor(
         @Assisted val parent: T,
-        @Assisted val callback: Consumer<TimeUnit>
+        @Assisted val callback: (TimeUnit) -> Unit
 ) : TimeUnitPicker<T> {
 
 
     override fun milliseconds(): T {
-        callback.accept(TimeUnit.MILLISECONDS);
+        callback(TimeUnit.MILLISECONDS);
         return parent
     }
 
     override fun ticks(): T {
-        callback.accept(TimeUnit.TICKS)
+        callback(TimeUnit.TICKS)
         return parent
     }
 
     override fun seconds(): T {
-        callback.accept(TimeUnit.SECONDS)
+        callback(TimeUnit.SECONDS)
         return parent
     }
 
     override fun minutes(): T {
-        callback.accept(TimeUnit.MINUTES)
+        callback(TimeUnit.MINUTES)
         return parent
     }
 
     override fun hours(): T {
-        callback.accept(TimeUnit.HOURS)
+        callback(TimeUnit.HOURS)
         return parent
     }
 
     override fun days(): T {
-        callback.accept(TimeUnit.DAYS)
+        callback(TimeUnit.DAYS)
         return parent
     }
 
