@@ -1,6 +1,6 @@
 # Plumber
 
-![](https://travis-ci.com/knightzmc/plumber.svg?branch=master)
+![https://travis-ci.com/knightzmc/plumber](https://travis-ci.com/knightzmc/plumber.svg?branch=master)
 
 Plumber is a framework for the Spigot API to reduce the amount of boilerplate it takes to create high qualtity Minecraft plugins. With all frameworks, it has a learning curve, but the simple DSL and Spring Boot-style annotatation based system makes it easy to pick up. It also encourages best practices - as long as you use what's provided, you'll find yourself writing cleaner, more organised code that does away with static abuse, string concatenation for config files, and messy, buggy event handlers.
 
