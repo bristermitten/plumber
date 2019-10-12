@@ -2,6 +2,7 @@ package me.bristermitten.plumber.command;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.BukkitCommandManager;
+import co.aikar.commands.CommandManager;
 import co.aikar.commands.PaperCommandManager;
 import com.google.inject.Inject;
 import me.bristermitten.plumber.PlumberPlugin;
@@ -15,6 +16,9 @@ import org.bukkit.Bukkit;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Internal aspect that handles the scanning of command classes, and the registration of such classes
+ */
 @RequiredAspect
 public class CommandAspect extends AbstractAspect {
 
@@ -29,13 +33,17 @@ public class CommandAspect extends AbstractAspect {
 
     private BukkitCommandManager commandManager;
 
+    /**
+     * Enable the aspect, causing the creation of a {@link CommandManager},
+     * and the registration of all required commands.
+     */
     @Override
     protected void doEnable() {
         commandManager = new PaperCommandManager(plumberPlugin);
         commandManager.getCommandContexts()
                 .registerContext(PPlayer.class, context -> {
                     String arg = context.popFirstArg();
-                    return manager.of(Bukkit.getPlayer(arg));
+                    return manager.ofPlayer(Bukkit.getPlayer(arg));
                 });
         commandManager.getCommandCompletions()
                 .setDefaultCompletion("players", PPlayer.class);
@@ -52,6 +60,9 @@ public class CommandAspect extends AbstractAspect {
         }
     }
 
+    /**
+     * Disable the aspect, unregistering all commands
+     */
     @Override
     protected void doDisable() {
         commandManager.unregisterCommands();

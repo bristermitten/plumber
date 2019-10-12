@@ -6,13 +6,14 @@ import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.AspectModuleLink
 import me.bristermitten.plumber.aspect.AspectReflectionManager
 import me.bristermitten.plumber.aspect.RequiredAspect
-import javax.annotation.Nonnull
 
+/**
+ * Internal Aspect that manages files being mapped to configuration classes
+ * Has a static Guice module of [FileModule]
+ */
 @RequiredAspect
 @AspectModuleLink(FileModule::class)
 class FileAspect : AbstractAspect() {
-    @Nonnull
-
     @Inject
     lateinit var store: ConfigStore
 
@@ -23,7 +24,9 @@ class FileAspect : AbstractAspect() {
     lateinit var manager: AspectReflectionManager
 
 
-
+    /**
+     * Enable the aspect, which causes the scanning of all required classes, and the loading of file data into the classes
+     */
     override fun doEnable() {
         val fileClasses = manager.classesForAspect(this)
         fileClasses.forEach {
@@ -37,6 +40,9 @@ class FileAspect : AbstractAspect() {
     }
 
 
+    /**
+     * Store of file names to instances of [ManagedFile]
+     */
     @Singleton
     class ConfigStore {
         @Inject

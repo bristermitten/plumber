@@ -9,9 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class PlayerTaskLengthConfiguration extends DefaultTaskLengthConfiguration<PlayerActionBuilder> {
     @Inject
-    public PlayerTaskLengthConfiguration(@Assisted @NotNull PlayerActionBuilder value,
+    public PlayerTaskLengthConfiguration(@Assisted @NotNull PlayerActionBuilder parent,
                                          @NotNull TimeUnitPickerFactory factory,
                                          TaskFactory taskFactory) {
-        super(value, factory, taskFactory);
+        super(parent, factory, taskFactory);
     }
 }

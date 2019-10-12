@@ -30,7 +30,7 @@ public class PlayerActionBuilderImpl extends ActionBuilderImpl<PlayerActionBuild
                                    ImplementationFactory f2) {
         this.f2 = f2;
         this.onTrigger = onTrigger;
-        this.parent = factory.createPlayerConfiguration(this);
+        this.parent = factory.createPlayerTaskLengthConfiguration(this);
         this.player = player;
     }
 
@@ -75,7 +75,7 @@ public class PlayerActionBuilderImpl extends ActionBuilderImpl<PlayerActionBuild
     @NotNull
     @Override
     public <K> PlayerActionBuilder setKeyOnComplete(@NotNull DataKey<K> key, K value) {
-        player.setDataRaw(key, value);
+        onComplete = p -> p.rawSetData(key, value);
         return this;
     }
 }

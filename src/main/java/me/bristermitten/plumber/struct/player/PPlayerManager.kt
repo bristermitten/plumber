@@ -8,6 +8,12 @@ import org.bukkit.entity.Player
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
+/**
+ * Singleton for storing implementations of [PPlayer] bound to their underlying [Player]
+ * Should always be kept a singleton.
+ * Consumers should prioritise obtaining [PPlayer] instances from commands, events, or other things
+ * rather than manually obtaining instances from [PPlayerManager]
+ */
 @Singleton
 class PPlayerManager {
     private val players = ConcurrentHashMap<UUID, PPlayer>()
@@ -15,12 +21,20 @@ class PPlayerManager {
     @Inject
     private lateinit var injector: Injector
 
-    //todo use Guice to inject an impl to allow customisation
+    /**
+     * Create or get an instance of [PPlayer] from a given [UUID]
+     * @see [ofPlayer]
+     * @return a corresponding instance of [PPlayer], or null if no such player is online
+     */
     fun of(p: UUID): PPlayer {
-        return of(Bukkit.getPlayer(p))
+        return ofPlayer(Bukkit.getPlayer(p))
     }
 
-    fun of(p: Player): PPlayer {
+    /**
+     * Create or get an instance of [PPlayer] corresponding to the given [Player]
+     * @param p The player
+     */
+    fun ofPlayer(p: Player): PPlayer {
         return players.computeIfAbsent(p.uniqueId) {
             val pp = PPlayerImpl(p)
             injector.injectMembers(pp)

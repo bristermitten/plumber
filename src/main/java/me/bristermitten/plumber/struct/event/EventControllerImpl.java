@@ -10,19 +10,20 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+/**
+ * Default implementation of {@link EventController}
+ * @param <T> the type of the event being handled
+ */
 public class EventControllerImpl<T extends PlayerEvent & Cancellable> implements EventController<T> {
 
     private final PlumberPlugin plugin;
     private final Class<T> clazz;
     private Consumer<T> consumer;
     private boolean registered;
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Inject
     public EventControllerImpl(PlumberPlugin plugin, @Assisted Class<T> clazz) {

@@ -1,6 +1,8 @@
-package me.bristermitten.plumber.struct.key;
+package me.bristermitten.plumber.struct.key
 
-import java.util.HashMap;
+import java.util.*
 
-public class KeyMap extends HashMap<DataKey<?>, Object> {
-}
+/**
+ * Simple implementation of [HashMap] with generics overridden
+ */
+class KeyMap : HashMap<DataKey<*>, Any>()

@@ -5,6 +5,10 @@ import com.google.inject.Injector
 import com.google.inject.Module
 import org.slf4j.LoggerFactory
 
+/**
+ * Boilerplate-handling abstract implementation of [Aspect]
+ * Provides logging, enabled-status handling, and a wrapper for Guice's [Injector]
+ */
 abstract class AbstractAspect : Aspect {
 
     protected val logger = LoggerFactory.getLogger(javaClass)!!

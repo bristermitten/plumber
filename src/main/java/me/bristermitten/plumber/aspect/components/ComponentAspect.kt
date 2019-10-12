@@ -7,6 +7,10 @@ import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.AspectReflectionManager
 import me.bristermitten.plumber.aspect.RequiredAspect
 
+/**
+ * Required Aspect that facilitates the injection of all [Component] classes
+ * They are bound as eager singletons
+ */
 @RequiredAspect
 class ComponentAspect : AbstractAspect() {
 
