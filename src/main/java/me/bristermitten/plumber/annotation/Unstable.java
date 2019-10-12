@@ -10,6 +10,5 @@ package me.bristermitten.plumber.annotation;
  * it is all subject to changes.
  */
 public @interface Unstable {
-
     String reason() default "";
 }

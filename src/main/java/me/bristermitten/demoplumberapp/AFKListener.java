@@ -14,7 +14,7 @@ public class AFKListener {
     @Inject
     public AFKListener(TaskBuilderFactory factory) {
         factory.create()
-                .every(200).ticks()
+                .every(30).seconds()
                 .doing(this::handle)
                 .build().start();
     }
