@@ -1,4 +1,5 @@
 language: java
+install: gradlew assemble javadoc
 deploy:
   provider: pages
   skip_cleanup: true

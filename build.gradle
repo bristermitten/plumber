@@ -53,9 +53,6 @@ compileJava {
 shadowJar {
     minimize()
 }
-assemble {
-    javadoc()
-}
 
 javadoc {
     source = sourceSets.main.allJava
