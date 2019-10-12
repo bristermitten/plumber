@@ -6,8 +6,8 @@ public class ChatUtil {
 
     /**
      * Color a String in accordance with Bukkit's standards for color codes:
-     * '&' for human readable,
-     * '§' for internals
+     * {@literal &} for human readable,
+     * {@literal §} for internals
      *
      * @param s the string to color. if this is null, null will be returned
      * @return the colored string, or null if null is given

@@ -12,6 +12,9 @@ import java.io.File;
 
 public class DemoPlugin extends PlumberPlugin {
 
+    private @Inject
+    TestConfig config;
+
     public DemoPlugin() {
     }
 
@@ -24,7 +27,6 @@ public class DemoPlugin extends PlumberPlugin {
         MockBukkit.load(DemoPlugin.class);
     }
 
-    private @Inject TestConfig config;
     @Override
     public void onEnable() {
         System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "TRACE");
