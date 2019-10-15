@@ -8,12 +8,13 @@ import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Singleton
+import io.github.classgraph.ClassGraph
+import io.github.classgraph.ScanResult
 import me.bristermitten.plumber.PlumberPlugin
 import me.bristermitten.plumber.aspect.modules.AspectModule
 import me.bristermitten.plumber.aspect.modules.FinalAspectModule
 import me.bristermitten.plumber.aspect.modules.InitialModule
 import me.bristermitten.plumber.command.CommandAspect
-import org.reflections.Reflections
 import java.lang.reflect.AnnotatedElement
 
 @Suppress("UNCHECKED_CAST")
@@ -21,7 +22,7 @@ import java.lang.reflect.AnnotatedElement
 class AspectReflectionManager
 @Inject constructor(private val initialModule: InitialModule,
                     private val injector: Injector,
-                    private val reflections: Reflections) {
+                    private val classGraph: ClassGraph) {
 
     /**
      * A multi map of bindings from [AspectAnnotation] annotation classes to their respective aspects
@@ -35,12 +36,16 @@ class AspectReflectionManager
      * 2) Any [Aspect] where its [AspectAnnotation](s) are used at all
      */
     val requiredAspects: Set<Class<out Aspect>> by lazy {
-        bindings.keys()
-                .filter { reflections.getAnyAnnotatedWith(it).isNotEmpty() }
-                .flatMap { bindings[it] }
-                .toSet() + reflections.getTypesAnnotatedWith(RequiredAspect::class.java)
-                .filter { Aspect::class.java.isAssignableFrom(it) }
-                .mapNotNull { it as Class<out Aspect> }
+        var result: Set<Class<out Aspect>>? = null
+        classGraph.scan().use { scan ->
+            result = bindings.keys()
+                    .filter { scan.getAnyAnnotatedWith(it).isNotEmpty() }
+                    .flatMap { bindings[it] }
+                    .toSet() + scan.getClassesWithAnnotation(RequiredAspect::class.java.name)
+                    .filter { it.implementsInterface(Aspect::class.java.name) }
+                    .mapNotNull { it.loadClass() as Class<out Aspect> }
+        }
+        result!!
     }
 
     /**
@@ -50,17 +55,20 @@ class AspectReflectionManager
      */
     fun loadBaseBindings() {
         if (!bindings.isEmpty) return
-        reflections.getTypesAnnotatedWith(AspectAnnotation::class.java)
-                .stream().filter { it.isAnnotation }
-                .map { it as Class<out Annotation> }
-                .forEach { annotation ->
-                    //unlikely but just in case
-                    if (bindings.containsKey(annotation)) return@forEach
+        classGraph.scan().use { scan ->
+            scan.getClassesWithAnnotation(AspectAnnotation::class.java.name)
+                    .stream().filter { it.isAnnotation }
+                    .map { it.loadClass() as Class<out Annotation> }
+                    .forEach { annotation ->
+                        //unlikely but just in case
+                        if (bindings.containsKey(annotation)) return@forEach
 
-                    val aa = annotation.getAnnotation(AspectAnnotation::class.java)
-                    if (bindings.containsValue(aa.target.java)) return@forEach
-                    bindings.put(annotation, aa.target.java)
-                }
+                        val aa = annotation.getAnnotation(AspectAnnotation::class.java)
+                        if (bindings.containsValue(aa.target.java)) return@forEach
+                        bindings.put(annotation, aa.target.java)
+                    }
+        }
+
     }
 
     /**
@@ -83,7 +91,7 @@ class AspectReflectionManager
         return classesForAspect(aspect::class.java)
     }
 
-    /**
+    /**.map { it as AnnotatedElement }
      * Get all the classes associated with an aspect
      * This entails getting all the [AspectAnnotation] annotations that map to the aspect,
      * and finding all classes annotated by one or more of these annotations
@@ -92,7 +100,10 @@ class AspectReflectionManager
     fun classesForAspect(aspect: Class<out Aspect>): Set<Class<*>> {
         val inverse = Multimaps.invertFrom(bindings, HashMultimap.create())
         val annotations = inverse[aspect] ?: emptySet()
-        return annotations.flatMap { reflections.getTypesAnnotatedWith(it) }.toSet()
+        val scan = classGraph.scan()
+        val result = annotations.flatMap { scan.getClassesWithAnnotation(it.name) }.map { it.loadClass() }.toSet()
+        scan.close()
+        return result
     }
 
     /**
@@ -122,11 +133,14 @@ class AspectReflectionManager
      * Extension function to get any [AnnotatedElement] annotated with a given annotation
      * @param annotation the annotation to look for elements annotated with
      */
-    private fun Reflections.getAnyAnnotatedWith(annotation: Class<out Annotation>): Set<AnnotatedElement> {
-        return getTypesAnnotatedWith(annotation) +
-                getMethodsAnnotatedWith(annotation) +
-                getFieldsAnnotatedWith(annotation) +
-                getConstructorsAnnotatedWith(annotation)
+    private fun ScanResult.getAnyAnnotatedWith(annotation: Class<out Annotation>): Set<AnnotatedElement> {
+        val name = annotation.name
+        return (getClassesWithAnnotation(name) +
+                getClassesWithFieldAnnotation(name) +
+                getClassesWithMethodAnnotation(name) +
+                getClassesWithMethodParameterAnnotation(name))
+                .map { it.loadClass() }
+                .toSet()
 
     }
 }

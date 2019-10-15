@@ -14,14 +14,14 @@ repositories {
 }
 
 dependencies {
-    api 'com.google.guava:guava:27.1-jre'
+    api 'com.google.guava:guava:21.0'
     api 'com.google.inject:guice:4.2.2'
 
     implementation 'com.google.inject.extensions:guice-assistedinject:4.2.2'
 
-    implementation 'org.reflections:reflections:0.9.11'
+    implementation 'io.github.classgraph:classgraph:4.8.47'
 
-//    api "co.aikar:acf-paper:0.5.0-SNAPSHOT"
+    api "co.aikar:acf-paper:0.5.0-SNAPSHOT"
     api files("lib/acf-paper-0.5.0-SNAPSHOT.jar")
     api files("lib/acf-bukkit-0.5.0-SNAPSHOT.jar")
     api files("lib/acf-core-0.5.0-SNAPSHOT.jar")
@@ -57,6 +57,19 @@ compileJava {
 
 shadowJar {
     minimize()
+    relocate 'co.aikar', 'me.bristermitten.aikar'
+    exclude 'LICENSE-junit.txt'
+    dependencies {
+        exclude dependency('com.github.knightzmc:mockbukkit:.*')
+        exclude dependency('org.spigotmc:spigot-api:.*')
+        exclude(dependency('org.spigotmc:spigot:.*'))
+        exclude(dependency('org.bukkit:bukkit:.*'))
+        exclude(dependency('net.md-5:bungeecord-chat:.*'))
+        exclude(dependency('com.google.code.gson:gson:.*'))
+        exclude(dependency('com.google.guava:guava:.*'))
+        exclude(dependency('org.yaml:snakeyaml:.*'))
+        exclude(dependency('commons-lang:commons-lang:.*'))
+    }
 }
 
 javadoc {

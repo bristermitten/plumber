@@ -8,19 +8,13 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
+import io.github.classgraph.ClassGraph;
 import me.bristermitten.plumber.aspect.AspectReflectionManager;
 import me.bristermitten.plumber.aspect.modules.InitialModule;
 import me.bristermitten.plumber.command.CommandAspect;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
-import org.reflections.Configuration;
-import org.reflections.Reflections;
-import org.reflections.scanners.FieldAnnotationsScanner;
-import org.reflections.scanners.MethodAnnotationsScanner;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.scanners.TypeAnnotationsScanner;
-import org.reflections.util.ConfigurationBuilder;
 
 import java.io.File;
 
@@ -62,17 +56,22 @@ public class PlumberPlugin extends JavaPlugin {
         getLogger().info("Plumber Loading for Plugin " + getName() + "...");
         String ourPackage = getClass().getPackage().getName();
         String[] packages = {ourPackage, PlumberPlugin.class.getPackage().getName()};
-        Configuration config = new ConfigurationBuilder()
-                .addClassLoader(getClassLoader())
-                .filterInputsBy(p -> p != null && !p.contains("META-INF") && !p.contains("org.bukkit"))
-                .setExpandSuperTypes(false)
-                .forPackages(packages)
-                .setScanners(new MethodAnnotationsScanner(), new FieldAnnotationsScanner(),
-                        new TypeAnnotationsScanner(), new SubTypesScanner());
 
-        Reflections reflections = new Reflections(config);
+        ClassGraph classGraph = new ClassGraph()
+                .enableAllInfo()
+                .whitelistPackages(packages)
+                .blacklistPackages("org.bukkit", "org.spigot");
+//        Configuration config = new ConfigurationBuilder()
+//                .addClassLoader(getClassLoader())
+//                .filterInputsBy(p -> p != null && !p.contains("META-INF") && !p.contains("org.bukkit"))
+//                .setExpandSuperTypes(false)
+//                .forPackages(packages)
+//                .setScanners(new MethodAnnotationsScanner(), new FieldAnnotationsScanner(),
+//                        new TypeAnnotationsScanner(), new SubTypesScanner());
 
-        InitialModule initial = new InitialModule(this, reflections);
+//        Reflections reflections = new Reflections(config);
+
+        InitialModule initial = new InitialModule(this, classGraph);
         Injector initialInjector = Guice.createInjector(initial);
         AspectReflectionManager manager = initialInjector.getInstance(AspectReflectionManager.class);
         manager.loadBaseBindings();
