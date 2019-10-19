@@ -23,7 +23,7 @@ import java.lang.ref.WeakReference;
  * so it's advised not to store instances if possible, as they will not be able to be
  * garbage collected otherwise. If necessary, {@link WeakReference} is advised.
  */
-public interface PPlayer extends KeyHolder, Extendable {
+public interface PPlayer extends KeyHolder, Extendable<PPlayer> {
     /**
      * @return the underlying {@link Player} object
      */

@@ -92,7 +92,7 @@ class PPlayerImpl implements PPlayer {
     }
 
     @Override
-    public <T extends Extension> T getExtension(Class<T> clazz) {
+    public <T extends Extension<PPlayer>> T getExtension(Class<T> clazz) {
         return (T) extensions.getExtension(clazz);
     }
 

@@ -1,4 +1,4 @@
 package me.bristermitten.plumber.struct.extension;
 
-public interface Extension {
+public interface Extension<T extends Extendable> {
 }

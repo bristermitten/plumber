@@ -1,6 +1,6 @@
 package me.bristermitten.plumber.struct.extension;
 
-public interface Extendable {
+public interface Extendable<E extends Extendable<E>> {
 
-    <T extends Extension> T getExtension(Class<T> clazz);
+    <T extends Extension<E>> T getExtension(Class<T> clazz);
 }

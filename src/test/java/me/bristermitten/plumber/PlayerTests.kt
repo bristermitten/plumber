@@ -32,7 +32,7 @@ class PlayerTests {
         assertEquals(mappedType, player.getExtension(Extension::class.java))
     }
 
-    data class Extension @Inject constructor(val player: PPlayer) : PlumberExtension {
+    data class Extension @Inject constructor(val player: PPlayer) : PlumberExtension<PPlayer> {
         init {
             println(player)
         }
