@@ -3,7 +3,7 @@ package me.bristermitten.plumber.files
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import me.bristermitten.plumber.aspect.AbstractAspect
-import me.bristermitten.plumber.aspect.AspectModuleLink
+import me.bristermitten.plumber.aspect.AspectModule
 import me.bristermitten.plumber.aspect.AspectReflectionManager
 import me.bristermitten.plumber.aspect.RequiredAspect
 
@@ -12,7 +12,7 @@ import me.bristermitten.plumber.aspect.RequiredAspect
  * Has a static Guice module of [FileModule]
  */
 @RequiredAspect
-@AspectModuleLink(FileModule::class)
+@AspectModule(FileModule::class)
 class FileAspect : AbstractAspect() {
     @Inject
     lateinit var store: ConfigStore

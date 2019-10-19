@@ -38,7 +38,7 @@ import java.io.File;
 public class PlumberPlugin extends JavaPlugin {
 
     @Inject
-    private Injector injector;
+    protected Injector injector;
 
     public PlumberPlugin() {
     }
@@ -74,7 +74,9 @@ public class PlumberPlugin extends JavaPlugin {
 
         InitialModule initial = new InitialModule(this, reflections);
         Injector initialInjector = Guice.createInjector(initial);
+
         AspectReflectionManager manager = initialInjector.getInstance(AspectReflectionManager.class);
+
         manager.loadBaseBindings();
         manager.addThirdPartyBinding(CommandAlias.class, CommandAspect.class);
         manager.loadAll(this);

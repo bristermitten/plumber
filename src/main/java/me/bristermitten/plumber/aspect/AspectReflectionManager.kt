@@ -87,7 +87,7 @@ class AspectReflectionManager
      * Get all the classes associated with an aspect
      * This entails getting all the [AspectAnnotation] annotations that map to the aspect,
      * and finding all classes annotated by one or more of these annotations
-     * This is a slow operation and is not cached, so caching is advised
+     * This is a slow operation and is not cached
      */
     fun classesForAspect(aspect: Class<out Aspect>): Set<Class<*>> {
         val inverse = Multimaps.invertFrom(bindings, HashMultimap.create())
@@ -102,15 +102,15 @@ class AspectReflectionManager
      * 2) Create a new injector, and then create a [FinalAspectModule] for aspects that define static modules that must be installed in [AspectModule]
      * 3) Go through every aspect, get its instance, and then enable it.
      * 4) Inject any required data into [plumberPlugin]
+     *
      * @param plumberPlugin the plugin instance
      */
     fun loadAll(plumberPlugin: PlumberPlugin) {
-        val module = AspectModule(initialModule, this, injector = injector)
+        val module = AspectModule(initialModule, this, injector)
         var injector = Guice.createInjector(module)
+        val finalModule = FinalAspectModule(module, injector, module.lateAspects)
 
-        val finalModule = FinalAspectModule(module, injector, module.requiredAspects)
-        injector = Guice.createInjector(finalModule)
-
+        injector = Guice.createInjector(module, finalModule)
         requiredAspects.forEach {
             val aspect = injector.getInstance(it)
             aspect.enable()

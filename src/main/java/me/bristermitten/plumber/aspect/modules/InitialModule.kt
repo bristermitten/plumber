@@ -17,6 +17,6 @@ class InitialModule(
         bind(PlumberPlugin::class.java).toInstance(plumberPlugin)
         bind(plumberPlugin.javaClass).toInstance(plumberPlugin)
         bind(reflections.javaClass).toInstance(reflections)
-        bind(InitialModule::class.java).toInstance(this)
+        bind(javaClass).toInstance(this)
     }
 }

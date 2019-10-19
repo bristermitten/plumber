@@ -21,8 +21,13 @@ class FinalAspectModule(
      * 2) Loop through each required aspect, and bind them to an instance from the parent injector
      */
     override fun configure() {
-        install(parent)
+//        install(parent)
         requiredAspects.forEach {
+//            val binding = injector.getBinding(Key.get(it))
+//            if (binding != null) {
+//                logger.debug("An instance of {} is already bound, skipping from FinalAspectModule...", it.name)
+//                return@forEach
+//            }
             val instance = injector.getInstance(it)
             bind(instance.javaClass).toInstance(instance)
         }

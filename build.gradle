@@ -17,16 +17,17 @@ dependencies {
     api 'com.google.guava:guava:27.1-jre'
     api 'com.google.inject:guice:4.2.2'
 
-    implementation 'com.google.inject.extensions:guice-assistedinject:4.2.2'
+    api 'com.google.inject.extensions:guice-assistedinject:4.2.2'
 
-    implementation 'org.reflections:reflections:0.9.11'
+    api 'org.reflections:reflections:0.9.11'
 
-//    api "co.aikar:acf-paper:0.5.0-SNAPSHOT"
-    api files("lib/acf-paper-0.5.0-SNAPSHOT.jar")
-    api files("lib/acf-bukkit-0.5.0-SNAPSHOT.jar")
-    api files("lib/acf-core-0.5.0-SNAPSHOT.jar")
+    api "co.aikar:acf-paper:0.5.0-SNAPSHOT"
+//    api files("lib/acf-paper-0.5.0-SNAPSHOT.jar")
+//    api files("lib/acf-bukkit-0.5.0-SNAPSHOT.jar")
+//    api files("lib/acf-core-0.5.0-SNAPSHOT.jar")
 
     api 'org.slf4j:slf4j-api:1.7.28'
+
     implementation 'org.slf4j:slf4j-simple:1.7.28'
     implementation 'com.github.knightzmc:mockbukkit:63f3b97ea3432c969a1a77dcf9d2ee96c40bb509'
 
@@ -37,7 +38,9 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
 }
 compileKotlin {
     kotlinOptions {
@@ -57,6 +60,20 @@ compileJava {
 
 shadowJar {
     minimize()
+    relocate 'co.aikar.commands', 'me.bristermitten.commands'
+
+    dependencies {
+        exclude(dependency('org.slf4j:slf4j-simple:.*'))
+        exclude(dependency('com.github.knightzmc:mockbukkit:.*'))
+        exclude(dependency('org.spigotmc:spigot:.*'))
+        exclude(dependency('org.bukkit:bukkit:.*'))
+        exclude(dependency('org.spigotmc:spigot-api:.*'))
+        exclude(dependency('net.md-5:bungeecord-chat:.*'))
+        exclude(dependency('org.yaml:snakeyaml:.*'))
+        exclude(dependency('com.google:gson:.*'))
+//        exclude(dependency('org.javassist:javassist:.*'))
+    }
+    exclude 'junit/**'
 }
 
 javadoc {

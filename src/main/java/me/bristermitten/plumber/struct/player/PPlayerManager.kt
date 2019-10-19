@@ -1,5 +1,6 @@
 package me.bristermitten.plumber.struct.player
 
+import com.google.inject.AbstractModule
 import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Singleton
@@ -15,11 +16,9 @@ import java.util.concurrent.ConcurrentHashMap
  * rather than manually obtaining instances from [PPlayerManager]
  */
 @Singleton
-class PPlayerManager {
+class PPlayerManager @Inject constructor(private val injector: Injector) {
     private val players = ConcurrentHashMap<UUID, PPlayer>()
 
-    @Inject
-    private lateinit var injector: Injector
 
     /**
      * Create or get an instance of [PPlayer] from a given [UUID]
@@ -35,10 +34,14 @@ class PPlayerManager {
      * @param p The player
      */
     fun ofPlayer(p: Player): PPlayer {
+        val injector = injector.createChildInjector(object : AbstractModule() {
+            override fun configure() {
+                bind(Player::class.java).toInstance(p)
+                bind(p.javaClass).toInstance(p)
+            }
+        })
         return players.computeIfAbsent(p.uniqueId) {
-            val pp = PPlayerImpl(p)
-            injector.injectMembers(pp)
-            pp
+            injector.getInstance(PPlayerImpl::class.java)
         }
     }
 }
