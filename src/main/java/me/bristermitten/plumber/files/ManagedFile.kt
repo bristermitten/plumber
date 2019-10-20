@@ -16,8 +16,9 @@ private const val separator = '.'
  * Created with [ManagedFileFactory] through Guice
  */
 data class ManagedFile
-@Inject constructor(private val plugin: PlumberPlugin,
-                    @Assisted private val fileName: String) :
+@Inject constructor(
+        private val plugin: PlumberPlugin,
+        @Assisted private val fileName: String) :
         YamlConfiguration() {
 
     private val path = plugin.dataFolder.resolve(fileName)
@@ -32,8 +33,10 @@ data class ManagedFile
      */
     @Suppress("MemberVisibilityCanBePrivate")
     fun reload() {
-        val toPath = path.toPath()
+        val toPath = path.absoluteFile.toPath()
+
         if (Files.notExists(toPath)) {
+            path.parentFile.mkdirs()
             Files.createFile(toPath)
         }
         load(path)

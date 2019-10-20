@@ -2,6 +2,7 @@ package me.bristermitten.plumber.struct.player;
 
 import me.bristermitten.plumber.struct.builder.PlayerActionBuilder;
 import me.bristermitten.plumber.struct.builder.TaskLengthConfiguration;
+import me.bristermitten.plumber.struct.extension.Extendable;
 import me.bristermitten.plumber.struct.key.KeyHolder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -22,7 +23,7 @@ import java.lang.ref.WeakReference;
  * so it's advised not to store instances if possible, as they will not be able to be
  * garbage collected otherwise. If necessary, {@link WeakReference} is advised.
  */
-public interface PPlayer extends KeyHolder {
+public interface PPlayer extends KeyHolder, Extendable<PPlayer> {
     /**
      * @return the underlying {@link Player} object
      */

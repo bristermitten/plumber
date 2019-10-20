@@ -13,9 +13,8 @@ class FileModule @Inject constructor(private val manager: AspectReflectionManage
 
     override fun configure() {
         install(FactoryModuleBuilder().build(ManagedFileFactory::class.java))
-        manager.classesForAspect(FileAspect::class.java)
-                .forEach {
-                    bind(it).asEagerSingleton()
-                }
+        manager.classesForAspect(FileAspect::class.java).forEach {
+            bind(it).asEagerSingleton()
+        }
     }
 }

@@ -24,6 +24,6 @@ annotation class RequiredAspect
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AspectModuleLink(val target: KClass<out Module>)
+annotation class AspectModule(val target: KClass<out Module>)
 
 
