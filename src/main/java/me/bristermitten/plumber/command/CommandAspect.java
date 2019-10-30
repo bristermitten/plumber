@@ -71,6 +71,6 @@ public class CommandAspect extends AbstractAspect {
 
     private void load(Class<?> clazz) {
         commandManager.registerCommand((BaseCommand) instance(clazz));
-        System.out.println("Loaded and registered command " + clazz);
+        getLogger().debug("Registered command {}", clazz);
     }
 }

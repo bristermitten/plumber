@@ -15,6 +15,7 @@ import me.bristermitten.plumber.util.ChatUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.player.PlayerEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -86,13 +87,21 @@ class PPlayerImpl implements PPlayer {
         keyValues.put(key, data);
     }
 
+    @NotNull
     @Override
     public <K> K getData(DataKey<K> key) {
-        return (K) keyValues.getOrDefault(key, key.getDefaultValue());
+        return getData(key, key.getDefaultValue());
     }
 
+    @NotNull
     @Override
-    public <T extends Extension<PPlayer>> T getExtension(Class<T> clazz) {
+    public <K> K getData(DataKey<K> key, @NotNull K defaultValue) {
+        return (K) keyValues.getOrDefault(key, defaultValue);
+    }
+
+    @NotNull
+    @Override
+    public <T extends Extension<PPlayer>> T getExtension(@NotNull Class<T> clazz) {
         return (T) extensions.getExtension(clazz);
     }
 
@@ -114,7 +123,7 @@ class PPlayerImpl implements PPlayer {
     @Override
     public String toString() {
         return "PPlayerImpl{" +
-                "keyValues=" + keyValues +
+                "data=" + keyValues +
                 ", player=" + player +
                 '}';
     }

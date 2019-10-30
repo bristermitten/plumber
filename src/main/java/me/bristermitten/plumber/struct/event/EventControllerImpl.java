@@ -10,12 +10,14 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
+import org.bukkit.plugin.EventExecutor;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
  * Default implementation of {@link EventController}
+ *
  * @param <T> the type of the event being handled
  */
 public class EventControllerImpl<T extends PlayerEvent & Cancellable> implements EventController<T> {
@@ -33,11 +35,8 @@ public class EventControllerImpl<T extends PlayerEvent & Cancellable> implements
 
     private void tryRegister() {
         if (registered) return;
-        Bukkit.getPluginManager().registerEvent(clazz,
-                this,
-                EventPriority.NORMAL,
-                (listener, event) -> handle(event),
-                plugin);
+        EventExecutor eventExecutor = (listener, event) -> handle(event);
+        Bukkit.getPluginManager().registerEvent(clazz, this, EventPriority.NORMAL, eventExecutor, plugin);
         registered = true;
     }
 

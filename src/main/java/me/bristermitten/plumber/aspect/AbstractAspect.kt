@@ -4,6 +4,7 @@ import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Module
 import org.slf4j.LoggerFactory
+import kotlin.system.measureTimeMillis
 
 /**
  * Boilerplate-handling abstract implementation of [Aspect]
@@ -19,10 +20,12 @@ abstract class AbstractAspect : Aspect {
     private lateinit var injector: Injector
 
     override fun enable() {
-        logger.info("Enabling aspect " + javaClass.simpleName)
-        doEnable()
-        enabled = true
-        logger.info("Done")
+        logger.debug("Enabling aspect " + javaClass.simpleName)
+        val length = measureTimeMillis {
+            doEnable()
+            enabled = true
+        }
+        logger.debug("Loaded in {} ms", length)
     }
 
     override fun disable() {

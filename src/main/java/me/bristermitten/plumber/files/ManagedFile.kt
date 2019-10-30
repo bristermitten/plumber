@@ -15,13 +15,11 @@ private const val separator = '.'
  * Wraps a file to provide [YamlConfiguration] functionality without boilerplate of loading the file
  * Created with [ManagedFileFactory] through Guice
  */
-data class ManagedFile
-@Inject constructor(
-        private val plugin: PlumberPlugin,
-        @Assisted private val fileName: String) :
-        YamlConfiguration() {
+class ManagedFile
+@Inject constructor(plugin: PlumberPlugin, @Assisted private val fileName: String) : YamlConfiguration() {
 
-    private val path = plugin.dataFolder.resolve(fileName)
+    val instances: MutableSet<Any> = hashSetOf()
+    val path = plugin.dataFolder.resolve(fileName)
 
     init {
         reload()
@@ -29,9 +27,9 @@ data class ManagedFile
 
     /**
      * Reload data from the file into the internal map
+     * This also re-injects any [Configuration] objects
      * @see YamlConfiguration.load
      */
-    @Suppress("MemberVisibilityCanBePrivate")
     fun reload() {
         val toPath = path.absoluteFile.toPath()
 
@@ -40,6 +38,7 @@ data class ManagedFile
             Files.createFile(toPath)
         }
         load(path)
+        instances.forEach(this::loadDataInto)
     }
 
     /**
@@ -51,24 +50,37 @@ data class ManagedFile
     }
 
     /**
-     * Load data into a [Configuration] object
-     * from the file's data
+     * Load data into a [Configuration] object from the file's data
+     * The given object will be stored and re-injected on [reload]
      * Will scan all fields annotated with [ConfigVar] and attempt to get a value from the file, if so, it will be injected
      */
     fun loadDataInto(instance: Any, prefix: String) {
-        instance::class.java.fields.forEach {
+        instances.add(instance)
+        (instance.javaClass.declaredFields + instance.javaClass.fields).forEach {
+            if (it.type == ManagedFile::class.java) {
+                it.set(instance, this)
+                return
+            }
             if (!it.isAnnotationPresent(ConfigVar::class.java)) {
                 return
             }
             val annotation = it.getAnnotation(ConfigVar::class.java)
-            val value: Any? = get(prefix child annotation.value)
+            val path = prefix child annotation.value
+            val value: Any? = get(path, null)
 
+            it.isAccessible = true
             if (value != null)
                 it.set(instance, value)
             else if (it.get(instance) != null) {
-                set(value, it.get(instance))
+                this[path] = it.get(instance)
             }
         }
+    }
+
+    fun loadDataInto(instance: Any) {
+        val annotation = instance.javaClass.getAnnotation(Configuration::class.java) ?: return
+
+        loadDataInto(instance, annotation.prefix)
     }
 
     /**

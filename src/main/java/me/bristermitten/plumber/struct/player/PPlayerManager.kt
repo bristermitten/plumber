@@ -34,13 +34,13 @@ class PPlayerManager @Inject constructor(private val injector: Injector) {
      * @param p The player
      */
     fun ofPlayer(p: Player): PPlayer {
-        val injector = injector.createChildInjector(object : AbstractModule() {
-            override fun configure() {
-                bind(Player::class.java).toInstance(p)
-                bind(p.javaClass).toInstance(p)
-            }
-        })
         return players.computeIfAbsent(p.uniqueId) {
+            val injector = injector.createChildInjector(object : AbstractModule() {
+                override fun configure() {
+                    bind(Player::class.java).toInstance(p)
+                    bind(p.javaClass).toInstance(p)
+                }
+            })
             injector.getInstance(PPlayerImpl::class.java)
         }
     }

@@ -29,7 +29,7 @@ dependencies {
     api 'org.slf4j:slf4j-api:1.7.28'
 
     implementation 'org.slf4j:slf4j-simple:1.7.28'
-    implementation 'com.github.knightzmc:mockbukkit:63f3b97ea3432c969a1a77dcf9d2ee96c40bb509'
+    implementation 'com.github.knightzmc:mockbukkit:bcdf0db3df878c7b9f12cf4803d6a0190b92f200'
 
 
     api 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'

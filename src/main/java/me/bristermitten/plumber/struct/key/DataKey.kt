@@ -1,7 +1,8 @@
 package me.bristermitten.plumber.struct.key
 
 import me.bristermitten.plumber.struct.player.PPlayer
-import java.util.concurrent.CopyOnWriteArrayList
+import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 import java.util.function.Consumer
 
 /**
@@ -10,6 +11,9 @@ import java.util.function.Consumer
  * Means that Strings don't have to be passed around for simple storage
  */
 data class DataKey<T>(val key: String, val defaultValue: T) {
+
+    constructor(defaultValue: T) : this(UUID.randomUUID().toString(), defaultValue)
+
     /**
      * List of Handlers for when the key's value is updated.
      * These are not actually handled in the Key object, and instead should be called inside
@@ -20,10 +24,8 @@ data class DataKey<T>(val key: String, val defaultValue: T) {
      * This approach avoids having to store the current value in a [DataKey], fulfilling the idea of it being a key only,
      * whereas the value is stored in entities.
      *
-     * Concurrency is achieved with [CopyOnWriteArrayList], which has a minimal performance impact as a DataKey's handlers
-     * will usually be less than 10.
      */
-    val handlers = CopyOnWriteArrayList<Consumer<T>>()
+    val handlers = ConcurrentHashMap.newKeySet<Consumer<T>>()!!
 
     /**
      * Execute all handlers with a new value
@@ -32,4 +34,5 @@ data class DataKey<T>(val key: String, val defaultValue: T) {
     fun execHandlers(value: T) {
         handlers.forEach { it.accept(value) }
     }
+
 }

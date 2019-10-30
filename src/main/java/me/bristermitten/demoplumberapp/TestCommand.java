@@ -43,7 +43,7 @@ public class TestCommand extends PlumberCommand {
     public class UnFreeze extends TestCommand {
         @Default
         public void unFreeze(Player sender, PPlayer target) {
-            boolean value = target.getData(frozen);
+            Boolean value = target.getData(frozen);
             if (!value) {
                 reply(RED + "Player is not frozen");
                 return;

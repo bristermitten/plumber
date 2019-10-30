@@ -64,7 +64,6 @@ class AspectReflectionManager
                         if (bindings.containsKey(annotation)) return@forEach
 
                         val aa = annotation.getAnnotation(AspectAnnotation::class.java)
-                        if (bindings.containsValue(aa.target.java)) return@forEach
                         bindings.put(annotation, aa.target.java)
                     }
         }
@@ -88,7 +87,7 @@ class AspectReflectionManager
      * @param aspect the aspect to find classes associated with
      */
     fun classesForAspect(aspect: Aspect): Set<Class<*>> {
-        return classesForAspect(aspect::class.java)
+        return classesForAspect(aspect.javaClass)
     }
 
     /**.map { it as AnnotatedElement }
@@ -99,7 +98,9 @@ class AspectReflectionManager
      */
     fun classesForAspect(aspect: Class<out Aspect>): Set<Class<*>> {
         val inverse = Multimaps.invertFrom(bindings, HashMultimap.create())
-        val annotations = inverse[aspect] ?: emptySet()
+        if (!inverse.containsKey(aspect)) return emptySet()
+        val annotations = inverse[aspect] ?: return emptySet()
+        if (annotations.isEmpty()) return emptySet()
         val scan = classGraph.scan()
         val result = annotations.flatMap { scan.getClassesWithAnnotation(it.name) }.map { it.loadClass() }.toSet()
         scan.close()
