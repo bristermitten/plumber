@@ -23,6 +23,8 @@ dependencies {
 
     if (project.hasProperty("ci")) {
         api files("lib/locales.jar")
+        api files("lib/table.jar")
+        api files("lib/minecraft-timings-1.0.4.jar")
         api files("lib/expiringmap-0.5.8.jar")
         api files("lib/acf-paper-0.5.0-SNAPSHOT.jar")
         api files("lib/acf-bukkit-0.5.0-SNAPSHOT.jar")

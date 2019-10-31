@@ -15,8 +15,9 @@ import me.bristermitten.plumber.command.CommandAspect
 import org.bukkit.plugin.PluginDescriptionFile
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.JavaPluginLoader
-
 import java.io.File
+import java.util.logging.SimpleFormatter
+import java.util.logging.StreamHandler
 import kotlin.system.measureTimeMillis
 
 /**
@@ -51,6 +52,7 @@ open class PlumberPlugin : JavaPlugin {
      * This should be called immediately in [JavaPlugin.onEnable]
      */
     protected fun loadPlumber() {
+        initLoggers()
         logger.info("Plumber loading for Plugin $name...")
 
         val length = measureTimeMillis {
@@ -71,6 +73,17 @@ open class PlumberPlugin : JavaPlugin {
             manager.loadAll(this)
         }
         logger.info("Plumber loaded in $length ms!")
+    }
+
+    /**
+     * Configure both slf4j and the existing Java loggers to use stdout instead of stderr
+     */
+    private fun initLoggers() {
+        System.setProperty("org.slf4j.simpleLogger.logFile", "System.out");
+        logger.useParentHandlers = false
+        val formatter = SimpleFormatter()
+        val sh = StreamHandler(System.out, formatter)
+        logger.addHandler(sh)
     }
 
     fun <T> getInstance(clazz: Class<T>): T {

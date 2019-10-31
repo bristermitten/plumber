@@ -41,6 +41,7 @@ public interface KeyHolder {
      *
      * @param key the key to get
      * @param <K> the type of the key
+     * @param defaultValue the default value if they key holder has a null value
      * @return the value of the key, which will not be null
      */
     @NotNull
