@@ -16,8 +16,7 @@ import org.bukkit.plugin.PluginDescriptionFile
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.JavaPluginLoader
 import java.io.File
-import java.util.logging.SimpleFormatter
-import java.util.logging.StreamHandler
+import java.util.logging.LogManager
 import kotlin.system.measureTimeMillis
 
 /**
@@ -80,10 +79,7 @@ open class PlumberPlugin : JavaPlugin {
      */
     private fun initLoggers() {
         System.setProperty("org.slf4j.simpleLogger.logFile", "System.out");
-        logger.useParentHandlers = false
-        val formatter = SimpleFormatter()
-        val sh = StreamHandler(System.out, formatter)
-        logger.addHandler(sh)
+        LogManager.getLogManager().reset()
     }
 
     fun <T> getInstance(clazz: Class<T>): T {
