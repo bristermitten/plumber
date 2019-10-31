@@ -3,10 +3,10 @@ package me.bristermitten.plumber.util
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class ReflectionUtilTest {
+class ReflectionTest {
     @Test
     fun invokeNoArgsStaticMethod() {
-        ReflectionUtil.invokeNoArgsStaticMethod(javaClass, "doSomething")
+        Reflection.invokeNoArgsStaticMethod(javaClass, "doSomething")
         assertTrue(invoked)
     }
 

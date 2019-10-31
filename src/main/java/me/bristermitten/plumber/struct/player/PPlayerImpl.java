@@ -11,7 +11,7 @@ import me.bristermitten.plumber.struct.extension.ExtensionMap;
 import me.bristermitten.plumber.struct.key.DataKey;
 import me.bristermitten.plumber.struct.key.KeyHolder;
 import me.bristermitten.plumber.struct.key.KeyMap;
-import me.bristermitten.plumber.util.ChatUtil;
+import me.bristermitten.plumber.util.Chat;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.player.PlayerEvent;
@@ -65,7 +65,7 @@ class PPlayerImpl implements PPlayer {
 
     @Override
     public void message(String msg) {
-        player.sendMessage(ChatUtil.color(msg));
+        player.sendMessage(Chat.color(msg));
     }
 
 //    public DistancePicker<CompareRootTimePicker> lastMoved() {

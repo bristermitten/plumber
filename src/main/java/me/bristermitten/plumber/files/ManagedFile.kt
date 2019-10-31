@@ -15,8 +15,7 @@ private const val separator = '.'
  * Wraps a file to provide [YamlConfiguration] functionality without boilerplate of loading the file
  * Created with [ManagedFileFactory] through Guice
  */
-class ManagedFile
-@Inject constructor(plugin: PlumberPlugin, @Assisted private val fileName: String) : YamlConfiguration() {
+class ManagedFile @Inject constructor(plugin: PlumberPlugin, @Assisted private val fileName: String) : YamlConfiguration() {
 
     val instances: MutableSet<Any> = hashSetOf()
     val path = plugin.dataFolder.resolve(fileName)

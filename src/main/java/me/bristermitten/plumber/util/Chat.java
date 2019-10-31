@@ -2,7 +2,7 @@ package me.bristermitten.plumber.util;
 
 import org.bukkit.ChatColor;
 
-public class ChatUtil {
+public class Chat {
 
     /**
      * Color a String in accordance with Bukkit's standards for color codes:

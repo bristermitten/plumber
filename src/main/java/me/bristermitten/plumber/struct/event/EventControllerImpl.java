@@ -3,7 +3,7 @@ package me.bristermitten.plumber.struct.event;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import me.bristermitten.plumber.PlumberPlugin;
-import me.bristermitten.plumber.util.ReflectionUtil;
+import me.bristermitten.plumber.util.Reflection;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -51,7 +51,7 @@ public class EventControllerImpl<T extends PlayerEvent & Cancellable> implements
 
     public void unRegister() {
         if (!registered) return;
-        HandlerList handlers = (HandlerList) ReflectionUtil.invokeNoArgsStaticMethod(clazz, "getHandlerList");
+        HandlerList handlers = (HandlerList) Reflection.invokeNoArgsStaticMethod(clazz, "getHandlerList");
         if (handlers != null) {
             handlers.unregister(this);
         }

@@ -2,7 +2,7 @@ package me.bristermitten.plumber.util;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class ReflectionUtil {
+public class Reflection {
 
     /**
      * Invoke a static method upon a class that has no arguments

@@ -6,6 +6,7 @@ import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.AspectReflectionManager
 import me.bristermitten.plumber.aspect.RequiredAspect
 import me.bristermitten.plumber.aspect.modules.ModuleHelper
+import org.bukkit.block.Beacon
 
 /**
  * Required Aspect that facilitates the injection of all [Component] classes
@@ -15,7 +16,7 @@ import me.bristermitten.plumber.aspect.modules.ModuleHelper
 class ComponentAspect : AbstractAspect() {
 
     @Inject
-    lateinit var manager: AspectReflectionManager
+    private lateinit var manager: AspectReflectionManager
 
     override fun module(): Module {
         return ModuleHelper { binder ->

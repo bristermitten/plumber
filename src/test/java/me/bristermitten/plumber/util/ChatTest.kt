@@ -4,14 +4,14 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 
-class ChatUtilTest {
+class ChatTest {
 
     /**
      * This essentially just tests Bukkit's functionality, don't need much detail
      */
     @Test
     fun `Test color()`() {
-        assertNull(ChatUtil.color(null))
-        assertEquals("§c§lTest", ChatUtil.color("&c&lTest"))
+        assertNull(Chat.color(null))
+        assertEquals("§c§lTest", Chat.color("&c&lTest"))
     }
 }

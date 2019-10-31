@@ -67,6 +67,7 @@ shadowJar {
     minimize()
     relocate 'co.aikar', 'me.bristermitten.aikar'
     exclude 'LICENSE-junit.txt'
+    exclude 'junit/**'
     dependencies {
         exclude dependency('com.github.knightzmc:mockbukkit:.*')
         exclude dependency('org.spigotmc:spigot-api:.*')
@@ -77,6 +78,8 @@ shadowJar {
         exclude dependency('com.google.guava:guava:.*')
         exclude dependency('org.yaml:snakeyaml:.*')
         exclude dependency('commons-lang:commons-lang:.*')
+        exclude dependency('junit:junit:.*')
+        exclude dependency('com.googlecode.json-simple:json-simple:.*')
     }
 }
 

@@ -3,8 +3,8 @@ package me.bristermitten.plumber.scheduling
 import com.google.inject.assistedinject.Assisted
 import com.google.inject.assistedinject.AssistedInject
 import me.bristermitten.plumber.PlumberPlugin
-import me.bristermitten.plumber.struct.Resettable
 import me.bristermitten.plumber.scheduling.timings.Time
+import me.bristermitten.plumber.struct.Resettable
 import org.bukkit.scheduler.BukkitTask
 
 /**
@@ -12,7 +12,6 @@ import org.bukkit.scheduler.BukkitTask
  * Currently, all tasks are ran asynchronously, but this will be improved in the future.
  *
  * Generally, all Tasks are created with [TaskFactory]
- *
  */
 class Task : Runnable, Resettable {
 
@@ -52,21 +51,19 @@ class Task : Runnable, Resettable {
 
     fun start() {
         val scheduler = plugin.server.scheduler
-        when {
-            delay == Time.NONE_TICKS && period == Time.NONE_TICKS -> {
-                task = scheduler.runTaskAsynchronously(plugin, this)
-                return
-            }
-            delay == Time.NONE_TICKS -> {
-                task = scheduler.runTaskTimerAsynchronously(plugin, this, 0, period)
-                return
-            }
-            period == Time.NONE_TICKS -> {
-                task = scheduler.runTaskLaterAsynchronously(plugin, this, delay)
-                return
-            }
-            else -> task = scheduler.runTaskTimerAsynchronously(plugin, this, delay, period)
+        if (delay == Time.NONE_TICKS && period == Time.NONE_TICKS) {
+            task = scheduler.runTaskAsynchronously(plugin, this)
+            return
         }
+        if (delay == Time.NONE_TICKS) {
+            task = scheduler.runTaskTimerAsynchronously(plugin, this, 0, period)
+            return
+        }
+        if (period == Time.NONE_TICKS) {
+            task = scheduler.runTaskLaterAsynchronously(plugin, this, delay)
+            return
+        }
+        task = scheduler.runTaskTimerAsynchronously(plugin, this, delay, period)
     }
 
     fun stop() {

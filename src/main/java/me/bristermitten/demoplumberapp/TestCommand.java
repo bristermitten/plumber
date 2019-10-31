@@ -19,7 +19,6 @@ public class TestCommand extends PlumberCommand {
 
         @Default
         public void freeze(Player sender, PPlayer target) {
-
             if (target.getData(frozen)) {
                 reply(RED + "Player already frozen");
                 return;

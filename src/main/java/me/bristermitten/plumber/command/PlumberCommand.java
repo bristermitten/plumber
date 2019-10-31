@@ -1,7 +1,7 @@
 package me.bristermitten.plumber.command;
 
 import co.aikar.commands.BaseCommand;
-import me.bristermitten.plumber.util.ChatUtil;
+import me.bristermitten.plumber.util.Chat;
 
 /**
  * Extension of {@link BaseCommand} that gives extra boilerplate handling
@@ -15,6 +15,6 @@ public class PlumberCommand extends BaseCommand {
      * @param message the message to send
      */
     protected void reply(String message) {
-        getCurrentCommandIssuer().sendMessage(ChatUtil.color(message));
+        getCurrentCommandIssuer().sendMessage(Chat.color(message));
     }
 }
