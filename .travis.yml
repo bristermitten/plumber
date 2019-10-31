@@ -1,5 +1,5 @@
 language: java
-install: ./gradlew assemble javadoc
+install: ./gradlew -Pci assemble javadoc
 deploy:
   provider: pages
   skip_cleanup: true

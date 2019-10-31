@@ -21,10 +21,13 @@ dependencies {
 
     implementation 'io.github.classgraph:classgraph:4.8.47'
 
-    api "co.aikar:acf-paper:0.5.0-SNAPSHOT"
-    api files("lib/acf-paper-0.5.0-SNAPSHOT.jar")
-    api files("lib/acf-bukkit-0.5.0-SNAPSHOT.jar")
-    api files("lib/acf-core-0.5.0-SNAPSHOT.jar")
+    if (project.hasProperty("ci")) {
+        api files("lib/locales.jar")
+        api files("lib/expiringmap-0.5.8.jar")
+        api files("lib/acf-paper-0.5.0-SNAPSHOT.jar")
+        api files("lib/acf-bukkit-0.5.0-SNAPSHOT.jar")
+        api files("lib/acf-core-0.5.0-SNAPSHOT.jar")
+    } else api "co.aikar:acf-paper:0.5.0-SNAPSHOT"
 
     api 'org.slf4j:slf4j-api:1.7.28'
 
