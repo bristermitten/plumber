@@ -5,7 +5,7 @@ package me.bristermitten.plumber.scheduling.timings;
  * General best practice is to have the method that returns a TimeUnitPicker
  * take a long for the amount of time, for example
  * <code>
- * PPlayer.blockEvent(PlayerMoveEvent.class).undoAfter(30).seconds()
+ * PPlayer#blockEvent(PlayerMoveEvent.class).undoAfter(30).seconds()
  * </code>
  *
  * @param <T> the return type (generally a parent interface)

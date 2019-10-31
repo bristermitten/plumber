@@ -1,16 +1,15 @@
 package me.bristermitten.plumber.scheduling.timings;
 
 import me.bristermitten.plumber.scheduling.Task;
-import me.bristermitten.plumber.scheduling.TaskBuilderFactory;
 
 /**
  * Builder for configuring times in the future for scheduling
+ * This can be safely injected
  */
 public interface TaskBuilder {
 
     /**
-     * Default implementation, can be customised to change what Guice uses in
-     * {@link TaskBuilderFactory}
+     * Default implementation, can be customised to change what Guice uses when creating instances
      */
     Class<? extends TaskBuilder> impl = TaskBuilderImpl.class;
 

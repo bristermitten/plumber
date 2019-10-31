@@ -1,10 +1,11 @@
-package me.bristermitten.plumber.struct.builder
+package me.bristermitten.plumber.dsl
 
-import me.bristermitten.plumber.struct.builder.impl.PlayerActionBuilderImpl
+import me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl
 import me.bristermitten.plumber.struct.key.DataKey
 
 /**
- * Subclass of [ActionBuilder] that defines various actions that a Player could do
+ * Subclass of [ActionBuilder] that defines various actions that a Player could do.
+ * In the default implementation, a callback is defined that is ran when any of the actions are complete
  */
 interface PlayerActionBuilder : ActionBuilder<PlayerActionBuilder> {
 
@@ -33,7 +34,7 @@ interface PlayerActionBuilder : ActionBuilder<PlayerActionBuilder> {
      * @param key the key to set
      * @param value the value to set
      * @param K the type of the key
-     * @return this object for futher configuration
+     * @return this object for further configuration
      */
     fun <K> setKeyOnComplete(key: DataKey<K>, value: K): PlayerActionBuilder
 

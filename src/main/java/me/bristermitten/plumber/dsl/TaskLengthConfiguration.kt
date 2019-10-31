@@ -1,10 +1,10 @@
-package me.bristermitten.plumber.struct.builder
+package me.bristermitten.plumber.dsl
 
+import me.bristermitten.plumber.dsl.implementation.DefaultTaskLengthConfiguration
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPicker
-import me.bristermitten.plumber.struct.builder.impl.DefaultTaskLengthConfiguration
 
 /**
- * Interface for deciding how long as task should take
+ * Interface for deciding how long a task should take
  * @param B the child interface for later configuration
  */
 interface TaskLengthConfiguration<B : ActionBuilder<*>> {

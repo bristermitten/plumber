@@ -1,15 +1,15 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package me.bristermitten.plumber.struct.builder.impl
+package me.bristermitten.plumber.dsl.implementation
 
 import com.google.inject.Inject
 import com.google.inject.assistedinject.Assisted
+import me.bristermitten.plumber.dsl.ActionBuilder
+import me.bristermitten.plumber.dsl.TaskLengthConfiguration
 import me.bristermitten.plumber.scheduling.TaskFactory
 import me.bristermitten.plumber.scheduling.timings.Time
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPicker
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory
-import me.bristermitten.plumber.struct.builder.ActionBuilder
-import me.bristermitten.plumber.struct.builder.TaskLengthConfiguration
 
 internal open class DefaultTaskLengthConfiguration<B : ActionBuilder<B>>
 

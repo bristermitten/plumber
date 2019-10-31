@@ -17,9 +17,7 @@ class SchedulerAspect : AbstractAspect() {
     override fun module(): Module {
         return object : AbstractModule() {
             override fun configure() {
-                install(FactoryModuleBuilder()
-                        .implement(TaskBuilder::class.java, TaskBuilder.impl)
-                        .build(TaskBuilderFactory::class.java))
+                bind(TaskBuilder::class.java).to(TaskBuilder.impl)
 
                 install(FactoryModuleBuilder()
                         .build(TaskFactory::class.java)

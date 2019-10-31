@@ -1,7 +1,7 @@
 package me.bristermitten.plumber.struct.player;
 
-import me.bristermitten.plumber.struct.builder.PlayerActionBuilder;
-import me.bristermitten.plumber.struct.builder.TaskLengthConfiguration;
+import me.bristermitten.plumber.dsl.PlayerActionBuilder;
+import me.bristermitten.plumber.dsl.TaskLengthConfiguration;
 import me.bristermitten.plumber.struct.extension.Extendable;
 import me.bristermitten.plumber.struct.key.KeyHolder;
 import org.bukkit.entity.Player;

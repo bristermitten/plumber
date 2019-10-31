@@ -1,9 +1,9 @@
 package me.bristermitten.plumber.struct.player;
 
 import com.google.inject.Inject;
-import me.bristermitten.plumber.struct.builder.BuilderFactory;
-import me.bristermitten.plumber.struct.builder.PlayerActionBuilder;
-import me.bristermitten.plumber.struct.builder.TaskLengthConfiguration;
+import me.bristermitten.plumber.dsl.BuilderFactory;
+import me.bristermitten.plumber.dsl.PlayerActionBuilder;
+import me.bristermitten.plumber.dsl.TaskLengthConfiguration;
 import me.bristermitten.plumber.struct.event.EventController;
 import me.bristermitten.plumber.struct.event.EventControllerFactory;
 import me.bristermitten.plumber.struct.extension.Extension;

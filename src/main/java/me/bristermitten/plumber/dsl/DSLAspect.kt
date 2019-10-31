@@ -1,12 +1,9 @@
-package me.bristermitten.plumber.struct
+package me.bristermitten.plumber.dsl
 
 import com.google.inject.Module
 import com.google.inject.assistedinject.FactoryModuleBuilder
 import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.RequiredAspect
-import me.bristermitten.plumber.struct.builder.BuilderFactory
-import me.bristermitten.plumber.struct.builder.PlayerActionBuilder
-import me.bristermitten.plumber.struct.builder.TaskLengthConfiguration
 import me.bristermitten.plumber.struct.player.PPlayer
 
 /**
@@ -15,7 +12,7 @@ import me.bristermitten.plumber.struct.player.PPlayer
  * namely [PPlayer]
  */
 @RequiredAspect
-class DataAspect : AbstractAspect() {
+class DSLAspect : AbstractAspect() {
 
     override fun module(): Module {
         return FactoryModuleBuilder()

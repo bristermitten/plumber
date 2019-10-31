@@ -24,7 +24,6 @@ public class TestCommand extends PlumberCommand {
                 reply(RED + "Player already frozen");
                 return;
             }
-
             target.blockEvent(PlayerMoveEvent.class)
                     .until()
                     .playerLogout()
@@ -33,6 +32,7 @@ public class TestCommand extends PlumberCommand {
                     .undoAfter(30).seconds()
                     .withMessageOnComplete(RED + "You have been freed!")
                     .setKeyOnComplete(frozen, false);
+
 
             target.setData(frozen, true);
             target.message(RED + "You have been frozen");

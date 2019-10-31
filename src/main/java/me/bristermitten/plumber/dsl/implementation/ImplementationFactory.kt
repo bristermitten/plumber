@@ -1,6 +1,6 @@
-package me.bristermitten.plumber.struct.builder
+package me.bristermitten.plumber.dsl.implementation
 
-import me.bristermitten.plumber.struct.builder.impl.KeyChangeChooserImpl
+import me.bristermitten.plumber.dsl.KeyChangeChooser
 import me.bristermitten.plumber.struct.key.DataKey
 
 /**

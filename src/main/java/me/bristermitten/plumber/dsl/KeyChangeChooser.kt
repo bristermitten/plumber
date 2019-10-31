@@ -1,4 +1,4 @@
-package me.bristermitten.plumber.struct.builder
+package me.bristermitten.plumber.dsl
 
 import me.bristermitten.plumber.struct.Resettable
 import me.bristermitten.plumber.struct.key.DataKey

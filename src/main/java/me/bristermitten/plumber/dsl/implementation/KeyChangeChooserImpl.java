@@ -1,6 +1,6 @@
-package me.bristermitten.plumber.struct.builder.impl;
+package me.bristermitten.plumber.dsl.implementation;
 
-import me.bristermitten.plumber.struct.builder.KeyChangeChooser;
+import me.bristermitten.plumber.dsl.KeyChangeChooser;
 import me.bristermitten.plumber.struct.key.DataKey;
 
 import java.util.function.Consumer;

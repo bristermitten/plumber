@@ -1,7 +1,7 @@
-package me.bristermitten.plumber.struct.builder
+package me.bristermitten.plumber.dsl
 
 import com.google.inject.assistedinject.Assisted
-import me.bristermitten.plumber.struct.builder.impl.PlayerTaskLengthConfiguration
+import me.bristermitten.plumber.dsl.implementation.PlayerTaskLengthConfiguration
 import me.bristermitten.plumber.struct.player.PPlayer
 
 /**

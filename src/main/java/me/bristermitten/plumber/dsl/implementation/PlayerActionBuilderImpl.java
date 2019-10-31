@@ -1,12 +1,11 @@
-package me.bristermitten.plumber.struct.builder.impl;
+package me.bristermitten.plumber.dsl.implementation;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import me.bristermitten.plumber.dsl.BuilderFactory;
+import me.bristermitten.plumber.dsl.KeyChangeChooser;
+import me.bristermitten.plumber.dsl.PlayerActionBuilder;
 import me.bristermitten.plumber.struct.Resettable;
-import me.bristermitten.plumber.struct.builder.BuilderFactory;
-import me.bristermitten.plumber.struct.builder.ImplementationFactory;
-import me.bristermitten.plumber.struct.builder.KeyChangeChooser;
-import me.bristermitten.plumber.struct.builder.PlayerActionBuilder;
 import me.bristermitten.plumber.struct.key.DataKey;
 import me.bristermitten.plumber.struct.player.PPlayer;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +16,7 @@ import java.util.function.Consumer;
 
 public class PlayerActionBuilderImpl extends ActionBuilderImpl<PlayerActionBuilder> implements PlayerActionBuilder {
     private final PPlayer player;
-    private final ImplementationFactory f2;
+    private final ImplementationFactory factory;
     private final Runnable onTrigger;
     private String message;
     private Consumer<PPlayer> onComplete;
@@ -25,10 +24,11 @@ public class PlayerActionBuilderImpl extends ActionBuilderImpl<PlayerActionBuild
     private Set<Resettable> toReset = new HashSet<>();
 
     @Inject
-    public PlayerActionBuilderImpl(@Assisted PPlayer player, @Assisted Runnable onTrigger,
+    public PlayerActionBuilderImpl(@Assisted PPlayer player,
+                                   @Assisted Runnable onTrigger,
                                    BuilderFactory factory,
-                                   ImplementationFactory f2) {
-        this.f2 = f2;
+                                   ImplementationFactory factory2) {
+        this.factory = factory2;
         this.onTrigger = onTrigger;
         this.parent = factory.createPlayerTaskLengthConfiguration(this);
         this.player = player;
@@ -37,9 +37,9 @@ public class PlayerActionBuilderImpl extends ActionBuilderImpl<PlayerActionBuild
     @NotNull
     @Override
     public <K> KeyChangeChooser<PlayerActionBuilder, K> keyChange(@NotNull DataKey<K> key) {
-        KeyChangeChooser<PlayerActionBuilder, K> x = f2.createKeyChangeChooser(key, this, this);
-        toReset.add(x);
-        return x;
+        KeyChangeChooser<PlayerActionBuilder, K> chooser = factory.createKeyChangeChooser(key, this, this);
+        toReset.add(chooser);
+        return chooser;
     }
 
     @NotNull
