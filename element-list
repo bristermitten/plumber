@@ -1,12 +1,10 @@
 me.bristermitten.plumber
 me.bristermitten.plumber.annotation
 me.bristermitten.plumber.command
-me.bristermitten.plumber.event.player
+me.bristermitten.plumber.dsl.implementation
 me.bristermitten.plumber.scheduling
 me.bristermitten.plumber.scheduling.timings
-me.bristermitten.plumber.struct.builder.impl
 me.bristermitten.plumber.struct.event
-me.bristermitten.plumber.struct.extension
 me.bristermitten.plumber.struct.key
 me.bristermitten.plumber.struct.player
 me.bristermitten.plumber.util
