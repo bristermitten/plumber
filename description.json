@@ -1,4 +1,4 @@
 {
   "subtitle": "A Framework for the Spigot API to eliminate boilerplate in a clean way",
-  "description": "Plumber is my most ambitious project. It aims to wrap the entire Spigot API into a clean, easy to learn interface, along with a method chaining DSL that makes complex tasks take a few lines. It's currently in alpha, but as time goes more and more features will be wrapped until we have a clean, fast, simple Spigot Framework.Updarte "
+  "description": "Plumber is my most ambitious project. It aims to wrap the entire Spigot API into a clean, easy to learn interface, along with a method chaining DSL that makes complex tasks take a few lines. It's currently in alpha, but as time goes more and more features will be wrapped until we have a clean, fast, simple Spigot Framework."
 }
