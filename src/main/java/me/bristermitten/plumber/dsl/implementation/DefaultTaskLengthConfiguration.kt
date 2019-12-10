@@ -11,7 +11,7 @@ import me.bristermitten.plumber.scheduling.timings.Time
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPicker
 import me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory
 
-internal open class DefaultTaskLengthConfiguration<B : ActionBuilder<B>>
+open class DefaultTaskLengthConfiguration<B : ActionBuilder<B>>
 
 @Inject constructor(
         @Assisted private val value: B,
