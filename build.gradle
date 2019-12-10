@@ -10,7 +10,7 @@ repositories {
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'https://jitpack.io' }
-    maven { url "https://repo.aikar.co/nexus/content/groups/aikar/" }
+    maven { url "http://repo.aikar.co/nexus/content/groups/aikar/" }
 }
 
 dependencies {
