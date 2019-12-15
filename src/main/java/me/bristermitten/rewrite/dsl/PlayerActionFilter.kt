@@ -1,6 +1,9 @@
 package me.bristermitten.rewrite.dsl
 
-interface PlayerActionFilter<F> : ActionFilter<F, PlayerActionFilter<F>> {
+import me.bristermitten.rewrite.dsl.core.ActionFilter
+import me.bristermitten.rewrite.dsl.core.BooleanOperator
 
-    fun whenIsInWorld(worldName: String): BooleanCycle<PlayerActionFilter<F>, F>
+interface PlayerActionFilter: ActionFilter<PlayerActionFilter> {
+
+    fun whenIsInWorld(worldName: String): BooleanOperator<PlayerActionFilter>
 }
