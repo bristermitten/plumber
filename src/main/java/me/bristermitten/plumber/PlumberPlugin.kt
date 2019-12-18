@@ -9,7 +9,7 @@ import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Singleton
 import io.github.classgraph.ClassGraph
-import me.bristermitten.plumber.aspect.AspectReflectionManager
+import me.bristermitten.plumber.aspect.AspectManager
 import me.bristermitten.plumber.aspect.modules.InitialModule
 import me.bristermitten.plumber.command.CommandAspect
 import org.bukkit.plugin.PluginDescriptionFile
@@ -65,10 +65,9 @@ open class PlumberPlugin : JavaPlugin {
             val initial = InitialModule(this, classGraph)
             val initialInjector = Guice.createInjector(initial)
 
-            val manager = initialInjector.getInstance(AspectReflectionManager::class.java)
+            val manager = initialInjector.getInstance(AspectManager::class.java)
 
             manager.loadBaseBindings()
-            manager.addThirdPartyBinding(CommandAlias::class.java, CommandAspect::class.java)
             manager.loadAll(this)
         }
         logger.info("Plumber loaded in $length ms!")

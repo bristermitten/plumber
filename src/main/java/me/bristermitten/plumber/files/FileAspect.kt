@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.AspectModule
-import me.bristermitten.plumber.aspect.AspectReflectionManager
+import me.bristermitten.plumber.aspect.AspectManager
 import me.bristermitten.plumber.aspect.RequiredAspect
 
 /**
@@ -21,7 +21,7 @@ class FileAspect : AbstractAspect() {
     lateinit var factory: ManagedFileFactory
 
     @Inject
-    lateinit var manager: AspectReflectionManager
+    lateinit var manager: AspectManager
 
 
     /**

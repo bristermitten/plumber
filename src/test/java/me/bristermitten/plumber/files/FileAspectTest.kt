@@ -32,7 +32,7 @@ class FileAspectTest : PlumberTest() {
     @Test
     fun `Test saving and reloading of Managed File`() {
         file.file.save()
-        Files.writeString(file.file.path.toPath(), "test: Test2")
+        Files.write(file.file.path.toPath(), "test: Test2".toByteArray())
         file.file.reload()
         assertEquals("Test2", file.test)
     }

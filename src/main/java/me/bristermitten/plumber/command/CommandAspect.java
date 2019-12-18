@@ -4,11 +4,13 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.BukkitCommandManager;
 import co.aikar.commands.CommandManager;
 import co.aikar.commands.PaperCommandManager;
+import co.aikar.commands.annotation.CommandAlias;
 import com.google.inject.Inject;
 import me.bristermitten.plumber.PlumberPlugin;
 import me.bristermitten.plumber.aspect.AbstractAspect;
-import me.bristermitten.plumber.aspect.AspectReflectionManager;
+import me.bristermitten.plumber.aspect.AspectManager;
 import me.bristermitten.plumber.aspect.RequiredAspect;
+import me.bristermitten.plumber.aspect.ThirdPartyAspectBinding;
 import me.bristermitten.plumber.struct.player.PPlayer;
 import me.bristermitten.plumber.struct.player.PPlayerManager;
 import org.bukkit.Bukkit;
@@ -20,18 +22,17 @@ import java.util.Set;
  * Internal aspect that handles the scanning of command classes, and the registration of such classes
  */
 @RequiredAspect
+//Unnecessary but defines a mapping
+@ThirdPartyAspectBinding(targets = CommandAlias.class)
 public class CommandAspect extends AbstractAspect {
 
+    public BukkitCommandManager commandManager;
     @Inject
     private PlumberPlugin plumberPlugin;
-
     @Inject
     private PPlayerManager manager;
-
     @Inject
-    private AspectReflectionManager reflectionManager;
-
-    private BukkitCommandManager commandManager;
+    private AspectManager reflectionManager;
 
     /**
      * Enable the aspect, causing the creation of a {@link CommandManager},
@@ -45,8 +46,7 @@ public class CommandAspect extends AbstractAspect {
                     String arg = context.popFirstArg();
                     return manager.ofPlayer(Bukkit.getPlayer(arg));
                 });
-        commandManager.getCommandCompletions()
-                .setDefaultCompletion("players", PPlayer.class);
+
 
         Set<Class<?>> loaded = new HashSet<>();
         for (Class<?> commandClass : reflectionManager.classesForAspect(this)) {
@@ -58,6 +58,11 @@ public class CommandAspect extends AbstractAspect {
             load(commandClass);
             loaded.add(commandClass);
         }
+    }
+
+    private void setupCompletions(PaperCommandManager manager) {
+        commandManager.getCommandCompletions()
+                .setDefaultCompletion("players", PPlayer.class);
     }
 
     /**

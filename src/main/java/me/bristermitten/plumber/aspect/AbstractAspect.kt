@@ -29,10 +29,12 @@ abstract class AbstractAspect : Aspect {
     }
 
     override fun disable() {
-        logger.info("Disabling aspect " + javaClass.simpleName)
-        doDisable()
-        enabled = false
-        logger.info("Done")
+        logger.debug("Disabling aspect " + javaClass.simpleName)
+        val length = measureTimeMillis {
+            doDisable()
+            enabled = false
+        }
+        logger.debug("Unloaded in {} ms", length)
     }
 
     protected open fun doEnable() {}

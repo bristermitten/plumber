@@ -4,8 +4,8 @@ import com.google.inject.AbstractModule
 import com.google.inject.Injector
 import com.google.inject.Module
 import me.bristermitten.plumber.aspect.Aspect
+import me.bristermitten.plumber.aspect.AspectManager
 import me.bristermitten.plumber.aspect.AspectModule
-import me.bristermitten.plumber.aspect.AspectReflectionManager
 import org.slf4j.LoggerFactory
 
 /**
@@ -13,11 +13,11 @@ import org.slf4j.LoggerFactory
  * Details in [configure]
  */
 class AspectModule(private val parent: InitialModule,
-                   private val aspectReflectionManager: AspectReflectionManager,
+                   private val aspectManager: AspectManager,
                    private val injector: Injector) : AbstractModule() {
 
     private val logger = LoggerFactory.getLogger(javaClass)
-    private val requiredAspects: MutableSet<Class<out Aspect>> = aspectReflectionManager.requiredAspects.toMutableSet()
+    private val requiredAspects: MutableSet<Class<out Aspect>> = aspectManager.requiredAspects.toMutableSet()
     val lateAspects: MutableSet<Class<out Aspect>> = HashSet()
     private val modules: MutableSet<Module> = HashSet()
     private val mappings: MutableSet<Any> = HashSet()
@@ -43,8 +43,8 @@ class AspectModule(private val parent: InitialModule,
     /**
      * Technically this violates Guice's best practice of side-effects in modules, however it is necessary to avoid a far more complex layout
      * The process can be broken into steps/pseudocode
-     * 1) Install a parent module given
-     * 2) Bind the instance of [AspectReflectionManager]
+     * 1) Install a parent module of [InitialModule] provided in the constructor
+     * 2) Bind the instance of [AspectManager] that has been provided
      * 3) Loop through each aspect class in [requiredAspects]
      * If the aspect has the annotation [AspectModule], install the target module, and add the aspect to the "later initialising" set
      * Otherwise, get an instance of the aspect from the parent injector, bind the instance (making it a singleton), and install a module if one is provided
@@ -53,7 +53,7 @@ class AspectModule(private val parent: InitialModule,
      */
     override fun configure() {
         install(parent)
-        bind(aspectReflectionManager.javaClass).toInstance(aspectReflectionManager)
+        bind(aspectManager.javaClass).toInstance(aspectManager)
 
         modules.forEach {
             install(it)
