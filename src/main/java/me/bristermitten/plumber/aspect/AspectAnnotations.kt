@@ -26,4 +26,13 @@ annotation class RequiredAspect
 @Retention(AnnotationRetention.RUNTIME)
 annotation class AspectModule(val target: KClass<out Module>)
 
+/**
+ * Binds an [Aspect] to some third party annotations
+ * That is, if these annotations are used at all, the aspect will be loaded
+ * This annotation will only be acted upon if it annotates an [Aspect]
+ */
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ThirdPartyAspectBinding(vararg val targets: KClass<out Annotation>)
+
 
