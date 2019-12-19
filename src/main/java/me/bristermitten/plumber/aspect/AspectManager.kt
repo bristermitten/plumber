@@ -63,7 +63,17 @@ class AspectManager
                     bindings.put(annotation, aa.target.java)
                 }
 
-        
+        classFinder.getClassesAnnotatedWith(ThirdPartyAspectBinding::class.java)
+                .filter {
+                    Aspect::class.java.isAssignableFrom(it)
+                }.map {
+                    it as Class<out Aspect> to it.getAnnotation(ThirdPartyAspectBinding::class.java)
+                }
+                .forEach {
+                    it.second.targets.forEach { target ->
+                        bindings.put(target.java, it.first)
+                    }
+                }
     }
 
     /**

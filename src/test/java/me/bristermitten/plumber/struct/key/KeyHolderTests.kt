@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import java.util.function.Consumer
 
-class KeyHolderTest : PlumberTest() {
+class KeyHolderTests : PlumberTest() {
     private lateinit var player: PlayerMock
 
     private lateinit var playerManager: PPlayerManager
