@@ -17,11 +17,12 @@ class PPlayerTest : PlumberTest() {
     private lateinit var player: PlayerMock
 
     private lateinit var playerManager: PPlayerManager
+
     @Before
     override fun setUp() {
         super.setUp()
         player = MockBukkit.getMock().addPlayer()
-        playerManager=plugin.getInstance(PPlayerManager::class.java)
+        playerManager = plugin.getInstance(PPlayerManager::class.java)
     }
 
 
