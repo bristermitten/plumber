@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerEvent;
  * Can't use Guice because of generics, so currently stuck to {@link EventControllerImpl}
  */
 public class EventControllerFactory {
+
     @Inject
     private PlumberPlugin plugin;
 

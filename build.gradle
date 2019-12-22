@@ -36,15 +36,14 @@ dependencies {
     api 'org.slf4j:slf4j-api:1.7.28'
 
     implementation 'org.slf4j:slf4j-simple:1.7.28'
-    implementation 'com.github.knightzmc:mockbukkit:bcdf0db3df878c7b9f12cf4803d6a0190b92f200'
-
+    implementation 'com.github.knightzmc:reflector:748c92934c'
 
     api 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
     implementation 'org.spigotmc:spigot:1.12.2-R0.1-SNAPSHOT'
 
 
-    // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    testImplementation 'com.github.knightzmc:mockbukkit:bcdf0db3df878c7b9f12cf4803d6a0190b92f200'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 

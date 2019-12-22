@@ -1,5 +1,5 @@
 package me.bristermitten.plumber.struct.extension
 
-interface Extendable<E : Extendable<E>> {
-    fun <T : Extension<E>> getExtension(clazz: Class<T>): T
+interface Extendable<T, E : Extension<T>> {
+    fun getExtension(clazz: Class<out E>): E
 }

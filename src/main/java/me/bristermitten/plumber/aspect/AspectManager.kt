@@ -7,20 +7,21 @@ import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Singleton
-import io.github.classgraph.ClassGraph
 import me.bristermitten.plumber.PlumberPlugin
 import me.bristermitten.plumber.aspect.modules.AspectModule
 import me.bristermitten.plumber.aspect.modules.FinalAspectModule
 import me.bristermitten.plumber.aspect.modules.InitialModule
 import me.bristermitten.plumber.reflection.ClassFinder
+import me.bristermitten.reflector.Reflector
+import me.bristermitten.reflector.property.structure.ClassStructure
 
 @Suppress("UNCHECKED_CAST")
 @Singleton
 class AspectManager
 @Inject constructor(private val initialModule: InitialModule,
                     private val injector: Injector,
-                    private val classGraph: ClassGraph,
-                    private val classFinder: ClassFinder) {
+                    private val classFinder: ClassFinder,
+                    private val reflector: Reflector) {
 
     /**
      * A multimap of bindings from [AspectAnnotation] annotation classes to their respective aspects
@@ -35,22 +36,22 @@ class AspectManager
      * 1) Any [Aspect] where its [AspectAnnotation](s) are used at all
      * 2) Every [Aspect] class annotated by [RequiredAspect]
      */
-    val requiredAspects: Set<Class<out Aspect>> by lazy {
-        classGraph.scan().use { scan ->
-            bindings.keys()
-                    .filter { classFinder.getAnyAnnotatedWith(it).isNotEmpty() }
-                    .flatMap { bindings[it] }.toSet() +
-                    scan.getClassesWithAnnotation(RequiredAspect::class.java.name)
-                            .filter { it.implementsInterface(Aspect::class.java.name) }
-                            .mapNotNull { it.loadClass() as Class<out Aspect> }
-        }
+    val requiredAspects: Collection<Class<out Aspect>> by lazy {
+        val usedAspects = bindings.keys()
+                .filter { classFinder.getAnyAnnotatedWith(it).isNotEmpty() }
+                .flatMap { bindings[it] }
+
+        val requiredAspects = classFinder.getClassesAnnotatedWith(RequiredAspect::class.java)
+                .filter { Aspect::class.java.isAssignableFrom(it) }
+                .map { it as Class<out Aspect> }
+
+        (usedAspects + requiredAspects).distinct()
     }
 
     /**
      * Load the aspect bindings.
      * This entails finding all [AspectAnnotation] annotation classes,
      * getting each one's [AspectAnnotation.target], then adding it to the [bindings] map.
-     *
      */
     fun loadBaseBindings() {
         if (!bindings.isEmpty) return
@@ -82,6 +83,7 @@ class AspectManager
      * @param annotation the annotation to map
      * @param aspect the aspect to map the annotation to
      */
+    @Suppress("unused")
     fun addThirdPartyBinding(annotation: Class<out Annotation>, aspect: Class<out Aspect>): AspectManager {
         bindings.put(annotation, aspect)
         return this
@@ -94,13 +96,19 @@ class AspectManager
      */
     fun classesForAspect(aspect: Aspect): Collection<Class<*>> {
         return classesForAspect(aspect.javaClass)
+    } /**
+     * Get all the classes associated with an aspect
+     * @param aspect the aspect to find classes associated with
+     */
+    fun classStructuresForAspect(aspect: Aspect): Collection<ClassStructure> {
+        return classStructuresForAspect(aspect.javaClass)
     }
 
     /**.
      * Get all the classes associated with an aspect
      * This entails getting all the [AspectAnnotation] annotations that map to the aspect,
      * and finding all classes annotated by one or more of these annotations
-     * This is a slow operation and is not cached, so bear that in mind when calling
+     *
      */
     fun classesForAspect(aspect: Class<out Aspect>): Collection<Class<*>> {
         val inverse = Multimaps.invertFrom(bindings, HashMultimap.create())
@@ -108,7 +116,16 @@ class AspectManager
         val annotations = inverse[aspect] ?: return emptySet()
         if (annotations.isEmpty()) return emptySet()
 
-        return annotations.flatMap { classFinder.getAnyAnnotatedWith(it) }
+        return annotations.flatMap { classFinder.getAnyAnnotatedWith(it) }.distinct()
+    }
+
+    /**.
+     * Get all the classes associated with an aspect
+     * This entails getting all the [AspectAnnotation] annotations that map to the aspect,
+     * and finding all classes annotated by one or more of these annotations
+     */
+    fun classStructuresForAspect(aspect: Class<out Aspect>): Collection<ClassStructure> {
+        return classesForAspect(aspect).map { reflector.getStructure(it) }
     }
 
     /**
@@ -124,17 +141,16 @@ class AspectManager
     fun loadAll(plumberPlugin: PlumberPlugin) {
         val module = AspectModule(initialModule, this, injector)
         var injector = Guice.createInjector(module)
+
         val finalModule = FinalAspectModule(module, injector, module.lateAspects)
 
-        injector = Guice.createInjector(module, finalModule)
-
-        requiredAspects.forEach {
-            val aspect = injector.getInstance(it)
-            aspect.enable()
-
-        }
+        injector = Guice.createInjector(finalModule)
 
         injector.injectMembers(plumberPlugin)
+    }
+
+    fun <A : Aspect, C : AspectConfig<A>> configClassesForAspect(clazz: Class<C>): Collection<Class<out C>> {
+        return classFinder.getClassesImplementing(clazz)
     }
 
 }

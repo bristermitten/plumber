@@ -1,5 +1,6 @@
 package me.bristermitten.plumber.struct.player;
 
+import com.google.inject.ImplementedBy;
 import me.bristermitten.plumber.dsl.PlayerActionBuilder;
 import me.bristermitten.plumber.dsl.TaskLengthConfiguration;
 import me.bristermitten.plumber.struct.extension.Extendable;
@@ -23,7 +24,8 @@ import java.lang.ref.WeakReference;
  * so it's advised not to store instances if possible, as they will not be able to be
  * garbage collected otherwise. If necessary, {@link WeakReference} is advised.
  */
-public interface PPlayer extends KeyHolder, Extendable<PPlayer> {
+@ImplementedBy(PPlayerImpl.class)
+public interface PPlayer extends KeyHolder, Extendable<PPlayer, PlayerExtension> {
     /**
      * @return the underlying {@link Player} object
      */

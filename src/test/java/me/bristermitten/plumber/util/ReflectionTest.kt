@@ -4,6 +4,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class ReflectionTest {
+
     @Test
     fun invokeNoArgsStaticMethod() {
         Reflection.invokeNoArgsStaticMethod(javaClass, "doSomething")

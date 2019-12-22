@@ -3,6 +3,6 @@ package me.bristermitten.plumber.struct.key
 import java.util.*
 
 /**
- * Simple implementation of [HashMap] with generics overridden
+ * Simple delegate of [HashMap] with generics overridden
  */
-class KeyMap : HashMap<DataKey<*>, Any>()
+class KeyMap : MutableMap<DataKey<*>, Any > by HashMap()

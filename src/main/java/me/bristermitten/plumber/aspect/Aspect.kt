@@ -11,7 +11,7 @@ import com.google.inject.Module
  *
  * Instances are created with Guice, so [Inject] can be used. However, bear in mind that an instance of your aspect will be created with Guice before [module]
  * is called, and then this instance will be bound as the singleton instance and not injected again. If you need to make custom bindings,
- * and then inject into your aspect, use the annotation [AspectModule], and instead return null from [module]. This has the drawback/benefit of your aspect being
+ * and then inject into your aspect, use the annotation [StaticAspectModule], and instead return null from [module]. This has the drawback/benefit of your aspect being
  * loaded after all normal aspects.
  */
 interface Aspect {
@@ -26,7 +26,7 @@ interface Aspect {
     fun disable()
 
     /**
-     * Provide an optional [Module] that will be installed **AFTER** the Aspect is instantiated.
+     * Provide an optional [Module] that will be installed after [enable] is called
      */
     fun module(): Module? = null
 }

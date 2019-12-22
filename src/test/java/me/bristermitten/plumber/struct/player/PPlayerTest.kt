@@ -4,6 +4,9 @@ import be.seeseemelk.mockbukkit.MockBukkit
 import be.seeseemelk.mockbukkit.entity.PlayerMock
 import com.google.inject.Inject
 import me.bristermitten.plumber.PlumberTest
+import me.bristermitten.plumber.aspect.AspectConfig
+import me.bristermitten.plumber.command.CommandAspect
+import me.bristermitten.plumber.reflection.ClassFinder
 import me.bristermitten.plumber.struct.extension.Extension
 import org.bukkit.Bukkit
 import org.bukkit.event.player.AsyncPlayerChatEvent
@@ -65,6 +68,6 @@ class PPlayerTest : PlumberTest() {
     }
 
 
-    data class TestExtension @Inject constructor(val player: PPlayer) : Extension<PPlayer>
+    data class TestExtension @Inject constructor(val player: PPlayer) : PlayerExtension
 }
 
