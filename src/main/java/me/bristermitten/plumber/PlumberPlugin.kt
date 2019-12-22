@@ -3,7 +3,6 @@
  */
 package me.bristermitten.plumber
 
-import co.aikar.commands.annotation.CommandAlias
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Injector
@@ -11,12 +10,13 @@ import com.google.inject.Singleton
 import io.github.classgraph.ClassGraph
 import me.bristermitten.plumber.aspect.AspectManager
 import me.bristermitten.plumber.aspect.modules.InitialModule
-import me.bristermitten.plumber.command.CommandAspect
+import me.bristermitten.reflector.Reflector
+import me.bristermitten.reflector.inject.ReflectorBindingModule
 import org.bukkit.plugin.PluginDescriptionFile
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.JavaPluginLoader
 import java.io.File
-import java.util.logging.LogManager
+import java.util.logging.ConsoleHandler
 import kotlin.system.measureTimeMillis
 
 /**
@@ -28,21 +28,23 @@ import kotlin.system.measureTimeMillis
  * This class will be a Singleton throughout the framework, and at the moment doesn't do much
  * else than the initial setup.
  * On that note, in any Plumber plugin, [PlumberPlugin.loadPlumber]
- * should be called in your [JavaPlugin.onEnable]
+ * should be called in your [JavaPlugin.onEnable] if you override the default [PlumberPlugin.onEnable]
  */
+
 @Singleton
 open class PlumberPlugin : JavaPlugin {
 
     @Inject
     protected lateinit var injector: Injector
 
-    constructor()
-
+    constructor() : super()
     constructor(loader: JavaPluginLoader?, description: PluginDescriptionFile?, dataFolder: File?, file: File?) : super(loader, description, dataFolder, file)
+
 
     override fun onEnable() {
         loadPlumber()
     }
+
 
     /**
      * Load the framework.
@@ -52,6 +54,8 @@ open class PlumberPlugin : JavaPlugin {
      */
     protected fun loadPlumber() {
         initLoggers()
+
+
         logger.info("Plumber loading for Plugin $name...")
 
         val length = measureTimeMillis {
@@ -62,7 +66,8 @@ open class PlumberPlugin : JavaPlugin {
                     .enableAllInfo()
                     .whitelistPackages(*packages)
 
-            val initial = InitialModule(this, classGraph)
+            val reflectorModule = ReflectorBindingModule()
+            val initial = InitialModule(this, classGraph, reflectorModule)
             val initialInjector = Guice.createInjector(initial)
 
             val manager = initialInjector.getInstance(AspectManager::class.java)
@@ -78,7 +83,13 @@ open class PlumberPlugin : JavaPlugin {
      */
     private fun initLoggers() {
         System.setProperty("org.slf4j.simpleLogger.logFile", "System.out");
-        LogManager.getLogManager().reset()
+
+        logger.useParentHandlers = false
+        logger.addHandler(object : ConsoleHandler() {
+            init {
+                setOutputStream(System.out)
+            }
+        })
     }
 
     fun <T> getInstance(clazz: Class<T>): T {

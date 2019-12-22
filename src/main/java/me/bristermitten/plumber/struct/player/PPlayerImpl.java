@@ -6,7 +6,6 @@ import me.bristermitten.plumber.dsl.PlayerActionBuilder;
 import me.bristermitten.plumber.dsl.TaskLengthConfiguration;
 import me.bristermitten.plumber.struct.event.EventController;
 import me.bristermitten.plumber.struct.event.EventControllerFactory;
-import me.bristermitten.plumber.struct.extension.Extension;
 import me.bristermitten.plumber.struct.extension.ExtensionMap;
 import me.bristermitten.plumber.struct.key.DataKey;
 import me.bristermitten.plumber.struct.key.KeyHolder;
@@ -43,6 +42,7 @@ class PPlayerImpl implements PPlayer {
 
     @Inject
     PPlayerImpl(Player player, ExtensionMap extensionMap, BuilderFactory factory, EventControllerFactory ecFactory) {
+
         this.player = player;
         this.extensions = extensionMap;
         this.factory = factory;
@@ -57,7 +57,7 @@ class PPlayerImpl implements PPlayer {
 
     @Override
     public <T extends PlayerEvent & Cancellable> TaskLengthConfiguration<PlayerActionBuilder> blockEvent(Class<T> e) {
-        EventController<?> controller = ecFactory.createController(e);
+        EventController<T> controller = ecFactory.createController(e);
         controller.cancelAll();
         PlayerActionBuilder actionBuilder = factory.createPlayerActionBuilder(this, controller::ignoreAll);
         return factory.createPlayerTaskLengthConfiguration(actionBuilder);
@@ -96,13 +96,14 @@ class PPlayerImpl implements PPlayer {
     @NotNull
     @Override
     public <K> K getData(DataKey<K> key, @NotNull K defaultValue) {
+        //noinspection unchecked
         return (K) keyValues.getOrDefault(key, defaultValue);
     }
 
     @NotNull
     @Override
-    public <T extends Extension<PPlayer>> T getExtension(@NotNull Class<T> clazz) {
-        return (T) extensions.getExtension(clazz);
+    public PlayerExtension getExtension(@NotNull Class<? extends PlayerExtension> clazz) {
+        return (PlayerExtension) extensions.getExtension(clazz);
     }
 
     @Override
@@ -127,4 +128,5 @@ class PPlayerImpl implements PPlayer {
                 ", player=" + player +
                 '}';
     }
+
 }

@@ -41,7 +41,10 @@ abstract class AbstractAspect : Aspect {
 
     protected open fun doDisable() {}
 
-    override fun module(): Module? = null
+    override fun module() = module
+
+    protected open fun loadModule(): Module? = null
+    val module: Module? by lazy { loadModule() }
 
     protected fun <T> instance(clazz: Class<T>): T = injector.getInstance(clazz)
 }

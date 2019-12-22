@@ -7,7 +7,7 @@ import org.junit.Test
 class ChatTest {
 
     /**
-     * This essentially just tests Bukkit's functionality, don't need much detail
+     * This essentially just tests Bukkit's functionality, doesn't need much detail
      */
     @Test
     fun `Test color()`() {

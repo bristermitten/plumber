@@ -24,7 +24,7 @@ annotation class RequiredAspect
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AspectModule(val target: KClass<out Module>)
+annotation class StaticAspectModule(val target: KClass<out Module>, val normalLoad: Boolean = false)
 
 /**
  * Binds an [Aspect] to some third party annotations

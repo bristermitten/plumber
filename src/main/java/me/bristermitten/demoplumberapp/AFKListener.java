@@ -6,6 +6,8 @@ import me.bristermitten.plumber.aspect.components.Component;
 import me.bristermitten.plumber.scheduling.Task;
 import me.bristermitten.plumber.scheduling.timings.TaskBuilder;
 
+import java.util.EnumSet;
+
 @Component
 public class AFKListener {
 

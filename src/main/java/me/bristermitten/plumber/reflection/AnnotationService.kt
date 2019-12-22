@@ -35,8 +35,8 @@ class AnnotationService {
 
 
     private val targetBindings = mapOf(
-            ElementType.TYPE to CommonAnnotationTarget.TYPE,
-            AnnotationTarget.TYPE to CommonAnnotationTarget.TYPE,
+            ElementType.TYPE to CommonAnnotationTarget.CLASS,
+            AnnotationTarget.CLASS to CommonAnnotationTarget.CLASS,
 
             ElementType.METHOD to CommonAnnotationTarget.METHOD,
             AnnotationTarget.FUNCTION to CommonAnnotationTarget.METHOD,
@@ -53,7 +53,7 @@ class AnnotationService {
 
 enum class CommonAnnotationTarget {
     METHOD,
-    TYPE,
+    CLASS,
     CONSTRUCTOR,
     FIELD
 }
