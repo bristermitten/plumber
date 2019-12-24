@@ -64,6 +64,9 @@ class FilesAspect : AbstractAspect() {
                 stores.add(type to store)
                 logger.info("Registered $type")
             }
+            else {
+
+            }
         }
     }
 
