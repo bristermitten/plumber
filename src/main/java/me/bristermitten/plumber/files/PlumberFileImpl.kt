@@ -1,23 +1,19 @@
 package me.bristermitten.plumber.files
 
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.google.inject.Inject
 import com.google.inject.assistedinject.Assisted
 import me.bristermitten.plumber.PlumberPlugin
-import me.bristermitten.reflector.Reflector
-import org.json.simple.JSONObject
 import org.yaml.snakeyaml.Yaml
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 
-abstract class AbstractPlumberFile(name: String, reflector: Reflector, plugin: PlumberPlugin) : PlumberFile {
+abstract class AbstractPlumberFile(name: String, plugin: PlumberPlugin) : PlumberFile {
     private val file = File(plugin.dataFolder, name)
     lateinit var mapped: Store<*>
     lateinit var type: TypeToken<*>
-//    private val structure by lazy { reflector.getStructure(type) }
 
     protected abstract fun loadFrom(inputStream: InputStream): Any
     protected abstract fun saveTo(outputStream: OutputStream)
@@ -30,17 +26,15 @@ abstract class AbstractPlumberFile(name: String, reflector: Reflector, plugin: P
 
     override fun saveData() {
         saveTo(file.outputStream())
-        println(file.readLines().joinToString('\n'.toString()))
     }
 }
 
 class YamlPlumberFile @Inject constructor(
         @Assisted name: String,
-        reflector: Reflector,
         plugin: PlumberPlugin,
         private val yaml: Yaml,
         private val gson: Gson
-) : AbstractPlumberFile(name, reflector, plugin) {
+) : AbstractPlumberFile(name, plugin) {
 
     override fun loadFrom(inputStream: InputStream): Any {
         val any = yaml.load<Any>(inputStream)
@@ -54,10 +48,9 @@ class YamlPlumberFile @Inject constructor(
 
 class JsonPlumberFile @Inject constructor(
         @Assisted name: String,
-        reflector: Reflector,
         plugin: PlumberPlugin,
         private val gson: Gson
-) : AbstractPlumberFile(name, reflector, plugin) {
+) : AbstractPlumberFile(name, plugin) {
 
     override fun loadFrom(inputStream: InputStream): Any {
         return gson.fromJson(inputStream.reader(), type.type) ?: mapped
