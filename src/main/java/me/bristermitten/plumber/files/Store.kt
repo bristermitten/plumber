@@ -4,7 +4,7 @@ interface Store<T> {
     fun flush()
     fun reload()
 
-    fun getType() : Class<*>
-
     fun loadWith(data: Any)
+    fun save(t: T)
 }
+

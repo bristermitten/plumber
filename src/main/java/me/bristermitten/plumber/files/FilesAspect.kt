@@ -8,7 +8,9 @@ import me.bristermitten.plumber.aspect.AspectManager
 import me.bristermitten.plumber.aspect.RequiredAspect
 import me.bristermitten.plumber.aspect.StaticAspectModule
 import me.bristermitten.plumber.util.Reflection.createAbstractModule
+import me.bristermitten.reflector.Reflector
 import org.apache.commons.io.FilenameUtils
+import org.bukkit.Material
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Proxy
 
@@ -22,6 +24,9 @@ class FilesAspect : AbstractAspect() {
 
     @Inject
     private lateinit var plumberFileFactory: PlumberFileFactory
+
+    @Inject
+    private lateinit var reflector: Reflector
 
     private val stores: MutableSet<Pair<Class<*>, Any>> = HashSet()
 
@@ -46,25 +51,39 @@ class FilesAspect : AbstractAspect() {
                 val file = when (info.type) {
                     FileType.YAML -> plumberFileFactory.createYaml(info.name)
                     FileType.JSON -> plumberFileFactory.createJson(info.name)
-                    else -> continue@loop
+                    else -> null
+                } ?: continue
+
+                val handler: StoreProxyHandler
+                val typeOfStore: Class<*>
+
+                when {
+                    structure.isSubTypeOf(KeyValueStore::class.java) -> {
+                        handler = KeyValueStoreProxyHandler(file, reflector)
+                        typeOfStore = typeParameters[1] as Class<*>
+                    }
+                    structure.isSubTypeOf(ValueStore::class.java) -> {
+                        handler = ValueStoreProxyHandler(file)
+                        typeOfStore = typeParameters[0] as Class<*>
+                    }
+                    else -> {
+                        continue@loop
+                    }
                 }
 
-                val handler = when {
-                    structure.isSubTypeOf(KeyValueStore::class.java) -> KeyValueStoreProxyHandler(file)
-                    structure.isSubTypeOf(ValueStore::class.java) -> ValueStoreProxyHandler(file)
-                    else -> continue@loop
-                }
+                handler.setType(typeOfStore)
 
                 val store = Proxy.newProxyInstance(javaClass.classLoader, arrayOf(type), handler) as Store<*>
-
                 file.mapped = store
 
-                val token = TypeToken.getParameterized(store.getType(), *typeParameters.toTypedArray())
+                val collection = handler.collectionProxy
+                val token = TypeToken.getParameterized(collection.javaClass, *typeParameters.toTypedArray())
+
+
                 file.type = token
                 stores.add(type to store)
                 logger.info("Registered $type")
-            }
-            else {
+            } else {
 
             }
         }

@@ -2,16 +2,21 @@ package me.bristermitten.plumber.files
 
 import com.google.common.collect.HashBasedTable
 import com.google.common.collect.Table
+import com.google.gson.reflect.TypeToken
+import me.bristermitten.reflector.Reflector
+import me.bristermitten.reflector.property.Property
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 
 sealed class StoreProxyHandler(
-        protected val mainProxy: Any,
-        private val file: PlumberFile
+        val collectionProxy: Any,
+        val file: PlumberFile
 ) : InvocationHandler {
 
-    private val methodTable: Table<String, List<Class<*>>,
-            (Array<Any>) -> Any> = HashBasedTable.create()
+    open fun setType(type: Class<*>){}
+
+    protected val methodTable: Table<String, List<Class<*>>,
+            (Array<Any>) -> Any?> = HashBasedTable.create()
 
     init {
         methodTable.put("flush", emptyList()) {
@@ -22,10 +27,13 @@ sealed class StoreProxyHandler(
             file.loadData()
         }
         methodTable.put("getType", emptyList()) {
-            return@put mainProxy.javaClass
+            return@put collectionProxy.javaClass
         }
         methodTable.put("loadWith", listOf(Any::class.java)) { args ->
             load(args[0])
+        }
+        methodTable.put("equals", listOf(Any::class.java)) {
+            collectionProxy == it[0]
         }
     }
 
@@ -35,7 +43,7 @@ sealed class StoreProxyHandler(
         val args = arguments ?: arrayOf()
 
         if (method.declaringClass != Store::class.java) {
-            return method.invoke(mainProxy, *args)
+            return method.invoke(collectionProxy, *args)
         }
 
         val fromTable = methodTable.get(method.name, method.parameterTypes.toList())
@@ -47,9 +55,8 @@ sealed class StoreProxyHandler(
 }
 
 class ValueStoreProxyHandler(file: PlumberFile) : StoreProxyHandler(ArrayList<Any>(), file) {
-
     override fun load(data: Any) {
-        val list = mainProxy as ArrayList<Any>
+        val list = collectionProxy as ArrayList<Any>
         list.clear()
 
         if (data is Iterable<*>)
@@ -61,9 +68,29 @@ class ValueStoreProxyHandler(file: PlumberFile) : StoreProxyHandler(ArrayList<An
     }
 }
 
-class KeyValueStoreProxyHandler(file: PlumberFile) : StoreProxyHandler(HashMap<Any, Any>(), file) {
+class KeyValueStoreProxyHandler(file: PlumberFile, private val reflector: Reflector) : StoreProxyHandler(HashMap<Any, Any>(), file) {
+
+    override fun setType(type: Class<*>) {
+        if (!this::idProperty.isInitialized) {
+            idProperty = reflector.getStructure(type).searchProperties()
+                    .byAnnotation(Id::class.java).search().findFirst().orElseThrow {
+                        IllegalArgumentException("Class $type has no @Id property")
+                    }
+        }
+
+
+        methodTable.put("save", listOf(Any::class.java)) {
+            val map = collectionProxy as MutableMap<Any ,Any>
+            map[idProperty.getValue(it[0])] = it[0]
+            null
+        }
+    }
+
+
+    private lateinit var idProperty: Property
+
     override fun load(data: Any) {
-        val map = mainProxy as HashMap<Any, Any>
+        val map = collectionProxy as HashMap<Any, Any>
         map.clear()
 
         if (data is Map<*, *>)
