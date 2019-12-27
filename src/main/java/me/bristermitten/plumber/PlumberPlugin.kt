@@ -3,20 +3,16 @@
  */
 package me.bristermitten.plumber
 
-import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Singleton
-import io.github.classgraph.ClassGraph
-import me.bristermitten.plumber.aspect.AspectManager
-import me.bristermitten.plumber.aspect.modules.InitialModule
-import me.bristermitten.reflector.Reflector
-import me.bristermitten.reflector.inject.ReflectorBindingModule
+import me.bristermitten.plumber.newaspect.PlumberLoader
 import org.bukkit.plugin.PluginDescriptionFile
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.JavaPluginLoader
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.io.File
-import java.util.logging.ConsoleHandler
 import kotlin.system.measureTimeMillis
 
 /**
@@ -33,6 +29,8 @@ import kotlin.system.measureTimeMillis
 
 @Singleton
 open class PlumberPlugin : JavaPlugin {
+
+    val logger: Logger = LoggerFactory.getLogger(javaClass)
 
     @Inject
     protected lateinit var injector: Injector
@@ -53,44 +51,14 @@ open class PlumberPlugin : JavaPlugin {
      * This should be called immediately in [JavaPlugin.onEnable]
      */
     protected fun loadPlumber() {
-        initLoggers()
-
-
-        logger.info("Plumber loading for Plugin $name...")
+        logger.info("Plumber loading for Plugin {}...", name)
 
         val length = measureTimeMillis {
-            val ourPackage = javaClass.getPackage().name
-            val packages = arrayOf(ourPackage, PlumberPlugin::class.java.getPackage().name)
-
-            val classGraph = ClassGraph()
-                    .enableAllInfo()
-                    .whitelistPackages(*packages)
-
-            val reflectorModule = ReflectorBindingModule()
-            val initial = InitialModule(this, classGraph, reflectorModule)
-            val initialInjector = Guice.createInjector(initial)
-
-            val manager = initialInjector.getInstance(AspectManager::class.java)
-
-            manager.loadBaseBindings()
-            manager.loadAll(this)
+            PlumberLoader().loadPlumber(this)
         }
-        logger.info("Plumber loaded in $length ms!")
+        logger.info("Plumber loaded in {} ms!", length)
     }
 
-    /**
-     * Configure both slf4j and the existing Java loggers to use stdout instead of stderr
-     */
-    private fun initLoggers() {
-        System.setProperty("org.slf4j.simpleLogger.logFile", "System.out");
-
-        logger.useParentHandlers = false
-        logger.addHandler(object : ConsoleHandler() {
-            init {
-                setOutputStream(System.out)
-            }
-        })
-    }
 
     fun <T> getInstance(clazz: Class<T>): T {
         return injector.getInstance(clazz)
