@@ -51,9 +51,3 @@ class AnnotationService {
 
 }
 
-enum class CommonAnnotationTarget {
-    METHOD,
-    CLASS,
-    CONSTRUCTOR,
-    FIELD
-}
