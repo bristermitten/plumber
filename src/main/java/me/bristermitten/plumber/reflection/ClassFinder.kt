@@ -8,6 +8,7 @@ import io.github.classgraph.ClassGraph
 import io.github.classgraph.ClassInfo
 import io.github.classgraph.ScanResult
 import java.lang.annotation.Target
+import kotlin.reflect.KClass
 
 @Singleton
 class ClassFinder @Inject constructor(private val classGraph: ClassGraph,
@@ -46,8 +47,8 @@ class ClassFinder @Inject constructor(private val classGraph: ClassGraph,
         }
     }
 
-    fun <T> getClassesImplementing(clazz: Class<T>): Collection<Class<out T>> {
-        val name = clazz.name
+    fun <T : Any> getClassesImplementing(clazz: KClass<T>): Collection<Class<out T>> {
+        val name = clazz.qualifiedName
         return scan {
             getClassesImplementing(name).map { it.loadClass() as Class<out T> }
         }
