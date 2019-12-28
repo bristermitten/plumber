@@ -21,7 +21,8 @@ class AnnotationService {
         if (jTarget != null) {
             return getJDKAnnotationTargets(jTarget)
         }
-        return emptySet()
+
+        return EnumSet.allOf(CommonAnnotationTarget::class.java)
     }
 
 

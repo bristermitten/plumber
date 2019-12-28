@@ -4,9 +4,9 @@ import com.google.inject.Module
 
 interface Aspect {
 
-    fun enable()
+    fun enable(classes: Collection<Class<*>>) {}
 
-    fun disable()
+    fun disable() {}
 
-    fun module() : Module?
+    fun module(): Module? = null
 }
