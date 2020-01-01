@@ -6,7 +6,7 @@ package me.bristermitten.plumber
 import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Singleton
-import me.bristermitten.plumber.newaspect.PlumberLoader
+import me.bristermitten.plumber.aspect.PlumberLoader
 import org.bukkit.plugin.PluginDescriptionFile
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.JavaPluginLoader
@@ -40,6 +40,7 @@ open class PlumberPlugin : JavaPlugin {
 
 
     override fun onEnable() {
+
         loadPlumber()
     }
 
@@ -48,13 +49,13 @@ open class PlumberPlugin : JavaPlugin {
      * Load the framework.
      * This entails scanning classes in the classpath, creating instances and injectors
      * through Guice, and loading all necessary aspects.
-     * This should be called immediately in [JavaPlugin.onEnable]
+     * This should be called before anything else in [onEnable]
      */
     protected fun loadPlumber() {
         logger.info("Plumber loading for Plugin {}...", name)
 
         val length = measureTimeMillis {
-            PlumberLoader().loadPlumber(this)
+            PlumberLoader(this).loadPlumber()
         }
         logger.info("Plumber loaded in {} ms!", length)
     }

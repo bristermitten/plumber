@@ -1,4 +1,4 @@
-package me.bristermitten.plumber.newaspect
+package me.bristermitten.plumber.aspect
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
@@ -12,16 +12,16 @@ import me.bristermitten.plumber.reflection.ClassFinder
 import me.bristermitten.plumber.reflection.Reflection.createGuiceModule
 
 /**
- * Class responsible for loading the entirety of Plumber
- * A lot of the work is delegated to Guice, and
+ * Class responsible for loading the entirety of Plumber.
+ *
  */
-class PlumberLoader {
+class PlumberLoader(private val plugin: PlumberPlugin) {
 
     private val bindings: Multimap<Class<out Annotation>, Class<out Aspect>> = HashMultimap.create()
     private val aspectClasses: Multimap<Class<out Aspect>, Class<*>> = HashMultimap.create()
 
-    fun loadPlumber(plumberPlugin: PlumberPlugin) {
-        val externalPluginPackage = plumberPlugin.javaClass.`package`.name
+    fun loadPlumber() {
+        val externalPluginPackage = plugin.javaClass.`package`.name
         val plumberPackage = PlumberPlugin::class.java.`package`.name
 
         val packages = arrayOf(externalPluginPackage, plumberPackage)
@@ -41,19 +41,21 @@ class PlumberLoader {
         })
 
         val classFinder = injector.getInstance(ClassFinder::class.java)
-
+        val holder = injector.getInstance(InjectorHolder::class.java)
         val aspects = classFinder.getClassesImplementing(Aspect::class)
         loadBindings(classFinder, aspects)
 
         aspects
                 .filter {
                     if (it.isAnnotationPresent(RequiredAspect::class.java)) true
-                    else bindings.containsValue(it) && aspectClasses[it].isNotEmpty()
+                    else aspectClasses[it].isNotEmpty()
                 }
                 .sortedByDescending { it.getAnnotation(RequiredAspect::class.java)?.priority ?: Integer.MIN_VALUE }
                 .forEach {
                     injector = loadAspect(injector, it)
                 }
+
+        holder.lock(injector)
     }
 
     private fun loadBindings(classFinder: ClassFinder, aspects: Collection<Class<out Aspect>>) {
@@ -69,8 +71,8 @@ class PlumberLoader {
                     aspectClasses.putAll(target, classFinder.getClassesWithAnnotationAnywhere(it))
                 }
 
-        aspects.filter {
-            it.isAnnotationPresent(LoadIfPresent::class.java)
+        aspects.filter { aspectClass ->
+            aspectClass.isAnnotationPresent(LoadIfPresent::class.java)
         }.map {
             it to it.getAnnotation(LoadIfPresent::class.java).targets.toSet()
         }.forEach { pair ->
@@ -99,7 +101,7 @@ class PlumberLoader {
 
     private fun installAspectModule(instance: Aspect, i: Injector): Injector {
         var injector = i
-        val module = instance.module()
+        val module = instance.getModule()
 
         if (module != null)
             injector = injector.createChildInjector(module)
