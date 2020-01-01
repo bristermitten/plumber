@@ -1,8 +1,8 @@
 package me.bristermitten.plumber.aspects
 
 import me.bristermitten.plumber.PlumberExtension
-import me.bristermitten.plumber.newaspect.Aspect
-import me.bristermitten.plumber.newaspect.RequiredAspect
+import me.bristermitten.plumber.aspect.Aspect
+import me.bristermitten.plumber.aspect.RequiredAspect
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

@@ -1,6 +1,8 @@
 package me.bristermitten.plumber.reflection
 
+import com.google.inject.Injector
 import com.google.inject.Singleton
+import me.bristermitten.plumber.aspect.InjectorHolder
 import java.lang.annotation.ElementType
 import java.lang.annotation.Target
 import java.util.*
@@ -21,6 +23,7 @@ class AnnotationService {
         if (jTarget != null) {
             return getJDKAnnotationTargets(jTarget)
         }
+
 
         return EnumSet.allOf(CommonAnnotationTarget::class.java)
     }
