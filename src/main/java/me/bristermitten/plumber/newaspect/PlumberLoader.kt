@@ -1,7 +1,5 @@
 package me.bristermitten.plumber.newaspect
 
-import com.google.common.collect.BiMap
-import com.google.common.collect.HashBiMap
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Guice
@@ -20,6 +18,7 @@ import me.bristermitten.plumber.reflection.Reflection.createGuiceModule
 class PlumberLoader {
 
     private val bindings: Multimap<Class<out Annotation>, Class<out Aspect>> = HashMultimap.create()
+    private val aspectClasses: Multimap<Class<out Aspect>, Class<*>> = HashMultimap.create()
 
     fun loadPlumber(plumberPlugin: PlumberPlugin) {
         val externalPluginPackage = plumberPlugin.javaClass.`package`.name
@@ -33,7 +32,6 @@ class PlumberLoader {
                 .disableRuntimeInvisibleAnnotations()
                 .disableNestedJarScanning()
                 .disableJarScanning()
-
 
 
         var injector = Guice.createInjector(object : KotlinModule() {
@@ -50,7 +48,7 @@ class PlumberLoader {
         aspects
                 .filter {
                     if (it.isAnnotationPresent(RequiredAspect::class.java)) true
-                    else bindings.containsValue(it) && classFinder.getAnyAnnotatedWith(bindings.()[it]!!).isNotEmpty()
+                    else bindings.containsValue(it) && aspectClasses[it].isNotEmpty()
                 }
                 .sortedByDescending { it.getAnnotation(RequiredAspect::class.java)?.priority ?: Integer.MIN_VALUE }
                 .forEach {
@@ -67,7 +65,8 @@ class PlumberLoader {
                 }
                 .forEach {
                     val target = it.getAnnotation(AspectAnnotation::class.java).target.java
-                    bindings[it] = target
+                    bindings.put(it, target)
+                    aspectClasses.putAll(target, classFinder.getClassesWithAnnotationAnywhere(it))
                 }
 
         aspects.filter {
@@ -77,7 +76,8 @@ class PlumberLoader {
         }.forEach { pair ->
             val aspectClass = pair.first
             pair.second.forEach {
-                bindings[it.java] = aspectClass
+                bindings.put(it.java, aspectClass)
+                aspectClasses.putAll(aspectClass, classFinder.getClassesWithAnnotationAnywhere(it.java))
             }
         }
     }
@@ -90,7 +90,7 @@ class PlumberLoader {
         injector = bindAspectInstance(injector, clazz)
 
         val instance = injector.getInstance(clazz)
-        instance.enable(bindings.inverse()[clazz])
+        instance.enable(aspectClasses[clazz])
 
         injector = installAspectModule(instance, injector)
 

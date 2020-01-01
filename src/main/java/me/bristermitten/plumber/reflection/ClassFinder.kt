@@ -19,7 +19,7 @@ class ClassFinder @Inject constructor(private val classGraph: ClassGraph,
      * This checks the [annotation]'s [Target] and only searches applicable elements
      * @param annotation the annotation to look for elements annotated with
      */
-    fun getAnyAnnotatedWith(annotation: Class<out Annotation>): Collection<Class<*>> {
+    fun getClassesWithAnnotationAnywhere(annotation: Class<out Annotation>): Collection<Class<*>> {
         val name = annotation.name
         val targets = annotationService.getAnnotationTargets(annotation)
 

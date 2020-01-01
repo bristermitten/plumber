@@ -9,8 +9,10 @@ import org.junit.jupiter.api.extension.ExtendWith
 
 @RequiredAspect
 class Required : Aspect {
-    override fun enable() {
+
+    override fun enable(classes: Collection<Class<*>>) {
         enabled = true
+        Required.classes = classes
     }
 
     override fun disable() {
@@ -18,14 +20,17 @@ class Required : Aspect {
 
     companion object {
         var enabled = false
+        var classes: Collection<Class<*>> = emptySet()
     }
 
 }
+
 @ExtendWith(PlumberExtension::class)
 class RequiredTests {
     @Test
-    fun `Test Required Aspect Enabled`(){
+    fun `Test Required Aspect Enabled`() {
         assertTrue(Required.enabled)
+        assertTrue(Required.classes.isEmpty())
     }
 
 }
