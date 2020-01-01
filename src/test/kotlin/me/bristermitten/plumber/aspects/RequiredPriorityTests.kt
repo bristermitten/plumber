@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 @RequiredAspect(priority = 1)
 class Priority1 : Aspect {
 
-    override fun enable() {
+    override fun enable(classes: Collection<Class<*>>) {
         order.add(Priority1::class)
     }
 
@@ -22,7 +22,7 @@ class Priority1 : Aspect {
 
 @RequiredAspect(priority = 2)
 class Priority2 : Aspect {
-    override fun enable() {
+    override fun enable(classes: Collection<Class<*>>) {
         order.add(Priority2::class)
     }
 
