@@ -1,19 +1,16 @@
 plugins {
     id 'java-library'
     id 'maven'
-    id 'maven-publish'
     id 'org.jetbrains.kotlin.jvm' version '1.3.50'
     id "com.github.johnrengelman.shadow" version "5.1.0"
 }
-group = 'me.bristermitten'
-version = '0.0.1'
 
 repositories {
     jcenter()
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'https://jitpack.io' }
-    maven { url "http://repo.aikar.co/nexus/content/groups/aikar/" }
+    maven { url "https://repo.aikar.co/nexus/content/groups/aikar/" }
 }
 
 dependencies {
@@ -34,44 +31,30 @@ dependencies {
         api files("lib/acf-core-0.5.0-SNAPSHOT.jar")
     } else api "co.aikar:acf-paper:0.5.0-SNAPSHOT"
 
-    compile 'org.slf4j:slf4j-log4j12:1.8.0-alpha2'
+    api 'org.slf4j:slf4j-api:1.7.28'
 
-    compile 'dev.misfitlabs.kotlinguice4:kotlin-guice:1.4.1'
-    implementation ('com.github.knightzmc:reflector:b860a37b8eee5b9ca804fef5d983cc7278727790'){
-        exclude group: 'junit'
-    }
-
-    api ('org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT') {
-        exclude group: 'junit'
-    }
-    implementation ('org.spigotmc:spigot:1.12.2-R0.1-SNAPSHOT') {
-        exclude group: 'junit'
-    }
+    implementation 'org.slf4j:slf4j-simple:1.7.28'
+    implementation 'com.github.knightzmc:mockbukkit:bcdf0db3df878c7b9f12cf4803d6a0190b92f200'
 
 
-    testApi('com.github.knightzmc:mockbukkit:4afe7bda8bfad66811634e6fae544dcdb52f32a3') {
-        exclude group: 'junit'
-    }
-    testImplementation "org.junit.jupiter:junit-jupiter:5.5.2"
+    api 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
+    implementation 'org.spigotmc:spigot:1.12.2-R0.1-SNAPSHOT'
+
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
 }
-
-test {
-    useJUnitPlatform()
-}
-
 compileKotlin {
     kotlinOptions {
         javaParameters = true
         jvmTarget = "1.8"
     }
 }
-
 compileTestKotlin {
     kotlinOptions {
-        javaParameters = true
         jvmTarget = "1.8"
     }
 }
@@ -83,6 +66,8 @@ compileJava {
 shadowJar {
     minimize()
     relocate 'co.aikar', 'me.bristermitten.aikar'
+    exclude 'LICENSE-junit.txt'
+    exclude 'junit/**'
     dependencies {
         exclude dependency('com.github.knightzmc:mockbukkit:.*')
         exclude dependency('org.spigotmc:spigot-api:.*')
@@ -95,22 +80,6 @@ shadowJar {
         exclude dependency('commons-lang:commons-lang:.*')
         exclude dependency('junit:junit:.*')
         exclude dependency('com.googlecode.json-simple:json-simple:.*')
-    }
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-
-            artifact sourceJar {
-                classifier "sources"
-            }
-        }
     }
 }
 
