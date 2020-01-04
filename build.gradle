@@ -5,8 +5,8 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.50'
     id "com.github.johnrengelman.shadow" version "5.1.0"
 }
+
 group = 'me.bristermitten'
-version = '0.0.1'
 
 repositories {
     jcenter()
@@ -37,14 +37,14 @@ dependencies {
     compile 'org.slf4j:slf4j-log4j12:1.8.0-alpha2'
 
     compile 'dev.misfitlabs.kotlinguice4:kotlin-guice:1.4.1'
-    implementation ('com.github.knightzmc:reflector:b860a37b8eee5b9ca804fef5d983cc7278727790'){
+    implementation('com.github.knightzmc:reflector:b860a37b8eee5b9ca804fef5d983cc7278727790') {
         exclude group: 'junit'
     }
 
-    api ('org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT') {
+    api('org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT') {
         exclude group: 'junit'
     }
-    implementation ('org.spigotmc:spigot:1.12.2-R0.1-SNAPSHOT') {
+    implementation('org.spigotmc:spigot:1.12.2-R0.1-SNAPSHOT') {
         exclude group: 'junit'
     }
 
@@ -73,6 +73,7 @@ compileTestKotlin {
         jvmTarget = "1.8"
     }
 }
+
 compileJava {
     options.compilerArgs += ["-parameters"]
     options.fork = true
@@ -100,6 +101,15 @@ task sourceJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
+task createClassScan(type: JavaExec) {
+    classpath = sourceSets.test.runtimeClasspath
+    dependsOn testClasses
+
+    args = [sourceSets.main.resources.srcDirs[0]]
+
+    main = "BuildTimeClassScan"
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -113,7 +123,7 @@ publishing {
 }
 
 javadoc {
-    source = sourceSets.main.allJava
+    source = sourceSets.main.allSource
     include '**/me/bristermitten/plumber/**'
     destinationDir = file('docs')
 }

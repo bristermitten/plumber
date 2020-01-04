@@ -4,8 +4,8 @@
 package me.bristermitten.plumber
 
 import com.google.inject.Inject
-import com.google.inject.Injector
 import com.google.inject.Singleton
+import me.bristermitten.plumber.aspect.InjectorHolder
 import me.bristermitten.plumber.aspect.PlumberLoader
 import org.bukkit.plugin.PluginDescriptionFile
 import org.bukkit.plugin.java.JavaPlugin
@@ -30,17 +30,20 @@ import kotlin.system.measureTimeMillis
 @Singleton
 open class PlumberPlugin : JavaPlugin {
 
-    val logger: Logger = LoggerFactory.getLogger(javaClass)
+    protected val logger: Logger = LoggerFactory.getLogger(javaClass)
 
     @Inject
-    protected lateinit var injector: Injector
+    protected lateinit var holder: InjectorHolder
 
     constructor() : super()
     constructor(loader: JavaPluginLoader?, description: PluginDescriptionFile?, dataFolder: File?, file: File?) : super(loader, description, dataFolder, file)
 
 
+    /**
+     * Default [JavaPlugin.onEnable] implementation.
+     * This loads Plumber, and if overridden [loadPlumber] should be called
+     */
     override fun onEnable() {
-
         loadPlumber()
     }
 
@@ -61,7 +64,10 @@ open class PlumberPlugin : JavaPlugin {
     }
 
 
+    /**
+     * Helper method to get an instance of a class with Guice
+     */
     fun <T> getInstance(clazz: Class<T>): T {
-        return injector.getInstance(clazz)
+        return holder.injector.getInstance(clazz)
     }
 }
