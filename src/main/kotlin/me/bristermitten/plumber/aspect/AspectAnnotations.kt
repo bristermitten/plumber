@@ -4,69 +4,26 @@ import com.google.inject.Module
 import kotlin.reflect.KClass
 
 /**
- * Annotation Classes related to the loading of Aspects
- *
+ * Marks that an annotation is used by an aspect, and that the class scanner should initialize that Aspect if not
+ * already done.
  */
-
-/**
- * Only applicable to subclasses of [Aspect].
- *
- * This annotation indicates that an Aspect is required and must always be loaded.
- * It should be used sparingly.
- *
- * Required Aspects will be loaded before non-required Aspects.
- * @param priority The priority for loading in relation to other required Aspects. Higher priorities load first.
- */
-@Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.CLASS)
-@MustBeDocumented
-annotation class RequiredAspect(val priority: Int = 0)
-
-
-/**
- * Only applicable to subclasses of [Aspect].
- *
- * Used to configure a static module for an Aspect.
- * This is useful when an Aspect requires some bindings from Guice to be injected into it.
- *
- * Normally, injection would happen, and then [Aspect.getModule] would be installed,
- * but no bindings would exist from the module when the Aspect is created.
- *
- * This annotation solves that problem.
- * If an Aspect has it, the given [target] will be installed first,
- * and then the Aspect will be injected with the bindings from the module.
- */
-@Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.CLASS)
-@MustBeDocumented
-annotation class StaticModule(val target: KClass<out Module>)
-
-
-/**
- * Binds an Annotation to an Aspect.
- *
- * If the annotated annotation is present at all on the classpath,
- * the given [target] will be loaded if not already.
- */
-@Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.ANNOTATION_CLASS)
-@MustBeDocumented
+@Retention(AnnotationRetention.RUNTIME)
 annotation class AspectAnnotation(val target: KClass<out Aspect>)
 
+/**
+ * Marks that an aspect is necessary for basic Plumber functionality, and should always be enabled
+ */
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class RequiredAspect
 
 /**
- * Only applicable to subclasses of [Aspect].
- *
- * Similar to [AspectAnnotation], this binds an annotation to an Aspect, but the other way around.
- *
- * If any of the [targets] are present at all on the classpath,
- * the annotated Aspect will be loaded if not already.
- *
- * This annotation should only be used if the [targets] are part of an external library
- * and cannot be given [AspectAnnotation]. A good example is ACF's @CommandAlias,
- * which is third party, cannot be modified, but must be checked for loading the command aspect.
+ * Allows aspects to link to a custom Module class, instead of having to be initialised to provide a Module
+ * in [Aspect.module]
  */
-@Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)
-@MustBeDocumented
-annotation class LoadIfPresent(vararg val targets: KClass<out Annotation>)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class AspectModule(val target: KClass<out Module>)
+
+
