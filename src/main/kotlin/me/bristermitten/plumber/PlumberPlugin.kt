@@ -49,9 +49,10 @@ open class PlumberPlugin : JavaPlugin {
 
 
     /**
-     * Load the framework.
+     * Load Plumber.
      * This entails scanning classes in the classpath, creating instances and injectors
      * through Guice, and loading all necessary aspects.
+     *
      * This should be called before anything else in [onEnable]
      */
     protected fun loadPlumber() {
