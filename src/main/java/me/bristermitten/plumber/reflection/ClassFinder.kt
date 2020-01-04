@@ -16,7 +16,7 @@ class ClassFinder @Inject constructor(private val classGraph: ClassGraph,
 
     /**
      * Find all [Class]es with a given annotation in any of their fields, methods, constructors, or the class itself
-     * This checks the [annotation]'s [Target] and only searches applicable elements
+     * This checks the [annotation]'s [Target] and only searches applicable elements for speed improvements
      * @param annotation the annotation to look for elements annotated with
      */
     fun getClassesWithAnnotationAnywhere(annotation: Class<out Annotation>): Collection<Class<*>> {
@@ -40,8 +40,8 @@ class ClassFinder @Inject constructor(private val classGraph: ClassGraph,
         }
     }
 
-    fun getClassesAnnotatedWith(annotation: Class<out Annotation>): Collection<Class<*>> {
-        val name = annotation.name
+    fun getClassesAnnotatedWith(annotation: KClass<out Annotation>): Collection<Class<*>> {
+        val name = annotation.qualifiedName
         return scan {
             getClassesWithAnnotation(name).loadClasses()
         }
