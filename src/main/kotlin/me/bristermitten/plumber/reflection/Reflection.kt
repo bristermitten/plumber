@@ -20,11 +20,15 @@ object Reflection {
         }
     }
 
-    @JvmStatic
-    inline fun createGuiceModule(crossinline block : KotlinBinder.() -> Unit): KotlinModule {
+    /**
+     * Inline helper function for creating Guice modules easily.
+     * @param binding The function for configuring bindings
+     * @return a new [KotlinModule]
+     */
+    inline fun createGuiceModule(crossinline binding: KotlinBinder.() -> Unit): KotlinModule {
         return object : KotlinModule() {
             override fun configure() {
-                block(kotlinBinder)
+                binding(kotlinBinder)
             }
         }
     }
