@@ -21,7 +21,10 @@ class InjectorHolder @Inject constructor(private val _injector: Injector) {
             if (locked) return field
             return _injector.getInstance(Injector::class.java)!!
         }
-        private set
+        set(value) {
+            if (locked) throw IllegalStateException("Holder locked")
+            field = value
+        }
 
     fun lock(injector: Injector) {
         if (locked) return
