@@ -7,6 +7,16 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
+@ExtendWith(PlumberExtension::class)
+class RequiredTests {
+    @Test
+    fun `Test Required Aspect Enabled`() {
+        assertTrue(Required.enabled)
+        assertTrue(Required.classes.isEmpty())
+    }
+
+}
+
 @RequiredAspect
 class Required : Aspect {
 
@@ -15,22 +25,9 @@ class Required : Aspect {
         Required.classes = classes
     }
 
-    override fun disable() {
-    }
-
     companion object {
         var enabled = false
         var classes: Collection<Class<*>> = emptySet()
-    }
-
-}
-
-@ExtendWith(PlumberExtension::class)
-class RequiredTests {
-    @Test
-    fun `Test Required Aspect Enabled`() {
-        assertTrue(Required.enabled)
-        assertTrue(Required.classes.isEmpty())
     }
 
 }

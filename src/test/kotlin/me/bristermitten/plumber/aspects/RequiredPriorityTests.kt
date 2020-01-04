@@ -8,31 +8,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import kotlin.reflect.KClass
 
-@RequiredAspect(priority = 1)
-class Priority1 : Aspect {
-
-    override fun enable(classes: Collection<Class<*>>) {
-        order.add(Priority1::class)
-    }
-
-    override fun disable() {
-    }
-
-}
-
-@RequiredAspect(priority = 2)
-class Priority2 : Aspect {
-    override fun enable(classes: Collection<Class<*>>) {
-        order.add(Priority2::class)
-    }
-
-    override fun disable() {
-    }
-
-}
-
-val order = LinkedHashSet<KClass<out Aspect>>(2)
-
 
 @ExtendWith(PlumberExtension::class)
 class RequiredPriorityTests {
@@ -45,3 +20,20 @@ class RequiredPriorityTests {
     }
 }
 
+
+@RequiredAspect(priority = 1)
+class Priority1 : Aspect {
+    override fun enable(classes: Collection<Class<*>>) {
+        order.add(Priority1::class)
+    }
+}
+
+@RequiredAspect(priority = 2)
+class Priority2 : Aspect {
+    override fun enable(classes: Collection<Class<*>>) {
+        order.add(Priority2::class)
+    }
+
+}
+
+val order = LinkedHashSet<KClass<out Aspect>>(2)

@@ -9,14 +9,23 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
+@TestAspectAnnotation
+@ExtendWith(PlumberExtension::class)
+class TestAspectAnnotationAspectTests {
+
+    @Test
+    fun `Test Annotated Aspect Enabled with AspectAnnotation present`() {
+        assertTrue(AnnotationEnabledAspect.enabled)
+        assertEquals(setOf(TestAspectAnnotationAspectTests::class.java), AnnotationEnabledAspect.classes)
+    }
+}
+
+
 class AnnotationEnabledAspect : Aspect {
-    private lateinit var injectorHolder: InjectorHolder
+
     override fun enable(classes: Collection<Class<*>>) {
         enabled = true
         AnnotationEnabledAspect.classes = classes
-    }
-
-    override fun disable() {
     }
 
     companion object {
@@ -29,15 +38,3 @@ class AnnotationEnabledAspect : Aspect {
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class TestAspectAnnotation
-
-
-@TestAspectAnnotation
-@ExtendWith(PlumberExtension::class)
-class TestAspectAnnotationAspectTests {
-
-    @Test
-    fun `Test Annotated Aspect Enabled with AspectAnnotation present`() {
-        assertTrue(AnnotationEnabledAspect.enabled)
-        assertEquals(setOf(TestAspectAnnotationAspectTests::class.java), AnnotationEnabledAspect.classes)
-    }
-}
