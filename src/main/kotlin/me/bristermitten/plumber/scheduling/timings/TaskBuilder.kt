@@ -1,33 +1,27 @@
-package me.bristermitten.plumber.scheduling.timings;
+package me.bristermitten.plumber.scheduling.timings
 
-import me.bristermitten.plumber.scheduling.Task;
+import me.bristermitten.plumber.scheduling.Task
 
 /**
  * Builder for configuring times in the future for scheduling
  * This can be safely injected
  */
-public interface TaskBuilder {
-
-    /**
-     * Default implementation, can be customised to change what Guice uses when creating instances
-     */
-    Class<? extends TaskBuilder> impl = TaskBuilderImpl.class;
-
+interface TaskBuilder {
     /**
      * Define a repeating period in which the task is executed
      *
      * @param period the period, where the time unit is then picked
-     * @return a {@link TimeUnitPicker} to pick the time unit
+     * @return a [TimeUnitPicker] to pick the time unit
      */
-    TimeUnitPicker<TaskBuilder> every(long period);
+    fun every(period: Long): TimeUnitPicker<TaskBuilder>
 
     /**
      * Define an initial delay for the task.
      *
      * @param wait the wait time, where the time unit is then picked
-     * @return a {@link TimeUnitPicker} to pick the time unit
+     * @return a [TimeUnitPicker] to pick the time unit
      */
-    TimeUnitPicker<TaskBuilder> in(long wait);
+    fun `in`(wait: Long): TimeUnitPicker<TaskBuilder>
 
     /**
      * Set the functionality for this Task
@@ -35,13 +29,21 @@ public interface TaskBuilder {
      * @param r the function to run on every execution
      * @return this builder
      */
-    TaskBuilder doing(Runnable r);
+    fun doing(r: Runnable): TaskBuilder
 
     /**
      * Create a new Task from this Builder
      *
      * @return a new Task
-     * @throws IllegalStateException if {@link TaskBuilder#doing(Runnable)} has not been called
+     * @throws IllegalStateException if [TaskBuilder.doing] has not been called
      */
-    Task build() throws IllegalStateException;
+    @Throws(IllegalStateException::class)
+    fun build(): Task
+
+    companion object {
+        /**
+         * Default implementation, can be customised to change what Guice uses when creating instances
+         */
+        val impl: Class<out TaskBuilder> = TaskBuilderImpl::class.java
+    }
 }

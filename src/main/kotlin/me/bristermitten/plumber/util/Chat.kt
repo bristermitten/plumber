@@ -1,19 +1,17 @@
-package me.bristermitten.plumber.util;
+package me.bristermitten.plumber.util
 
-import org.bukkit.ChatColor;
+import org.bukkit.ChatColor
 
-public class Chat {
-
+object Chat {
     /**
      * Color a String in accordance with Bukkit's standards for color codes:
-     * {@literal &} for human readable,
-     * {@literal §} for internals
+     * &amp; for human readable,
+     * § for internals
      *
      * @param s the string to color. if this is null, null will be returned
      * @return the colored string, or null if null is given
      */
-    public static String color(String s) {
-        if (s == null) return null;
-        return ChatColor.translateAlternateColorCodes('&', s);
+    fun color(s: String?): String? {
+        return if (s == null) null else ChatColor.translateAlternateColorCodes('&', s)
     }
 }

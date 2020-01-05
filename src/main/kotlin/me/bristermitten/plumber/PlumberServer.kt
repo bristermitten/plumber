@@ -1,14 +1,12 @@
-package me.bristermitten.plumber;
+package me.bristermitten.plumber
 
-import me.bristermitten.plumber.annotation.Unstable;
-import me.bristermitten.plumber.struct.player.PPlayer;
-
-import java.util.Collection;
+import me.bristermitten.plumber.annotation.Unstable
+import me.bristermitten.plumber.struct.player.PPlayer
 
 @Unstable(reason = "No functionality yet")
-public class PlumberServer {
+class PlumberServer {
 
-    public Collection<PPlayer> players() {
-        return null;
+    fun players(): Collection<PPlayer> {
+        TODO()
     }
 }

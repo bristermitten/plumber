@@ -11,8 +11,6 @@ import me.bristermitten.plumber.reflection.Reflection.createGuiceModule
  */
 @RequiredAspect(priority = Int.MIN_VALUE)
 class ComponentAspect : AbstractAspect() {
-
-
     override fun getModule(): Module {
         return createGuiceModule {
             classes

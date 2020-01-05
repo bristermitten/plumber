@@ -1,131 +1,105 @@
-package me.bristermitten.plumber.struct.player;
+package me.bristermitten.plumber.struct.player
 
-import com.google.inject.Inject;
-import me.bristermitten.plumber.dsl.BuilderFactory;
-import me.bristermitten.plumber.dsl.PlayerActionBuilder;
-import me.bristermitten.plumber.dsl.TaskLengthConfiguration;
-import me.bristermitten.plumber.struct.event.EventController;
-import me.bristermitten.plumber.struct.event.EventControllerFactory;
-import me.bristermitten.plumber.struct.extension.ExtensionMap;
-import me.bristermitten.plumber.struct.key.DataKey;
-import me.bristermitten.plumber.struct.key.KeyHolder;
-import me.bristermitten.plumber.struct.key.KeyMap;
-import me.bristermitten.plumber.util.Chat;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
-import org.bukkit.event.player.PlayerEvent;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
+import com.google.inject.Inject
+import me.bristermitten.plumber.dsl.BuilderFactory
+import me.bristermitten.plumber.dsl.PlayerActionBuilder
+import me.bristermitten.plumber.dsl.TaskLengthConfiguration
+import me.bristermitten.plumber.struct.event.EventController
+import me.bristermitten.plumber.struct.event.EventControllerFactory
+import me.bristermitten.plumber.struct.extension.ExtensionMap
+import me.bristermitten.plumber.struct.key.DataKey
+import me.bristermitten.plumber.struct.key.KeyHolder
+import me.bristermitten.plumber.struct.key.KeyMap
+import me.bristermitten.plumber.util.Chat
+import org.bukkit.entity.Player
+import org.bukkit.event.Cancellable
+import org.bukkit.event.player.PlayerEvent
+import java.util.*
 
 /**
- * Default implementation for {@link PPlayer}
- * <p>
- * TODO: Replace implementation of {@link KeyHolder} by extending something like "KeyHolderImpl"?
+ * Default implementation for [PPlayer]
+ *
+ *
+ * TODO: Replace implementation of [KeyHolder] by extending something like "KeyHolderImpl"?
  */
-class PPlayerImpl implements PPlayer {
-
-    /**
-     * Storage of Data Key values
-     */
-    private final KeyMap keyValues = new KeyMap();
+internal class PPlayerImpl @Inject constructor(
     /**
      * The underlying Player
      */
-    private final Player player;
+    private val player: Player,
+    private val extensions: ExtensionMap,
+    private val factory: BuilderFactory,
+    private val ecFactory: EventControllerFactory
+) : PPlayer {
+    /**
+     * Storage of Data Key values
+     */
+    private val keyValues = KeyMap()
 
-    private final ExtensionMap extensions;
-
-    private final BuilderFactory factory;
-
-    private final EventControllerFactory ecFactory;
-
-    @Inject
-    PPlayerImpl(Player player, ExtensionMap extensionMap, BuilderFactory factory, EventControllerFactory ecFactory) {
-        this.player = player;
-        this.extensions = extensionMap;
-        this.factory = factory;
-        this.ecFactory = ecFactory;
-        extensions.init(this);
+    override fun player(): Player {
+        return player
     }
 
-    @Override
-    public Player player() {
-        return player;
+    override fun <T> blockEvent(e: Class<T>): TaskLengthConfiguration<PlayerActionBuilder> where T : PlayerEvent, T : Cancellable {
+        val controller: EventController<T> = ecFactory.createController(e)
+        controller.cancelAll()
+        val actionBuilder =
+            factory.createPlayerActionBuilder(this, Runnable { controller.ignoreAll() })
+        return factory.createPlayerTaskLengthConfiguration(actionBuilder)
     }
 
-    @Override
-    public <T extends PlayerEvent & Cancellable> TaskLengthConfiguration<PlayerActionBuilder> blockEvent(Class<T> e) {
-        EventController<T> controller = ecFactory.createController(e);
-        controller.cancelAll();
-        PlayerActionBuilder actionBuilder = factory.createPlayerActionBuilder(this, controller::ignoreAll);
-        return factory.createPlayerTaskLengthConfiguration(actionBuilder);
+    override fun message(msg: String) {
+        player.sendMessage(Chat.color(msg))
     }
 
-    @Override
-    public void message(String msg) {
-        player.sendMessage(Chat.color(msg));
-    }
-
-//    public DistancePicker<CompareRootTimePicker> lastMoved() {
+    //    public DistancePicker<CompareRootTimePicker> lastMoved() {
 //        return null;
 //    }
 //
 //    public void kick() {
 //        player.kickPlayer("TODO");
 //    }
-
-    @Override
-    public <K> void setData(DataKey<K> key, K data) {
-        key.execHandlers(data);
-        keyValues.put(key, data);
+    override fun <K: Any> setData(key: DataKey<K>, data: K) {
+        key.execHandlers(data)
+        keyValues[key] = data
     }
 
-    @Override
-    public <K> void rawSetData(DataKey<K> key, K data) {
-        keyValues.put(key, data);
+    override fun <K: Any> rawSetData(key: DataKey<K>, data: K) {
+        keyValues[key] = data
     }
 
-    @NotNull
-    @Override
-    public <K> K getData(DataKey<K> key) {
-        return getData(key, key.getDefaultValue());
+    override fun <K: Any> getData(key: DataKey<K>): K {
+        return getData(key, key.defaultValue)
     }
 
-    @NotNull
-    @Override
-    public <K> K getData(DataKey<K> key, @NotNull K defaultValue) {
-        //noinspection unchecked
-        return (K) keyValues.getOrDefault(key, defaultValue);
+    override fun <K: Any> getData(key: DataKey<K>, defaultValue: K): K {
+        @Suppress("UNCHECKED_CAST")
+        return keyValues.getOrDefault(key, defaultValue) as K
     }
 
-    @NotNull
-    @Override
-    public PlayerExtension getExtension(@NotNull Class<? extends PlayerExtension> clazz) {
-        return (PlayerExtension) extensions.getExtension(clazz);
+    override fun getExtension(clazz: Class<out PlayerExtension>): PlayerExtension {
+        return extensions.getExtension(clazz) as PlayerExtension
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PPlayerImpl pPlayer = (PPlayerImpl) o;
-        return keyValues.equals(pPlayer.keyValues) &&
-                player.equals(pPlayer.player) &&
-                extensions.equals(pPlayer.extensions);
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || javaClass != other.javaClass) return false
+        val pPlayer = other as PPlayerImpl
+        return keyValues == pPlayer.keyValues && player == pPlayer.player && extensions == pPlayer.extensions
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(keyValues, player, extensions);
+    override fun hashCode(): Int {
+        return Objects.hash(keyValues, player, extensions)
     }
 
-    @Override
-    public String toString() {
+    override fun toString(): String {
         return "PPlayerImpl{" +
                 "data=" + keyValues +
                 ", player=" + player +
-                '}';
+                '}'
     }
 
+    init {
+        extensions.init(this)
+    }
 }

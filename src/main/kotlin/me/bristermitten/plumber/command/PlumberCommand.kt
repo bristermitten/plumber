@@ -1,20 +1,19 @@
-package me.bristermitten.plumber.command;
+package me.bristermitten.plumber.command
 
-import co.aikar.commands.BaseCommand;
-import me.bristermitten.plumber.util.Chat;
+import co.aikar.commands.BaseCommand
+import me.bristermitten.plumber.util.Chat
 
 /**
- * Extension of {@link BaseCommand} that gives extra boilerplate handling
+ * Extension of [BaseCommand] that gives extra boilerplate handling
  * It's recommended to use this class
  */
-public class PlumberCommand extends BaseCommand {
-
+class PlumberCommand : BaseCommand() {
     /**
      * Reply to a command, sending a message to the sender. The string will be colored.
      *
      * @param message the message to send
      */
-    protected void reply(String message) {
-        getCurrentCommandIssuer().sendMessage(Chat.color(message));
+    protected fun reply(message: String) {
+        currentCommandIssuer.sendMessage(Chat.color(message))
     }
 }

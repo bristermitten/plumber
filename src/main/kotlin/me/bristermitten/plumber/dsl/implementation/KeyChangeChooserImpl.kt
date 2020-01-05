@@ -1,39 +1,31 @@
-package me.bristermitten.plumber.dsl.implementation;
+package me.bristermitten.plumber.dsl.implementation
 
-import me.bristermitten.plumber.dsl.KeyChangeChooser;
-import me.bristermitten.plumber.struct.key.DataKey;
+import me.bristermitten.plumber.dsl.KeyChangeChooser
+import me.bristermitten.plumber.struct.key.DataKey
+import java.util.function.Consumer
 
-import java.util.function.Consumer;
+class KeyChangeChooserImpl<R, K>(
+    private val r: R,
+    private val watching: DataKey<K>,
+    private val callback: Runnable
+) :
+    KeyChangeChooser<R, K> {
 
-public class KeyChangeChooserImpl<R, K> implements KeyChangeChooser<R, K> {
+    private var consumer: Consumer<K>? = null
 
-    private final R r;
-    private final DataKey<K> watching;
-    private final Runnable callback;
-    private Consumer<K> consumer;
-
-    public KeyChangeChooserImpl(R r, DataKey<K> key, Runnable callback) {
-        this.r = r;
-        this.watching = key;
-        this.callback = callback;
-    }
-
-    @Override
-    public R toValue(K value) {
-        if (consumer != null)
-            watching.getHandlers().remove(consumer);
-
-        consumer = v -> {
-            if (value.equals(v)) {
-                callback.run();
+    override fun toValue(value: K): R {
+        if (consumer != null) watching.handlers.remove(consumer)
+        consumer = Consumer { v: K ->
+            if (value == v) {
+                callback.run()
             }
-        };
-        watching.getHandlers().add(consumer);
-        return r;
+        }
+        watching.handlers.add(consumer)
+        return r
     }
 
-    @Override
-    public void reset() {
-        watching.getHandlers().remove(consumer);
+    override fun reset() {
+        watching.handlers.remove(consumer)
     }
+
 }

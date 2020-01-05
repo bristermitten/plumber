@@ -1,84 +1,71 @@
-package me.bristermitten.plumber.struct.event;
+package me.bristermitten.plumber.struct.event
 
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
-import me.bristermitten.plumber.PlumberPlugin;
-import me.bristermitten.plumber.util.Reflection;
-import org.bukkit.Bukkit;
-import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerEvent;
-import org.bukkit.plugin.EventExecutor;
-
-import java.util.function.Consumer;
-import java.util.function.Predicate;
+import com.google.inject.Inject
+import com.google.inject.assistedinject.Assisted
+import me.bristermitten.plumber.PlumberPlugin
+import me.bristermitten.plumber.util.Reflection.invokeNoArgsStaticMethod
+import org.bukkit.Bukkit
+import org.bukkit.event.*
+import org.bukkit.event.player.PlayerEvent
+import org.bukkit.plugin.EventExecutor
+import java.util.function.Consumer
+import java.util.function.Predicate
 
 /**
- * Default implementation of {@link EventController}
+ * Default implementation of [EventController]
  *
- * @param <T> the type of the event being handled
- */
-public class EventControllerImpl<T extends PlayerEvent & Cancellable> implements EventController<T> {
+ * @param <T> the type of the event being handled */
+class EventControllerImpl<T> @Inject constructor(
+    private val plugin: PlumberPlugin,
+    @Assisted private val clazz: Class<T>
+) : EventController<T> where T : PlayerEvent, T : Cancellable {
 
-    private final PlumberPlugin plugin;
-    private final Class<T> clazz;
-    private Consumer<T> consumer;
-    private boolean registered;
+    private var consumer: Consumer<T>? = null
+    private var registered = false
 
-    @Inject
-    public EventControllerImpl(PlumberPlugin plugin, @Assisted Class<T> clazz) {
-        this.plugin = plugin;
-        this.clazz = clazz;
-    }
-
-    private void tryRegister() {
-        if (registered) return;
-        EventExecutor eventExecutor = (listener, event) -> handle(event);
-        Bukkit.getPluginManager().registerEvent(clazz, this, EventPriority.NORMAL, eventExecutor, plugin);
-        registered = true;
-    }
-
-    private void handle(Event event) {
-        if (consumer == null) return;
-        if (event == null) return;
-        if (!clazz.isAssignableFrom(event.getClass())) return;
-
-        consumer.accept((T) event);
-    }
-
-
-    public void unRegister() {
-        if (!registered) return;
-        HandlerList handlers = (HandlerList) Reflection.invokeNoArgsStaticMethod(clazz, "getHandlerList");
-        if (handlers != null) {
-            handlers.unregister(this);
+    private fun tryRegister() {
+        if (registered) return
+        val eventExecutor = EventExecutor { _: Listener, event: Event ->
+            handle(event)
         }
-        consumer = null;
-        registered = false;
+        Bukkit.getPluginManager()
+            .registerEvent(clazz, this, EventPriority.NORMAL, eventExecutor, plugin)
+        registered = true
     }
 
-    @Override
-    public void cancelAll() {
-//        if (!Cancellable.class.isAssignableFrom(clazz)) {
+    private fun handle(event: Event) {
+        if (consumer == null) return
+        if (!clazz.isAssignableFrom(event.javaClass)) return
+        @Suppress("UNCHECKED_CAST")
+        consumer!!.accept(event as T)
+    }
+
+    override fun unRegister() {
+        if (!registered) return
+        val handlers = invokeNoArgsStaticMethod(
+            clazz,
+            "getHandlerList"
+        ) as HandlerList?
+        handlers?.unregister(this)
+        consumer = null
+        registered = false
+    }
+
+    override fun cancelAll() { //        if (!Cancellable.class.isAssignableFrom(clazz)) {
 //            logger.warn("Tried to cancelAll non-cancellable event {}", clazz.getSimpleName());
 //            ignoreAll();
 //        }
-        tryRegister();
-        consumer = e -> e.setCancelled(true);
+        tryRegister()
+        consumer = Consumer { e: T -> e.isCancelled = true }
     }
 
-    @Override
-    public void cancelIf(Predicate<T> predicate) {
-        tryRegister();
-        consumer = e -> {
-            if (predicate.test(e)) e.setCancelled(true);
-        };
+    override fun cancelIf(predicate: Predicate<T>) {
+        tryRegister()
+        consumer = Consumer { e: T -> if (predicate.test(e)) e.isCancelled = true }
     }
 
-    @Override
-    public void ignoreAll() {
-        unRegister();
+    override fun ignoreAll() {
+        unRegister()
     }
+
 }

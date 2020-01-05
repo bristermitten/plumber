@@ -1,11 +1,9 @@
-package me.bristermitten.plumber.struct.key;
-
-import org.jetbrains.annotations.NotNull;
+package me.bristermitten.plumber.struct.key
 
 /**
- * A KeyHolder defines an entity that holds key-value storage in the form of {@link DataKey}
+ * A KeyHolder defines an entity that holds key-value storage in the form of [DataKey]
  */
-public interface KeyHolder {
+interface KeyHolder {
     /**
      * Update a key's value
      * The key's handlers WILL be called
@@ -14,7 +12,7 @@ public interface KeyHolder {
      * @param data the new value
      * @param <K>  the type of the key
      */
-    <K> void setData(DataKey<K> key, K data);
+    fun <K : Any> setData(key: DataKey<K>, data: K)
 
     /**
      * Update a key's value
@@ -24,7 +22,7 @@ public interface KeyHolder {
      * @param data the new value
      * @param <K>  the type of the key
      */
-    <K> void rawSetData(DataKey<K> key, K data);
+    fun <K : Any> rawSetData(key: DataKey<K>, data: K)
 
     /**
      * Get a key's value
@@ -33,8 +31,7 @@ public interface KeyHolder {
      * @param <K> the type of the key
      * @return the value of the key, or the key's default value
      */
-    @NotNull
-    <K> K getData(DataKey<K> key);
+    fun <K : Any> getData(key: DataKey<K>): K
 
     /**
      * Get a key's value, with a default value if the value is null
@@ -44,6 +41,5 @@ public interface KeyHolder {
      * @param defaultValue the default value if they key holder has a null value
      * @return the value of the key, which will not be null
      */
-    @NotNull
-    <K> K getData(DataKey<K> key, @NotNull K defaultValue);
+    fun <K: Any> getData(key: DataKey<K>, defaultValue: K): K
 }
