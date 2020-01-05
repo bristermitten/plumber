@@ -1,5 +1,5 @@
 language: java
-install: ./gradlew -Pci clean assemble javadoc
+install: ./gradlew -Pci clean assemble dokka
 script: ./gradlew -Pci check
 deploy:
   provider: pages
