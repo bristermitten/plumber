@@ -3,7 +3,7 @@ package me.bristermitten.plumber.aspect.component
 import com.google.inject.Module
 import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.RequiredAspect
-import me.bristermitten.plumber.reflection.Reflection.createGuiceModule
+import me.bristermitten.plumber.util.Reflection.createGuiceModule
 
 /**
  * Required Aspect that facilitates the injection of all [Component] classes

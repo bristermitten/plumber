@@ -36,9 +36,8 @@ internal class TaskBuilderImpl @Inject constructor(
     }
 
     override fun build(): Task {
-        checkNotNull(run)
         val delay = delayUnit.toTicks(delayLength)
         val period = repeatUnit.toTicks(repeatLength)
-        return taskFactory.create(delay, period, run)
+        return taskFactory.create(delay, period, run!!)
     }
 }

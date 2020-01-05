@@ -4,8 +4,8 @@ import com.google.inject.Module
 import com.google.inject.assistedinject.FactoryModuleBuilder
 import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.RequiredAspect
-import me.bristermitten.plumber.reflection.Reflection.createGuiceModule
 import me.bristermitten.plumber.scheduling.timings.TaskBuilder
+import me.bristermitten.plumber.util.Reflection.createGuiceModule
 
 /**
  * Aspect that handles the scheduler related functionality of Plumber
@@ -19,8 +19,7 @@ class SchedulerAspect : AbstractAspect() {
             bind(TaskBuilder::class.java).to(TaskBuilder.impl)
 
             install(
-                FactoryModuleBuilder()
-                    .build(TaskFactory::class.java)
+                FactoryModuleBuilder().build(TaskFactory::class.java)
             )
         }
     }

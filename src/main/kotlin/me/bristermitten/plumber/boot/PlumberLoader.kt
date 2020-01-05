@@ -9,7 +9,7 @@ import io.github.classgraph.ClassGraph
 import me.bristermitten.plumber.PlumberPlugin
 import me.bristermitten.plumber.aspect.*
 import me.bristermitten.plumber.reflection.ClassFinder
-import me.bristermitten.plumber.reflection.Reflection.createGuiceModule
+import me.bristermitten.plumber.util.Reflection.createGuiceModule
 import me.bristermitten.plumber.util.*
 import me.bristermitten.reflector.inject.ReflectorBindingModule
 import org.slf4j.LoggerFactory

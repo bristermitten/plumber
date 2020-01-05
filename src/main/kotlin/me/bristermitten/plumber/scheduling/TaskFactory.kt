@@ -1,13 +1,13 @@
-package me.bristermitten.plumber.scheduling;
+package me.bristermitten.plumber.scheduling
 
-import com.google.inject.assistedinject.Assisted;
-import me.bristermitten.plumber.scheduling.timings.Time;
+import com.google.inject.assistedinject.Assisted
+import me.bristermitten.plumber.scheduling.timings.Time
 
 /**
- * Guice Assisted Injection factory for creating instances of {@link Task}
+ * Guice Assisted Injection factory for creating instances of [Task]
  */
-public interface TaskFactory {
-    Task create(@Assisted("delay") long delay, @Assisted("period") long period, Runnable run);
+interface TaskFactory {
+    fun create(@Assisted("delay") delay: Long, @Assisted("period") period: Long, run: Runnable): Task
 
-    Task create(@Assisted("delay") Time delay, @Assisted("period") Time period, Runnable run);
+    fun create(@Assisted("delay") delay: Time, @Assisted("period") period: Time, run: Runnable): Task
 }

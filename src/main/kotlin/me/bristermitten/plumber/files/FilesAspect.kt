@@ -6,7 +6,7 @@ import com.google.inject.Module
 import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.RequiredAspect
 import me.bristermitten.plumber.aspect.StaticModule
-import me.bristermitten.plumber.reflection.Reflection.createGuiceModule
+import me.bristermitten.plumber.util.Reflection.createGuiceModule
 import me.bristermitten.reflector.Reflector
 import org.apache.commons.io.FilenameUtils
 import java.lang.reflect.ParameterizedType

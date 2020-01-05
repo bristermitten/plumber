@@ -36,7 +36,7 @@ interface PlayerActionBuilder : ActionBuilder<PlayerActionBuilder> {
      * @param K the type of the key
      * @return this object for further configuration
      */
-    fun <K> setKeyOnComplete(key: DataKey<K>, value: K): PlayerActionBuilder
+    fun <K: Any> setKeyOnComplete(key: DataKey<K>, value: K): PlayerActionBuilder
 
     companion object {
         var impl: Class<out PlayerActionBuilder> = PlayerActionBuilderImpl::class.java

@@ -1,7 +1,7 @@
 package me.bristermitten.plumber.util
 
-import com.google.inject.AbstractModule
-import com.google.inject.Binder
+import dev.misfitlabs.kotlinguice4.KotlinBinder
+import dev.misfitlabs.kotlinguice4.KotlinModule
 
 object Reflection {
     /**
@@ -11,12 +11,25 @@ object Reflection {
      * @return the object returned by the method
      */
     @JvmStatic
-    fun invokeNoArgsStaticMethod(clazz: Class<*>, methodName: String?): Any? {
+    fun invokeNoArgsStaticMethod(clazz: Class<*>, methodName: String): Any? {
         return try {
             clazz.getDeclaredMethod(methodName).invoke(null)
         } catch (e: ReflectiveOperationException) {
             e.printStackTrace()
             null
+        }
+    }
+
+    /**
+     * Inline helper function for creating Guice modules easily.
+     * @param binding The function for configuring bindings
+     * @return a new [KotlinModule]
+     */
+    inline fun createGuiceModule(crossinline binding: KotlinBinder.() -> Unit): KotlinModule {
+        return object : KotlinModule() {
+            override fun configure() {
+                binding(kotlinBinder)
+            }
         }
     }
 }
