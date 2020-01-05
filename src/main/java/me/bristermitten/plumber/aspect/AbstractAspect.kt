@@ -19,7 +19,10 @@ abstract class AbstractAspect : Aspect {
     @Inject
     private lateinit var injector: Injector
 
-    override fun enable() {
+    protected lateinit var classes: Collection<Class<*>>
+
+    override fun enable(classes: Collection<Class<*>>) {
+        this.classes = classes
         logger.debug("Enabling aspect " + javaClass.simpleName)
         val length = measureTimeMillis {
             doEnable()
@@ -37,14 +40,10 @@ abstract class AbstractAspect : Aspect {
         logger.debug("Unloaded in {} ms", length)
     }
 
+    protected open fun doDisable() {}
     protected open fun doEnable() {}
 
-    protected open fun doDisable() {}
-
-    override fun module() = module
-
-    protected open fun loadModule(): Module? = null
-    val module: Module? by lazy { loadModule() }
+    override fun getModule(): Module? = null
 
     protected fun <T> instance(clazz: Class<T>): T = injector.getInstance(clazz)
 }

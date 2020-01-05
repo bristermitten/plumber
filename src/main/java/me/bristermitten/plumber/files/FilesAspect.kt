@@ -4,46 +4,39 @@ import com.google.gson.reflect.TypeToken
 import com.google.inject.Inject
 import com.google.inject.Module
 import me.bristermitten.plumber.aspect.AbstractAspect
-import me.bristermitten.plumber.aspect.AspectManager
 import me.bristermitten.plumber.aspect.RequiredAspect
-import me.bristermitten.plumber.aspect.StaticAspectModule
-import me.bristermitten.plumber.util.Reflection.createAbstractModule
+import me.bristermitten.plumber.aspect.StaticModule
+import me.bristermitten.plumber.reflection.Reflection.createGuiceModule
 import me.bristermitten.reflector.Reflector
 import org.apache.commons.io.FilenameUtils
-import org.bukkit.Material
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Proxy
 
 
-@StaticAspectModule(FilesAspectStaticModule::class, true)
+@StaticModule(FilesAspectStaticModule::class)
 @RequiredAspect
-class FilesAspect : AbstractAspect() {
+class FilesAspect @Inject constructor(
+    private val reflector: Reflector,
+    private val plumberFileFactory: PlumberFileFactory
+) : AbstractAspect() {
 
-    @Inject
-    private lateinit var manager: AspectManager
-
-    @Inject
-    private lateinit var plumberFileFactory: PlumberFileFactory
-
-    @Inject
-    private lateinit var reflector: Reflector
 
     private val stores: MutableSet<Pair<Class<*>, Any>> = HashSet()
 
     override fun doEnable() {
-        loop@ for (structure in manager.classStructuresForAspect(this)) {
-            if (structure.isSubTypeOf(Store::class.java)) {
-
+        classes.map { reflector.getStructure(it) }
+            .filter { it.isSubTypeOf(Store::class.java) }
+            .forEach { structure ->
                 val type = structure.type
 
                 val typeParameters = type.genericInterfaces.filterIsInstance<ParameterizedType>()
-                        .first {
-                            Store::class.java.isAssignableFrom(it.rawType as Class<*>)
-                        }.actualTypeArguments.toList()
+                    .first {
+                        Store::class.java.isAssignableFrom(it.rawType as Class<*>)
+                    }.actualTypeArguments.toList()
 
                 if (!structure.info.hasAnnotationType(MappedTo::class.java)) {
                     logger.warn("Store class ${type.name} is not annotated with @MappedToFile. It will not be loaded.")
-                    continue
+                    return@forEach
                 }
 
                 val info = getFileInfo(structure.info.getAnnotation(MappedTo::class.java))
@@ -52,7 +45,7 @@ class FilesAspect : AbstractAspect() {
                     FileType.YAML -> plumberFileFactory.createYaml(info.name)
                     FileType.JSON -> plumberFileFactory.createJson(info.name)
                     else -> null
-                } ?: continue
+                } ?: return@forEach
 
                 val handler: StoreProxyHandler
                 val typeOfStore: Class<*>
@@ -67,7 +60,7 @@ class FilesAspect : AbstractAspect() {
                         typeOfStore = typeParameters[0] as Class<*>
                     }
                     else -> {
-                        continue@loop
+                        return@forEach
                     }
                 }
 
@@ -83,10 +76,7 @@ class FilesAspect : AbstractAspect() {
                 file.type = token
                 stores.add(type to store)
                 logger.info("Registered $type")
-            } else {
-
             }
-        }
     }
 
     private fun getFileInfo(mappedTo: MappedTo): FileInfo {
@@ -109,10 +99,9 @@ class FilesAspect : AbstractAspect() {
         JSON, YAML, SQL, INFER
     }
 
-    override fun loadModule(): Module {
-        return createAbstractModule {
-
-            for ((clazz, instance) in stores) {
+    override fun getModule(): Module {
+        return createGuiceModule {
+            stores.forEach { (clazz, instance) ->
                 @Suppress("UNCHECKED_CAST")
                 bind(clazz as Class<in Any>).toInstance(instance)
             }

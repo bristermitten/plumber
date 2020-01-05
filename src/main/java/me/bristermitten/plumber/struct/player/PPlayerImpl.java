@@ -42,7 +42,6 @@ class PPlayerImpl implements PPlayer {
 
     @Inject
     PPlayerImpl(Player player, ExtensionMap extensionMap, BuilderFactory factory, EventControllerFactory ecFactory) {
-
         this.player = player;
         this.extensions = extensionMap;
         this.factory = factory;

@@ -19,13 +19,4 @@ object Reflection {
             null
         }
     }
-
-    @JvmStatic
-    fun createAbstractModule(block : Binder.() -> Unit): AbstractModule {
-        return object : AbstractModule() {
-            override fun configure() {
-                block(binder())
-            }
-        }
-    }
 }

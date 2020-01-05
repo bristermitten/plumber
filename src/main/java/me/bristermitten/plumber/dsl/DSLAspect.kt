@@ -11,10 +11,10 @@ import me.bristermitten.plumber.aspect.RequiredAspect
 @RequiredAspect
 class DSLAspect : AbstractAspect() {
 
-    override fun module(): Module {
+    override fun getModule(): Module {
         return FactoryModuleBuilder()
-                .implement(PlayerActionBuilder::class.java, PlayerActionBuilder.impl)
-                .implement(TaskLengthConfiguration::class.java, TaskLengthConfiguration.impl)
-                .build(BuilderFactory::class.java)
+            .implement(PlayerActionBuilder::class.java, PlayerActionBuilder.impl)
+            .implement(TaskLengthConfiguration::class.java, TaskLengthConfiguration.impl)
+            .build(BuilderFactory::class.java)
     }
 }

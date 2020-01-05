@@ -3,17 +3,17 @@ package me.bristermitten.plumber.command
 import co.aikar.commands.BaseCommand
 import co.aikar.commands.PaperCommandManager
 import co.aikar.commands.annotation.CommandAlias
-import com.google.inject.AbstractModule
 import com.google.inject.Inject
 import com.google.inject.Module
 import me.bristermitten.plumber.PlumberPlugin
 import me.bristermitten.plumber.aspect.AbstractAspect
-import me.bristermitten.plumber.aspect.AspectManager
-import me.bristermitten.plumber.aspect.ThirdPartyAspectBinding
+import me.bristermitten.plumber.aspect.LoadIfPresent
 import me.bristermitten.plumber.reflection.ClassFinder
+import me.bristermitten.plumber.reflection.Reflection.createGuiceModule
 import me.bristermitten.plumber.struct.player.PPlayer
 import me.bristermitten.plumber.struct.player.PPlayerManager
 import me.bristermitten.plumber.struct.player.PlayerExtension
+import me.bristermitten.reflector.Reflector
 import org.bukkit.Bukkit
 
 /**
@@ -21,17 +21,13 @@ import org.bukkit.Bukkit
  */
 
 //Only load if we see @CommandAlias at all. CommandAlias is necessary for ACF so we can assume it will be used
-@ThirdPartyAspectBinding(targets = [CommandAlias::class])
-class CommandAspect : AbstractAspect() {
-
-    @Inject
-    private lateinit var plumberPlugin: PlumberPlugin
-    @Inject
-    private lateinit var manager: PPlayerManager
-    @Inject
-    private lateinit var aspectManager: AspectManager
-    @Inject
-    private lateinit var finder: ClassFinder
+@LoadIfPresent(CommandAlias::class)
+class CommandAspect @Inject constructor(
+    private val plumberPlugin: PlumberPlugin,
+    private val manager: PPlayerManager,
+    private val classFinder: ClassFinder,
+    private val reflector: Reflector
+) : AbstractAspect() {
 
     private lateinit var commandManager: PaperCommandManager
 
@@ -46,34 +42,33 @@ class CommandAspect : AbstractAspect() {
         setupCompletions()
         setupContexts()
 
-        val configs = aspectManager.configClassesForAspect(CommandAspectConfig::class.java)
-                .map { clazz -> instance(clazz) }
+        val configs = classFinder.getRealClassesImplementing(CommandAspectConfig::class)
+            .map { instance(it) }
 
         configs.forEach { it.beforeRegistration(commandManager) }
 
-        aspectManager.classStructuresForAspect(this)
-                .filter { it.isFullClass }
-                .forEach { load(it.type) }
+        classes
+            .map(reflector::getStructure)
+            .filter { it.isFullClass }
+            .forEach { load(it.type) }
 
         configs.forEach { it.beforeRegistration(commandManager) }
     }
 
-    override fun module(): Module {
-        return object : AbstractModule() {
-            override fun configure() {
-                for (command in commands) {
-                    bind(command.javaClass).toInstance(command)
-                }
+    override fun getModule(): Module {
+        return createGuiceModule {
+            for (command in commands) {
+                bind(command.javaClass).toInstance(command)
             }
         }
     }
 
     private fun setupContexts() {
         commandManager.commandContexts
-                .registerContext(PPlayer::class.java) { context ->
-                    val arg = context.popFirstArg()
-                    manager.ofPlayer(Bukkit.getPlayer(arg))
-                }
+            .registerContext(PPlayer::class.java) { context ->
+                val arg = context.popFirstArg()
+                manager.ofPlayer(Bukkit.getPlayer(arg))
+            }
 
         commandManager.commandContexts.registerContext(PlayerExtension::class.java) { context ->
             @Suppress("UNCHECKED_CAST", "DEPRECATION")
@@ -84,7 +79,8 @@ class CommandAspect : AbstractAspect() {
     }
 
     private fun setupCompletions() {
-        val extensionArray = finder.findAllExtensionsFor(PPlayer::class.java).toTypedArray()
+        val extensionArray = classFinder.findAllExtensionsFor(PPlayer::class)
+            .toTypedArray()
         commandManager.commandCompletions.setDefaultCompletion("players", *extensionArray, PPlayer::class.java)
     }
 
