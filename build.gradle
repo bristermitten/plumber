@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
     id 'org.jetbrains.kotlin.jvm' version '1.3.50'
     id "com.github.johnrengelman.shadow" version "5.1.0"
+    id 'org.jetbrains.dokka' version '0.10.0'
 }
 
 group = 'me.bristermitten'
@@ -128,4 +129,9 @@ javadoc {
     source = sourceSets.main.allSource
     include '**/me/bristermitten/plumber/**'
     destinationDir = file('docs')
+}
+
+dokka {
+    outputFormat = 'html' 
+    outputDirectory = "$buildDir/docs"
 }
