@@ -23,7 +23,7 @@ dependencies {
 
     api 'com.google.inject.extensions:guice-assistedinject:4.2.2'
 
-    implementation 'io.github.classgraph:classgraph:4.8.47'
+    implementation 'io.github.classgraph:classgraph:4.8.59'
 
     if (project.hasProperty("ci")) {
         api files("lib/locales.jar")
@@ -129,4 +129,32 @@ publishing {
 dokka {
     outputFormat = 'jekyll'
     outputDirectory = "$projectDir/docs"
+    configuration {
+        sourceLink {
+            path = "./"
+
+            // URL showing where the source code can be accessed through the web browser
+            url = "https://github.com/knightzmc/plumber/tree/master/"
+
+            lineSuffix = "#L"
+        }
+
+        //Spigot
+        externalDocumentationLink {
+            url = new URL("https://hub.spigotmc.org/javadocs/spigot/")
+            packageListUrl = new URL("https://hub.spigotmc.org/javadocs/spigot/package-list")
+        }
+
+        //Guice
+        externalDocumentationLink {
+            url = new URL("https://google.github.io/guice/api-docs/latest/javadoc/index.html")
+            packageListUrl = new URL("https://google.github.io/guice/api-docs/latest/javadoc/package-list")
+        }
+
+        //ACF Core
+        externalDocumentationLink {
+            url = new URL("https://aikar.github.io/commands/acf-core/")
+            packageListUrl = new URL("https://aikar.github.io/commands/acf-core/package-list")
+        }
+    }
 }
