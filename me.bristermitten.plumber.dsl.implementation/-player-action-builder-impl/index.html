@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PlayerActionBuilderImpl - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.dsl.implementation</a>&nbsp;/&nbsp;<a href="./index.html">PlayerActionBuilderImpl</a><br/>
+<br/>
+<h1>PlayerActionBuilderImpl</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">PlayerActionBuilderImpl</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-action-builder-impl/index.html"><span class="identifier">ActionBuilderImpl</span></a><span class="symbol">&lt;</span><a href="../../me.bristermitten.plumber.dsl/-player-action-builder/index.html"><span class="identifier">PlayerActionBuilder</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../../me.bristermitten.plumber.dsl/-player-action-builder/index.html"><span class="identifier">PlayerActionBuilder</span></a></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">PlayerActionBuilderImpl</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl$<init>(me.bristermitten.plumber.struct.player.PPlayer, java.lang.Runnable, me.bristermitten.plumber.dsl.implementation.ImplementationFactory, me.bristermitten.plumber.dsl.BuilderFactory)/player">player</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.struct.player/-p-player/index.html"><span class="identifier">PPlayer</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl$<init>(me.bristermitten.plumber.struct.player.PPlayer, java.lang.Runnable, me.bristermitten.plumber.dsl.implementation.ImplementationFactory, me.bristermitten.plumber.dsl.BuilderFactory)/onTrigger">onTrigger</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Runnable.html"><span class="identifier">Runnable</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl$<init>(me.bristermitten.plumber.struct.player.PPlayer, java.lang.Runnable, me.bristermitten.plumber.dsl.implementation.ImplementationFactory, me.bristermitten.plumber.dsl.BuilderFactory)/factory">factory</span><span class="symbol">:</span>&nbsp;<a href="../-implementation-factory/index.html"><span class="identifier">ImplementationFactory</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl$<init>(me.bristermitten.plumber.struct.player.PPlayer, java.lang.Runnable, me.bristermitten.plumber.dsl.implementation.ImplementationFactory, me.bristermitten.plumber.dsl.BuilderFactory)/builderFactory">builderFactory</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.dsl/-builder-factory/index.html"><span class="identifier">BuilderFactory</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="key-change.html">keyChange</a></h4>
+</td>
+<td>
+<p>Watch for a key change on the player</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">K</span><span class="symbol">&gt;</span> <span class="identifier">keyChange</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl$keyChange(me.bristermitten.plumber.struct.key.DataKey((me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl.keyChange.K)))/key">key</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.struct.key/-data-key/index.html"><span class="identifier">DataKey</span></a><span class="symbol">&lt;</span><span class="identifier">K</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../me.bristermitten.plumber.dsl/-key-change-chooser/index.html"><span class="identifier">KeyChangeChooser</span></a><span class="symbol">&lt;</span><a href="../../me.bristermitten.plumber.dsl/-player-action-builder/index.html"><span class="identifier">PlayerActionBuilder</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">K</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="player-logout.html">playerLogout</a></h4>
+</td>
+<td>
+<p>Watch for the player to logout</p>
+<code><span class="keyword">fun </span><span class="identifier">playerLogout</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../me.bristermitten.plumber.dsl/-player-action-builder/index.html"><span class="identifier">PlayerActionBuilder</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="reset.html">reset</a></h4>
+</td>
+<td>
+<p>Reset the current data
+Implementation is interface specific</p>
+<code><span class="keyword">fun </span><span class="identifier">reset</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="run.html">run</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">run</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="set-key-on-complete.html">setKeyOnComplete</a></h4>
+</td>
+<td>
+<p>Set a Data Key when the action is complete</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">K</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">setKeyOnComplete</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl$setKeyOnComplete(me.bristermitten.plumber.struct.key.DataKey((me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl.setKeyOnComplete.K)), me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl.setKeyOnComplete.K)/key">key</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.struct.key/-data-key/index.html"><span class="identifier">DataKey</span></a><span class="symbol">&lt;</span><span class="identifier">K</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl$setKeyOnComplete(me.bristermitten.plumber.struct.key.DataKey((me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl.setKeyOnComplete.K)), me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl.setKeyOnComplete.K)/value">value</span><span class="symbol">:</span>&nbsp;<span class="identifier">K</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../me.bristermitten.plumber.dsl/-player-action-builder/index.html"><span class="identifier">PlayerActionBuilder</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="with-message-on-complete.html">withMessageOnComplete</a></h4>
+</td>
+<td>
+<p>Set a message that will be sent when the action is complete</p>
+<code><span class="keyword">fun </span><span class="identifier">withMessageOnComplete</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl$withMessageOnComplete(kotlin.String)/msg">msg</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../me.bristermitten.plumber.dsl/-player-action-builder/index.html"><span class="identifier">PlayerActionBuilder</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

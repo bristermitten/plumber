@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TaskBuilder - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.scheduling.timings</a>&nbsp;/&nbsp;<a href="./index.html">TaskBuilder</a><br/>
+<br/>
+<h1>TaskBuilder</h1>
+(JVM) <code><span class="keyword">interface </span><span class="identifier">TaskBuilder</span></code>
+<p>Builder for configuring times in the future for scheduling
+This can be safely injected</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="build.html">build</a></h4>
+</td>
+<td>
+<p>Create a new Task from this Builder</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">build</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../me.bristermitten.plumber.scheduling/-task/index.html"><span class="identifier">Task</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="doing.html">doing</a></h4>
+</td>
+<td>
+<p>Set the functionality for this Task</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">doing</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.scheduling.timings.TaskBuilder$doing(java.lang.Runnable)/r">r</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Runnable.html"><span class="identifier">Runnable</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">TaskBuilder</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="every.html">every</a></h4>
+</td>
+<td>
+<p>Define a repeating period in which the task is executed</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">every</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.scheduling.timings.TaskBuilder$every(kotlin.Long)/period">period</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-time-unit-picker/index.html"><span class="identifier">TimeUnitPicker</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">TaskBuilder</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="in.html">in</a></h4>
+</td>
+<td>
+<p>Define an initial delay for the task.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">in</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.scheduling.timings.TaskBuilder$in(kotlin.Long)/wait">wait</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-time-unit-picker/index.html"><span class="identifier">TimeUnitPicker</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">TaskBuilder</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="impl.html">impl</a></h4>
+</td>
+<td>
+<p>Default implementation, can be customised to change what Guice uses when creating instances</p>
+<code><span class="keyword">val </span><span class="identifier">impl</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="./index.html"><span class="identifier">TaskBuilder</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

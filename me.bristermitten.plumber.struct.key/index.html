@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>me.bristermitten.plumber.struct.key - plumber</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">plumber</a>&nbsp;/&nbsp;<a href="./index.html">me.bristermitten.plumber.struct.key</a><br/>
+<br/>
+<h2>Package me.bristermitten.plumber.struct.key</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-data-key/index.html">DataKey</a></h4>
+</td>
+<td>
+<p>A DataKey provides a key for storing key-value data in entities
+It only stores the key, and a default value. It does NOT store the values, these are stored in the entities
+Means that Strings don't have to be passed around for simple storage</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">DataKey</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-key-holder/index.html">KeyHolder</a></h4>
+</td>
+<td>
+<p>A KeyHolder defines an entity that holds key-value storage in the form of <a href="-data-key/index.html">DataKey</a></p>
+<code><span class="keyword">interface </span><span class="identifier">KeyHolder</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-key-map/index.html">KeyMap</a></h4>
+</td>
+<td>
+<p>Simple delegate of <a href="https://docs.oracle.com/javase/6/docs/api/java/util/HashMap.html">HashMap</a> with generics overridden</p>
+<code><span class="keyword">class </span><span class="identifier">KeyMap</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html"><span class="identifier">MutableMap</span></a><span class="symbol">&lt;</span><a href="-data-key/index.html"><span class="identifier">DataKey</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

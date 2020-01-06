@@ -1,0 +1,18 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Aspect.disable - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.aspect</a>&nbsp;/&nbsp;<a href="index.html">Aspect</a>&nbsp;/&nbsp;<a href="./disable.html">disable</a><br/>
+<br/>
+<h1>disable</h1>
+(JVM) <a name="me.bristermitten.plumber.aspect.Aspect$disable()"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">disable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Disable the Aspect.
+Called internally and only once: server shutdown.
+Often not needed, but some aspects may want to use this to flush data or similar operations.</p>
+<p>//TODO Ensure that all classes will still be loaded when this is called</p>
+</BODY>
+</HTML>

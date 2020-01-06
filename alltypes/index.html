@@ -1,0 +1,484 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>alltypes - plumber</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<h3>All Types</h3>
+<table>
+<tbody>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.aspect/-abstract-aspect/index.html">me.bristermitten.plumber.aspect.AbstractAspect</a></h5>
+<p>Boilerplate-handling abstract implementation of <a href="../me.bristermitten.plumber.aspect/-aspect/index.html">Aspect</a>
+Provides logging, enabled-status handling, and a wrapper for Guice's <a href="#">Injector</a></p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-abstract-plumber-file/index.html">me.bristermitten.plumber.files.AbstractPlumberFile</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl/-action-builder/index.html">me.bristermitten.plumber.dsl.ActionBuilder</a></h5>
+<p>It's quite hard to give a simple description for this interface, other than it provides
+a specification for sub-classes like <a href="../me.bristermitten.plumber.dsl/-player-action-builder/index.html">PlayerActionBuilder</a>
+Generally Action Builder is used after <a href="../me.bristermitten.plumber.dsl/-task-length-configuration/index.html">TaskLengthConfiguration</a> in the interface flow</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl.implementation/-action-builder-impl/index.html">me.bristermitten.plumber.dsl.implementation.ActionBuilderImpl</a></h5>
+<p>Simple implementation of <a href="../me.bristermitten.plumber.dsl/-action-builder/index.html">ActionBuilder</a> that holds a parent <a href="../me.bristermitten.plumber.dsl/-task-length-configuration/index.html">TaskLengthConfiguration</a></p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.core/-action-filter/index.html">me.bristermitten.rewrite.dsl.core.ActionFilter</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.core.impl/-action-filter-impl/index.html">me.bristermitten.rewrite.dsl.core.impl.ActionFilterImpl</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.aspect/-aspect/index.html">me.bristermitten.plumber.aspect.Aspect</a></h5>
+<p>A section of Plumber's functionality, for example, command handling or file management
+An Aspect should be considered the parent of this section, and manage dependency injection and initial setup</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.aspect/-aspect-annotation/index.html">me.bristermitten.plumber.aspect.AspectAnnotation</a></h5>
+<p>Binds an Annotation to an Aspect.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.aspect/-aspect-config.html">me.bristermitten.plumber.aspect.AspectConfig</a></h5>
+<p>Configuration interface for an Aspect
+Users can extend this to customise functionality for an Aspect
+However it is the Aspect's responsibility to get the implementations from <a href="../me.bristermitten.plumber.reflection/-class-finder/index.html">ClassFinder</a>
+and load them into the individual Aspect</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.core/-boolean-operator/index.html">me.bristermitten.rewrite.dsl.core.BooleanOperator</a></h5>
+<p>Used for chaining multiple tasks</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.core.impl/-boolean-operator-impl/index.html">me.bristermitten.rewrite.dsl.core.impl.BooleanOperatorImpl</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl/-builder-factory/index.html">me.bristermitten.plumber.dsl.BuilderFactory</a></h5>
+<p>Guice Factory for creating various builder interfaces</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.util/-chat/index.html">me.bristermitten.plumber.util.Chat</a></h5>
+</tr>
+<tr>
+(JVM)  (extensions in package me.bristermitten.plumber.util)
+<h5><a href="../me.bristermitten.plumber.util/java.lang.-class/index.html">java.lang.Class</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.reflection/-class-finder/index.html">me.bristermitten.plumber.reflection.ClassFinder</a></h5>
+<p>Helper that wraps <a href="#">ClassGraph</a> into a cleaner system and provides
+extra functionality</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.boot/-class-graph-provider/index.html">me.bristermitten.plumber.boot.ClassGraphProvider</a></h5>
+<p>Guice <a href="#">Provider</a> for <a href="#">ClassGraph</a>
+This lazily initialises the instance, and uses <a href="../me.bristermitten.plumber.boot/-plumber-info/index.html">PlumberInfo</a> to whitelist packages</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.command/-command-aspect/index.html">me.bristermitten.plumber.command.CommandAspect</a></h5>
+<p>Internal aspect that handles the scanning of command classes, and the registration of such classes</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.command/-command-aspect-config/index.html">me.bristermitten.plumber.command.CommandAspectConfig</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.reflection/-common-annotation-target/index.html">me.bristermitten.plumber.reflection.CommonAnnotationTarget</a></h5>
+<p>Annotation targets that are possible in both Java and Kotlin.
+Some values may be compressed, such as <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-o-n-s-t-r-u-c-t-o-r/index.html">AnnotationTarget.CONSTRUCTOR</a>
+which is classed as a Method in ClassGraph so serves no purpose to be standalone</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling.timings.compare/-compare-root-time-picker/index.html">me.bristermitten.plumber.scheduling.timings.compare.CompareRootTimePicker</a></h5>
+<p>Picker interface for picking a distance from a certain time</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.aspect.component/-component/index.html">me.bristermitten.plumber.aspect.component.Component</a></h5>
+<p>Similar to Spring's @Component, this indicates that the class should be instantiated with Guice
+and bound as a singleton.
+It will be bound as part of <a href="../me.bristermitten.plumber.aspect.component/-component-aspect/index.html">ComponentAspect</a></p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.aspect.component/-component-aspect/index.html">me.bristermitten.plumber.aspect.component.ComponentAspect</a></h5>
+<p>Required Aspect that facilitates the injection of all <a href="../me.bristermitten.plumber.aspect.component/-component/index.html">Component</a> classes
+They are bound as eager singletons</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.core/-continuous-action-builder/index.html">me.bristermitten.rewrite.dsl.core.ContinuousActionBuilder</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-data/index.html">me.bristermitten.plumber.files.Data</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.key/-data-key/index.html">me.bristermitten.plumber.struct.key.DataKey</a></h5>
+<p>A DataKey provides a key for storing key-value data in entities
+It only stores the key, and a default value. It does NOT store the values, these are stored in the entities
+Means that Strings don't have to be passed around for simple storage</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl.implementation/-default-task-length-configuration/index.html">me.bristermitten.plumber.dsl.implementation.DefaultTaskLengthConfiguration</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling.timings.compare/-distance-comparer/index.html">me.bristermitten.plumber.scheduling.timings.compare.DistanceComparer</a></h5>
+<p>DSL Picker for comparing lengths, often of time</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl/-d-s-l-aspect/index.html">me.bristermitten.plumber.dsl.DSLAspect</a></h5>
+<p>Aspect containing the management of all default DSL implementations</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.event/-event-controller/index.html">me.bristermitten.plumber.struct.event.EventController</a></h5>
+<p>A wrapper for handling events that provides simple boilerplate handling
+Currently, only supports <a href="#">Cancellable</a> instances of <a href="#">PlayerEvent</a>
+All instances have an <a href="#">EventPriority</a> of <a href="#">EventPriority.NORMAL</a>
+For performance reasons, if no handling functionality is defined, the controller is not registered into Bukkit</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.event/-event-controller-factory/index.html">me.bristermitten.plumber.struct.event.EventControllerFactory</a></h5>
+<p>Simple factory class for creating instances of <a href="../me.bristermitten.plumber.struct.event/-event-controller/index.html">EventController</a>
+Can't use Guice because of generics, so currently stuck to <a href="../me.bristermitten.plumber.struct.event/-event-controller-impl/index.html">EventControllerImpl</a></p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.event/-event-controller-impl/index.html">me.bristermitten.plumber.struct.event.EventControllerImpl</a></h5>
+<p>Default implementation of <a href="../me.bristermitten.plumber.struct.event/-event-controller/index.html">EventController</a></p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.extension/-extendable/index.html">me.bristermitten.plumber.struct.extension.Extendable</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.extension/-extension.html">me.bristermitten.plumber.struct.extension.Extension</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.extension/-extension-map/index.html">me.bristermitten.plumber.struct.extension.ExtensionMap</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-files-aspect/index.html">me.bristermitten.plumber.files.FilesAspect</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-files-aspect-static-module/index.html">me.bristermitten.plumber.files.FilesAspectStaticModule</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-id/index.html">me.bristermitten.plumber.files.Id</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl.implementation/-implementation-factory/index.html">me.bristermitten.plumber.dsl.implementation.ImplementationFactory</a></h5>
+<p>Factory for creating objects that Guice cannot handle</p>
+</tr>
+<tr>
+(JVM)  (extensions in package me.bristermitten.plumber.util)
+<h5><a href="../me.bristermitten.plumber.util/com.google.inject.-injector/index.html">com.google.inject.Injector</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.boot/-injector-holder/index.html">me.bristermitten.plumber.boot.InjectorHolder</a></h5>
+<p>Holder class for Guice's <a href="#">Injector</a>
+Because the current <a href="#">Injector</a> is modified frequently in Aspect creation, if an
+Aspect has an instance of <a href="#">Injector</a> injected it will not necessarily have every binding required.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-json-plumber-file/index.html">me.bristermitten.plumber.files.JsonPlumberFile</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl/-key-change-chooser/index.html">me.bristermitten.plumber.dsl.KeyChangeChooser</a></h5>
+<p>Interfaces that wraps watching a <a href="../me.bristermitten.plumber.struct.key/-data-key/index.html">DataKey</a> for a specific value</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl.implementation/-key-change-chooser-impl/index.html">me.bristermitten.plumber.dsl.implementation.KeyChangeChooserImpl</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.key/-key-holder/index.html">me.bristermitten.plumber.struct.key.KeyHolder</a></h5>
+<p>A KeyHolder defines an entity that holds key-value storage in the form of <a href="../me.bristermitten.plumber.struct.key/-data-key/index.html">DataKey</a></p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.key/-key-map/index.html">me.bristermitten.plumber.struct.key.KeyMap</a></h5>
+<p>Simple delegate of <a href="https://docs.oracle.com/javase/6/docs/api/java/util/HashMap.html">HashMap</a> with generics overridden</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-key-value-store.html">me.bristermitten.plumber.files.KeyValueStore</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-key-value-store-proxy-handler/index.html">me.bristermitten.plumber.files.KeyValueStoreProxyHandler</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.core/-length-configuration/index.html">me.bristermitten.rewrite.dsl.core.LengthConfiguration</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.aspect/-load-if-present/index.html">me.bristermitten.plumber.aspect.LoadIfPresent</a></h5>
+<p>Only applicable to subclasses of <a href="../me.bristermitten.plumber.aspect/-aspect/index.html">Aspect</a>.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.core.impl/-main-plumber-entity/index.html">me.bristermitten.rewrite.dsl.core.impl.MainPlumberEntity</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-mapped-to/index.html">me.bristermitten.plumber.files.MappedTo</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-mapping-type/index.html">me.bristermitten.plumber.files.MappingType</a></h5>
+</tr>
+<tr>
+(JVM)  (extensions in package me.bristermitten.plumber.util)
+<h5><a href="../me.bristermitten.plumber.util/com.google.inject.-module/index.html">com.google.inject.Module</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl/-player-action-builder/index.html">me.bristermitten.plumber.dsl.PlayerActionBuilder</a></h5>
+<p>Subclass of <a href="../me.bristermitten.plumber.dsl/-action-builder/index.html">ActionBuilder</a> that defines various actions that a Player could do.
+In the default implementation, a callback is defined that is ran when any of the actions are complete</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl.implementation/-player-action-builder-impl/index.html">me.bristermitten.plumber.dsl.implementation.PlayerActionBuilderImpl</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.player/-player-action-filter/index.html">me.bristermitten.rewrite.dsl.player.PlayerActionFilter</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.player/-player-extension.html">me.bristermitten.plumber.struct.player.PlayerExtension</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.event.player/-player-join-event/index.html">me.bristermitten.plumber.event.player.PlayerJoinEvent</a></h5>
+<p>Event that gives Plumber functionality to the default Bukkit event</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.player/-player-reactor-picker/index.html">me.bristermitten.rewrite.dsl.player.PlayerReactorPicker</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl.implementation/-player-task-length-configuration/index.html">me.bristermitten.plumber.dsl.implementation.PlayerTaskLengthConfiguration</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.command/-plumber-command/index.html">me.bristermitten.plumber.command.PlumberCommand</a></h5>
+<p>Extension of <a href="#">BaseCommand</a> that gives extra boilerplate handling
+It's recommended to use this class</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.core/-plumber-entity/index.html">me.bristermitten.rewrite.dsl.core.PlumberEntity</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-plumber-file/index.html">me.bristermitten.plumber.files.PlumberFile</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-plumber-file-factory/index.html">me.bristermitten.plumber.files.PlumberFileFactory</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.boot/-plumber-info/index.html">me.bristermitten.plumber.boot.PlumberInfo</a></h5>
+<p>Holds info about the running Plumber instance.
+Currently, this only includes the package name of the <a href="../me.bristermitten.plumber/-plumber-plugin/index.html">PlumberPlugin</a> implementation
+for <a href="../me.bristermitten.plumber.reflection/-class-finder/index.html">ClassFinder</a>, but may have more in the future.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.boot/-plumber-loader/index.html">me.bristermitten.plumber.boot.PlumberLoader</a></h5>
+<p>Class responsible for loading the entirety of Plumber.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber/-plumber-plugin/index.html">me.bristermitten.plumber.PlumberPlugin</a></h5>
+<p>Main class of Plumber. A Plugin that uses Plumber should extend this instead of
+<a href="#">JavaPlugin</a>, as it is responsible for the loading of the framework,
+and may handle more in the future.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber/-plumber-server/index.html">me.bristermitten.plumber.PlumberServer</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.player/-p-player/index.html">me.bristermitten.plumber.struct.player.PPlayer</a></h5>
+<p>Plumber wrapper for the <a href="#">Player</a> class
+Allows lots of boilerplate on Players do be done easily</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.player/-p-player/index.html">me.bristermitten.rewrite.dsl.player.PPlayer</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct.player/-p-player-manager/index.html">me.bristermitten.plumber.struct.player.PPlayerManager</a></h5>
+<p>Singleton for managing implementations of <a href="../me.bristermitten.plumber.struct.player/-p-player/index.html">PPlayer</a> bound to their underlying <a href="#">Player</a></p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.rewrite.dsl.core/-reactor-picker/index.html">me.bristermitten.rewrite.dsl.core.ReactorPicker</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.util/-reflection/index.html">me.bristermitten.plumber.util.Reflection</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.aspect/-required-aspect/index.html">me.bristermitten.plumber.aspect.RequiredAspect</a></h5>
+<p>Only applicable to subclasses of <a href="../me.bristermitten.plumber.aspect/-aspect/index.html">Aspect</a>.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.struct/-resettable/index.html">me.bristermitten.plumber.struct.Resettable</a></h5>
+<p>Indicates that something can be reset</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling/-scheduled-task/index.html">me.bristermitten.plumber.scheduling.ScheduledTask</a></h5>
+<p>Aspect annotation linking to <a href="../me.bristermitten.plumber.scheduling/-scheduler-aspect/index.html">SchedulerAspect</a>
+Currently, does nothing as the scheduler aspect is always loaded</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling/-scheduler-aspect/index.html">me.bristermitten.plumber.scheduling.SchedulerAspect</a></h5>
+<p>Aspect that handles the scheduler related functionality of Plumber
+Currently, all it does is installs the required Assisted Injection factories</p>
+</tr>
+<tr>
+(JVM)  (extensions in package me.bristermitten.plumber.util)
+<h5><a href="../me.bristermitten.plumber.util/kotlin.sequences.-sequence/index.html">kotlin.sequences.Sequence</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.aspect/-static-module/index.html">me.bristermitten.plumber.aspect.StaticModule</a></h5>
+<p>Only applicable to subclasses of <a href="../me.bristermitten.plumber.aspect/-aspect/index.html">Aspect</a>.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-storage-mapping/index.html">me.bristermitten.plumber.files.StorageMapping</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-store/index.html">me.bristermitten.plumber.files.Store</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-store-proxy-handler/index.html">me.bristermitten.plumber.files.StoreProxyHandler</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling/-task/index.html">me.bristermitten.plumber.scheduling.Task</a></h5>
+<p>A Task wraps Bukkit's Scheduler system into a single object.
+Currently, all tasks are ran asynchronously, but this will be improved in the future.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling.timings/-task-builder/index.html">me.bristermitten.plumber.scheduling.timings.TaskBuilder</a></h5>
+<p>Builder for configuring times in the future for scheduling
+This can be safely injected</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling/-task-factory/index.html">me.bristermitten.plumber.scheduling.TaskFactory</a></h5>
+<p>Guice Assisted Injection factory for creating instances of <a href="../me.bristermitten.plumber.scheduling/-task/index.html">Task</a></p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.dsl/-task-length-configuration/index.html">me.bristermitten.plumber.dsl.TaskLengthConfiguration</a></h5>
+<p>Interface for deciding how long a task should take</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling.timings/-time/index.html">me.bristermitten.plumber.scheduling.timings.Time</a></h5>
+<p>Represents a length of time, with a unit</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling.timings/-time-unit/index.html">me.bristermitten.plumber.scheduling.timings.TimeUnit</a></h5>
+<p>Simple Time Unit enum that includes Minecraft ticks,
+where ideally 20 ticks are in a second.
+Anything below a millisecond is not included, as realistically they are highly unlikely
+to be needed in a Minecraft server</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling.timings/-time-unit-picker/index.html">me.bristermitten.plumber.scheduling.timings.TimeUnitPicker</a></h5>
+<p>A TimeUnitPicker allows developers to choose a time unit for an action.
+General best practice is to have the method that returns a TimeUnitPicker
+take a long for the amount of time, for example
+<code>
+PPlayer#blockEvent(PlayerMoveEvent.class).undoAfter(30).seconds()
+</code> *</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.scheduling.timings/-time-unit-picker-factory/index.html">me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory</a></h5>
+<p>Simple factory class for creating instances of <a href="../me.bristermitten.plumber.scheduling.timings/-time-unit-picker/index.html">TimeUnitPicker</a>
+Due to the use of generics, we can't use Assisted Inject for this, so have to do it manually</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.annotation/-unstable/index.html">me.bristermitten.plumber.annotation.Unstable</a></h5>
+<p>Indicates that a part of the API is unstable.
+This can range from bugs, to completely nothing being implemented / working yet.
+It's advised not to use anything annotated with <a href="../me.bristermitten.plumber.annotation/-unstable/index.html">Unstable</a>,
+but feel free to submit a PR!</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-value-store.html">me.bristermitten.plumber.files.ValueStore</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-value-store-proxy-handler/index.html">me.bristermitten.plumber.files.ValueStoreProxyHandler</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../me.bristermitten.plumber.files/-yaml-plumber-file/index.html">me.bristermitten.plumber.files.YamlPlumberFile</a></h5>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

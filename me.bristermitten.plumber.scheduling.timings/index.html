@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>me.bristermitten.plumber.scheduling.timings - plumber</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">plumber</a>&nbsp;/&nbsp;<a href="./index.html">me.bristermitten.plumber.scheduling.timings</a><br/>
+<br/>
+<h2>Package me.bristermitten.plumber.scheduling.timings</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-task-builder/index.html">TaskBuilder</a></h4>
+</td>
+<td>
+<p>Builder for configuring times in the future for scheduling
+This can be safely injected</p>
+<code><span class="keyword">interface </span><span class="identifier">TaskBuilder</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-time/index.html">Time</a></h4>
+</td>
+<td>
+<p>Represents a length of time, with a unit</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Time</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-time-unit/index.html">TimeUnit</a></h4>
+</td>
+<td>
+<p>Simple Time Unit enum that includes Minecraft ticks,
+where ideally 20 ticks are in a second.
+Anything below a millisecond is not included, as realistically they are highly unlikely
+to be needed in a Minecraft server</p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">TimeUnit</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-time-unit-picker/index.html">TimeUnitPicker</a></h4>
+</td>
+<td>
+<p>A TimeUnitPicker allows developers to choose a time unit for an action.
+General best practice is to have the method that returns a TimeUnitPicker
+take a long for the amount of time, for example
+<code>
+PPlayer#blockEvent(PlayerMoveEvent.class).undoAfter(30).seconds()
+</code> *</p>
+<code><span class="keyword">interface </span><span class="identifier">TimeUnitPicker</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-time-unit-picker-factory/index.html">TimeUnitPickerFactory</a></h4>
+</td>
+<td>
+<p>Simple factory class for creating instances of <a href="-time-unit-picker/index.html">TimeUnitPicker</a>
+Due to the use of generics, we can't use Assisted Inject for this, so have to do it manually</p>
+<code><span class="keyword">class </span><span class="identifier">TimeUnitPickerFactory</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

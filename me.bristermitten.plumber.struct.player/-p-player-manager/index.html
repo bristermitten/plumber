@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PPlayerManager - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.struct.player</a>&nbsp;/&nbsp;<a href="./index.html">PPlayerManager</a><br/>
+<br/>
+<h1>PPlayerManager</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">PPlayerManager</span></code>
+<p>Singleton for managing implementations of <a href="../-p-player/index.html">PPlayer</a> bound to their underlying <a href="#">Player</a></p>
+<p>Consumers should prioritise obtaining <a href="../-p-player/index.html">PPlayer</a> instances from commands, events, or other things
+rather than manually obtaining instances from <a href="./index.html">PPlayerManager</a></p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Singleton for managing implementations of <a href="../-p-player/index.html">PPlayer</a> bound to their underlying <a href="#">Player</a></p>
+<code><span class="identifier">PPlayerManager</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.player.PPlayerManager$<init>(me.bristermitten.plumber.boot.InjectorHolder)/holder">holder</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.boot/-injector-holder/index.html"><span class="identifier">InjectorHolder</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="of.html">of</a></h4>
+</td>
+<td>
+<p>Create or get an instance of <a href="../-p-player/index.html">PPlayer</a> from a given <a href="https://docs.oracle.com/javase/6/docs/api/java/util/UUID.html">UUID</a></p>
+<code><span class="keyword">fun </span><span class="identifier">of</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.player.PPlayerManager$of(java.util.UUID)/p">p</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/util/UUID.html"><span class="identifier">UUID</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-p-player/index.html"><span class="identifier">PPlayer</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="of-player.html">ofPlayer</a></h4>
+</td>
+<td>
+<p>Create or get an instance of <a href="../-p-player/index.html">PPlayer</a> corresponding to the given <a href="#">Player</a></p>
+<code><span class="keyword">fun </span><span class="identifier">ofPlayer</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.player.PPlayerManager$ofPlayer(org.bukkit.entity.Player)/p">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">Player</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-p-player/index.html"><span class="identifier">PPlayer</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

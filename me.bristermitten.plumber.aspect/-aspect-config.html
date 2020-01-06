@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AspectConfig - plumber</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">plumber</a>&nbsp;/&nbsp;<a href="index.html">me.bristermitten.plumber.aspect</a>&nbsp;/&nbsp;<a href="./-aspect-config.html">AspectConfig</a><br/>
+<br/>
+<h1>AspectConfig</h1>
+(JVM) <code><span class="keyword">interface </span><span class="identifier">AspectConfig</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-aspect/index.html"><span class="identifier">Aspect</span></a><span class="symbol">&gt;</span></code>
+<p>Configuration interface for an Aspect
+Users can extend this to customise functionality for an Aspect
+However it is the Aspect's responsibility to get the implementations from <a href="../me.bristermitten.plumber.reflection/-class-finder/index.html">ClassFinder</a>
+and load them into the individual Aspect</p>
+<p>Do not use this interface, instead create a subclass that provides the required Type Parameter</p>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../me.bristermitten.plumber.command/-command-aspect-config/index.html">CommandAspectConfig</a></h4>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CommandAspectConfig</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./-aspect-config.html"><span class="identifier">AspectConfig</span></a><span class="symbol">&lt;</span><a href="../me.bristermitten.plumber.command/-command-aspect/index.html"><span class="identifier">CommandAspect</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

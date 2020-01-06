@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KeyHolder - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.struct.key</a>&nbsp;/&nbsp;<a href="./index.html">KeyHolder</a><br/>
+<br/>
+<h1>KeyHolder</h1>
+(JVM) <code><span class="keyword">interface </span><span class="identifier">KeyHolder</span></code>
+<p>A KeyHolder defines an entity that holds key-value storage in the form of <a href="../-data-key/index.html">DataKey</a></p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-data.html">getData</a></h4>
+</td>
+<td>
+<p>Get a key's value</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">K</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">getData</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.key.KeyHolder$getData(me.bristermitten.plumber.struct.key.DataKey((me.bristermitten.plumber.struct.key.KeyHolder.getData.K)))/key">key</span><span class="symbol">:</span>&nbsp;<a href="../-data-key/index.html"><span class="identifier">DataKey</span></a><span class="symbol">&lt;</span><span class="identifier">K</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">K</span></code>
+<p>Get a key's value, with a default value if the value is null</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">K</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">getData</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.key.KeyHolder$getData(me.bristermitten.plumber.struct.key.DataKey((me.bristermitten.plumber.struct.key.KeyHolder.getData.K)), me.bristermitten.plumber.struct.key.KeyHolder.getData.K)/key">key</span><span class="symbol">:</span>&nbsp;<a href="../-data-key/index.html"><span class="identifier">DataKey</span></a><span class="symbol">&lt;</span><span class="identifier">K</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.struct.key.KeyHolder$getData(me.bristermitten.plumber.struct.key.DataKey((me.bristermitten.plumber.struct.key.KeyHolder.getData.K)), me.bristermitten.plumber.struct.key.KeyHolder.getData.K)/defaultValue">defaultValue</span><span class="symbol">:</span>&nbsp;<span class="identifier">K</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">K</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="raw-set-data.html">rawSetData</a></h4>
+</td>
+<td>
+<p>Update a key's value
+The key's handlers WILL NOT be called</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">K</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">rawSetData</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.key.KeyHolder$rawSetData(me.bristermitten.plumber.struct.key.DataKey((me.bristermitten.plumber.struct.key.KeyHolder.rawSetData.K)), me.bristermitten.plumber.struct.key.KeyHolder.rawSetData.K)/key">key</span><span class="symbol">:</span>&nbsp;<a href="../-data-key/index.html"><span class="identifier">DataKey</span></a><span class="symbol">&lt;</span><span class="identifier">K</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.struct.key.KeyHolder$rawSetData(me.bristermitten.plumber.struct.key.DataKey((me.bristermitten.plumber.struct.key.KeyHolder.rawSetData.K)), me.bristermitten.plumber.struct.key.KeyHolder.rawSetData.K)/data">data</span><span class="symbol">:</span>&nbsp;<span class="identifier">K</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="set-data.html">setData</a></h4>
+</td>
+<td>
+<p>Update a key's value
+The key's handlers WILL be called</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">K</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">setData</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.key.KeyHolder$setData(me.bristermitten.plumber.struct.key.DataKey((me.bristermitten.plumber.struct.key.KeyHolder.setData.K)), me.bristermitten.plumber.struct.key.KeyHolder.setData.K)/key">key</span><span class="symbol">:</span>&nbsp;<a href="../-data-key/index.html"><span class="identifier">DataKey</span></a><span class="symbol">&lt;</span><span class="identifier">K</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.struct.key.KeyHolder$setData(me.bristermitten.plumber.struct.key.DataKey((me.bristermitten.plumber.struct.key.KeyHolder.setData.K)), me.bristermitten.plumber.struct.key.KeyHolder.setData.K)/data">data</span><span class="symbol">:</span>&nbsp;<span class="identifier">K</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../../me.bristermitten.plumber.struct.player/-p-player/index.html">PPlayer</a></h4>
+</td>
+<td>
+<p>Plumber wrapper for the <a href="#">Player</a> class
+Allows lots of boilerplate on Players do be done easily</p>
+<code><span class="keyword">interface </span><span class="identifier">PPlayer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">KeyHolder</span></a><span class="symbol">, </span><a href="../../me.bristermitten.plumber.struct.extension/-extendable/index.html"><span class="identifier">Extendable</span></a><span class="symbol">&lt;</span><a href="../../me.bristermitten.plumber.struct.player/-p-player/index.html"><span class="identifier">PPlayer</span></a><span class="symbol">,</span>&nbsp;<a href="../../me.bristermitten.plumber.struct.player/-player-extension.html"><span class="identifier">PlayerExtension</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SchedulerAspect.getModule - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.scheduling</a>&nbsp;/&nbsp;<a href="index.html">SchedulerAspect</a>&nbsp;/&nbsp;<a href="./get-module.html">getModule</a><br/>
+<br/>
+<h1>getModule</h1>
+(JVM) <a name="me.bristermitten.plumber.scheduling.SchedulerAspect$getModule()"></a>
+<code><span class="keyword">fun </span><span class="identifier">getModule</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Module</span></code>
+<p>Provide an optional Guice module to be installed.
+This is called <em>after</em> instantiation of the Aspect so nothing from this module can be used in the Aspect.</p>
+<p>Ideally, this should be the only module associated with the Aspect to avoid confusing code structures.
+However some Aspects may need 2 modules for configuring bindings into the Aspect itself:</p>
+<p><strong>See Also</strong><br/>
+<p><a href="../../me.bristermitten.plumber.aspect/-static-module/index.html">StaticModule</a></p>
+</p>
+</BODY>
+</HTML>

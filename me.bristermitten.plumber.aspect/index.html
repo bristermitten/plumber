@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>me.bristermitten.plumber.aspect - plumber</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">plumber</a>&nbsp;/&nbsp;<a href="./index.html">me.bristermitten.plumber.aspect</a><br/>
+<br/>
+<h2>Package me.bristermitten.plumber.aspect</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-abstract-aspect/index.html">AbstractAspect</a></h4>
+</td>
+<td>
+<p>Boilerplate-handling abstract implementation of <a href="-aspect/index.html">Aspect</a>
+Provides logging, enabled-status handling, and a wrapper for Guice's <a href="#">Injector</a></p>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractAspect</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-aspect/index.html"><span class="identifier">Aspect</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-aspect/index.html">Aspect</a></h4>
+</td>
+<td>
+<p>A section of Plumber's functionality, for example, command handling or file management
+An Aspect should be considered the parent of this section, and manage dependency injection and initial setup</p>
+<code><span class="keyword">interface </span><span class="identifier">Aspect</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-aspect-config.html">AspectConfig</a></h4>
+</td>
+<td>
+<p>Configuration interface for an Aspect
+Users can extend this to customise functionality for an Aspect
+However it is the Aspect's responsibility to get the implementations from <a href="../me.bristermitten.plumber.reflection/-class-finder/index.html">ClassFinder</a>
+and load them into the individual Aspect</p>
+<code><span class="keyword">interface </span><span class="identifier">AspectConfig</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-aspect/index.html"><span class="identifier">Aspect</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Annotations</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-aspect-annotation/index.html">AspectAnnotation</a></h4>
+</td>
+<td>
+<p>Binds an Annotation to an Aspect.</p>
+<code><span class="keyword">annotation</span> <span class="keyword">class </span><span class="identifier">AspectAnnotation</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-load-if-present/index.html">LoadIfPresent</a></h4>
+</td>
+<td>
+<p>Only applicable to subclasses of <a href="-aspect/index.html">Aspect</a>.</p>
+<code><span class="keyword">annotation</span> <span class="keyword">class </span><span class="identifier">LoadIfPresent</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-required-aspect/index.html">RequiredAspect</a></h4>
+</td>
+<td>
+<p>Only applicable to subclasses of <a href="-aspect/index.html">Aspect</a>.</p>
+<code><span class="keyword">annotation</span> <span class="keyword">class </span><span class="identifier">RequiredAspect</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-static-module/index.html">StaticModule</a></h4>
+</td>
+<td>
+<p>Only applicable to subclasses of <a href="-aspect/index.html">Aspect</a>.</p>
+<code><span class="keyword">annotation</span> <span class="keyword">class </span><span class="identifier">StaticModule</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Task - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.scheduling</a>&nbsp;/&nbsp;<a href="./index.html">Task</a><br/>
+<br/>
+<h1>Task</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">Task</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Runnable.html"><span class="identifier">Runnable</span></a><span class="symbol">, </span><a href="../../me.bristermitten.plumber.struct/-resettable/index.html"><span class="identifier">Resettable</span></a></code>
+<p>A Task wraps Bukkit's Scheduler system into a single object.
+Currently, all tasks are ran asynchronously, but this will be improved in the future.</p>
+<p>Generally, all Tasks are created with <a href="../-task-factory/index.html">TaskFactory</a></p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">Task</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.scheduling.Task$<init>(me.bristermitten.plumber.PlumberPlugin, kotlin.Long, kotlin.Long, java.lang.Runnable)/plugin">plugin</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber/-plumber-plugin/index.html"><span class="identifier">PlumberPlugin</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.scheduling.Task$<init>(me.bristermitten.plumber.PlumberPlugin, kotlin.Long, kotlin.Long, java.lang.Runnable)/delay">delay</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.scheduling.Task$<init>(me.bristermitten.plumber.PlumberPlugin, kotlin.Long, kotlin.Long, java.lang.Runnable)/period">period</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.scheduling.Task$<init>(me.bristermitten.plumber.PlumberPlugin, kotlin.Long, kotlin.Long, java.lang.Runnable)/delegate">delegate</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Runnable.html"><span class="identifier">Runnable</span></a><span class="symbol">)</span></code><br/>
+<code><span class="identifier">Task</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.scheduling.Task$<init>(me.bristermitten.plumber.PlumberPlugin, me.bristermitten.plumber.scheduling.timings.Time, me.bristermitten.plumber.scheduling.timings.Time, java.lang.Runnable)/plugin">plugin</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber/-plumber-plugin/index.html"><span class="identifier">PlumberPlugin</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.scheduling.Task$<init>(me.bristermitten.plumber.PlumberPlugin, me.bristermitten.plumber.scheduling.timings.Time, me.bristermitten.plumber.scheduling.timings.Time, java.lang.Runnable)/delay">delay</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.scheduling.timings/-time/index.html"><span class="identifier">Time</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.scheduling.Task$<init>(me.bristermitten.plumber.PlumberPlugin, me.bristermitten.plumber.scheduling.timings.Time, me.bristermitten.plumber.scheduling.timings.Time, java.lang.Runnable)/period">period</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.scheduling.timings/-time/index.html"><span class="identifier">Time</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.scheduling.Task$<init>(me.bristermitten.plumber.PlumberPlugin, me.bristermitten.plumber.scheduling.timings.Time, me.bristermitten.plumber.scheduling.timings.Time, java.lang.Runnable)/delegate">delegate</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Runnable.html"><span class="identifier">Runnable</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="reset.html">reset</a></h4>
+</td>
+<td>
+<p>Reset the current data
+Implementation is interface specific</p>
+<code><span class="keyword">fun </span><span class="identifier">reset</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="run.html">run</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">run</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="start.html">start</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">start</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="stop.html">stop</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">stop</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

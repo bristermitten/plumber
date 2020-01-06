@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PPlayer - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.struct.player</a>&nbsp;/&nbsp;<a href="./index.html">PPlayer</a><br/>
+<br/>
+<h1>PPlayer</h1>
+(JVM) <code><span class="keyword">interface </span><span class="identifier">PPlayer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.struct.key/-key-holder/index.html"><span class="identifier">KeyHolder</span></a><span class="symbol">, </span><a href="../../me.bristermitten.plumber.struct.extension/-extendable/index.html"><span class="identifier">Extendable</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">PPlayer</span></a><span class="symbol">,</span>&nbsp;<a href="../-player-extension.html"><span class="identifier">PlayerExtension</span></a><span class="symbol">&gt;</span></code>
+<p>Plumber wrapper for the <a href="#">Player</a> class
+Allows lots of boilerplate on Players do be done easily</p>
+<p>Instances can be obtained from <a href="../-p-player-manager/index.html">PPlayerManager</a> if necessary,
+otherwise it's advised to use events or command injection, rather than storing
+and manually obtaining instances.</p>
+<p>Per online player, one <a href="./index.html">PPlayer</a> instance exists. As with Bukkit's Player,
+this will be removed from storage if the player logs out,
+so it's advised not to store instances if possible, as they will not be able to be
+garbage collected otherwise. If necessary, weak references are advised</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="block-event.html">blockEvent</a></h4>
+</td>
+<td>
+<p>Block a certain event class until a given condition is complete (if any)</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">blockEvent</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.player.PPlayer$blockEvent(java.lang.Class((me.bristermitten.plumber.struct.player.PPlayer.blockEvent.T)))/e">e</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../me.bristermitten.plumber.dsl/-task-length-configuration/index.html"><span class="identifier">TaskLengthConfiguration</span></a><span class="symbol">&lt;</span><a href="../../me.bristermitten.plumber.dsl/-player-action-builder/index.html"><span class="identifier">PlayerActionBuilder</span></a><span class="symbol">&gt;</span><span class="keyword"> where </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">PlayerEvent</span><span class="symbol">, </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Cancellable</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="message.html">message</a></h4>
+</td>
+<td>
+<p>Send a message to the player.
+The String will be colored for Bukkit color codes</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">message</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.player.PPlayer$message(kotlin.String)/msg">msg</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="player.html">player</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">player</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Player</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ClassFinder - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.reflection</a>&nbsp;/&nbsp;<a href="./index.html">ClassFinder</a><br/>
+<br/>
+<h1>ClassFinder</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">ClassFinder</span></code>
+<p>Helper that wraps <a href="#">ClassGraph</a> into a cleaner system and provides
+extra functionality</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Helper that wraps <a href="#">ClassGraph</a> into a cleaner system and provides
+extra functionality</p>
+<code><span class="identifier">ClassFinder</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.reflection.ClassFinder$<init>(me.bristermitten.plumber.PlumberPlugin, io.github.classgraph.ClassGraph)/plumberPlugin">plumberPlugin</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber/-plumber-plugin/index.html"><span class="identifier">PlumberPlugin</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.reflection.ClassFinder$<init>(me.bristermitten.plumber.PlumberPlugin, io.github.classgraph.ClassGraph)/classGraph">classGraph</span><span class="symbol">:</span>&nbsp;<span class="identifier">ClassGraph</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="find-all-extensions-for.html">findAllExtensionsFor</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.struct.extension/-extendable/index.html"><span class="identifier">Extendable</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">,</span>&nbsp;<span class="keyword">out</span>&nbsp;<a href="../../me.bristermitten.plumber.struct.extension/-extension.html"><span class="identifier">Extension</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span> <span class="identifier">findAllExtensionsFor</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.reflection.ClassFinder$findAllExtensionsFor(kotlin.reflect.KClass((me.bristermitten.plumber.reflection.ClassFinder.findAllExtensionsFor.T)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="../../me.bristermitten.plumber.struct.extension/-extension.html"><span class="identifier">Extension</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-classes-annotated-with.html">getClassesAnnotatedWith</a></h4>
+</td>
+<td>
+<p>Get all classes that are annotated with the given <a href="get-classes-annotated-with.html#me.bristermitten.plumber.reflection.ClassFinder$getClassesAnnotatedWith(kotlin.reflect.KClass((kotlin.Annotation)))/annotation">annotation</a> in Kotlin <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a> format
+This simply makes calling from Kotlin cleaner as ::class can be used instead of ::class.java</p>
+<code><span class="keyword">fun </span><span class="identifier">getClassesAnnotatedWith</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.reflection.ClassFinder$getClassesAnnotatedWith(kotlin.reflect.KClass((kotlin.Annotation)))/annotation">annotation</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-annotation/index.html"><span class="identifier">Annotation</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-classes-implementing.html">getClassesImplementing</a></h4>
+</td>
+<td>
+<p>Get all classes that implement the given class in Kotlin <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a> format</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">getClassesImplementing</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.reflection.ClassFinder$getClassesImplementing(kotlin.reflect.KClass((me.bristermitten.plumber.reflection.ClassFinder.getClassesImplementing.T)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-classes-with-annotation-anywhere.html">getClassesWithAnnotationAnywhere</a></h4>
+</td>
+<td>
+<p>Find all <a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html">Class</a>es with a given annotation in any of their fields, methods, constructors, or the class itself
+This checks the <a href="get-classes-with-annotation-anywhere.html#me.bristermitten.plumber.reflection.ClassFinder$getClassesWithAnnotationAnywhere(java.lang.Class((kotlin.Annotation)))/annotation">annotation</a>'s <a href="https://docs.oracle.com/javase/6/docs/api/java/lang/annotation/Target.html">Target</a> and only searches applicable elements for speed improvements</p>
+<code><span class="keyword">fun </span><span class="identifier">getClassesWithAnnotationAnywhere</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.reflection.ClassFinder$getClassesWithAnnotationAnywhere(java.lang.Class((kotlin.Annotation)))/annotation">annotation</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-annotation/index.html"><span class="identifier">Annotation</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-real-classes-implementing.html">getRealClassesImplementing</a></h4>
+</td>
+<td>
+<p>Get all classes that implement the given class in Kotlin <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a> format,
+with abstract classes filtered out.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">getRealClassesImplementing</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.reflection.ClassFinder$getRealClassesImplementing(kotlin.reflect.KClass((me.bristermitten.plumber.reflection.ClassFinder.getRealClassesImplementing.T)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-s-c-a-n_-f-i-l-e_-n-a-m-e.html">SCAN_FILE_NAME</a></h4>
+</td>
+<td>
+<p>File name for the scan file. This will be looked for in the plugin's resources directory
+and may not exist, in which case scan results will be computed</p>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">SCAN_FILE_NAME</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

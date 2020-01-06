@@ -1,0 +1,25 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>InjectorHolder.<init> - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.boot</a>&nbsp;/&nbsp;<a href="index.html">InjectorHolder</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+(JVM) <a name="me.bristermitten.plumber.boot.InjectorHolder$&lt;init&gt;(com.google.inject.Injector)"></a>
+<code><span class="identifier">InjectorHolder</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.boot.InjectorHolder$<init>(com.google.inject.Injector)/default">default</span><span class="symbol">:</span>&nbsp;<span class="identifier">Injector</span><span class="symbol">)</span></code>
+<p>Holder class for Guice's <a href="#">Injector</a>
+Because the current <a href="#">Injector</a> is modified frequently in Aspect creation, if an
+Aspect has an instance of <a href="#">Injector</a> injected it will not necessarily have every binding required.</p>
+<p>For example, if an Aspect is initialised it will be injected with the Injector used to create it.
+However, after if installs a module, said injector will not contain the bindings from that module.
+One solution would be to re-inject into the Aspect, but this brings a performance toll along with
+the inconsistencies that come with mutability. Instead, Aspects should have <a href="index.html">InjectorHolder</a> injected
+which will carry the latest injector and will be updated after each Aspect's <a href="../../me.bristermitten.plumber.aspect/-aspect/get-module.html">Aspect.getModule</a> declaration</p>
+<p>Instead, Aspects can have this injected to get the latest <a href="#">Injector</a>, which it is guaranteed to always hold.</p>
+<p><strong>Author</strong><br/>
+Alexander Wood (BristerMitten)</p>
+</BODY>
+</HTML>

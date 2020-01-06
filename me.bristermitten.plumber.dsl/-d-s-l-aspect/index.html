@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DSLAspect - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.dsl</a>&nbsp;/&nbsp;<a href="./index.html">DSLAspect</a><br/>
+<br/>
+<h1>DSLAspect</h1>
+(JVM) <code><span class="identifier">@RequiredAspect</span> <span class="keyword">class </span><span class="identifier">DSLAspect</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.aspect/-abstract-aspect/index.html"><span class="identifier">AbstractAspect</span></a></code>
+<p>Aspect containing the management of all default DSL implementations</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Aspect containing the management of all default DSL implementations</p>
+<code><span class="identifier">DSLAspect</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-module.html">getModule</a></h4>
+</td>
+<td>
+<p>Provide an optional Guice module to be installed.
+This is called <em>after</em> instantiation of the Aspect so nothing from this module can be used in the Aspect.</p>
+<code><span class="keyword">fun </span><span class="identifier">getModule</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Module</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

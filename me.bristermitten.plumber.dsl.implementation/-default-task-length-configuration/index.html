@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DefaultTaskLengthConfiguration - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.dsl.implementation</a>&nbsp;/&nbsp;<a href="./index.html">DefaultTaskLengthConfiguration</a><br/>
+<br/>
+<h1>DefaultTaskLengthConfiguration</h1>
+(JVM) <code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">DefaultTaskLengthConfiguration</span><span class="symbol">&lt;</span><span class="identifier">B</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.dsl/-action-builder/index.html"><span class="identifier">ActionBuilder</span></a><span class="symbol">&lt;</span><span class="identifier">B</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.dsl/-task-length-configuration/index.html"><span class="identifier">TaskLengthConfiguration</span></a><span class="symbol">&lt;</span><span class="identifier">B</span><span class="symbol">&gt;</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">DefaultTaskLengthConfiguration</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.DefaultTaskLengthConfiguration$<init>(me.bristermitten.plumber.dsl.implementation.DefaultTaskLengthConfiguration.B, me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory, me.bristermitten.plumber.scheduling.TaskFactory)/value">value</span><span class="symbol">:</span>&nbsp;<span class="identifier">B</span><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.DefaultTaskLengthConfiguration$<init>(me.bristermitten.plumber.dsl.implementation.DefaultTaskLengthConfiguration.B, me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory, me.bristermitten.plumber.scheduling.TaskFactory)/factory">factory</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.scheduling.timings/-time-unit-picker-factory/index.html"><span class="identifier">TimeUnitPickerFactory</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.DefaultTaskLengthConfiguration$<init>(me.bristermitten.plumber.dsl.implementation.DefaultTaskLengthConfiguration.B, me.bristermitten.plumber.scheduling.timings.TimeUnitPickerFactory, me.bristermitten.plumber.scheduling.TaskFactory)/taskFactory">taskFactory</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber.scheduling/-task-factory/index.html"><span class="identifier">TaskFactory</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="forever.html">forever</a></h4>
+</td>
+<td>
+<p>Do the task forever</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">forever</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="undo-after.html">undoAfter</a></h4>
+</td>
+<td>
+<p>Undo the task (if applicable) after a certain length of time</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">undoAfter</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.dsl.implementation.DefaultTaskLengthConfiguration$undoAfter(kotlin.Long)/time">time</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../me.bristermitten.plumber.scheduling.timings/-time-unit-picker/index.html"><span class="identifier">TimeUnitPicker</span></a><span class="symbol">&lt;</span><span class="identifier">B</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="until.html">until</a></h4>
+</td>
+<td>
+<p>Do the task until certain conditions are met, at which point it will be cancelled/undone depending on the task</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">until</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">B</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../-player-task-length-configuration/index.html">PlayerTaskLengthConfiguration</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">PlayerTaskLengthConfiguration</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">DefaultTaskLengthConfiguration</span></a><span class="symbol">&lt;</span><a href="../../me.bristermitten.plumber.dsl/-player-action-builder/index.html"><span class="identifier">PlayerActionBuilder</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

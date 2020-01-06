@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PlumberPlugin - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber</a>&nbsp;/&nbsp;<a href="./index.html">PlumberPlugin</a><br/>
+<br/>
+<h1>PlumberPlugin</h1>
+(JVM) <code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PlumberPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">JavaPlugin</span></code>
+<p>Main class of Plumber. A Plugin that uses Plumber should extend this instead of
+<a href="#">JavaPlugin</a>, as it is responsible for the loading of the framework,
+and may handle more in the future.</p>
+<p>This class will be a Singleton throughout the framework, and at the moment doesn't do much
+else than the initial setup.
+On that note, in any Plumber plugin, <a href="load-plumber.html">PlumberPlugin.loadPlumber</a>
+should be called in your <a href="#">JavaPlugin.onEnable</a> if you override the default <a href="on-enable.html">PlumberPlugin.onEnable</a></p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">PlumberPlugin</span><span class="symbol">(</span><span class="symbol">)</span></code><br/>
+<code><span class="identifier">PlumberPlugin</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.PlumberPlugin$<init>(org.bukkit.plugin.java.JavaPluginLoader, org.bukkit.plugin.PluginDescriptionFile, java.io.File, java.io.File)/loader">loader</span><span class="symbol">:</span>&nbsp;<span class="identifier">JavaPluginLoader</span><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.PlumberPlugin$<init>(org.bukkit.plugin.java.JavaPluginLoader, org.bukkit.plugin.PluginDescriptionFile, java.io.File, java.io.File)/description">description</span><span class="symbol">:</span>&nbsp;<span class="identifier">PluginDescriptionFile</span><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.PlumberPlugin$<init>(org.bukkit.plugin.java.JavaPluginLoader, org.bukkit.plugin.PluginDescriptionFile, java.io.File, java.io.File)/dataFolder">dataFolder</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.PlumberPlugin$<init>(org.bukkit.plugin.java.JavaPluginLoader, org.bukkit.plugin.PluginDescriptionFile, java.io.File, java.io.File)/file">file</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">?</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="holder.html">holder</a></h4>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">holder</span><span class="symbol">: </span><a href="../../me.bristermitten.plumber.boot/-injector-holder/index.html"><span class="identifier">InjectorHolder</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="logger.html">logger</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">logger</span><span class="symbol">: </span><span class="identifier">Logger</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-instance.html">getInstance</a></h4>
+</td>
+<td>
+<p>Helper method to get an instance of a class with Guice</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">getInstance</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.PlumberPlugin$getInstance(java.lang.Class((me.bristermitten.plumber.PlumberPlugin.getInstance.T)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="load-plumber.html">loadPlumber</a></h4>
+</td>
+<td>
+<p>Load the framework.
+This entails scanning classes in the classpath, creating instances and injectors
+through Guice, and loading all necessary aspects.
+This should be called before anything else in <a href="on-enable.html">onEnable</a></p>
+<code><span class="keyword">fun </span><span class="identifier">loadPlumber</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-enable.html">onEnable</a></h4>
+</td>
+<td>
+<p>Default <a href="#">JavaPlugin.onEnable</a> implementation.
+This loads Plumber, and if overridden <a href="load-plumber.html">loadPlumber</a> should be called</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onEnable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

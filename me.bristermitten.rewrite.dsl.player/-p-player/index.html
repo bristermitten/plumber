@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PPlayer - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.rewrite.dsl.player</a>&nbsp;/&nbsp;<a href="./index.html">PPlayer</a><br/>
+<br/>
+<h1>PPlayer</h1>
+(JVM) <code><span class="keyword">interface </span><span class="identifier">PPlayer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.rewrite.dsl.core/-plumber-entity/index.html"><span class="identifier">PlumberEntity</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">PPlayer</span></a><span class="symbol">,</span>&nbsp;<a href="../-player-action-filter/index.html"><span class="identifier">PlayerActionFilter</span></a><span class="symbol">,</span>&nbsp;<a href="../-player-reactor-picker/index.html"><span class="identifier">PlayerReactorPicker</span></a><span class="symbol">&gt;</span></code>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="block-event.html">blockEvent</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">blockEvent</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.rewrite.dsl.player.PPlayer$blockEvent(java.lang.Class((me.bristermitten.rewrite.dsl.player.PPlayer.blockEvent.T)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../me.bristermitten.rewrite.dsl.core/-length-configuration/index.html"><span class="identifier">LengthConfiguration</span></a><span class="symbol">&lt;</span><a href="../-player-action-filter/index.html"><span class="identifier">PlayerActionFilter</span></a><span class="symbol">,</span>&nbsp;<a href="../-player-reactor-picker/index.html"><span class="identifier">PlayerReactorPicker</span></a><span class="symbol">&gt;</span><span class="keyword"> where </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">PlayerEvent</span><span class="symbol">, </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Cancellable</span></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">blockEvent</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.rewrite.dsl.player.PPlayer$blockEvent(kotlin.reflect.KClass((me.bristermitten.rewrite.dsl.player.PPlayer.blockEvent.T)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../me.bristermitten.rewrite.dsl.core/-length-configuration/index.html"><span class="identifier">LengthConfiguration</span></a><span class="symbol">&lt;</span><a href="../-player-action-filter/index.html"><span class="identifier">PlayerActionFilter</span></a><span class="symbol">,</span>&nbsp;<a href="../-player-reactor-picker/index.html"><span class="identifier">PlayerReactorPicker</span></a><span class="symbol">&gt;</span><span class="keyword"> where </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">PlayerEvent</span><span class="symbol">, </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Cancellable</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="kill.html">kill</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">kill</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="send-message.html">sendMessage</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">sendMessage</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.rewrite.dsl.player.PPlayer$sendMessage(kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

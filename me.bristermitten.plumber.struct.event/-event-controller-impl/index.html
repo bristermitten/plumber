@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>EventControllerImpl - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.struct.event</a>&nbsp;/&nbsp;<a href="./index.html">EventControllerImpl</a><br/>
+<br/>
+<h1>EventControllerImpl</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">EventControllerImpl</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-event-controller/index.html"><span class="identifier">EventController</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="keyword"> where </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">PlayerEvent</span><span class="symbol">, </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Cancellable</span></code>
+<p>Default implementation of <a href="../-event-controller/index.html">EventController</a></p>
+<p><strong>Parameters</strong><br/>
+</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Default implementation of <a href="../-event-controller/index.html">EventController</a></p>
+<code><span class="identifier">EventControllerImpl</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.event.EventControllerImpl$<init>(me.bristermitten.plumber.PlumberPlugin, java.lang.Class((me.bristermitten.plumber.struct.event.EventControllerImpl.T)))/plugin">plugin</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber/-plumber-plugin/index.html"><span class="identifier">PlumberPlugin</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.struct.event.EventControllerImpl$<init>(me.bristermitten.plumber.PlumberPlugin, java.lang.Class((me.bristermitten.plumber.struct.event.EventControllerImpl.T)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="cancel-all.html">cancelAll</a></h4>
+</td>
+<td>
+<p>Cancel all instances of the event by calling <a href="#">Cancellable.setCancelled</a></p>
+<code><span class="keyword">fun </span><span class="identifier">cancelAll</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="cancel-if.html">cancelIf</a></h4>
+</td>
+<td>
+<p>Cancel any instance of the event if a certain predicate is fulfilled.</p>
+<code><span class="keyword">fun </span><span class="identifier">cancelIf</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.event.EventControllerImpl$cancelIf(java.util.function.Predicate((me.bristermitten.plumber.struct.event.EventControllerImpl.T)))/predicate">predicate</span><span class="symbol">:</span>&nbsp;<span class="identifier">Predicate</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="ignore-all.html">ignoreAll</a></h4>
+</td>
+<td>
+<p>Ignore all instances of the event. For performance reasons, this is equivalent to calling
+<a href="../-event-controller/un-register.html">EventController.unRegister</a></p>
+<code><span class="keyword">fun </span><span class="identifier">ignoreAll</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="un-register.html">unRegister</a></h4>
+</td>
+<td>
+<p>Unregister the controller, causing all handling to be undone.
+This may be called internally for performance reasons</p>
+<code><span class="keyword">fun </span><span class="identifier">unRegister</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

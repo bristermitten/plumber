@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Aspect - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.aspect</a>&nbsp;/&nbsp;<a href="./index.html">Aspect</a><br/>
+<br/>
+<h1>Aspect</h1>
+(JVM) <code><span class="keyword">interface </span><span class="identifier">Aspect</span></code>
+<p>A section of Plumber's functionality, for example, command handling or file management
+An Aspect should be considered the parent of this section, and manage dependency injection and initial setup</p>
+<p>Aspects are considered singletons and will only be internally instantiated once.</p>
+<p>Instances are created with Guice, so <a href="#">Inject</a> can be used.
+However, bear in mind that injection will occur before <a href="get-module.html">getModule</a>
+is called, and so an Aspect cannot be injected with bindings in its <a href="get-module.html">getModule</a> return value</p>
+<p>If you need to make bindings and then inject into your aspect, use the annotation <a href="../-static-module/index.html">StaticModule</a>,
+which defines a module that will be installed before Aspect creation.
+A module can still be returned from <a href="get-module.html">getModule</a>, however the same conditions apply.</p>
+<p>On its own, an aspect will not automatically be loaded to reduce startup time.
+Instead, it must be given a "reason" to load. This can be one or multiple of 3 things:</p>
+<ol><li>Annotating the class with <a href="../-required-aspect/index.html">RequiredAspect</a>, which ensures it will always be loaded</li>
+<li>Any <a href="../-aspect-annotation/index.html">AspectAnnotation</a>s that target this aspect being present anywhere on the classpath</li>
+<li>Annotating the class with <a href="../-load-if-present/index.html">LoadIfPresent</a> to load the aspect if a given annotation is present
+anywhere on the classpath</li>
+</ol>
+<p><strong>Author</strong><br/>
+Alexander Wood (knightzmc)</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="disable.html">disable</a></h4>
+</td>
+<td>
+<p>Disable the Aspect.
+Called internally and only once: server shutdown.
+Often not needed, but some aspects may want to use this to flush data or similar operations.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">disable</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="enable.html">enable</a></h4>
+</td>
+<td>
+<p>Enable the Aspect. This is called internally and only once: on server startup.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">enable</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.aspect.Aspect$enable(kotlin.collections.Collection((java.lang.Class((kotlin.Any)))))/classes">classes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-module.html">getModule</a></h4>
+</td>
+<td>
+<p>Provide an optional Guice module to be installed.
+This is called <em>after</em> instantiation of the Aspect so nothing from this module can be used in the Aspect.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getModule</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Module</span><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../-abstract-aspect/index.html">AbstractAspect</a></h4>
+</td>
+<td>
+<p>Boilerplate-handling abstract implementation of <a href="./index.html">Aspect</a>
+Provides logging, enabled-status handling, and a wrapper for Guice's <a href="#">Injector</a></p>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractAspect</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Aspect</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>me.bristermitten.plumber.reflection - plumber</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">plumber</a>&nbsp;/&nbsp;<a href="./index.html">me.bristermitten.plumber.reflection</a><br/>
+<br/>
+<h2>Package me.bristermitten.plumber.reflection</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-class-finder/index.html">ClassFinder</a></h4>
+</td>
+<td>
+<p>Helper that wraps <a href="#">ClassGraph</a> into a cleaner system and provides
+extra functionality</p>
+<code><span class="keyword">class </span><span class="identifier">ClassFinder</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-common-annotation-target/index.html">CommonAnnotationTarget</a></h4>
+</td>
+<td>
+<p>Annotation targets that are possible in both Java and Kotlin.
+Some values may be compressed, such as <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-o-n-s-t-r-u-c-t-o-r/index.html">AnnotationTarget.CONSTRUCTOR</a>
+which is classed as a Method in ClassGraph so serves no purpose to be standalone</p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">CommonAnnotationTarget</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-annotation-targets.html">getAnnotationTargets</a></h4>
+</td>
+<td>
+<p>Get all of the targets of an Annotation.
+This provides compatibility for both Kotlin and Java annotations,
+bringing them into a common <a href="-common-annotation-target/index.html">CommonAnnotationTarget</a></p>
+<code><span class="keyword">fun </span><span class="identifier">getAnnotationTargets</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.reflection$getAnnotationTargets(java.lang.Class((kotlin.Annotation)))/annotation">annotation</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-annotation/index.html"><span class="identifier">Annotation</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span class="symbol">&lt;</span><a href="-common-annotation-target/index.html"><span class="identifier">CommonAnnotationTarget</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

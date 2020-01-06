@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PlumberInfo - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.boot</a>&nbsp;/&nbsp;<a href="./index.html">PlumberInfo</a><br/>
+<br/>
+<h1>PlumberInfo</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">PlumberInfo</span></code>
+<p>Holds info about the running Plumber instance.
+Currently, this only includes the package name of the <a href="../../me.bristermitten.plumber/-plumber-plugin/index.html">PlumberPlugin</a> implementation
+for <a href="../../me.bristermitten.plumber.reflection/-class-finder/index.html">ClassFinder</a>, but may have more in the future.</p>
+<p>TODO - I'm not a fan of this class's coupling with <a href="../../me.bristermitten.plumber/-plumber-plugin/index.html">PlumberPlugin</a>, however this approach seems cleaner than</p>
+<ul><li>requiring it to be created in <a href="../-plumber-loader/index.html">PlumberLoader</a> or something similar. Ideas would be appreciated</li>
+</ul>
+<p><strong>Author</strong><br/>
+Alexander Wood (BristerMitten)</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>For mocking.</p>
+<code><span class="identifier">PlumberInfo</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.boot.PlumberInfo$<init>(kotlin.String)/externalPackage">externalPackage</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code><code><span class="identifier">PlumberInfo</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.boot.PlumberInfo$<init>(me.bristermitten.plumber.PlumberPlugin)/plumberPlugin">plumberPlugin</span><span class="symbol">:</span>&nbsp;<a href="../../me.bristermitten.plumber/-plumber-plugin/index.html"><span class="identifier">PlumberPlugin</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="external-plugin-package.html">externalPluginPackage</a></h4>
+</td>
+<td>
+<p>The external plugin's package (eg me.author.plugin)</p>
+<code><span class="keyword">val </span><span class="identifier">externalPluginPackage</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="plumber-package.html">plumberPackage</a></h4>
+</td>
+<td>
+<p>Plumber's package for internals</p>
+<code><span class="keyword">val </span><span class="identifier">plumberPackage</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

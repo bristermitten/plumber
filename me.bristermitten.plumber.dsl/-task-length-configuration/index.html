@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TaskLengthConfiguration - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.dsl</a>&nbsp;/&nbsp;<a href="./index.html">TaskLengthConfiguration</a><br/>
+<br/>
+<h1>TaskLengthConfiguration</h1>
+(JVM) <code><span class="keyword">interface </span><span class="identifier">TaskLengthConfiguration</span><span class="symbol">&lt;</span><span class="identifier">B</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-action-builder/index.html"><span class="identifier">ActionBuilder</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Interface for deciding how long a task should take</p>
+<h3>Parameters</h3>
+<p><a name="B"></a>
+<code>B</code> - the child interface for later configuration</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="forever.html">forever</a></h4>
+</td>
+<td>
+<p>Do the task forever</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">forever</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="undo-after.html">undoAfter</a></h4>
+</td>
+<td>
+<p>Undo the task (if applicable) after a certain length of time</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">undoAfter</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.dsl.TaskLengthConfiguration$undoAfter(kotlin.Long)/time">time</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../me.bristermitten.plumber.scheduling.timings/-time-unit-picker/index.html"><span class="identifier">TimeUnitPicker</span></a><span class="symbol">&lt;</span><span class="identifier">B</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="until.html">until</a></h4>
+</td>
+<td>
+<p>Do the task until certain conditions are met, at which point it will be cancelled/undone depending on the task</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">until</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">B</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="impl.html">impl</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">impl</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="./index.html"><span class="identifier">TaskLengthConfiguration</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../../me.bristermitten.plumber.dsl.implementation/-default-task-length-configuration/index.html">DefaultTaskLengthConfiguration</a></h4>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">DefaultTaskLengthConfiguration</span><span class="symbol">&lt;</span><span class="identifier">B</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-action-builder/index.html"><span class="identifier">ActionBuilder</span></a><span class="symbol">&lt;</span><span class="identifier">B</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">TaskLengthConfiguration</span></a><span class="symbol">&lt;</span><span class="identifier">B</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

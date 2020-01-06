@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>LoadIfPresent.<init> - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.aspect</a>&nbsp;/&nbsp;<a href="index.html">LoadIfPresent</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+(JVM) <a name="me.bristermitten.plumber.aspect.LoadIfPresent$&lt;init&gt;(kotlin.Array((kotlin.reflect.KClass((kotlin.Annotation)))))"></a>
+<code><span class="identifier">LoadIfPresent</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="me.bristermitten.plumber.aspect.LoadIfPresent$<init>(kotlin.Array((kotlin.reflect.KClass((kotlin.Annotation)))))/targets">targets</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-annotation/index.html"><span class="identifier">Annotation</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+<p>Only applicable to subclasses of <a href="../-aspect/index.html">Aspect</a>.</p>
+<p>Similar to <a href="../-aspect-annotation/index.html">AspectAnnotation</a>, this binds an annotation to an Aspect, but the other way around.</p>
+<p>If any of the <a href="targets.html">targets</a> are present at all on the classpath,
+the annotated Aspect will be loaded if not already.</p>
+<p>This annotation should only be used if the <a href="targets.html">targets</a> are part of an external library
+and cannot be given <a href="../-aspect-annotation/index.html">AspectAnnotation</a>. A good example is ACF's @CommandAlias,
+which is third party, cannot be modified, but must be checked for loading the command aspect.</p>
+</BODY>
+</HTML>

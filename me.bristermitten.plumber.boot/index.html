@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>me.bristermitten.plumber.boot - plumber</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">plumber</a>&nbsp;/&nbsp;<a href="./index.html">me.bristermitten.plumber.boot</a><br/>
+<br/>
+<h2>Package me.bristermitten.plumber.boot</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-class-graph-provider/index.html">ClassGraphProvider</a></h4>
+</td>
+<td>
+<p>Guice <a href="#">Provider</a> for <a href="#">ClassGraph</a>
+This lazily initialises the instance, and uses <a href="-plumber-info/index.html">PlumberInfo</a> to whitelist packages</p>
+<code><span class="keyword">class </span><span class="identifier">ClassGraphProvider</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Provider</span><span class="symbol">&lt;</span><span class="identifier">ClassGraph</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-injector-holder/index.html">InjectorHolder</a></h4>
+</td>
+<td>
+<p>Holder class for Guice's <a href="#">Injector</a>
+Because the current <a href="#">Injector</a> is modified frequently in Aspect creation, if an
+Aspect has an instance of <a href="#">Injector</a> injected it will not necessarily have every binding required.</p>
+<code><span class="keyword">class </span><span class="identifier">InjectorHolder</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-plumber-info/index.html">PlumberInfo</a></h4>
+</td>
+<td>
+<p>Holds info about the running Plumber instance.
+Currently, this only includes the package name of the <a href="../me.bristermitten.plumber/-plumber-plugin/index.html">PlumberPlugin</a> implementation
+for <a href="../me.bristermitten.plumber.reflection/-class-finder/index.html">ClassFinder</a>, but may have more in the future.</p>
+<code><span class="keyword">class </span><span class="identifier">PlumberInfo</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-plumber-loader/index.html">PlumberLoader</a></h4>
+</td>
+<td>
+<p>Class responsible for loading the entirety of Plumber.</p>
+<code><span class="keyword">class </span><span class="identifier">PlumberLoader</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

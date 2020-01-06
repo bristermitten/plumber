@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DataKey - plumber</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">plumber</a>&nbsp;/&nbsp;<a href="../index.html">me.bristermitten.plumber.struct.key</a>&nbsp;/&nbsp;<a href="./index.html">DataKey</a><br/>
+<br/>
+<h1>DataKey</h1>
+(JVM) <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">DataKey</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>A DataKey provides a key for storing key-value data in entities
+It only stores the key, and a default value. It does NOT store the values, these are stored in the entities
+Means that Strings don't have to be passed around for simple storage</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">DataKey</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.key.DataKey$<init>(me.bristermitten.plumber.struct.key.DataKey.T)/defaultValue">defaultValue</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span></code>
+<p>A DataKey provides a key for storing key-value data in entities
+It only stores the key, and a default value. It does NOT store the values, these are stored in the entities
+Means that Strings don't have to be passed around for simple storage</p>
+<code><span class="identifier">DataKey</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.key.DataKey$<init>(kotlin.String, me.bristermitten.plumber.struct.key.DataKey.T)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="me.bristermitten.plumber.struct.key.DataKey$<init>(kotlin.String, me.bristermitten.plumber.struct.key.DataKey.T)/defaultValue">defaultValue</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="default-value.html">defaultValue</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">defaultValue</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="handlers.html">handlers</a></h4>
+</td>
+<td>
+<p>List of Handlers for when the key's value is updated.
+These are not actually handled in the Key object, and instead should be called inside
+classes that implement <a href="../-key-holder/index.html">KeyHolder</a> or hold instances of <a href="./index.html">DataKey</a>
+For example, in <a href="exec-handlers.html">PPlayer.setData</a> is called every time the key's data is updated.</p>
+<code><span class="keyword">val </span><span class="identifier">handlers</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/util/concurrent/ConcurrentHashMap/KeySetView.html"><span class="identifier">KeySetView</span></a><span class="symbol">&lt;</span><span class="identifier">Consumer</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">!</span><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">!</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="key.html">key</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">key</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="exec-handlers.html">execHandlers</a></h4>
+</td>
+<td>
+<p>Execute all handlers with a new value
+This should be called before the value is set upon</p>
+<code><span class="keyword">fun </span><span class="identifier">execHandlers</span><span class="symbol">(</span><span class="identifier" id="me.bristermitten.plumber.struct.key.DataKey$execHandlers(me.bristermitten.plumber.struct.key.DataKey.T)/value">value</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
