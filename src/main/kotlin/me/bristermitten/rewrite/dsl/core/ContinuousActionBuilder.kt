@@ -8,8 +8,8 @@ interface ContinuousActionBuilder<F> {
     companion object {
         private lateinit var pPlayer: PPlayer
         fun test() {
-            pPlayer.createTask(Runnable { println("hello world") }).whenIsInWorld("test world").or().whenIsTrue(true)
-            pPlayer.executeTask(Runnable { println("test") }).until().death().or().logout().or().death().and().death().nand().logout()
+            pPlayer.createTask { println("hello world") }.whenIsInWorld("test world").or().whenIsTrue(true)
+            pPlayer.executeTask { println("test") }.until().death().or().logout().or().death().and().death().nand().logout()
             pPlayer.blockEvent(PlayerMoveEvent::class.java).until().death()
         }
     }
