@@ -6,20 +6,20 @@ title: PlumberPlugin - plumber
 
 # PlumberPlugin
 
-`open class PlumberPlugin : JavaPlugin`
+`open class PlumberPlugin : `[`JavaPlugin`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java/JavaPlugin.html)
 
 Main class of Plumber. A Plugin that uses Plumber should extend this instead of
-[JavaPlugin](#), as it is responsible for the loading of the framework,
+[JavaPlugin](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java/JavaPlugin.html), as it is responsible for the loading of the framework,
 and may handle more in the future.
 
 This class will be a Singleton throughout the framework, and at the moment doesn't do much
 else than the initial setup.
 On that note, in any Plumber plugin, [PlumberPlugin.loadPlumber](load-plumber.html)
-should be called in your [JavaPlugin.onEnable](#) if you override the default [PlumberPlugin.onEnable](on-enable.html)
+should be called in your [JavaPlugin.onEnable](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java/JavaPlugin.html#onEnable()) if you override the default [PlumberPlugin.onEnable](on-enable.html)
 
 ### Constructors
 
-| [&lt;init&gt;](-init-.html) | Basic no-args constructor This constructor it provided so that it can be overridden for mocking or similar purposes`PlumberPlugin()`<br>Basic JavaPlugin constructor This constructor it provided so that it can be overridden for mocking or similar purposes`PlumberPlugin(loader: JavaPluginLoader?, description: PluginDescriptionFile?, dataFolder: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`?, file: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`?)` |
+| [&lt;init&gt;](-init-.html) | Basic no-args constructor This constructor it provided so that it can be overridden for mocking or similar purposes`PlumberPlugin()`<br>Basic JavaPlugin constructor This constructor it provided so that it can be overridden for mocking or similar purposes`PlumberPlugin(loader: `[`JavaPluginLoader`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java/JavaPluginLoader.html)`?, description: `[`PluginDescriptionFile`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/PluginDescriptionFile.html)`?, dataFolder: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`?, file: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`?)` |
 
 ### Properties
 
@@ -30,5 +30,5 @@ should be called in your [JavaPlugin.onEnable](#) if you override the default [P
 
 | [getInstance](get-instance.html) | Helper method to get an instance of a class with Guice`fun <T> getInstance(clazz: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<T>): T` |
 | [loadPlumber](load-plumber.html) | Load the framework. This entails scanning classes in the classpath, creating instances and injectors through Guice, and loading all necessary aspects. This should be called before anything else in [onEnable](on-enable.html)`fun loadPlumber(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [onEnable](on-enable.html) | Default [JavaPlugin.onEnable](#) implementation. This loads Plumber, and if overridden [loadPlumber](load-plumber.html) should be called`open fun onEnable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [onEnable](on-enable.html) | Default [JavaPlugin.onEnable](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java/JavaPlugin.html#onEnable()) implementation. This loads Plumber, and if overridden [loadPlumber](load-plumber.html) should be called`open fun onEnable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 

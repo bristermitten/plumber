@@ -8,7 +8,7 @@ title: PPlayerManager.<init> - plumber
 
 `PPlayerManager(holder: `[`InjectorHolder`](../../me.bristermitten.plumber.boot/-injector-holder/index.html)`)`
 
-Singleton for managing implementations of [PPlayer](../-p-player/index.html) bound to their underlying [Player](#)
+Singleton for managing implementations of [PPlayer](../-p-player/index.html) bound to their underlying [Player](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html)
 
 Consumers should prioritise obtaining [PPlayer](../-p-player/index.html) instances from commands, events, or other things
 rather than manually obtaining instances from [PPlayerManager](index.html)

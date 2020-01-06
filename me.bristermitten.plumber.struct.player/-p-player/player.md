@@ -6,8 +6,8 @@ title: PPlayer.player - plumber
 
 # player
 
-`abstract fun player(): Player`
+`abstract fun player(): `[`Player`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html)
 
 **Return**
-the underlying [Player](#) object
+the underlying [Player](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html) object
 

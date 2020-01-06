@@ -6,7 +6,7 @@ title: StaticModule.<init> - plumber
 
 # &lt;init&gt;
 
-`StaticModule(target: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<out Module>)`
+`StaticModule(target: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<out `[`Module`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html)`>)`
 
 Only applicable to subclasses of [Aspect](../-aspect/index.html).
 

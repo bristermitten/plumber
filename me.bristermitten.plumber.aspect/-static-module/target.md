@@ -6,4 +6,4 @@ title: StaticModule.target - plumber
 
 # target
 
-`val target: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<out Module>`
+`val target: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<out `[`Module`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html)`>`

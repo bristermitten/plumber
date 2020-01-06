@@ -9,6 +9,6 @@ title: me.bristermitten.plumber.struct.player - plumber
 ### Types
 
 | [PlayerExtension](-player-extension.html) | `interface PlayerExtension : `[`Extension`](../me.bristermitten.plumber.struct.extension/-extension.html)`<`[`PPlayer`](-p-player/index.html)`>` |
-| [PPlayer](-p-player/index.html) | Plumber wrapper for the [Player](#) class Allows lots of boilerplate on Players do be done easily`interface PPlayer : `[`KeyHolder`](../me.bristermitten.plumber.struct.key/-key-holder/index.html)`, `[`Extendable`](../me.bristermitten.plumber.struct.extension/-extendable/index.html)`<`[`PPlayer`](-p-player/index.html)`, `[`PlayerExtension`](-player-extension.html)`>` |
-| [PPlayerManager](-p-player-manager/index.html) | Singleton for managing implementations of [PPlayer](-p-player/index.html) bound to their underlying [Player](#)`class PPlayerManager` |
+| [PPlayer](-p-player/index.html) | Plumber wrapper for the [Player](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html) class Allows lots of boilerplate on Players do be done easily`interface PPlayer : `[`KeyHolder`](../me.bristermitten.plumber.struct.key/-key-holder/index.html)`, `[`Extendable`](../me.bristermitten.plumber.struct.extension/-extendable/index.html)`<`[`PPlayer`](-p-player/index.html)`, `[`PlayerExtension`](-player-extension.html)`>` |
+| [PPlayerManager](-p-player-manager/index.html) | Singleton for managing implementations of [PPlayer](-p-player/index.html) bound to their underlying [Player](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html)`class PPlayerManager` |
 

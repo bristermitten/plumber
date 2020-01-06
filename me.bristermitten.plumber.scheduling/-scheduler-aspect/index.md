@@ -17,5 +17,5 @@ Currently, all it does is installs the required Assisted Injection factories
 
 ### Functions
 
-| [getModule](get-module.html) | Provide an optional Guice module to be installed. This is called *after* instantiation of the Aspect so nothing from this module can be used in the Aspect.`fun getModule(): Module` |
+| [getModule](get-module.html) | Provide an optional Guice module to be installed. This is called *after* instantiation of the Aspect so nothing from this module can be used in the Aspect.`fun getModule(): `[`Module`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html) |
 

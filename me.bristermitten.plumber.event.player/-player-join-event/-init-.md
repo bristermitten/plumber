@@ -6,7 +6,7 @@ title: PlayerJoinEvent.<init> - plumber
 
 # &lt;init&gt;
 
-`PlayerJoinEvent(playerJoined: Player, joinMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, plumberPlayer: `[`PPlayer`](../../me.bristermitten.plumber.struct.player/-p-player/index.html)`)`
+`PlayerJoinEvent(playerJoined: `[`Player`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html)`, joinMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, plumberPlayer: `[`PPlayer`](../../me.bristermitten.plumber.struct.player/-p-player/index.html)`)`
 
 Event that gives Plumber functionality to the default Bukkit event
 

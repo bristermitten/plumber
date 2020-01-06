@@ -8,7 +8,7 @@ title: ClassGraphProvider.<init> - plumber
 
 `ClassGraphProvider(info: `[`PlumberInfo`](../-plumber-info/index.html)`)`
 
-Guice [Provider](#) for [ClassGraph](#)
+Guice [Provider](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html) for [ClassGraph](#)
 This lazily initialises the instance, and uses [PlumberInfo](../-plumber-info/index.html) to whitelist packages
 
 **Author**

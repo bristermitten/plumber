@@ -10,7 +10,7 @@ title: ExtensionMap - plumber
 
 ### Constructors
 
-| [&lt;init&gt;](-init-.html) | `ExtensionMap(injector: Injector)` |
+| [&lt;init&gt;](-init-.html) | `ExtensionMap(injector: `[`Injector`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html)`)` |
 
 ### Functions
 

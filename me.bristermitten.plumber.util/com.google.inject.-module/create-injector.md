@@ -6,7 +6,7 @@ title: createInjector - plumber
 
 # createInjector
 
-`fun Module.createInjector(): Injector`
+`fun `[`Module`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html)`.createInjector(): `[`Injector`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html)
 
-[Module](#) extension for [Guice.createInjector](#)
+[Module](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html) extension for [Guice.createInjector](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Guice.html#createInjector(com.google.inject.Module...))
 

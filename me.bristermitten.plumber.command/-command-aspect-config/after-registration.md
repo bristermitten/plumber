@@ -6,4 +6,4 @@ title: CommandAspectConfig.afterRegistration - plumber
 
 # afterRegistration
 
-`abstract fun afterRegistration(commandManager: PaperCommandManager): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun afterRegistration(commandManager: `[`PaperCommandManager`](https://aikar.github.io/commands/acf-core/co/aikar/commands/PaperCommandManager.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

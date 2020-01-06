@@ -14,5 +14,5 @@ title: Extendable - plumber
 
 ### Inheritors
 
-| [PPlayer](../../me.bristermitten.plumber.struct.player/-p-player/index.html) | Plumber wrapper for the [Player](#) class Allows lots of boilerplate on Players do be done easily`interface PPlayer : `[`KeyHolder`](../../me.bristermitten.plumber.struct.key/-key-holder/index.html)`, `[`Extendable`](./index.html)`<`[`PPlayer`](../../me.bristermitten.plumber.struct.player/-p-player/index.html)`, `[`PlayerExtension`](../../me.bristermitten.plumber.struct.player/-player-extension.html)`>` |
+| [PPlayer](../../me.bristermitten.plumber.struct.player/-p-player/index.html) | Plumber wrapper for the [Player](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html) class Allows lots of boilerplate on Players do be done easily`interface PPlayer : `[`KeyHolder`](../../me.bristermitten.plumber.struct.key/-key-holder/index.html)`, `[`Extendable`](./index.html)`<`[`PPlayer`](../../me.bristermitten.plumber.struct.player/-p-player/index.html)`, `[`PlayerExtension`](../../me.bristermitten.plumber.struct.player/-player-extension.html)`>` |
 

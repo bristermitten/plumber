@@ -6,4 +6,4 @@ title: InjectorHolder.injector - plumber
 
 # injector
 
-`var injector: Injector`
+`var injector: `[`Injector`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html)

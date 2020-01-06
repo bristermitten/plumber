@@ -8,6 +8,6 @@ title: PlumberPlugin.onEnable - plumber
 
 `open fun onEnable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Default [JavaPlugin.onEnable](#) implementation.
+Default [JavaPlugin.onEnable](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java/JavaPlugin.html#onEnable()) implementation.
 This loads Plumber, and if overridden [loadPlumber](load-plumber.html) should be called
 

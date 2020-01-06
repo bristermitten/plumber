@@ -6,14 +6,14 @@ title: PlumberCommand - plumber
 
 # PlumberCommand
 
-`class PlumberCommand : BaseCommand`
+`class PlumberCommand : `[`BaseCommand`](https://aikar.github.io/commands/acf-core/co/aikar/commands/BaseCommand.html)
 
-Extension of [BaseCommand](#) that gives extra boilerplate handling
+Extension of [BaseCommand](https://aikar.github.io/commands/acf-core/co/aikar/commands/BaseCommand.html) that gives extra boilerplate handling
 It's recommended to use this class
 
 ### Constructors
 
-| [&lt;init&gt;](-init-.html) | Extension of [BaseCommand](#) that gives extra boilerplate handling It's recommended to use this class`PlumberCommand()` |
+| [&lt;init&gt;](-init-.html) | Extension of [BaseCommand](https://aikar.github.io/commands/acf-core/co/aikar/commands/BaseCommand.html) that gives extra boilerplate handling It's recommended to use this class`PlumberCommand()` |
 
 ### Functions
 

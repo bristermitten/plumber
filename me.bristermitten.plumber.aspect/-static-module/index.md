@@ -22,9 +22,9 @@ and then the Aspect will be injected with the bindings from the module.
 
 ### Constructors
 
-| [&lt;init&gt;](-init-.html) | Only applicable to subclasses of [Aspect](../-aspect/index.html).`StaticModule(target: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<out Module>)` |
+| [&lt;init&gt;](-init-.html) | Only applicable to subclasses of [Aspect](../-aspect/index.html).`StaticModule(target: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<out `[`Module`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html)`>)` |
 
 ### Properties
 
-| [target](target.html) | `val target: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<out Module>` |
+| [target](target.html) | `val target: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<out `[`Module`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html)`>` |
 

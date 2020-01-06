@@ -8,5 +8,5 @@ title: EventControllerImpl.cancelAll - plumber
 
 `fun cancelAll(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Cancel all instances of the event by calling [Cancellable.setCancelled](#)
+Cancel all instances of the event by calling [Cancellable.setCancelled](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/Cancellable.html#setCancelled(boolean))
 

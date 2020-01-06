@@ -6,4 +6,4 @@ title: ExtensionMap.<init> - plumber
 
 # &lt;init&gt;
 
-`ExtensionMap(injector: Injector)`
+`ExtensionMap(injector: `[`Injector`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html)`)`

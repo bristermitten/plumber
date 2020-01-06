@@ -11,7 +11,7 @@ title: PlumberPlugin.<init> - plumber
 Basic no-args constructor
 This constructor it provided so that it can be overridden for mocking or similar purposes
 
-`PlumberPlugin(loader: JavaPluginLoader?, description: PluginDescriptionFile?, dataFolder: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`?, file: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`?)`
+`PlumberPlugin(loader: `[`JavaPluginLoader`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java/JavaPluginLoader.html)`?, description: `[`PluginDescriptionFile`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/PluginDescriptionFile.html)`?, dataFolder: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`?, file: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`?)`
 
 Basic JavaPlugin constructor
 This constructor it provided so that it can be overridden for mocking or similar purposes

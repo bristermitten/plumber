@@ -9,5 +9,5 @@ title: AbstractAspect.<init> - plumber
 `AbstractAspect()`
 
 Boilerplate-handling abstract implementation of [Aspect](../-aspect/index.html)
-Provides logging, enabled-status handling, and a wrapper for Guice's [Injector](#)
+Provides logging, enabled-status handling, and a wrapper for Guice's [Injector](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html)
 

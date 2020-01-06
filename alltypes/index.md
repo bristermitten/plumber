@@ -9,7 +9,7 @@ title: alltypes - plumber
 ##### [me.bristermitten.plumber.aspect.AbstractAspect](../me.bristermitten.plumber.aspect/-abstract-aspect/index.html)
 
 Boilerplate-handling abstract implementation of [Aspect](../me.bristermitten.plumber.aspect/-aspect/index.html)
-Provides logging, enabled-status handling, and a wrapper for Guice's [Injector](#)
+Provides logging, enabled-status handling, and a wrapper for Guice's [Injector](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html)
 
 
 |
@@ -109,7 +109,7 @@ extra functionality
 
 ##### [me.bristermitten.plumber.boot.ClassGraphProvider](../me.bristermitten.plumber.boot/-class-graph-provider/index.html)
 
-Guice [Provider](#) for [ClassGraph](#)
+Guice [Provider](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html) for [ClassGraph](#)
 This lazily initialises the instance, and uses [PlumberInfo](../me.bristermitten.plumber.boot/-plumber-info/index.html) to whitelist packages
 
 
@@ -201,8 +201,8 @@ Aspect containing the management of all default DSL implementations
 ##### [me.bristermitten.plumber.struct.event.EventController](../me.bristermitten.plumber.struct.event/-event-controller/index.html)
 
 A wrapper for handling events that provides simple boilerplate handling
-Currently, only supports [Cancellable](#) instances of [PlayerEvent](#)
-All instances have an [EventPriority](#) of [EventPriority.NORMAL](#)
+Currently, only supports [Cancellable](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/Cancellable.html) instances of [PlayerEvent](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/player/PlayerEvent.html)
+All instances have an [EventPriority](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/EventPriority.html) of [EventPriority.NORMAL](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/EventPriority.html#NORMAL)
 For performance reasons, if no handling functionality is defined, the controller is not registered into Bukkit
 
 
@@ -267,9 +267,9 @@ Factory for creating objects that Guice cannot handle
 
 ##### [me.bristermitten.plumber.boot.InjectorHolder](../me.bristermitten.plumber.boot/-injector-holder/index.html)
 
-Holder class for Guice's [Injector](#)
-Because the current [Injector](#) is modified frequently in Aspect creation, if an
-Aspect has an instance of [Injector](#) injected it will not necessarily have every binding required.
+Holder class for Guice's [Injector](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html)
+Because the current [Injector](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html) is modified frequently in Aspect creation, if an
+Aspect has an instance of [Injector](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html) injected it will not necessarily have every binding required.
 
 
 |
@@ -389,7 +389,7 @@ Event that gives Plumber functionality to the default Bukkit event
 
 ##### [me.bristermitten.plumber.command.PlumberCommand](../me.bristermitten.plumber.command/-plumber-command/index.html)
 
-Extension of [BaseCommand](#) that gives extra boilerplate handling
+Extension of [BaseCommand](https://aikar.github.io/commands/acf-core/co/aikar/commands/BaseCommand.html) that gives extra boilerplate handling
 It's recommended to use this class
 
 
@@ -429,7 +429,7 @@ Class responsible for loading the entirety of Plumber.
 ##### [me.bristermitten.plumber.PlumberPlugin](../me.bristermitten.plumber/-plumber-plugin/index.html)
 
 Main class of Plumber. A Plugin that uses Plumber should extend this instead of
-[JavaPlugin](#), as it is responsible for the loading of the framework,
+[JavaPlugin](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/java/JavaPlugin.html), as it is responsible for the loading of the framework,
 and may handle more in the future.
 
 
@@ -442,7 +442,7 @@ and may handle more in the future.
 
 ##### [me.bristermitten.plumber.struct.player.PPlayer](../me.bristermitten.plumber.struct.player/-p-player/index.html)
 
-Plumber wrapper for the [Player](#) class
+Plumber wrapper for the [Player](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html) class
 Allows lots of boilerplate on Players do be done easily
 
 
@@ -455,7 +455,7 @@ Allows lots of boilerplate on Players do be done easily
 
 ##### [me.bristermitten.plumber.struct.player.PPlayerManager](../me.bristermitten.plumber.struct.player/-p-player-manager/index.html)
 
-Singleton for managing implementations of [PPlayer](../me.bristermitten.plumber.struct.player/-p-player/index.html) bound to their underlying [Player](#)
+Singleton for managing implementations of [PPlayer](../me.bristermitten.plumber.struct.player/-p-player/index.html) bound to their underlying [Player](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html)
 
 
 |

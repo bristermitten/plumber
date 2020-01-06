@@ -8,6 +8,6 @@ title: PlumberCommand.<init> - plumber
 
 `PlumberCommand()`
 
-Extension of [BaseCommand](#) that gives extra boilerplate handling
+Extension of [BaseCommand](https://aikar.github.io/commands/acf-core/co/aikar/commands/BaseCommand.html) that gives extra boilerplate handling
 It's recommended to use this class
 

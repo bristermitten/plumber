@@ -8,5 +8,5 @@ title: me.bristermitten.plumber.event.player - plumber
 
 ### Types
 
-| [PlayerJoinEvent](-player-join-event/index.html) | Event that gives Plumber functionality to the default Bukkit event`class PlayerJoinEvent : PlayerJoinEvent` |
+| [PlayerJoinEvent](-player-join-event/index.html) | Event that gives Plumber functionality to the default Bukkit event`class PlayerJoinEvent : `[`PlayerJoinEvent`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/player/PlayerJoinEvent.html) |
 

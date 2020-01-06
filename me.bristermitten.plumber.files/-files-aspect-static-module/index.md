@@ -6,7 +6,7 @@ title: FilesAspectStaticModule - plumber
 
 # FilesAspectStaticModule
 
-`class FilesAspectStaticModule : AbstractModule`
+`class FilesAspectStaticModule : `[`AbstractModule`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/AbstractModule.html)
 
 ### Constructors
 

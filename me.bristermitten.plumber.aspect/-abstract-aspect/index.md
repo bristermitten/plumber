@@ -9,11 +9,11 @@ title: AbstractAspect - plumber
 `abstract class AbstractAspect : `[`Aspect`](../-aspect/index.html)
 
 Boilerplate-handling abstract implementation of [Aspect](../-aspect/index.html)
-Provides logging, enabled-status handling, and a wrapper for Guice's [Injector](#)
+Provides logging, enabled-status handling, and a wrapper for Guice's [Injector](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html)
 
 ### Constructors
 
-| [&lt;init&gt;](-init-.html) | Boilerplate-handling abstract implementation of [Aspect](../-aspect/index.html) Provides logging, enabled-status handling, and a wrapper for Guice's [Injector](#)`AbstractAspect()` |
+| [&lt;init&gt;](-init-.html) | Boilerplate-handling abstract implementation of [Aspect](../-aspect/index.html) Provides logging, enabled-status handling, and a wrapper for Guice's [Injector](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html)`AbstractAspect()` |
 
 ### Properties
 
@@ -26,7 +26,7 @@ Provides logging, enabled-status handling, and a wrapper for Guice's [Injector](
 | [doDisable](do-disable.html) | `open fun doDisable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [doEnable](do-enable.html) | `open fun doEnable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [enable](enable.html) | Enable the Aspect. This is called internally and only once: on server startup.`open fun enable(classes: `[`Collection`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html)`<`[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<*>>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [getModule](get-module.html) | Provide an optional Guice module to be installed. This is called *after* instantiation of the Aspect so nothing from this module can be used in the Aspect.`open fun getModule(): Module?` |
+| [getModule](get-module.html) | Provide an optional Guice module to be installed. This is called *after* instantiation of the Aspect so nothing from this module can be used in the Aspect.`open fun getModule(): `[`Module`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html)`?` |
 | [instance](instance.html) | `fun <T> instance(clazz: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<T>): T` |
 
 ### Inheritors

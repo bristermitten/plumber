@@ -10,6 +10,6 @@ title: CommandAspectConfig - plumber
 
 ### Functions
 
-| [afterRegistration](after-registration.html) | `abstract fun afterRegistration(commandManager: PaperCommandManager): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [beforeRegistration](before-registration.html) | `abstract fun beforeRegistration(commandManager: PaperCommandManager): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [afterRegistration](after-registration.html) | `abstract fun afterRegistration(commandManager: `[`PaperCommandManager`](https://aikar.github.io/commands/acf-core/co/aikar/commands/PaperCommandManager.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [beforeRegistration](before-registration.html) | `abstract fun beforeRegistration(commandManager: `[`PaperCommandManager`](https://aikar.github.io/commands/acf-core/co/aikar/commands/PaperCommandManager.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 

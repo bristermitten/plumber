@@ -6,9 +6,9 @@ title: ClassGraphProvider - plumber
 
 # ClassGraphProvider
 
-`class ClassGraphProvider : Provider<ClassGraph>`
+`class ClassGraphProvider : `[`Provider`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html)`<ClassGraph>`
 
-Guice [Provider](#) for [ClassGraph](#)
+Guice [Provider](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html) for [ClassGraph](#)
 This lazily initialises the instance, and uses [PlumberInfo](../-plumber-info/index.html) to whitelist packages
 
 **Author**
@@ -16,7 +16,7 @@ Alexander Wood (BristerMitten)
 
 ### Constructors
 
-| [&lt;init&gt;](-init-.html) | Guice [Provider](#) for [ClassGraph](#) This lazily initialises the instance, and uses [PlumberInfo](../-plumber-info/index.html) to whitelist packages`ClassGraphProvider(info: `[`PlumberInfo`](../-plumber-info/index.html)`)` |
+| [&lt;init&gt;](-init-.html) | Guice [Provider](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html) for [ClassGraph](#) This lazily initialises the instance, and uses [PlumberInfo](../-plumber-info/index.html) to whitelist packages`ClassGraphProvider(info: `[`PlumberInfo`](../-plumber-info/index.html)`)` |
 
 ### Functions
 

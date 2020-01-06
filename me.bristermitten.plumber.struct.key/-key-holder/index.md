@@ -18,5 +18,5 @@ A KeyHolder defines an entity that holds key-value storage in the form of [DataK
 
 ### Inheritors
 
-| [PPlayer](../../me.bristermitten.plumber.struct.player/-p-player/index.html) | Plumber wrapper for the [Player](#) class Allows lots of boilerplate on Players do be done easily`interface PPlayer : `[`KeyHolder`](./index.html)`, `[`Extendable`](../../me.bristermitten.plumber.struct.extension/-extendable/index.html)`<`[`PPlayer`](../../me.bristermitten.plumber.struct.player/-p-player/index.html)`, `[`PlayerExtension`](../../me.bristermitten.plumber.struct.player/-player-extension.html)`>` |
+| [PPlayer](../../me.bristermitten.plumber.struct.player/-p-player/index.html) | Plumber wrapper for the [Player](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html) class Allows lots of boilerplate on Players do be done easily`interface PPlayer : `[`KeyHolder`](./index.html)`, `[`Extendable`](../../me.bristermitten.plumber.struct.extension/-extendable/index.html)`<`[`PPlayer`](../../me.bristermitten.plumber.struct.player/-p-player/index.html)`, `[`PlayerExtension`](../../me.bristermitten.plumber.struct.player/-player-extension.html)`>` |
 
