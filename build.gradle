@@ -125,21 +125,8 @@ publishing {
     }
 }
 
-javadoc {
-    source = sourceSets.main.allSource
-    include '**/me/bristermitten/plumber/**'
-    destinationDir = file('docs')
-}
 
 dokka {
-    outputFormat = 'html'
+    outputFormat = 'jekyll'
     outputDirectory = "$projectDir/docs"
-
-    configuration {
-
-        reportUndocumented = true
-
-        targets = ["JVM"]
-    }
-
 }

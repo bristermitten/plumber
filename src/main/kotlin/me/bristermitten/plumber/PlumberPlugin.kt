@@ -35,8 +35,22 @@ open class PlumberPlugin : JavaPlugin {
     @Inject
     protected lateinit var holder: InjectorHolder
 
+    /**
+     * Basic no-args constructor
+     * This constructor it provided so that it can be overridden for mocking or similar purposes
+     */
     constructor() : super()
-    constructor(loader: JavaPluginLoader?, description: PluginDescriptionFile?, dataFolder: File?, file: File?) : super(loader, description, dataFolder, file)
+
+    /**
+     * Basic JavaPlugin constructor
+     * This constructor it provided so that it can be overridden for mocking or similar purposes
+     */
+    constructor(loader: JavaPluginLoader?, description: PluginDescriptionFile?, dataFolder: File?, file: File?) : super(
+        loader,
+        description,
+        dataFolder,
+        file
+    )
 
 
     /**
