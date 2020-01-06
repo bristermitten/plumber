@@ -7,3 +7,6 @@ title: MappedTo.fileName - plumber
 # fileName
 
 `val fileName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+
+The name of the storage. Files will be made in the plugin directory
+

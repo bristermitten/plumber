@@ -6,4 +6,7 @@ title: MappedTo.type - plumber
 
 # type
 
-`val type: FileType`
+`val type: `[`StorageType`](../-storage-type/index.html)
+
+The type of storage to use. If not specified, it will be inferred from the file extension
+

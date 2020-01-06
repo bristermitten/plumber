@@ -6,4 +6,4 @@ title: FilesAspect.FileInfo.type - plumber
 
 # type
 
-`val type: FileType`
+`val type: `[`StorageType`](../../-storage-type/index.html)

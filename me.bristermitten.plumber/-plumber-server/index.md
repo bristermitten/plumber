@@ -6,7 +6,7 @@ title: PlumberServer - plumber
 
 # PlumberServer
 
-`class PlumberServer`
+`@Unstable("No functionality yet") class PlumberServer`
 
 ### Constructors
 

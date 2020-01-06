@@ -6,7 +6,7 @@ title: CompareRootTimePicker - plumber
 
 # CompareRootTimePicker
 
-`interface CompareRootTimePicker`
+`@Unstable("No implementation yet") interface CompareRootTimePicker`
 
 Picker interface for picking a distance from a certain time
 

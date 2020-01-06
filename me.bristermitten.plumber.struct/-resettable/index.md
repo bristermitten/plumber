@@ -6,7 +6,7 @@ title: Resettable - plumber
 
 # Resettable
 
-`interface Resettable`
+`@Unstable("The future of this interface is not yet decided, and it may be removed due to lack of usefulness or creating convoluted implementations") interface Resettable`
 
 Indicates that something can be reset
 

@@ -8,5 +8,5 @@ title: MappingType.TWO_WAY - plumber
 
 `TWO_WAY`
 
-Changes to the object affect the storage and vice versa
+Changes to the object affect the storage and vice versa.
 

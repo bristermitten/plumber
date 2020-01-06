@@ -7,3 +7,6 @@ title: StorageMapping.type - plumber
 # type
 
 `val type: `[`MappingType`](../-mapping-type/index.html)
+
+the type of mapping to use
+

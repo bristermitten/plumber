@@ -6,7 +6,7 @@ title: DistanceComparer - plumber
 
 # DistanceComparer
 
-`interface DistanceComparer<T>`
+`@Unstable("No implementation yet") interface DistanceComparer<T>`
 
 DSL Picker for comparing lengths, often of time
 

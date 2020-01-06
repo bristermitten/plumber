@@ -8,6 +8,6 @@ title: MappingType.ONE_WAY_FROM_STORAGE - plumber
 
 `ONE_WAY_FROM_STORAGE`
 
-Changes to the object do not affect the storage but if the storage changes the object is updated
-only really applicable to sql
+Changes to the object do not affect the storage but if the storage changes the object is updated.
+Only applicable to SQL.
 

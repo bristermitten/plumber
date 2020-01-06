@@ -7,3 +7,7 @@ title: Id.<init> - plumber
 # &lt;init&gt;
 
 `Id()`
+
+Define the Id parameter for a data class
+This is only needed for Key-Value storage, and is used as the key
+

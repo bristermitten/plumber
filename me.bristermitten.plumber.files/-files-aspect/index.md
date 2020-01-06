@@ -6,12 +6,11 @@ title: FilesAspect - plumber
 
 # FilesAspect
 
-`@StaticModule(FilesAspectStaticModule) @RequiredAspect class FilesAspect : `[`AbstractAspect`](../../me.bristermitten.plumber.aspect/-abstract-aspect/index.html)
+`@RequiredAspect class FilesAspect : `[`AbstractAspect`](../../me.bristermitten.plumber.aspect/-abstract-aspect/index.html)
 
 ### Types
 
 | [FileInfo](-file-info/index.html) | `data class FileInfo` |
-| [FileType](-file-type/index.html) | `enum class FileType` |
 
 ### Constructors
 

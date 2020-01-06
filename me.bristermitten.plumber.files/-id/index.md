@@ -8,7 +8,10 @@ title: Id - plumber
 
 `@Target([AnnotationTarget.FIELD]) annotation class Id`
 
+Define the Id parameter for a data class
+This is only needed for Key-Value storage, and is used as the key
+
 ### Constructors
 
-| [&lt;init&gt;](-init-.html) | `Id()` |
+| [&lt;init&gt;](-init-.html) | Define the Id parameter for a data class This is only needed for Key-Value storage, and is used as the key`Id()` |
 

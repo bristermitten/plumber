@@ -6,4 +6,4 @@ title: FilesAspect.FileInfo.<init> - plumber
 
 # &lt;init&gt;
 
-`FileInfo(name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, type: FileType)`
+`FileInfo(name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, type: `[`StorageType`](../../-storage-type/index.html)`)`

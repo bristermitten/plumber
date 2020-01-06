@@ -5,6 +5,7 @@ $dokka.location:me.bristermitten.plumber.util$filterIsAnnotation(kotlin.sequence
 $dokka.location:me.bristermitten.plumber.util$getAnnotation(java.lang.Class((kotlin.Any)), kotlin.reflect.KClass((me.bristermitten.plumber.util.getAnnotation.A)))me.bristermitten.plumber.util/java.lang.-class/get-annotation.html
 $dokka.location:me.bristermitten.plumber.util$getInstance(com.google.inject.Injector, kotlin.reflect.KClass((me.bristermitten.plumber.util.getInstance.T)))me.bristermitten.plumber.util/com.google.inject.-injector/get-instance.html
 $dokka.location:me.bristermitten.plumber.util$isAnnotationPresent(java.lang.Class((kotlin.Any)), kotlin.reflect.KClass((kotlin.Annotation)))me.bristermitten.plumber.util/java.lang.-class/is-annotation-present.html
+$dokka.location:me.bristermitten.plumber.util$packageName(java.lang.Class((kotlin.Any)))me.bristermitten.plumber.util/java.lang.-class/package-name.html
 me.bristermitten.plumber
 me.bristermitten.plumber.annotation
 me.bristermitten.plumber.aspect

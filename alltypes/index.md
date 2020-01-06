@@ -165,11 +165,6 @@ They are bound as eager singletons
 
 |
 
-##### [me.bristermitten.plumber.files.Data](../me.bristermitten.plumber.files/-data/index.html)
-
-
-|
-
 ##### [me.bristermitten.plumber.struct.key.DataKey](../me.bristermitten.plumber.struct.key/-data-key/index.html)
 
 A DataKey provides a key for storing key-value data in entities
@@ -249,6 +244,9 @@ Default implementation of [EventController](../me.bristermitten.plumber.struct.e
 |
 
 ##### [me.bristermitten.plumber.files.Id](../me.bristermitten.plumber.files/-id/index.html)
+
+Define the Id parameter for a data class
+This is only needed for Key-Value storage, and is used as the key
 
 
 |
@@ -334,10 +332,14 @@ Only applicable to subclasses of [Aspect](../me.bristermitten.plumber.aspect/-as
 
 ##### [me.bristermitten.plumber.files.MappedTo](../me.bristermitten.plumber.files/-mapped-to/index.html)
 
+Map an object to a persistent store i.e. a File or Database
+
 
 |
 
 ##### [me.bristermitten.plumber.files.MappingType](../me.bristermitten.plumber.files/-mapping-type/index.html)
+
+Methods of mapping data to a backend storage
 
 
 | (extensions in package me.bristermitten.plumber.util)
@@ -513,6 +515,15 @@ Only applicable to subclasses of [Aspect](../me.bristermitten.plumber.aspect/-as
 |
 
 ##### [me.bristermitten.plumber.files.StorageMapping](../me.bristermitten.plumber.files/-storage-mapping/index.html)
+
+The type of mapping to use from memory to storage
+
+
+|
+
+##### [me.bristermitten.plumber.files.StorageType](../me.bristermitten.plumber.files/-storage-type/index.html)
+
+Types of File or storage to use for saving and loading data
 
 
 |

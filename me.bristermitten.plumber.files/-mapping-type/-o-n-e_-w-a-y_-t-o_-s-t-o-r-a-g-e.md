@@ -8,5 +8,5 @@ title: MappingType.ONE_WAY_TO_STORAGE - plumber
 
 `ONE_WAY_TO_STORAGE`
 
-Changes to the object affect the storage but after initial loading the object is not changed
+Changes to the object affect the storage but after initial loading the object is not changed.
 
