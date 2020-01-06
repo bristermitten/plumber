@@ -162,7 +162,9 @@ class ClassFinder @Inject constructor(
         get() {
             if (field != null) return field
             val file = plumberPlugin.getResource(SCAN_FILE_NAME) ?: return null
-            field = String(file.readAllBytes())
+            file.use {
+                field = String(it.readBytes())
+            }
             return field
         }
 

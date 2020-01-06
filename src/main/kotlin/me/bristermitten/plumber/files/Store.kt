@@ -5,6 +5,7 @@ interface Store<T> {
     fun reload()
 
     fun loadWith(data: Any)
+
     fun save(t: T)
 }
 

@@ -10,6 +10,7 @@ import org.yaml.snakeyaml.nodes.Tag
 import org.yaml.snakeyaml.representer.Representer
 
 class FilesAspectStaticModule : AbstractModule() {
+
     override fun configure() {
         install(FactoryModuleBuilder().build(PlumberFileFactory::class.java))
 

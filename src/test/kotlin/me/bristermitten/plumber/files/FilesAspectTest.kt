@@ -1,8 +1,6 @@
 package me.bristermitten.plumber.files
 
 import me.bristermitten.plumber.PlumberExtension
-import me.bristermitten.plumber.TestPlugin
-import org.bukkit.plugin.java.JavaPlugin
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Test
@@ -18,7 +16,7 @@ class FilesAspectTest{
 
         val store = plugin.getInstance(type)
 
-        val element = Data(id = 3, name = "Test")
+        val element = TestDataClass(id = 3, name = "Test")
         store.add(element)
         store.flush()
 
@@ -40,7 +38,7 @@ class FilesAspectTest{
 
         val store = plugin.getInstance(type)
 
-        val element = Data(id = 3, name = "Test")
+        val element = TestDataClass(id = 3, name = "Test")
 
         store.save(element)
         store.flush()
@@ -58,10 +56,10 @@ class FilesAspectTest{
     }
 
     @MappedTo("test.yml")
-    interface TestStore : ValueStore<Data>
+    interface TestStore : ValueStore<TestDataClass>
 
     @MappedTo("test.yml")
-    interface TestKeyStore : KeyValueStore<Long, Data>
+    interface TestKeyStore : KeyValueStore<Long, TestDataClass>
 
 //    @MappedTo("config-test.yml")
 //    class TestConfig  {

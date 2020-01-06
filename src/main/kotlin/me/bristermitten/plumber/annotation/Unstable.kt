@@ -9,4 +9,5 @@ package me.bristermitten.plumber.annotation
  * It's important to note that at this stage, everything in Plumber is considered unstable, as
  * it is all subject to changes.
  */
+@MustBeDocumented
 annotation class Unstable(val reason: String = "")

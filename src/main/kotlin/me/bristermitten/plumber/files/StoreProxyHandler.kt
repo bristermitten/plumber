@@ -15,8 +15,7 @@ sealed class StoreProxyHandler(
 
     open fun setType(type: Class<*>){}
 
-    protected val methodTable: Table<String, List<Class<*>>,
-            (Array<Any>) -> Any?> = HashBasedTable.create()
+    protected val methodTable: Table<String, List<Class<*>>, (Array<Any>) -> Any?> = HashBasedTable.create()
 
     init {
         methodTable.put("flush", emptyList()) {
@@ -31,9 +30,6 @@ sealed class StoreProxyHandler(
         }
         methodTable.put("loadWith", listOf(Any::class.java)) { args ->
             load(args[0])
-        }
-        methodTable.put("equals", listOf(Any::class.java)) {
-            collectionProxy == it[0]
         }
     }
 

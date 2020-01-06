@@ -41,3 +41,8 @@ fun Sequence<Class<*>>.filterIsAnnotation(): Sequence<Class<out Annotation>> {
     @Suppress("UNCHECKED_CAST")
     return filter { it.isAnnotation } as Sequence<Class<out Annotation>>
 }
+
+
+fun Class<*>.packageName(): String {
+    return `package`.name
+}

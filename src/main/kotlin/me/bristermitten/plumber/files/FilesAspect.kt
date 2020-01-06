@@ -20,8 +20,7 @@ class FilesAspect @Inject constructor(
     private val plumberFileFactory: PlumberFileFactory
 ) : AbstractAspect() {
 
-
-    private val stores: MutableSet<Pair<Class<*>, Any>> = HashSet()
+    private val stores: MutableMap<Class<*>, Any> = HashMap()
 
     override fun doEnable() {
         classes.map { reflector.getStructure(it) }
@@ -29,7 +28,8 @@ class FilesAspect @Inject constructor(
             .forEach { structure ->
                 val type = structure.type
 
-                val typeParameters = type.genericInterfaces.filterIsInstance<ParameterizedType>()
+                val typeParameters = type.genericInterfaces
+                    .filterIsInstance<ParameterizedType>()
                     .first {
                         Store::class.java.isAssignableFrom(it.rawType as Class<*>)
                     }.actualTypeArguments.toList()
@@ -42,8 +42,8 @@ class FilesAspect @Inject constructor(
                 val info = getFileInfo(structure.info.getAnnotation(MappedTo::class.java))
 
                 val file = when (info.type) {
-                    FileType.YAML -> plumberFileFactory.createYaml(info.name)
-                    FileType.JSON -> plumberFileFactory.createJson(info.name)
+                    StorageType.YAML -> plumberFileFactory.createYaml(info.name)
+                    StorageType.JSON -> plumberFileFactory.createJson(info.name)
                     else -> null
                 } ?: return@forEach
 
@@ -74,30 +74,28 @@ class FilesAspect @Inject constructor(
 
 
                 file.type = token
-                stores.add(type to store)
+                stores[type] = store
                 logger.info("Registered $type")
             }
     }
 
     private fun getFileInfo(mappedTo: MappedTo): FileInfo {
-        if (mappedTo.type != FileType.INFER)
+        if (mappedTo.type != StorageType.INFER)
             return FileInfo(mappedTo.fileName, mappedTo.type)
 
         val type = when (FilenameUtils.getExtension(mappedTo.fileName).toLowerCase()) {
-            "json" -> FileType.JSON
-            "yml" -> FileType.YAML
-            "yaml" -> FileType.YAML
-            "db" -> FileType.SQL
-            "sql" -> FileType.SQL
-            else -> FileType.YAML
+            "json" -> StorageType.JSON
+            "yml" -> StorageType.YAML
+            "yaml" -> StorageType.YAML
+            "db" -> StorageType.SQL
+            "sql" -> StorageType.SQL
+            else -> StorageType.YAML
         }
         return FileInfo(mappedTo.fileName, type)
     }
 
-    data class FileInfo(val name: String, val type: FileType)
-    enum class FileType {
-        JSON, YAML, SQL, INFER
-    }
+    data class FileInfo(val name: String, val type: StorageType)
+
 
     override fun getModule(): Module {
         return createGuiceModule {

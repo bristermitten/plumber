@@ -4,6 +4,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import me.bristermitten.plumber.PlumberPlugin
 import me.bristermitten.plumber.reflection.ClassFinder
+import me.bristermitten.plumber.util.packageName
 
 /**
  * Holds info about the running Plumber instance.
@@ -27,7 +28,7 @@ class PlumberInfo {
 
     @Inject
     constructor(plumberPlugin: PlumberPlugin) {
-        this.externalPluginPackage = plumberPlugin.javaClass.packageName
+        this.externalPluginPackage = plumberPlugin.javaClass.packageName()
     }
 
     /**
@@ -37,5 +38,5 @@ class PlumberInfo {
     /**
      * Plumber's package for internals
      */
-    val plumberPackage: String = PlumberPlugin::class.java.packageName
+    val plumberPackage: String = PlumberPlugin::class.java.packageName()
 }

@@ -38,7 +38,6 @@ annotation class RequiredAspect(val priority: Int = 0)
  */
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)
-@MustBeDocumented
 annotation class StaticModule(val target: KClass<out Module>)
 
 
