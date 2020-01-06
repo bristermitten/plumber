@@ -3,6 +3,7 @@ package me.bristermitten.plumber.boot
 import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Singleton
+import me.bristermitten.plumber.aspect.Aspect
 import org.slf4j.LoggerFactory
 
 /**

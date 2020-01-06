@@ -22,7 +22,7 @@ import org.bukkit.event.player.PlayerEvent
  * Per online player, one [PPlayer] instance exists. As with Bukkit's Player,
  * this will be removed from storage if the player logs out,
  * so it's advised not to store instances if possible, as they will not be able to be
- * garbage collected otherwise. If necessary, [WeakReference] is advised.
+ * garbage collected otherwise. If necessary, weak references are advised
  */
 @ImplementedBy(PPlayerImpl::class)
 interface PPlayer : KeyHolder, Extendable<PPlayer, PlayerExtension> {

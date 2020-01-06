@@ -50,7 +50,7 @@ dependencies {
     }
 
 
-    testApi ('com.github.knightzmc:mockbukkit:4afe7bda8bfad66811634e6fae544dcdb52f32a3'){
+    testApi('com.github.knightzmc:mockbukkit:4afe7bda8bfad66811634e6fae544dcdb52f32a3') {
         exclude group: 'junit'
     }
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.2"
@@ -132,6 +132,14 @@ javadoc {
 }
 
 dokka {
-    outputFormat = 'html' 
-    outputDirectory = "$buildDir/docs"
+    outputFormat = 'html'
+    outputDirectory = "$projectDir/docs"
+
+    configuration {
+
+        reportUndocumented = true
+
+        targets = ["JVM"]
+    }
+
 }

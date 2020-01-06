@@ -8,8 +8,7 @@ class KeyChangeChooserImpl<R, K>(
     private val r: R,
     private val watching: DataKey<K>,
     private val callback: Runnable
-) :
-    KeyChangeChooser<R, K> {
+) : KeyChangeChooser<R, K> {
 
     private var consumer: Consumer<K>? = null
 

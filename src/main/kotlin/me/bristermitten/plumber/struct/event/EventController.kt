@@ -1,6 +1,7 @@
 package me.bristermitten.plumber.struct.event
 
 import org.bukkit.event.Cancellable
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerEvent
 import java.util.function.Predicate

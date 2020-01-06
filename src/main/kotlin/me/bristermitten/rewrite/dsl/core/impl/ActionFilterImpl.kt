@@ -4,7 +4,7 @@ import me.bristermitten.rewrite.dsl.core.ActionFilter
 import me.bristermitten.rewrite.dsl.core.BooleanOperator
 import java.util.function.Supplier
 
-internal open class ActionFilterImpl(private val runnable: Runnable) : ActionFilter<ActionFilterImpl> {
+class ActionFilterImpl(private val runnable: ()->Unit) : ActionFilter<ActionFilterImpl> {
     private var allowedToRun = true
 
     override fun whenIsTrue(boolean: Boolean): BooleanOperator<ActionFilterImpl> {
@@ -22,6 +22,6 @@ internal open class ActionFilterImpl(private val runnable: Runnable) : ActionFil
 
     override fun done() {
         if (allowedToRun)
-            runnable.run()
+            runnable()
     }
 }
