@@ -275,6 +275,11 @@ Aspect has an instance of [Injector](https://google.github.io/guice/api-docs/lat
 ##### [me.bristermitten.plumber.files.JsonPlumberFile](../me.bristermitten.plumber.files/-json-plumber-file/index.html)
 
 
+| (extensions in package me.bristermitten.plumber.util)
+
+##### [kotlin.reflect.KClass](../me.bristermitten.plumber.util/kotlin.reflect.-k-class/index.html)
+
+
 |
 
 ##### [me.bristermitten.plumber.dsl.KeyChangeChooser](../me.bristermitten.plumber.dsl/-key-change-chooser/index.html)
