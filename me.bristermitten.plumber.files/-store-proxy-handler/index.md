@@ -6,7 +6,7 @@ title: StoreProxyHandler - plumber
 
 # StoreProxyHandler
 
-`sealed class StoreProxyHandler : `[`InvocationHandler`](https://docs.oracle.com/javase/6/docs/api/java/lang/reflect/InvocationHandler.html)
+`@Unstable("Functional but not documented and undergoing heavy refactoring") sealed class StoreProxyHandler : `[`InvocationHandler`](https://docs.oracle.com/javase/6/docs/api/java/lang/reflect/InvocationHandler.html)
 
 ### Properties
 

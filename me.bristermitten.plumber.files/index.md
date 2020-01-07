@@ -10,7 +10,7 @@ title: me.bristermitten.plumber.files - plumber
 
 | [AbstractPlumberFile](-abstract-plumber-file/index.html) | `abstract class AbstractPlumberFile : `[`PlumberFile`](-plumber-file/index.html) |
 | [FilesAspect](-files-aspect/index.html) | `class FilesAspect : `[`AbstractAspect`](../me.bristermitten.plumber.aspect/-abstract-aspect/index.html) |
-| [FilesAspectStaticModule](-files-aspect-static-module/index.html) | `class FilesAspectStaticModule : `[`AbstractModule`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/AbstractModule.html) |
+| [FilesAspectStaticModule](-files-aspect-static-module/index.html) | Static Module for [FilesAspect](-files-aspect/index.html) Configures SnakeYaml and AssistedInject`class FilesAspectStaticModule : `[`AbstractModule`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/AbstractModule.html) |
 | [JsonPlumberFile](-json-plumber-file/index.html) | `class JsonPlumberFile : `[`AbstractPlumberFile`](-abstract-plumber-file/index.html) |
 | [KeyValueStore](-key-value-store.html) | `interface KeyValueStore<K, T> : `[`Store`](-store/index.html)`<T>, `[`MutableMap`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html)`<K, T>` |
 | [KeyValueStoreProxyHandler](-key-value-store-proxy-handler/index.html) | `class KeyValueStoreProxyHandler : `[`StoreProxyHandler`](-store-proxy-handler/index.html) |

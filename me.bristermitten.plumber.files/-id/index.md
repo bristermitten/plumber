@@ -6,7 +6,7 @@ title: Id - plumber
 
 # Id
 
-`@Target([AnnotationTarget.FIELD]) annotation class Id`
+`@Unstable("Functional but not documented and undergoing heavy refactoring") @Target([AnnotationTarget.FIELD]) annotation class Id`
 
 Define the Id parameter for a data class
 This is only needed for Key-Value storage, and is used as the key

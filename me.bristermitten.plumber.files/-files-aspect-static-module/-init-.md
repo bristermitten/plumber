@@ -7,3 +7,7 @@ title: FilesAspectStaticModule.<init> - plumber
 # &lt;init&gt;
 
 `FilesAspectStaticModule()`
+
+Static Module for [FilesAspect](../-files-aspect/index.html)
+Configures SnakeYaml and AssistedInject
+

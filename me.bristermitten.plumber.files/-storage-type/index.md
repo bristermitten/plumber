@@ -6,7 +6,7 @@ title: StorageType - plumber
 
 # StorageType
 
-`enum class StorageType`
+`@Unstable("Functional but not documented and undergoing heavy refactoring") enum class StorageType`
 
 Types of File or storage to use for saving and loading data
 

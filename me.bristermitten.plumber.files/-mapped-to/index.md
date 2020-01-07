@@ -6,7 +6,7 @@ title: MappedTo - plumber
 
 # MappedTo
 
-`@AspectAnnotation(FilesAspect) @Target([AnnotationTarget.CLASS]) annotation class MappedTo`
+`@Unstable("Functional but not documented and undergoing heavy refactoring") @AspectAnnotation(FilesAspect) @Target([AnnotationTarget.CLASS]) annotation class MappedTo`
 
 Map an object to a persistent store i.e. a File or Database
 

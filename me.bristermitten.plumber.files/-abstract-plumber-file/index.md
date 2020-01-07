@@ -6,7 +6,7 @@ title: AbstractPlumberFile - plumber
 
 # AbstractPlumberFile
 
-`abstract class AbstractPlumberFile : `[`PlumberFile`](../-plumber-file/index.html)
+`@Unstable("Functional but not documented and undergoing heavy refactoring") abstract class AbstractPlumberFile : `[`PlumberFile`](../-plumber-file/index.html)
 
 ### Constructors
 

@@ -240,6 +240,9 @@ Default implementation of [EventController](../me.bristermitten.plumber.struct.e
 
 ##### [me.bristermitten.plumber.files.FilesAspectStaticModule](../me.bristermitten.plumber.files/-files-aspect-static-module/index.html)
 
+Static Module for [FilesAspect](../me.bristermitten.plumber.files/-files-aspect/index.html)
+Configures SnakeYaml and AssistedInject
+
 
 |
 

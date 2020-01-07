@@ -6,7 +6,7 @@ title: Store - plumber
 
 # Store
 
-`interface Store<T>`
+`@Unstable("Functional but not documented and undergoing heavy refactoring") interface Store<T>`
 
 ### Functions
 

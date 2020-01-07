@@ -6,4 +6,4 @@ title: ValueStore - plumber
 
 # ValueStore
 
-`interface ValueStore<T> : `[`Store`](-store/index.html)`<T>, `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<T>`
+`@Unstable("Functional but not documented and undergoing heavy refactoring") interface ValueStore<T> : `[`Store`](-store/index.html)`<T>, `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<T>`

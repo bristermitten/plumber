@@ -6,7 +6,7 @@ title: PlumberFile - plumber
 
 # PlumberFile
 
-`interface PlumberFile`
+`@Unstable("Functional but not documented and undergoing heavy refactoring") interface PlumberFile`
 
 ### Functions
 

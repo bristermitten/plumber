@@ -6,11 +6,14 @@ title: FilesAspectStaticModule - plumber
 
 # FilesAspectStaticModule
 
-`class FilesAspectStaticModule : `[`AbstractModule`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/AbstractModule.html)
+`@Unstable("Functional but not documented and undergoing heavy refactoring") class FilesAspectStaticModule : `[`AbstractModule`](https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/AbstractModule.html)
+
+Static Module for [FilesAspect](../-files-aspect/index.html)
+Configures SnakeYaml and AssistedInject
 
 ### Constructors
 
-| [&lt;init&gt;](-init-.html) | `FilesAspectStaticModule()` |
+| [&lt;init&gt;](-init-.html) | Static Module for [FilesAspect](../-files-aspect/index.html) Configures SnakeYaml and AssistedInject`FilesAspectStaticModule()` |
 
 ### Functions
 

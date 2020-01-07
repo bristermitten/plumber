@@ -6,7 +6,7 @@ title: FilesAspect - plumber
 
 # FilesAspect
 
-`@RequiredAspect class FilesAspect : `[`AbstractAspect`](../../me.bristermitten.plumber.aspect/-abstract-aspect/index.html)
+`@Unstable("Functional but not documented and undergoing heavy refactoring") @RequiredAspect class FilesAspect : `[`AbstractAspect`](../../me.bristermitten.plumber.aspect/-abstract-aspect/index.html)
 
 ### Types
 
