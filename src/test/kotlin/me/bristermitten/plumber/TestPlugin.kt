@@ -6,7 +6,13 @@ import java.io.File
 
 //That's it!
 class TestPlugin : PlumberPlugin {
-    constructor(loader: JavaPluginLoader?, description: PluginDescriptionFile?, dataFolder: File?, file: File?) : super(loader, description, dataFolder, file)
+    constructor(loader: JavaPluginLoader?, description: PluginDescriptionFile?, dataFolder: File?, file: File?) : super(
+        loader,
+        description,
+        dataFolder,
+        file
+    )
 
     constructor()
+
 }

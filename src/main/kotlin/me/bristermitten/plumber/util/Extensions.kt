@@ -3,6 +3,7 @@ package me.bristermitten.plumber.util
 import com.google.inject.Guice
 import com.google.inject.Injector
 import com.google.inject.Module
+import java.lang.reflect.Type
 import kotlin.reflect.KClass
 
 /**
@@ -45,4 +46,10 @@ fun Sequence<Class<*>>.filterIsAnnotation(): Sequence<Class<out Annotation>> {
 
 fun Class<*>.packageName(): String {
     return `package`.name
+}
+
+fun KClass<*>.isAssignableFrom(type: Type) : Boolean {
+    if(type !is Class<*>)
+        return false
+    return java.isAssignableFrom(type)
 }

@@ -7,10 +7,12 @@ import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.RequiredAspect
 import me.bristermitten.plumber.aspect.StaticModule
 import me.bristermitten.plumber.util.Reflection.createGuiceModule
+import me.bristermitten.plumber.util.isAssignableFrom
 import me.bristermitten.reflector.Reflector
 import org.apache.commons.io.FilenameUtils
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Proxy
+import java.lang.reflect.Type
 
 
 @StaticModule(FilesAspectStaticModule::class)
@@ -25,19 +27,21 @@ class FilesAspect @Inject constructor(
     override fun doEnable() {
         classes.map { reflector.getStructure(it) }
             .filter { it.isSubTypeOf(Store::class.java) }
-            .forEach { structure ->
-                val type = structure.type
-
-                val typeParameters = type.genericInterfaces
-                    .filterIsInstance<ParameterizedType>()
-                    .first {
-                        Store::class.java.isAssignableFrom(it.rawType as Class<*>)
-                    }.actualTypeArguments.toList()
-
-                if (!structure.info.hasAnnotationType(MappedTo::class.java)) {
-                    logger.warn("Store class ${type.name} is not annotated with @MappedToFile. It will not be loaded.")
-                    return@forEach
+            .filter {
+                val hasAnnotation = it.info.hasAnnotationType(MappedTo::class.java)
+                if (!hasAnnotation) {
+                    logger.warn(
+                        "Store class {} is not annotated with @MappedToFile. It will not be loaded.",
+                        it.type.name
+                    )
                 }
+                hasAnnotation
+            }
+            .forEach { structure ->
+                @Suppress("UNCHECKED_CAST") //safe, checked in filter
+                val type = structure.type as Class<out Store<*>>
+
+                val typeParameters = getStoreTypeParameters(type)
 
                 val info = getFileInfo(structure.info.getAnnotation(MappedTo::class.java))
 
@@ -79,6 +83,20 @@ class FilesAspect @Inject constructor(
             }
     }
 
+    /**
+     * Get the type parameters of a given Store class
+     * Given a `class extends StoreImplementation<ParamA, ParamB> extends Store<ParamA>`
+     * this will retrieve ```[ParamA]```
+     */
+    private fun getStoreTypeParameters(type: Class<out Store<*>>): List<Type> {
+        return type.genericInterfaces
+            .filterIsInstance<ParameterizedType>()
+            .first {
+                //eg KeyValueStore or ValueStore
+                Store::class.isAssignableFrom(it.rawType)
+            }.actualTypeArguments.toList() //eg ValueStore<Data> => [Data]
+    }
+
     private fun getFileInfo(mappedTo: MappedTo): FileInfo {
         if (mappedTo.type != StorageType.INFER)
             return FileInfo(mappedTo.fileName, mappedTo.type)
@@ -87,8 +105,8 @@ class FilesAspect @Inject constructor(
             "json" -> StorageType.JSON
             "yml" -> StorageType.YAML
             "yaml" -> StorageType.YAML
-            "db" -> StorageType.SQL
-            "sql" -> StorageType.SQL
+//            "db" -> StorageType.SQL
+//            "sql" -> StorageType.SQL
             else -> StorageType.YAML
         }
         return FileInfo(mappedTo.fileName, type)
