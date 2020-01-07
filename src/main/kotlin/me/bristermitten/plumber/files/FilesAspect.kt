@@ -3,6 +3,7 @@ package me.bristermitten.plumber.files
 import com.google.gson.reflect.TypeToken
 import com.google.inject.Inject
 import com.google.inject.Module
+import me.bristermitten.plumber.annotation.Unstable
 import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.RequiredAspect
 import me.bristermitten.plumber.aspect.StaticModule
@@ -15,6 +16,7 @@ import java.lang.reflect.Proxy
 import java.lang.reflect.Type
 
 
+@Unstable("Functional but not documented and undergoing heavy refactoring")
 @StaticModule(FilesAspectStaticModule::class)
 @RequiredAspect
 class FilesAspect @Inject constructor(

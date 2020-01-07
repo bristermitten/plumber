@@ -3,11 +3,12 @@ package me.bristermitten.plumber.files
 import com.google.common.collect.HashBasedTable
 import com.google.common.collect.Table
 import com.google.gson.reflect.TypeToken
+import me.bristermitten.plumber.annotation.Unstable
 import me.bristermitten.reflector.Reflector
 import me.bristermitten.reflector.property.Property
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
-
+@Unstable("Functional but not documented and undergoing heavy refactoring")
 sealed class StoreProxyHandler(
         val collectionProxy: Any,
         val file: PlumberFile

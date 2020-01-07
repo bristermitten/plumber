@@ -3,10 +3,12 @@ package me.bristermitten.plumber.files
 import me.bristermitten.plumber.annotation.Unstable
 import me.bristermitten.plumber.aspect.AspectAnnotation
 
+
 /**
  * Define the Id parameter for a data class
  * This is only needed for Key-Value storage, and is used as the key
  */
+@Unstable("Functional but not documented and undergoing heavy refactoring")
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Id
@@ -16,6 +18,7 @@ annotation class Id
  * @param fileName The name of the storage. Files will be made in the plugin directory
  * @param type The type of storage to use. If not specified, it will be inferred from the file extension
  */
+@Unstable("Functional but not documented and undergoing heavy refactoring")
 @AspectAnnotation(FilesAspect::class)
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)

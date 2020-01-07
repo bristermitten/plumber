@@ -1,8 +1,11 @@
 package me.bristermitten.plumber.files
 
+import me.bristermitten.plumber.annotation.Unstable
+
 /**
  * Types of File or storage to use for saving and loading data
  */
+@Unstable("Functional but not documented and undergoing heavy refactoring")
 enum class StorageType {
     /**
      * Use Gson to load and save to a JSON file

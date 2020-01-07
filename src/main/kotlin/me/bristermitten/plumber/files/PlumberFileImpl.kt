@@ -5,11 +5,12 @@ import com.google.gson.reflect.TypeToken
 import com.google.inject.Inject
 import com.google.inject.assistedinject.Assisted
 import me.bristermitten.plumber.PlumberPlugin
+import me.bristermitten.plumber.annotation.Unstable
 import org.yaml.snakeyaml.Yaml
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
-
+@Unstable("Functional but not documented and undergoing heavy refactoring")
 abstract class AbstractPlumberFile(name: String, plugin: PlumberPlugin) : PlumberFile {
     private val file = File(plugin.dataFolder, name)
     lateinit var mapped: Store<*>

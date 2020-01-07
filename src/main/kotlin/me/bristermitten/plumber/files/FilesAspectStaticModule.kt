@@ -2,6 +2,7 @@ package me.bristermitten.plumber.files
 
 import com.google.inject.AbstractModule
 import com.google.inject.assistedinject.FactoryModuleBuilder
+import me.bristermitten.plumber.annotation.Unstable
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 import org.yaml.snakeyaml.introspector.Property
@@ -9,6 +10,11 @@ import org.yaml.snakeyaml.nodes.MappingNode
 import org.yaml.snakeyaml.nodes.Tag
 import org.yaml.snakeyaml.representer.Representer
 
+/**
+ * Static Module for [FilesAspect]
+ * Configures SnakeYaml and AssistedInject
+ */
+@Unstable("Functional but not documented and undergoing heavy refactoring")
 class FilesAspectStaticModule : AbstractModule() {
 
     override fun configure() {
