@@ -1,6 +1,7 @@
 package me.bristermitten.plumber.files
 
 import me.bristermitten.plumber.annotation.Unstable
+import me.bristermitten.plumber.util.filterNotNull
 import me.bristermitten.reflector.Reflector
 import me.bristermitten.reflector.property.Property
 import java.lang.reflect.InvocationHandler
@@ -58,10 +59,10 @@ class ValueStoreProxyHandler<T>(file: PlumberFile) : StoreProxyHandler<MutableLi
         val list = collectionProxy
         list.clear()
 
+        list.addAll(data.filterNotNull())
         for (element in data) {
             if (element != null) {
-                @Suppress("UNCHECKED_CAST")
-                list.add(element as T)
+                list.add(element)
             }
         }
     }
@@ -74,6 +75,6 @@ class KeyValueStoreProxyHandler<T>(file: PlumberFile, private val reflector: Ref
         val map = collectionProxy
         map.clear()
 
-        map.putAll(data)
+        map.putAll(data.filterValues { it != null })
     }
 }

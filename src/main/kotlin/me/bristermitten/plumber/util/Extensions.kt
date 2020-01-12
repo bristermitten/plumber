@@ -48,8 +48,17 @@ fun Class<*>.packageName(): String {
     return `package`.name
 }
 
-fun KClass<*>.isAssignableFrom(type: Type) : Boolean {
-    if(type !is Class<*>)
+fun KClass<*>.isAssignableFrom(type: Type): Boolean {
+    if (type !is Class<*>)
         return false
     return java.isAssignableFrom(type)
+}
+
+
+fun <T> Iterable<T?>.filterNotNull(): Iterable<T> {
+    val result = ArrayList<T>()
+    for (value in this) {
+        if (value != null) result += value
+    }
+    return result
 }
