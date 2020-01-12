@@ -28,6 +28,7 @@ class FilesAspectTest{
         assertEquals(1, store.size)
         assertEquals(element, store[0])
         assertEquals(listOf(element), store)
+
         assertFalse(element === store[0])
     }
 
@@ -52,14 +53,15 @@ class FilesAspectTest{
         assertEquals(1, store.size)
         assertEquals(element, store[element.id])
         assertEquals(mapOf(element.id to element), store)
+
         assertFalse(element === store[element.id])
     }
 
     @MappedTo("test.yml")
-    interface TestStore : ValueStore<TestDataClass>
+    interface TestStore : ObjectStore<TestDataClass>
 
     @MappedTo("test.yml")
-    interface TestKeyStore : KeyValueStore<Long, TestDataClass>
+    interface TestKeyStore : DictionaryStore<Long, TestDataClass>
 
 //    @MappedTo("config-test.yml")
 //    class TestConfig  {

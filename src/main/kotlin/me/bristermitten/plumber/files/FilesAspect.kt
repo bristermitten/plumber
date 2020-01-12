@@ -27,7 +27,9 @@ class FilesAspect @Inject constructor(
     private val stores: MutableMap<Class<*>, Any> = HashMap()
 
     override fun doEnable() {
-        classes.map { reflector.getStructure(it) }
+        classes
+            .parallelStream()
+            .map { reflector.getStructure(it) }
             .filter { it.isSubTypeOf(Store::class.java) }
             .filter {
                 val hasAnnotation = it.info.hasAnnotationType(MappedTo::class.java)
@@ -47,21 +49,26 @@ class FilesAspect @Inject constructor(
 
                 val info = getFileInfo(structure.info.getAnnotation(MappedTo::class.java))
 
+                val delegate = structure.info.getAnnotation(StoreDelegate::class.java)
+                    ?: throw BadStoreException("Store class has no Delegate type ${structure.type}")
+
+                println(delegate)
+
                 val file = when (info.type) {
                     StorageType.YAML -> plumberFileFactory.createYaml(info.name)
                     StorageType.JSON -> plumberFileFactory.createJson(info.name)
-                    else -> null
-                } ?: return@forEach
+                    else -> return@forEach
+                }
 
                 val handler: StoreProxyHandler
                 val typeOfStore: Class<*>
 
                 when {
-                    structure.isSubTypeOf(KeyValueStore::class.java) -> {
+                    structure.isSubTypeOf(DictionaryStore::class.java) -> {
                         handler = KeyValueStoreProxyHandler(file, reflector)
                         typeOfStore = typeParameters[1] as Class<*>
                     }
-                    structure.isSubTypeOf(ValueStore::class.java) -> {
+                    structure.isSubTypeOf(ObjectStore::class.java) -> {
                         handler = ValueStoreProxyHandler(file)
                         typeOfStore = typeParameters[0] as Class<*>
                     }
@@ -70,7 +77,6 @@ class FilesAspect @Inject constructor(
                     }
                 }
 
-                handler.setType(typeOfStore)
 
                 val store = Proxy.newProxyInstance(javaClass.classLoader, arrayOf(type), handler) as Store<*>
                 file.mapped = store

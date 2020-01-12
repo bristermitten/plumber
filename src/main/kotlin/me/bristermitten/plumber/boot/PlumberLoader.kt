@@ -9,8 +9,9 @@ import io.github.classgraph.ClassGraph
 import me.bristermitten.plumber.PlumberPlugin
 import me.bristermitten.plumber.aspect.*
 import me.bristermitten.plumber.reflection.ClassFinder
-import me.bristermitten.plumber.util.Reflection.createGuiceModule
 import me.bristermitten.plumber.util.*
+import me.bristermitten.plumber.util.Reflection.createGuiceModule
+import me.bristermitten.reflector.config.OptionsBuilder
 import me.bristermitten.reflector.inject.ReflectorBindingModule
 import org.slf4j.LoggerFactory
 import java.util.*
@@ -79,7 +80,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
             bind<PlumberPlugin>().toInstance(plugin)
             bind(plugin.javaClass).toInstance(plugin)
             bind<ClassGraph>().toProvider<ClassGraphProvider>()
-            install(ReflectorBindingModule())
+            install(ReflectorBindingModule(OptionsBuilder().scanSuperInterfaceAnnotations().build()))
         }.createInjector()
     }
 
@@ -152,7 +153,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
 
         holder.injector = holder.injector.createChildInjector(staticModule)
 
-        logger.debug("StaticModule loaded for Aspect {}", aspectClass)
+        logger.debug("StaticModule {} installed", aspectClass)
     }
 
     /**
@@ -181,7 +182,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
                 */
                 bind(aspectClass).asEagerSingleton()
             })
-            logger.debug("Bound instance of Aspect {}", aspectClass)
+            logger.debug("{} bound (singleton)", aspectClass)
         }
     }
 
@@ -194,7 +195,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
         val module = instance.getModule() ?: return
 
         holder.injector = holder.injector.createChildInjector(module)
-        logger.debug("Aspect Module installed for Aspect {}", instance.javaClass)
+        logger.debug("Module installed for {}", instance.javaClass)
     }
 
 }

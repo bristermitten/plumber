@@ -14,7 +14,7 @@ enum class StorageType {
     /**
      * Use Gson and SnakeYaml to load and save to a YAML file.
      * Significantly slower than JSON as because of limitations with generics,
-     * The data is first deserialized by Snakeyaml as [Any],
+     * The data is first deserialized by SnakeYaml as [Any],
      * then serialized to a JSON Tree by Gson, then deserialized to the required type
      */
     YAML,

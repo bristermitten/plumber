@@ -38,7 +38,7 @@ dependencies {
     compile 'org.slf4j:slf4j-log4j12:1.8.0-alpha2'
 
     compile 'dev.misfitlabs.kotlinguice4:kotlin-guice:1.4.1'
-    implementation('com.github.knightzmc:reflector:b860a37b8eee5b9ca804fef5d983cc7278727790') {
+    implementation('com.github.knightzmc:reflector:d26f357744df81ca7e73bfc361f3c135bf6d2d14') {
         exclude group: 'junit'
     }
 

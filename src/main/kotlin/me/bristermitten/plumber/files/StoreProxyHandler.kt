@@ -1,40 +1,42 @@
 package me.bristermitten.plumber.files
 
-import com.google.common.collect.HashBasedTable
-import com.google.common.collect.Table
-import com.google.gson.reflect.TypeToken
 import me.bristermitten.plumber.annotation.Unstable
 import me.bristermitten.reflector.Reflector
 import me.bristermitten.reflector.property.Property
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
+import kotlin.reflect.jvm.javaMethod
+
 @Unstable("Functional but not documented and undergoing heavy refactoring")
-sealed class StoreProxyHandler(
-        val collectionProxy: Any,
-        val file: PlumberFile
+sealed class StoreProxyHandler<P, T>(
+    val collectionProxy: P,
+    val file: PlumberFile,
+    val type: Class<T>,
+    reflector: Reflector
 ) : InvocationHandler {
 
-    open fun setType(type: Class<*>){}
+    protected val idProperty: Property = reflector.getStructure(type).searchProperties()
+        .byAnnotation(Id::class.java).search().findFirst().orElseThrow {
+            IllegalArgumentException("Class $type has no @Id property")
+        }
 
-    protected val methodTable: Table<String, List<Class<*>>, (Array<Any>) -> Any?> = HashBasedTable.create()
+    protected val methodTable: MutableMap<Method, (Array<Any>) -> Any?> = HashMap()
 
     init {
-        methodTable.put("flush", emptyList()) {
+        methodTable[Store<T>::flush.javaMethod!!] = {
             file.saveData()
         }
 
-        methodTable.put("reload", emptyList()) {
+        methodTable[Store<T>::reload.javaMethod!!] = {
             file.loadData()
         }
-        methodTable.put("getType", emptyList()) {
-            return@put collectionProxy.javaClass
-        }
-        methodTable.put("loadWith", listOf(Any::class.java)) { args ->
-            load(args[0])
+        methodTable[Store<T>::loadWith.javaMethod!!] = { args ->
+            @Suppress("UNCHECKED_CAST")
+            load(args[0] as P)
         }
     }
 
-    abstract fun load(data: Any)
+    abstract fun load(data: P)
 
     override fun invoke(proxy: Any?, method: Method, arguments: Array<Any>?): Any? {
         val args = arguments ?: arrayOf()
@@ -43,7 +45,7 @@ sealed class StoreProxyHandler(
             return method.invoke(collectionProxy, *args)
         }
 
-        val fromTable = methodTable.get(method.name, method.parameterTypes.toList())
+        val fromTable = methodTable[method]
 
         return if (fromTable != null) {
             fromTable(args)
@@ -51,49 +53,27 @@ sealed class StoreProxyHandler(
     }
 }
 
-class ValueStoreProxyHandler(file: PlumberFile) : StoreProxyHandler(ArrayList<Any>(), file) {
-    override fun load(data: Any) {
-        val list = collectionProxy as ArrayList<Any>
+class ValueStoreProxyHandler<T>(file: PlumberFile) : StoreProxyHandler<MutableList<T>, T>(ArrayList<T>(), file) {
+    override fun load(data: MutableList<T>) {
+        val list = collectionProxy
         list.clear()
 
-        if (data is Iterable<*>)
-            for (element in data) {
-                if (element != null) {
-                    list.add(element)
-                }
+        for (element in data) {
+            if (element != null) {
+                @Suppress("UNCHECKED_CAST")
+                list.add(element as T)
             }
+        }
     }
 }
 
-class KeyValueStoreProxyHandler(file: PlumberFile, private val reflector: Reflector) : StoreProxyHandler(HashMap<Any, Any>(), file) {
+class KeyValueStoreProxyHandler<T>(file: PlumberFile, private val reflector: Reflector) :
+    StoreProxyHandler<MutableMap<Any, T>, T>(HashMap()) {
 
-    override fun setType(type: Class<*>) {
-        if (!this::idProperty.isInitialized) {
-            idProperty = reflector.getStructure(type).searchProperties()
-                    .byAnnotation(Id::class.java).search().findFirst().orElseThrow {
-                        IllegalArgumentException("Class $type has no @Id property")
-                    }
-        }
-
-
-        methodTable.put("save", listOf(Any::class.java)) {
-            val map = collectionProxy as MutableMap<Any ,Any>
-            map[idProperty.getValue(it[0])] = it[0]
-            null
-        }
-    }
-
-
-    private lateinit var idProperty: Property
-
-    override fun load(data: Any) {
-        val map = collectionProxy as HashMap<Any, Any>
+    override fun load(data: MutableMap<Any, T>) {
+        val map = collectionProxy
         map.clear()
 
-        if (data is Map<*, *>)
-            for ((key, value) in data) {
-                if (key != null && value != null)
-                    map[key] = value
-            }
+        map.putAll(data)
     }
 }

@@ -28,3 +28,14 @@ Take a look at the [Wiki](https://github.com/knightzmc/plumber/wiki)
 ###Roadmap
 - [ ] Implement [Fluency](https://github.com/knightzmc/fluency)
 - [ ] Expand DSL
+- [ ] Reform Files Aspect
+- [ ] Cross-Server communication tools
+- [ ] SQL integration
+
+
+###Guidelines
+*These are mostly for internal reference, but may also help contributors*
+ 
+* Prefer slower initial loading times than lazy loading or performing slower operations when the server is running
+
+* Hide implementations from subclasses, but make implementation clear from looking at source code.
