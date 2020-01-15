@@ -3,7 +3,6 @@
  */
 package me.bristermitten.plumber
 
-import com.google.common.primitives.Ints
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import me.bristermitten.plumber.boot.InjectorHolder

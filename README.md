@@ -12,9 +12,22 @@ At the moment, it's in its infancy, but the potential that comes with Plumber is
 * Kotlin Support - Kotlin is a JVM-based language that does away with the long winded syntax of Java, and brings hundreds of useful features with it. Much of Plumber is written in Kotlin, and we highly recommend giving it a try!
 * The Plumber DSL - Inspired by Guice's simple English-based Module configuration DSL, Plumber uses a functional, method chaining approach that results in incredibly readable code that looks something like this
 ```java
-for (PPlayer player : server.players()) {
-    if (player.lastMoved().moreThan(30).seconds().ago()) {
-        player.kick("Kicked for AFK.");
+@ScheduledTask
+public class AFKChecker {
+    
+    @Inject
+    public AFKChecker(TaskBuilder builder){
+        builder.every(10).seconds()
+                .doing(this::kickAfks)
+                .build().start();
+    }
+    
+    public void kickAFK() {
+        for (PPlayer player : server.players()) {
+            if (player.lastMoved().moreThan(30).seconds().ago()) {
+                player.kick("Kicked for AFK.");
+            }
+        }
     }
 }
 ```
@@ -25,7 +38,7 @@ It's a thing of beauty.
 Take a look at the [Wiki](https://github.com/knightzmc/plumber/wiki)
 
 
-###Roadmap
+### Roadmap
 - [ ] Implement [Fluency](https://github.com/knightzmc/fluency)
 - [ ] Expand DSL
 - [ ] Reform Files Aspect
@@ -33,7 +46,8 @@ Take a look at the [Wiki](https://github.com/knightzmc/plumber/wiki)
 - [ ] SQL integration
 
 
-###Guidelines
+### Guidelines
+
 *These are mostly for internal reference, but may also help contributors*
  
 * Prefer slower initial loading times than lazy loading or performing slower operations when the server is running

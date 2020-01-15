@@ -1,6 +1,8 @@
 package me.bristermitten.plumber.files
 
 import me.bristermitten.plumber.PlumberExtension
+import me.bristermitten.plumber.files.store.DictionaryStore
+import me.bristermitten.plumber.files.store.ObjectStore
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Test
@@ -17,7 +19,7 @@ class FilesAspectTest{
         val store = plugin.getInstance(type)
 
         val element = TestDataClass(id = 3, name = "Test")
-        store.add(element)
+        store.save(element)
         store.flush()
 
         store.clear()

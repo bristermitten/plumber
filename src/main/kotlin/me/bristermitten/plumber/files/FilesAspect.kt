@@ -7,6 +7,7 @@ import me.bristermitten.plumber.annotation.Unstable
 import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.RequiredAspect
 import me.bristermitten.plumber.aspect.StaticModule
+import me.bristermitten.plumber.files.store.*
 import me.bristermitten.plumber.util.Reflection.createGuiceModule
 import me.bristermitten.plumber.util.isAssignableFrom
 import me.bristermitten.reflector.Reflector
@@ -42,6 +43,7 @@ class FilesAspect @Inject constructor(
                 hasAnnotation
             }
             .forEach { structure ->
+
                 @Suppress("UNCHECKED_CAST") //safe, checked in filter
                 val type = structure.type as Class<out Store<*>>
 
@@ -49,10 +51,9 @@ class FilesAspect @Inject constructor(
 
                 val info = getFileInfo(structure.info.getAnnotation(MappedTo::class.java))
 
-                val delegate = structure.info.getAnnotation(StoreDelegate::class.java)
-                    ?: throw BadStoreException("Store class has no Delegate type ${structure.type}")
+//                val delegate = structure.info.getAnnotation(StoreInfo::class.java)
+//                    ?: throw BadStoreException("Store class has no Delegate type ${structure.type}")
 
-                println(delegate)
 
                 val file = when (info.type) {
                     StorageType.YAML -> plumberFileFactory.createYaml(info.name)
@@ -60,17 +61,29 @@ class FilesAspect @Inject constructor(
                     else -> return@forEach
                 }
 
-                val handler: StoreProxyHandler
+                val handler: StoreProxyHandler<*, *>
                 val typeOfStore: Class<*>
 
                 when {
                     structure.isSubTypeOf(DictionaryStore::class.java) -> {
-                        handler = KeyValueStoreProxyHandler(file, reflector)
                         typeOfStore = typeParameters[1] as Class<*>
+                        handler = StoreProxyHandler<MutableMap<Any, Any>, Any>(
+                            HashMap(),
+                            DictionaryHandler(reflector),
+                            file,
+                            typeOfStore,
+                            reflector
+                        )
                     }
                     structure.isSubTypeOf(ObjectStore::class.java) -> {
-                        handler = ValueStoreProxyHandler(file)
                         typeOfStore = typeParameters[0] as Class<*>
+                        handler = StoreProxyHandler<MutableList<Any>, Any>(
+                            ArrayList(),
+                            ObjectStoreHandler(),
+                            file,
+                            typeOfStore,
+                            reflector
+                        )
                     }
                     else -> {
                         return@forEach
@@ -81,7 +94,7 @@ class FilesAspect @Inject constructor(
                 val store = Proxy.newProxyInstance(javaClass.classLoader, arrayOf(type), handler) as Store<*>
                 file.mapped = store
 
-                val collection = handler.collectionProxy
+                val collection = handler.values!!
                 val token = TypeToken.getParameterized(collection.javaClass, *typeParameters.toTypedArray())
 
 

@@ -67,5 +67,6 @@ annotation class AspectAnnotation(val target: KClass<out Aspect>)
  */
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)
+@Repeatable
 @MustBeDocumented
 annotation class LoadIfPresent(vararg val targets: KClass<out Annotation>)

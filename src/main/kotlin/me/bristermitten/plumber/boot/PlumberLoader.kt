@@ -55,7 +55,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
         aspects.asSequence()
             .filter {
                 //Ensure that the Aspect needs to be loaded
-                it.isAnnotationPresent(RequiredAspect::class) || aspectClasses[it].isNotEmpty()
+                it.isAnnotationPresent<RequiredAspect>() || aspectClasses[it].isNotEmpty()
             }
             .sortedByDescending {
                 //Sort by priority
@@ -99,21 +99,26 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
             .asSequence()
             .filterIsAnnotation()
             .forEach { annotation ->
-                val target = annotation.getAnnotation(AspectAnnotation::class)!!.target.java
+
+                val aspectAnnotation = annotation.getAnnotation(AspectAnnotation::class)
+                    ?: return@forEach
+
+                val target = aspectAnnotation.target.java
+
                 bindings[annotation] = target
+
                 aspectClasses.putAll(target, classFinder.getClassesWithAnnotationAnywhere(annotation))
             }
 
-        aspects.asSequence().filter { aspectClass ->
-            aspectClass.isAnnotationPresent(LoadIfPresent::class)
-        }.map {
-            it to it.getAnnotation(LoadIfPresent::class)!!.targets.map { target -> target.java }
-        }.forEach { pair ->
-            val aspectClass = pair.first
-            val targets = pair.second
+        aspects.forEach { aspect ->
+
+            val loadIfPresent = aspect.getAnnotation(LoadIfPresent::class) ?: return@forEach
+
+            val targets = loadIfPresent.targets.map { it.java }
+
             targets.forEach { target ->
-                bindings[target] = aspectClass
-                aspectClasses.putAll(aspectClass, classFinder.getClassesWithAnnotationAnywhere(target))
+                bindings[target] = aspect
+                aspectClasses.putAll(aspect, classFinder.getClassesWithAnnotationAnywhere(target))
             }
         }
     }
@@ -144,10 +149,10 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
      * @param holder Current InjectorHolder
      */
     private fun addStaticModule(aspectClass: Class<out Aspect>, holder: InjectorHolder) {
-        if (!aspectClass.isAnnotationPresent(StaticModule::class)) return
+        val moduleAnnotation = aspectClass.getAnnotation(StaticModule::class) ?: return
         logger.debug("StaticModule found for Aspect {}, loading...", aspectClass)
 
-        val target = aspectClass.getAnnotation(StaticModule::class)!!.target
+        val target = moduleAnnotation.target
 
         val staticModule = holder.injector.getInstance(target)
 
@@ -163,6 +168,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
      * not allowing duplicate bindings in child injectors, eager singletons must be used
      * for the Aspect. However, this is called from a [Sequence], so there is next to no performance impact
      *
+     * TODO: The messiness with eager singletons could come back to bite us. I'd prefer a more
      * @param aspectClass The Aspect's class
      * @param holder Current InjectorHolder
      */

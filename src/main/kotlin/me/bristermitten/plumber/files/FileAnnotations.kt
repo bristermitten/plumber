@@ -2,8 +2,6 @@ package me.bristermitten.plumber.files
 
 import me.bristermitten.plumber.annotation.Unstable
 import me.bristermitten.plumber.aspect.AspectAnnotation
-import java.lang.annotation.Inherited
-import kotlin.reflect.KClass
 
 
 /**
@@ -60,13 +58,14 @@ enum class MappingType {
 
 
 /**
- * A subclass of [Store] should use this class to assign a type that will be assigned as a delegate.
- * This type will be instantiated and used as the underlying in-memory collection for the Store.
- * Interface subclasses (eg [ObjectStore]) should declare this annotation, but subclasses of those interfaces can override the data.
- * However, obviously, if the overridden type does not implement the original, methods may not be found and errors will occur.
+// * A subclass of [Store] should use this class to assign a type that will be assigned as a delegate.
+// * This type will be instantiated and used as the underlying in-memory collection for the Store.
+// * Interface subclasse should declare this annotation, but subclasses of those interfaces can override the data.
+// * However, obviously, if the overridden type does not implement the original, methods may not be found and errors will occur.
+ * A subclass of [Store] should use this annotation to define
  */
-@Unstable("Functional but not documented and undergoing heavy refactoring")
-@Target(AnnotationTarget.CLASS)
-@Retention(AnnotationRetention.RUNTIME)
-@Inherited
-annotation class StoreDelegate(val delegateType: KClass<*>)
+//@Unstable("Functional but not documented and undergoing heavy refactoring")
+//@Target(AnnotationTarget.CLASS)
+//@Retention(AnnotationRetention.RUNTIME)
+//@Inherited
+//annotation class StoreInfo(val delegateType: KClass<*>, val handler: KClass<out StoreHandler<*>>)

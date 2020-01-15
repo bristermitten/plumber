@@ -2,7 +2,6 @@ package me.bristermitten.plumber.aspects
 
 import me.bristermitten.plumber.PlumberExtension
 import me.bristermitten.plumber.aspect.AbstractAspect
-import me.bristermitten.plumber.aspect.Aspect
 import me.bristermitten.plumber.aspect.RequiredAspect
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

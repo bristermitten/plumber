@@ -4,7 +4,6 @@ import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Singleton
 import me.bristermitten.plumber.aspect.Aspect
-import org.slf4j.LoggerFactory
 
 /**
  * Holder class for Guice's [Injector]
@@ -21,7 +20,7 @@ import org.slf4j.LoggerFactory
  * @author Alexander Wood (BristerMitten)
  */
 @Singleton
-class InjectorHolder  @Inject constructor(default: Injector) {
+class InjectorHolder @Inject constructor(default: Injector) {
     private var locked = false
 
     var injector: Injector = default

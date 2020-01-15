@@ -7,7 +7,8 @@ import org.bukkit.event.player.PlayerJoinEvent as BukkitPlayerJoinEvent
 /**
  * Event that gives Plumber functionality to the default Bukkit event
  */
-class PlayerJoinEvent(playerJoined: Player, joinMessage: String, private val plumberPlayer: PPlayer) : BukkitPlayerJoinEvent(playerJoined, joinMessage) {
+class PlayerJoinEvent(playerJoined: Player, joinMessage: String, private val plumberPlayer: PPlayer) :
+    BukkitPlayerJoinEvent(playerJoined, joinMessage) {
 
     /**
      * @return the Plumber player of the Bukkit player

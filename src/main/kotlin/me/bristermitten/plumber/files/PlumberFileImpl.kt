@@ -6,6 +6,7 @@ import com.google.inject.Inject
 import com.google.inject.assistedinject.Assisted
 import me.bristermitten.plumber.PlumberPlugin
 import me.bristermitten.plumber.annotation.Unstable
+import me.bristermitten.plumber.files.store.Store
 import org.yaml.snakeyaml.Yaml
 import java.io.File
 import java.io.InputStream

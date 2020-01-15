@@ -12,7 +12,7 @@ internal class TimeUnitPickerImpl<T>
 
 
     override fun milliseconds(): T {
-        callback(TimeUnit.MILLISECONDS);
+        callback(TimeUnit.MILLISECONDS)
         return parent
     }
 

@@ -1,7 +1,6 @@
 package me.bristermitten.plumber
 
 import be.seeseemelk.mockbukkit.MockBukkit
-import org.junit.jupiter.api.extension.AfterAllCallback
 import org.junit.jupiter.api.extension.BeforeAllCallback
 import org.junit.jupiter.api.extension.ExtensionContext
 
@@ -14,13 +13,13 @@ class PlumberExtension : BeforeAllCallback {
     override fun beforeAll(context: ExtensionContext) {
         if (loaded) return
         MockBukkit.mock()
-      plugin=  MockBukkit.load(TestPlugin::class.java)
+        plugin = MockBukkit.load(TestPlugin::class.java)
         loaded = true
     }
 
     companion object {
         var loaded = false
         lateinit var plugin: TestPlugin
-        private set
+            private set
     }
 }

@@ -28,7 +28,7 @@ data class Time(var unit: TimeUnit = TimeUnit.SECONDS, var length: Long = 0) {
         /**
          * An empty time. Defined internally as 0 seconds
          */
-        val EMPTY = Time()
+        private val EMPTY = Time()
         /**
          * No time. Internally equal to -1 seconds, but should result in the number
          * being ignored. For example, in [me.bristermitten.plumber.scheduling.Task] if the period

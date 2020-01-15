@@ -1,4 +1,4 @@
-package me.bristermitten.plumber.files
+package me.bristermitten.plumber.files.store
 
 import me.bristermitten.plumber.annotation.Unstable
 

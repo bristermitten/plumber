@@ -21,8 +21,8 @@ fun Module.createInjector(): Injector = Guice.createInjector(this)
 /**
  * [Class] extension for [KClass]
  */
-fun Class<*>.isAnnotationPresent(annotation: KClass<out Annotation>): Boolean {
-    return isAnnotationPresent(annotation.java)
+inline fun <reified A : Annotation> Class<*>.isAnnotationPresent(): Boolean {
+    return isAnnotationPresent(A::class.java)
 }
 
 /**
