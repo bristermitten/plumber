@@ -1,53 +1,45 @@
 package me.bristermitten.plumber.newfiles.store
 
 import me.bristermitten.plumber.files.Id
+import me.bristermitten.plumber.newfiles.store.id.PropertyIDResolver
+import me.bristermitten.reflector.Reflector
+import me.bristermitten.reflector.config.FieldAccessLevel
+import me.bristermitten.reflector.config.OptionsBuilder
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
-import kotlin.reflect.jvm.javaMethod
 
 /**
  * @author Alexander Wood (BristerMitten)
  */
-class StoreProxyHandler<K, V> : InvocationHandler {
-
-    private val internalMap: MutableMap<K, V> = HashMap()
-    private val methodTable = hashMapOf<Method, (Array<Any?>) -> Any?>()
-
-    init {
-        methodTable[Store<*, V>::clear.javaMethod!!] = {
-            internalMap.clear()
-        }
-        var count = 0
-        methodTable[Store<*, V>::save.javaMethod!!] = {
-            internalMap.put((count++ as K), (it[0]!! as V))
-        }
-    }
+class StoreProxyHandler<K, V>(private val delegate: StoreDelegate<K, V>) : InvocationHandler {
 
     override fun invoke(proxy: Any, method: Method, a: Array<Any?>?): Any? {
-        val args = a ?: emptyArray()
-        methodTable[method]?.let { return it(args) }
-
-        if (method.declaringClass.isAssignableFrom(internalMap.javaClass)) {
-            return method.invoke(internalMap, *args)
-        }
-        return null
+        return method.invoke(delegate, *(a ?: emptyArray()))
     }
 }
 
 fun main() {
+
+    val reflector = Reflector(OptionsBuilder().fieldAccessLevel(FieldAccessLevel.ALL).build())
+    val idResolver = PropertyIDResolver<Long>(reflector)
+
     val proxy = Proxy.newProxyInstance(
         StoreProxyHandler::class.java.classLoader,
         arrayOf(Store::class.java),
-        StoreProxyHandler<Int, Int>()
-    ) as Store<Int, Int>
+        StoreProxyHandler<Long, TestData>(StoreDelegate(idResolver))
+    ) as Store<Long, TestData>
 
-    proxy.save(3)
-    proxy.save(4)
+    proxy.add(TestData(3))
+    proxy.add(TestData(4))
     proxy.forEach {
         println(it)
     }
-    println(proxy[1])
+    println(proxy[3])
+    proxy.remove(3)
+    proxy.forEach {
+        println(it)
+    }
 }
 
 data class TestData(

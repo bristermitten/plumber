@@ -7,6 +7,6 @@ import java.lang.reflect.Method
  */
 interface StoreHandler<P, V> {
     fun initMethodTable(table: MutableMap<Method, (Array<Any>) -> Any?>)
-    fun save(store:P, data:V)
+    fun save(store: P, data: V)
     fun loadData(loadFrom: P, loadTo: P)
 }

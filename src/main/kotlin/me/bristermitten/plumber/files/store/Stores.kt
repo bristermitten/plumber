@@ -11,7 +11,7 @@ import kotlin.reflect.jvm.javaMethod
 //@StoreInfo(HashMap::class, DictionaryHandler::class)
 interface DictionaryStore<K, T> : Store<T>, MutableMap<K, T>
 
-class DictionaryHandler<K, V>(private val reflector: Reflector) : StoreHandler<MutableMap<K, V>, V> {
+class DictionaryHandler<K, V : Any>(private val reflector: Reflector) : StoreHandler<MutableMap<K, V>, V> {
     override fun initMethodTable(table: MutableMap<Method, (Array<Any>) -> Any?>) {
         table[Store<V>::save.javaMethod!!] = { args ->
         }
@@ -26,7 +26,7 @@ class DictionaryHandler<K, V>(private val reflector: Reflector) : StoreHandler<M
     }
 
     override fun save(store: MutableMap<K, V>, data: V) {
-        val idProperty = reflector.getStructure(data?.javaClass).searchProperties()
+        val idProperty = reflector.getStructure(data.javaClass).searchProperties()
             .byAnnotation(Id::class.java).search().findFirst().orElseThrow {
                 IllegalArgumentException("Class has no @Id property")
             }
