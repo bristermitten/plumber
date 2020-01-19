@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(PlumberExtension::class)
-class FilesAspectTest{
+class FilesAspectTest {
 
     @Test
     fun `Test Correct Saving and Reloading of Value Store`() {

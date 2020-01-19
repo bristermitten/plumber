@@ -59,7 +59,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
             }
             .sortedByDescending {
                 //Sort by priority
-                it.getAnnotation(RequiredAspect::class)?.priority ?: Int.MIN_VALUE
+                it.getAnnotation<RequiredAspect>()?.priority ?: Int.MIN_VALUE
             }
             .forEach {
                 loadAspect(holder, it)
@@ -100,7 +100,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
             .filterIsAnnotation()
             .forEach { annotation ->
 
-                val aspectAnnotation = annotation.getAnnotation(AspectAnnotation::class)
+                val aspectAnnotation = annotation.getAnnotation<AspectAnnotation>()
                     ?: return@forEach
 
                 val target = aspectAnnotation.target.java
@@ -112,7 +112,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
 
         aspects.forEach { aspect ->
 
-            val loadIfPresent = aspect.getAnnotation(LoadIfPresent::class) ?: return@forEach
+            val loadIfPresent = aspect.getAnnotation<LoadIfPresent>() ?: return@forEach
 
             val targets = loadIfPresent.targets.map { it.java }
 
@@ -149,7 +149,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
      * @param holder Current InjectorHolder
      */
     private fun addStaticModule(aspectClass: Class<out Aspect>, holder: InjectorHolder) {
-        val moduleAnnotation = aspectClass.getAnnotation(StaticModule::class) ?: return
+        val moduleAnnotation = aspectClass.getAnnotation<StaticModule>() ?: return
         logger.debug("StaticModule found for Aspect {}, loading...", aspectClass)
 
         val target = moduleAnnotation.target

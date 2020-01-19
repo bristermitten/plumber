@@ -49,13 +49,13 @@ dependencies {
         exclude group: 'junit'
     }
 
+    implementation 'com.zaxxer:HikariCP:3.4.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
     testApi('com.github.knightzmc:mockbukkit:4afe7bda8bfad66811634e6fae544dcdb52f32a3') {
         exclude group: 'junit'
     }
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.2"
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
 }
 

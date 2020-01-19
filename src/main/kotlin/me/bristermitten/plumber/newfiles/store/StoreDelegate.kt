@@ -11,7 +11,6 @@ class StoreDelegate<K, V>(private val idResolver: IDResolver<K>) : Store<K, V>,
     }
 
     override fun flush() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun reload() {

@@ -28,8 +28,8 @@ inline fun <reified A : Annotation> Class<*>.isAnnotationPresent(): Boolean {
 /**
  * [Class] extension for [KClass]
  */
-fun <A : Annotation> Class<*>.getAnnotation(annotation: KClass<A>): A? {
-    return getAnnotation(annotation.java)
+inline fun <reified A : Annotation> Class<*>.getAnnotation(): A? {
+    return getAnnotation(A::class.java)
 }
 
 /**
