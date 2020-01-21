@@ -23,7 +23,9 @@ abstract class AbstractAspect : Aspect {
 
     override fun enable(classes: Collection<Class<*>>) {
         this.classes = classes
-        logger.debug("Enabling aspect " + javaClass.simpleName)
+
+        logger.debug("Enabling aspect {}", javaClass.simpleName)
+
         val length = measureTimeMillis {
             doEnable()
             enabled = true
@@ -32,7 +34,10 @@ abstract class AbstractAspect : Aspect {
     }
 
     override fun disable() {
-        logger.debug("Disabling aspect " + javaClass.simpleName)
+        classes = emptyList()
+
+        logger.debug("Disabling aspect {}", javaClass.simpleName)
+
         val length = measureTimeMillis {
             doDisable()
             enabled = false
@@ -46,4 +51,5 @@ abstract class AbstractAspect : Aspect {
     override fun getModule(): Module? = null
 
     protected fun <T> instance(clazz: Class<T>): T = injector.getInstance(clazz)
+    protected inline fun <reified T> instance(): T = instance(T::class.java)
 }

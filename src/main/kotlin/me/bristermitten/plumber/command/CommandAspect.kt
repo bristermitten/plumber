@@ -9,10 +9,10 @@ import me.bristermitten.plumber.PlumberPlugin
 import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.LoadIfPresent
 import me.bristermitten.plumber.reflection.ClassFinder
-import me.bristermitten.plumber.util.Reflection.createGuiceModule
 import me.bristermitten.plumber.struct.player.PPlayer
 import me.bristermitten.plumber.struct.player.PPlayerManager
 import me.bristermitten.plumber.struct.player.PlayerExtension
+import me.bristermitten.plumber.util.Reflection.createGuiceModule
 import me.bristermitten.reflector.Reflector
 import org.bukkit.Bukkit
 
@@ -42,7 +42,7 @@ class CommandAspect @Inject constructor(
         setupCompletions()
         setupContexts()
 
-        val configs = classFinder.getRealClassesImplementing(CommandAspectConfig::class)
+        val configs = classFinder.getRealClassesImplementing<CommandAspectConfig>()
             .map { instance(it) }
 
         configs.forEach { it.beforeRegistration(commandManager) }
@@ -52,7 +52,7 @@ class CommandAspect @Inject constructor(
             .filter { it.isFullClass }
             .forEach { load(it.type) }
 
-        configs.forEach { it.beforeRegistration(commandManager) }
+        configs.forEach { it.afterRegistration(commandManager) }
     }
 
     override fun getModule(): Module {

@@ -11,6 +11,7 @@ import me.bristermitten.plumber.aspect.*
 import me.bristermitten.plumber.reflection.ClassFinder
 import me.bristermitten.plumber.util.*
 import me.bristermitten.plumber.util.Reflection.createGuiceModule
+import me.bristermitten.reflector.config.FieldAccessLevel
 import me.bristermitten.reflector.config.OptionsBuilder
 import me.bristermitten.reflector.inject.ReflectorBindingModule
 import org.slf4j.LoggerFactory
@@ -80,7 +81,8 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
             bind<PlumberPlugin>().toInstance(plugin)
             bind(plugin.javaClass).toInstance(plugin)
             bind<ClassGraph>().toProvider<ClassGraphProvider>()
-            install(ReflectorBindingModule(OptionsBuilder().scanSuperInterfaceAnnotations().build()))
+            install(ReflectorBindingModule(OptionsBuilder().scanSuperInterfaceAnnotations()
+                .fieldAccessLevel(FieldAccessLevel.ALL).build()))
         }.createInjector()
     }
 

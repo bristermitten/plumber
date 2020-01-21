@@ -122,13 +122,16 @@ class ClassFinder @Inject constructor(
      * This simply makes calling from Kotlin cleaner as ::class can be used instead of ::class.java
      * but will also load the classes into Java [Class]es with the inferred type parameters
      */
-    fun <T : Any> getRealClassesImplementing(clazz: KClass<T>): Collection<Class<out T>> {
-        val name = clazz.qualifiedName
+    fun <T : Any> getRealClassesImplementing(clazz: Class<T>): Collection<Class<out T>> {
+        val name = clazz.name
 
         return scan {
             getClassesImplementing(name).filterNot { it.isAbstract }.map { it.loadClass() as Class<out T> }
         }
     }
+    inline fun <reified T: Any> getRealClassesImplementing() : Collection<Class<out T>> =
+        getRealClassesImplementing(T::class.java)
+
 //    fun <T : Extendable<T, out Extension<T>>> findAllExtensionsFor(clazz: Class<T>): Collection<Class<out Extension<T>>> {
 //        return classGraph.scan().use { result ->
 //            result.getClassesImplementing(Extension::class.java.name)

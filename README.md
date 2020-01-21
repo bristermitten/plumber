@@ -41,7 +41,9 @@ Take a look at the [Wiki](https://github.com/knightzmc/plumber/wiki)
 ### Roadmap
 - [ ] Implement [Fluency](https://github.com/knightzmc/fluency)
 - [ ] Expand DSL
-- [ ] Reform Files Aspect
+- [x] Reform Files Aspect
+- [ ] Better Aspect support for Aspect configurations, removing boilerplate, etc.
+- [ ] Non-Annotation based Aspect searching eg sub-interfaces of Store for Files Aspect
 - [ ] Cross-Server communication tools
 - [ ] SQL integration
 

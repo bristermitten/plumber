@@ -7,3 +7,4 @@ package me.bristermitten.plumber.newfiles.persist
 interface PersistenceContainer {
 
 }
+

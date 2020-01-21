@@ -1,14 +1,12 @@
 package me.bristermitten.plumber.files
 
 import me.bristermitten.plumber.PlumberExtension
-import me.bristermitten.plumber.newfiles.store.*
-import me.bristermitten.plumber.newfiles.store.id.PropertyIDResolvers
-import me.bristermitten.reflector.Reflector
-import me.bristermitten.reflector.config.FieldAccessLevel
-import me.bristermitten.reflector.config.OptionsBuilder
+import me.bristermitten.plumber.newfiles.store.Store
+import me.bristermitten.plumber.newfiles.store.StoreStrategy
+import me.bristermitten.plumber.newfiles.store.TestData
+import me.bristermitten.plumber.newfiles.store.id.IDStrategy
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
@@ -20,7 +18,7 @@ class TestNewFiles {
 
     @Test
     fun `Test Incremental Store Basic Adding and Removing`() {
-        val store = storeFactory.createStoreImplementation(TestIncrementStore::class.java)
+        val store = PlumberExtension.plugin.getInstance(TestIncrementStore::class.java)
 
         val data = TestData(3)
         store.add(data)
@@ -40,7 +38,7 @@ class TestNewFiles {
 
     @Test
     fun `Test Property Store Basic Adding and Removing`() {
-        val store = storeFactory.createStoreImplementation(TestPropertyStore::class.java)
+        val store = PlumberExtension.plugin.getInstance(TestPropertyStore::class.java)
 
         val data = TestData(3)
         store.add(data)
@@ -58,19 +56,7 @@ class TestNewFiles {
 
     interface TestIncrementStore : Store<Long, TestData>
 
-    @StoreStrategy(StoreStrategyType.PROPERTY)
+    @StoreStrategy(IDStrategy.PROPERTY)
     interface TestPropertyStore : Store<Long, TestData>
-
-    companion object {
-        lateinit var storeFactory: StoreFactory
-
-        @BeforeAll
-        @JvmStatic
-        fun setUp() {
-            val reflector = Reflector(OptionsBuilder().fieldAccessLevel(FieldAccessLevel.ALL).build())
-            val idResolvers = PropertyIDResolvers(reflector)
-            storeFactory = StoreFactory(PlumberExtension.plugin, idResolvers)
-        }
-    }
 
 }

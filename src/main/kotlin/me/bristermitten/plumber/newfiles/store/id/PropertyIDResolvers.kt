@@ -9,16 +9,18 @@ import me.bristermitten.reflector.property.Property
 /**
  * @author Alexander Wood (BristerMitten)
  */
+
 @Singleton
 class PropertyIDResolvers @Inject constructor(private val reflector: Reflector) {
     private val properties: MutableMap<Class<*>, Property> = HashMap()
 
-    fun <I> resolverFor(type: Class<I>, expectedIDType: Class<*>): IDResolver<I> {
+    fun <I> resolverFor(type: Class<*>, idType: Class<I>): IDResolver<I> {
         val property = properties.computeIfAbsent(type) {
             reflector.getStructure(it).searchProperties()
                 .byAnnotation(Id::class.java)
-                .byType(expectedIDType)
-                .search().findFirst().orElseThrow {
+                .byType(idType)
+                .search()
+                .findFirst().orElseThrow {
                     IllegalArgumentException("$type has no @Id property")
                 }
         }
