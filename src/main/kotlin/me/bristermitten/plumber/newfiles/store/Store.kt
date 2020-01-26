@@ -11,5 +11,4 @@ interface Store<K, V> : MutableMap<K, V> {
     fun flush()
 
     fun reload()
-
 }

@@ -16,6 +16,7 @@ import me.bristermitten.reflector.config.OptionsBuilder
 import me.bristermitten.reflector.inject.ReflectorBindingModule
 import org.slf4j.LoggerFactory
 import java.util.*
+import kotlin.system.measureTimeMillis
 
 /**
  * Class responsible for loading the entirety of Plumber.
@@ -47,7 +48,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
 
         val classFinder = injector.getInstance(ClassFinder::class)
 
-        val aspects = classFinder.getClassesImplementing(Aspect::class)
+        val aspects = classFinder.getClassesImplementing<Aspect>()
 
         loadBindingsAndAspectClasses(classFinder, aspects)
 
@@ -63,7 +64,9 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
                 it.getAnnotation<RequiredAspect>()?.priority ?: Int.MIN_VALUE
             }
             .forEach {
-                loadAspect(holder, it)
+                logger.debug("Loading Aspect {}", it.name)
+                val time = measureTimeMillis { loadAspect(holder, it) }
+                logger.debug("Loaded in {} ms \n", time)
             }
 
         holder.lock()
@@ -80,9 +83,14 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
         return createGuiceModule {
             bind<PlumberPlugin>().toInstance(plugin)
             bind(plugin.javaClass).toInstance(plugin)
+            bind<ClassLoader>().toInstance(plugin.javaClass.classLoader)
             bind<ClassGraph>().toProvider<ClassGraphProvider>()
-            install(ReflectorBindingModule(OptionsBuilder().scanSuperInterfaceAnnotations()
-                .fieldAccessLevel(FieldAccessLevel.ALL).build()))
+            install(
+                ReflectorBindingModule(
+                    OptionsBuilder().scanSuperInterfaceAnnotations()
+                        .fieldAccessLevel(FieldAccessLevel.ALL).build()
+                )
+            )
         }.createInjector()
     }
 
@@ -170,7 +178,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
      * not allowing duplicate bindings in child injectors, eager singletons must be used
      * for the Aspect. However, this is called from a [Sequence], so there is next to no performance impact
      *
-     * TODO: The messiness with eager singletons could come back to bite us. I'd prefer a more
+     * TODO: The messiness with eager singletons could come back to bite us. I'd prefer a more explicit binding
      * @param aspectClass The Aspect's class
      * @param holder Current InjectorHolder
      */
@@ -190,7 +198,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
                 */
                 bind(aspectClass).asEagerSingleton()
             })
-            logger.debug("{} bound (singleton)", aspectClass)
+            logger.debug("{} bound", aspectClass.simpleName)
         }
     }
 
@@ -203,7 +211,7 @@ class PlumberLoader(private val plugin: PlumberPlugin) {
         val module = instance.getModule() ?: return
 
         holder.injector = holder.injector.createChildInjector(module)
-        logger.debug("Module installed for {}", instance.javaClass)
+        logger.debug("Module installed for {}", instance.javaClass.simpleName)
     }
 
 }

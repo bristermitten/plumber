@@ -18,10 +18,10 @@ class StoreFactory @Inject constructor(
     private val idResolvers: IDResolvers
 ) {
 
-    fun <K: Any, V: Any> createStoreImplementation(clazz: Class<out Store<K, V>>): Store<K, V> {
+    fun <K : Any, V : Any> createStoreImplementation(clazz: Class<Store<K, V>>): Store<K, V> {
         val storeStrategy = clazz.getAnnotation<StoreStrategy>()?.strategy ?: IDStrategy.INCREMENT
 
-        //turning Class<out Store<K, V>> into [K, V]
+        //turning Class<out Store<K, V>> into [K, V] as Classes
         val storeTypeParameters = getStoreTypeParameters(clazz)
         val idType = storeTypeParameters[0]
         val valueType = storeTypeParameters[1]
@@ -35,25 +35,27 @@ class StoreFactory @Inject constructor(
 
         val resolver = idResolvers.getResolver(storeStrategy, valueType, idClass)
 
-        return createProxy(resolver)
+        return createProxy(resolver, clazz)
     }
 
-    private fun <K, V> createProxy(idResolver: IDResolver<K>): Store<K, V> {
+    private fun <K, V> createProxy(idResolver: IDResolver<K>, clazz: Class<Store<K, V>>): Store<K, V> {
         @Suppress("UNCHECKED_CAST")
         return Proxy.newProxyInstance(
             plumberPlugin.javaClass.classLoader,
-            arrayOf(Store::class.java),
-            StoreProxyHandler<K, V>(StoreDelegate(idResolver))
+            arrayOf(Store::class.java, clazz),
+            StoreProxyHandler(StoreDelegate(idResolver, clazz), clazz)
         ) as Store<K, V>
     }
 
     private fun getStoreTypeParameters(type: Class<out Store<*, *>>): List<Type> {
-        return type.genericInterfaces
+        val storeType = type.genericInterfaces
             .filterIsInstance<ParameterizedType>()
             .first {
                 //eg KeyValueStore or ValueStore
                 Store::class.isAssignableFrom(it.rawType)
-            }.actualTypeArguments.toList() //eg ValueStore<Data> => [Data]
+            }//the superinterface that extends Store
+
+        return storeType.actualTypeArguments.toList() //eg ValueStore<Data> => [Data]
     }
 
 }

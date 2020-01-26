@@ -3,7 +3,6 @@ package me.bristermitten.plumber.files
 import me.bristermitten.plumber.PlumberExtension
 import me.bristermitten.plumber.newfiles.store.Store
 import me.bristermitten.plumber.newfiles.store.StoreStrategy
-import me.bristermitten.plumber.newfiles.store.TestData
 import me.bristermitten.plumber.newfiles.store.id.IDStrategy
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -54,9 +53,13 @@ class TestNewFiles {
         assertEquals(0, store.size)
     }
 
-    interface TestIncrementStore : Store<Long, TestData>
-
-    @StoreStrategy(IDStrategy.PROPERTY)
-    interface TestPropertyStore : Store<Long, TestData>
-
 }
+
+interface TestIncrementStore : Store<Long, TestData>
+
+@StoreStrategy(IDStrategy.PROPERTY)
+interface TestPropertyStore : Store<Long, TestData>
+
+data class TestData(
+    @Id private val id: Long
+)

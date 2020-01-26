@@ -3,6 +3,7 @@ package me.bristermitten.plumber.files
 import com.google.gson.reflect.TypeToken
 import com.google.inject.Inject
 import com.google.inject.Module
+import me.bristermitten.plumber.annotation.HideFromReflection
 import me.bristermitten.plumber.annotation.Unstable
 import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.RequiredAspect
@@ -18,8 +19,9 @@ import java.lang.reflect.Type
 
 
 @Unstable("Functional but not documented and undergoing heavy refactoring")
-@StaticModule(FilesAspectStaticModule::class)
-@RequiredAspect
+//@StaticModule(FilesAspectStaticModule::class)
+//@RequiredAspect
+@HideFromReflection
 class FilesAspect @Inject constructor(
     private val reflector: Reflector,
     private val plumberFileFactory: PlumberFileFactory

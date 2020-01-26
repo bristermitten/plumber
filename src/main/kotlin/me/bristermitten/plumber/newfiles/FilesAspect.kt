@@ -6,10 +6,13 @@ import me.bristermitten.plumber.aspect.AbstractAspect
 import me.bristermitten.plumber.aspect.RequiredAspect
 import me.bristermitten.plumber.newfiles.store.Store
 import me.bristermitten.plumber.newfiles.store.StoreFactory
+import me.bristermitten.plumber.newfiles.store.StoreProxyHandler
 import me.bristermitten.plumber.newfiles.store.id.IDResolvers
 import me.bristermitten.plumber.newfiles.store.id.ResolverConfig
 import me.bristermitten.plumber.reflection.ClassFinder
 import me.bristermitten.plumber.util.Reflection.createGuiceModule
+import java.lang.reflect.Proxy
+import kotlin.streams.toList
 
 /**
  * @author Alexander Wood (BristerMitten)
@@ -18,10 +21,12 @@ import me.bristermitten.plumber.util.Reflection.createGuiceModule
 class FilesAspect @Inject constructor(
     private val idResolvers: IDResolvers,
     private val classFinder: ClassFinder,
-    private val storeFactory: StoreFactory
+    private val storeFactory: StoreFactory,
+    private val classLoader: ClassLoader
 ) : AbstractAspect() {
 
     private var stores: Collection<Store<*, *>> = ArrayList()
+
     override fun doEnable() {
 
         classFinder.getRealClassesImplementing<ResolverConfig>()
@@ -30,19 +35,26 @@ class FilesAspect @Inject constructor(
                 it.registerResolvers(idResolvers)
             }
 
-        stores = classFinder.getRealClassesImplementing<Store<*, *>>().map {
-            @Suppress("UNCHECKED_CAST")
-            val clazz = it as Class<out Store<Any, Any>>
+        stores = classFinder.getClassesImplementing<Store<*, *>>()
+            .parallelStream().map {
+                @Suppress("UNCHECKED_CAST")
+                val clazz = it as Class<Store<Any, Any>>
 
-            logger.debug("Created implementation for {}", clazz)
-            storeFactory.createStoreImplementation(clazz)
-        }.toList()
+                logger.debug("Created implementation for {}", clazz)
+                storeFactory.createStoreImplementation(clazz)
+            }.toList()
     }
 
     override fun getModule(): Module {
         return createGuiceModule {
-            stores.forEach {
-                bind(it.javaClass).toInstance(it)
+            for (store in stores) {
+
+                val handler = Proxy.getInvocationHandler(store)
+                if (handler !is StoreProxyHandler<*, *>) continue
+
+                @Suppress("UNCHECKED_CAST") val storeClass = handler.proxying as Class<Store<*, *>>
+
+                bind(storeClass).toInstance(store)
             }
         }
     }

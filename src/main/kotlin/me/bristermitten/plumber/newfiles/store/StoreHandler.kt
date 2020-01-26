@@ -16,5 +16,6 @@ interface StoreHandler<T> {
     fun add(data: T)
 
     fun clearValues()
+
     fun handle(method: Method, args: Array<Any?>): Any?
 }

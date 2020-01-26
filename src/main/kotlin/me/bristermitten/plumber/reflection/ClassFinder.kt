@@ -6,8 +6,10 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import io.github.classgraph.ClassGraph
 import io.github.classgraph.ClassInfo
+import io.github.classgraph.ClassInfoList
 import io.github.classgraph.ScanResult
 import me.bristermitten.plumber.PlumberPlugin
+import me.bristermitten.plumber.annotation.HideFromReflection
 import me.bristermitten.plumber.struct.extension.Extendable
 import me.bristermitten.plumber.struct.extension.Extension
 import java.lang.annotation.Target
@@ -31,11 +33,11 @@ class ClassFinder @Inject constructor(
         const val SCAN_FILE_NAME = "classes.json"
     }
 
-
     fun <T : Extendable<T, out Extension<T>>> findAllExtensionsFor(clazz: KClass<T>): Collection<Class<out Extension<T>>> {
         scan {
             return getClassesImplementing(Extension::class.java.name)
-                .filterNot { info -> info.isAbstract }
+                .filterVisible()
+                .filterNot { it.isAbstract }
                 .filter { info ->
                     //here info represents an interface : SomethingExtension : Extension<?>
 
@@ -77,7 +79,7 @@ class ClassFinder @Inject constructor(
                 elements.addAll(getClassesWithFieldAnnotation(name))
 
             if (targets.contains(CommonAnnotationTarget.CLASS))
-                elements.addAll(getClassesWithAnnotation(name))
+                elements.addAll(getClassesWithAnnotation(name).filterVisible())
 
             if (targets.contains(CommonAnnotationTarget.METHOD)) {
                 elements.addAll(getClassesWithMethodAnnotation(name))
@@ -97,23 +99,23 @@ class ClassFinder @Inject constructor(
     fun getClassesAnnotatedWith(annotation: KClass<out Annotation>): Collection<Class<*>> {
         val name = annotation.qualifiedName
         return scan {
-            getClassesWithAnnotation(name).loadClasses()
+            getClassesWithAnnotation(name).filterVisible().loadClasses()
         }
     }
 
     /**
-     * Get all classes that implement the given class in Kotlin [KClass] format
+     * Get all classes that implement a given class
      *
-     * This simply makes calling from Kotlin cleaner as ::class can be used instead of ::class.java
-     * but will also load the classes into Java [Class]es with the inferred type parameters
      */
-    fun <T : Any> getClassesImplementing(clazz: KClass<T>): Collection<Class<out T>> {
-        val name = clazz.qualifiedName
+    fun <T : Any> getClassesImplementing(clazz: Class<T>): Collection<Class<out T>> {
+        val name = clazz.name
 
         return scan {
-            getClassesImplementing(name).loadClasses().map { it as Class<out T> }
+            getClassesImplementing(name).filterVisible().loadClasses().map { it as Class<out T> }
         }
     }
+
+    inline fun <reified T : Any> getClassesImplementing() = getClassesImplementing(T::class.java)
 
     /**
      * Get all classes that implement the given class in Kotlin [KClass] format,
@@ -126,11 +128,13 @@ class ClassFinder @Inject constructor(
         val name = clazz.name
 
         return scan {
-            getClassesImplementing(name).filterNot { it.isAbstract }.map { it.loadClass() as Class<out T> }
+            getClassesImplementing(name)
+                .filterVisible()
+                .filterNot { it.isAbstract }.map { it.loadClass() as Class<out T> }
         }
     }
-    inline fun <reified T: Any> getRealClassesImplementing() : Collection<Class<out T>> =
-        getRealClassesImplementing(T::class.java)
+
+    inline fun <reified T : Any> getRealClassesImplementing() = getRealClassesImplementing(T::class.java)
 
 //    fun <T : Extendable<T, out Extension<T>>> findAllExtensionsFor(clazz: Class<T>): Collection<Class<out Extension<T>>> {
 //        return classGraph.scan().use { result ->
@@ -187,4 +191,10 @@ class ClassFinder @Inject constructor(
         return scan.use(receiver)
     }
 
+
+    private fun ClassInfoList.filterVisible(): ClassInfoList {
+        return filter {
+            !it.hasAnnotation(HideFromReflection::class.java.name)
+        }
+    }
 }

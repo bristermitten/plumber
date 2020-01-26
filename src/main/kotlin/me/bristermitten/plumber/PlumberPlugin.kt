@@ -69,7 +69,7 @@ open class PlumberPlugin : JavaPlugin {
      * This should be called before anything else in [onEnable]
      */
     protected fun loadPlumber() {
-        logger.info("Plumber loading for Plugin {}...", name)
+        logger.info("Plumber loading for Plugin {}...\n", name)
 
         val length = measureTimeMillis {
             PlumberLoader(this).loadPlumber()
