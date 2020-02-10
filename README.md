@@ -18,7 +18,7 @@ public class AFKChecker {
     @Inject
     public AFKChecker(TaskBuilder builder){
         builder.every(10).seconds()
-                .doing(this::kickAfks)
+                .doing(this::kickAFK)
                 .build().start();
     }
     
