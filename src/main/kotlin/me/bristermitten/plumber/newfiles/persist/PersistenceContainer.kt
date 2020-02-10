@@ -1,7 +1,7 @@
 package me.bristermitten.plumber.newfiles.persist
 
 /**
- * Most basic wrapper for either a file, or a database
+ * Core wrapper for a persistent store. Usually, this is either a database or a file.
  * @author Alexander Wood (BristerMitten)
  */
 interface PersistenceContainer {

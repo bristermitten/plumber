@@ -1,6 +1,7 @@
 import me.bristermitten.plumber.boot.ClassGraphProvider
 import me.bristermitten.plumber.boot.PlumberInfo
 import me.bristermitten.plumber.reflection.ClassFinder
+import org.bukkit.inventory.meta.ItemMeta
 import java.io.File
 import java.io.PrintWriter
 
